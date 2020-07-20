@@ -1,4 +1,6 @@
-interface Ticket {
+import { GeoJSON, MultiPoint, Point } from "geojson";
+
+export interface APITicket {
    _id: string;
    _source: {
       createDt: Date;
@@ -14,9 +16,16 @@ interface Ticket {
    };
 }
 
-interface APIResult {
+export interface APIResult {
    hits: {
-      hits: Ticket[];
+      hits: APITicket[];
       total: number;
    };
+}
+
+export interface Ticket {
+   ticketNumber: string;
+   partNumber: string;
+   partDescription: string;
+   location: GeoJSON.FeatureCollection<Point>;
 }
