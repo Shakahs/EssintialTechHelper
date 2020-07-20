@@ -1,4 +1,4 @@
-const getData = async () => {
+const getData = async (): Promise<APIResult> => {
    const result = await fetch(
       "https://reporting.serviceevent.com:446/api/datasets/b353a43e-819d-4d4f-9c28-cc7bc3a48a67/_search?report=702f5b27-d201-49d3-bd81-f8409ea192a9",
       {
@@ -30,8 +30,4 @@ const getData = async () => {
    } else throw new Error("could not get data");
 };
 
-if (require.main === module) {
-   getData().then((d) => {
-      console.log(d);
-   });
-}
+export default getData;
