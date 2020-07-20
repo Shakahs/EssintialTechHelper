@@ -1,3 +1,4 @@
-/build/
+/client-build/
 .idea
 node_modules
+/webpack-stats.json

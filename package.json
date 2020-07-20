@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "client-dev": "NODE_ENV=development ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.config.js",
-    "client-build": "rm -rf ./client-build/* && node ./node_modules/webpack/bin/webpack.js -p --config client-source/webpack.prod.config.js --profile --json > webpack-stats.json",
+    "client-build": "rm -rf ./client-build/* && node ./node_modules/webpack/bin/webpack.js -p --config webpack.prod.config.js --profile --json > webpack-stats.json",
     "client-bundle-analyze": "./node_modules/webpack-bundle-analyzer/lib/bin/analyzer.js ./webpack-stats.json ./client-build/"
   },
   "prettier": {

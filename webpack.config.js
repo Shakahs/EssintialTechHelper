@@ -77,8 +77,8 @@ module.exports = {
    },
    output: {
       filename: "[name].[hash].js",
-      path: path.resolve(__dirname, "../client-build/"),
-      publicPath: isProduction ? "/static" : "/",
+      path: path.resolve(__dirname, "client-build/"),
+      // publicPath: isProduction ? "/static" : "/",
    },
    resolve: {
       extensions: [".tsx", ".ts", ".js"],
