@@ -7,14 +7,17 @@ import {
    IfRejected,
    useFetch,
 } from "react-async";
-require("mapbox.js");
-const mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
-
-import getData from "./api";
+import ReactMapGL from "react-map-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 interface appProps {}
 
 const App: React.FunctionComponent<appProps> = (props) => {
+   // const geoCode = (res: APIResult) => {
+   //    console.log(res);
+   //    leaflet.geoco;
+   // };
+
    const fetchState = useFetch<APIResult>(
       "https://reporting.serviceevent.com:446/api/datasets/b353a43e-819d-4d4f-9c28-cc7bc3a48a67/_search?report=702f5b27-d201-49d3-bd81-f8409ea192a9",
       {
@@ -42,8 +45,13 @@ const App: React.FunctionComponent<appProps> = (props) => {
       { json: true, defer: false }
    );
 
-   mapboxgl.accessToken =
-      "pk.eyJ1Ijoic2hha2FocyIsImEiOiJja2N0d2hkZG4yMmtqMnlsYnlldXc4Y29hIn0.4z1YQzLrDQDQ0dM3A-bzGw";
+   const [viewport, setViewport] = useState({
+      width: 400,
+      height: 400,
+      latitude: 37.7577,
+      longitude: -122.4376,
+      zoom: 8,
+   });
 
    return (
       <>
@@ -60,6 +68,13 @@ const App: React.FunctionComponent<appProps> = (props) => {
             <br />
             {fetchState.error}
          </IfRejected>
+         <ReactMapGL
+            {...viewport}
+            mapboxApiAccessToken={
+               "pk.eyJ1Ijoic2hha2FocyIsImEiOiJja2N0d2hkZG4yMmtqMnlsYnlldXc4Y29hIn0.4z1YQzLrDQDQ0dM3A-bzGw"
+            }
+            onViewportChange={(nextViewport) => setViewport(nextViewport)}
+         />
       </>
    );
 };
