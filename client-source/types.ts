@@ -27,5 +27,10 @@ export interface Ticket {
    ticketNumber: string;
    partNumber: string;
    partDescription: string;
-   location: GeoJSON.FeatureCollection<Point>;
+   created: Date;
+   geocoding: GeoJSON.FeatureCollection<Point>;
+   address: string;
+   city: string;
+   priority: string;
+   siteName: string;
 }

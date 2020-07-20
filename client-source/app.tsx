@@ -14,6 +14,7 @@ import { APIResult, APITicket, Ticket } from "./types";
 import { apiParameters, apiUrl, mapboxToken } from "./constants";
 import { sortBy, truncate } from "lodash";
 const classNames = require("classnames");
+const datefns = require("date-fns");
 
 interface appProps {}
 
@@ -30,17 +31,43 @@ const App: React.FunctionComponent<appProps> = (props) => {
                `https://api.mapbox.com/geocoding/v5/mapbox.places/${geoQuery}.json?limit=1&access_token=${mapboxToken}`
             );
             const geoPoint: GeoJSON.FeatureCollection<Point> = await response.json();
+
+            console.log(
+               apiTicket._source.detailId,
+               `${apiTicket._source.createDt[0].substr(
+                  0,
+                  10
+               )}${apiTicket._source.createTm[0].substr(10)}`
+            );
+
             tRes.push({
-               location: geoPoint,
+               siteName: apiTicket._source.srmSiteName,
+               priority: apiTicket._source.srmPrio[0],
+               address: apiTicket._source.siteAddr,
+               city: apiTicket._source.srmSiteCity,
+               geocoding: geoPoint,
                ticketNumber: apiTicket._source.detailId,
                partNumber: apiTicket._source.srmModelNo[0],
                partDescription: apiTicket._source.srmModelDesc[0],
+               created: datefns.subHours(
+                  datefns.parseISO(
+                     `${apiTicket._source.createDt[0].substr(
+                        0,
+                        10
+                     )}${apiTicket._source.createTm[0].substr(10)}`
+                  ),
+                  1
+               ),
             });
-         } catch (e) {}
+         } catch (e) {
+            console.log(e);
+         }
       }
 
-      setGeoTickets(tRes);
-      console.log(tRes);
+      const sortedTRes = sortBy<Ticket>(tRes, (o) => [o.city]);
+
+      setGeoTickets(sortedTRes);
+      console.log(sortedTRes);
    };
 
    const fetchState = useFetch<APIResult>(apiUrl, apiParameters, {
@@ -67,32 +94,9 @@ const App: React.FunctionComponent<appProps> = (props) => {
 
    return (
       <>
-         <h3 className={"mx-auto"}>Essintial Ticket Helper</h3>
          <IfInitial state={fetchState}>Not running</IfInitial>
          <IfPending state={fetchState}>Fetching data...</IfPending>
          <IfFulfilled state={fetchState}>
-            <table className="table-auto text-sm">
-               <tbody>
-                  {sortedApiTickets.map((h) => {
-                     return (
-                        <tr
-                           key={h._id}
-                           className={classNames({
-                              "bg-yellow-500":
-                                 selectedTicket === h._source.detailId,
-                           })}
-                        >
-                           <td className={"border"}>{h._source.detailId}</td>
-                           <td className={"border"}>{h._source.siteAddr}</td>
-                           <td className={"border"}>{h._source.srmSiteCity}</td>
-                           <td className={"border"}>
-                              {h._source.srmModelDesc}
-                           </td>
-                        </tr>
-                     );
-                  })}
-               </tbody>
-            </table>
             <ReactMapGL
                {...viewport}
                mapboxApiAccessToken={mapboxToken}
@@ -105,8 +109,10 @@ const App: React.FunctionComponent<appProps> = (props) => {
                   <Marker
                      captureClick={true}
                      key={gt.ticketNumber}
-                     latitude={gt.location.features[0].geometry.coordinates[1]}
-                     longitude={gt.location.features[0].geometry.coordinates[0]}
+                     latitude={gt.geocoding.features[0].geometry.coordinates[1]}
+                     longitude={
+                        gt.geocoding.features[0].geometry.coordinates[0]
+                     }
                   >
                      <div
                         onClick={() => {
@@ -120,6 +126,33 @@ const App: React.FunctionComponent<appProps> = (props) => {
                   </Marker>
                ))}
             </ReactMapGL>
+            <table className="table-auto text-xs">
+               <tbody>
+                  {geoTickets.map((h) => {
+                     return (
+                        <tr
+                           key={h.ticketNumber}
+                           className={classNames({
+                              "bg-yellow-500":
+                                 selectedTicket === h.ticketNumber,
+                           })}
+                        >
+                           <td className={"border"}>{h.ticketNumber}</td>
+                           <td className={"border"}>
+                              {datefns.format(h.created, "L/d h:m b")}
+                           </td>
+                           <td className={"border"}>{h.priority}</td>
+                           <td className={"border"}>
+                              {h.siteName} {h.address}
+                           </td>
+                           <td className={"border"}>{h.city}</td>
+                           <td className={"border"}>{h.partNumber}</td>
+                           <td className={"border"}>{h.partDescription}</td>
+                        </tr>
+                     );
+                  })}
+               </tbody>
+            </table>
          </IfFulfilled>
          <IfRejected state={fetchState}>
             Fetch failed!:
