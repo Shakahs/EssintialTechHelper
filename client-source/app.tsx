@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
    IfFulfilled,
    IfInitial,
@@ -10,16 +10,14 @@ import {
 import ReactMapGL, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { GeoJSON, Point } from "geojson";
-import { APIResult, Ticket } from "./types";
-
-const mapboxToken =
-   "pk.eyJ1Ijoic2hha2FocyIsImEiOiJja2N0d2hkZG4yMmtqMnlsYnlldXc4Y29hIn0.4z1YQzLrDQDQ0dM3A-bzGw";
+import { APIResult, APITicket, Ticket } from "./types";
+import { apiParameters, apiUrl, mapboxToken } from "./constants";
+import { sortBy, truncate } from "lodash";
+const classNames = require("classnames");
 
 interface appProps {}
 
 const App: React.FunctionComponent<appProps> = (props) => {
-   const [geoTickets, setGeoTickets] = useState<Ticket[]>([]);
-
    const geoCode = async (res: APIResult) => {
       console.log(res);
       const promises: Promise<Response>[] = [];
@@ -45,32 +43,11 @@ const App: React.FunctionComponent<appProps> = (props) => {
       console.log(tRes);
    };
 
-   const fetchState = useFetch<APIResult>(
-      "https://reporting.serviceevent.com:446/api/datasets/b353a43e-819d-4d4f-9c28-cc7bc3a48a67/_search?report=702f5b27-d201-49d3-bd81-f8409ea192a9",
-      {
-         headers: {
-            accept: "application/hal+json",
-            "accept-language": "en-US,en;q=0.9",
-            authorization:
-               "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOjIzOSwiaWF0IjoxNTc5ODExNjk4LjU2Nn0.a1WmPzVYzXY5w_58sVlYX5McxxzZgzIKnfGtHbS_iew",
-            "content-type": "application/json;charset=UTF-8",
-            "sec-fetch-dest": "empty",
-            "sec-fetch-mode": "cors",
-            "sec-fetch-site": "same-origin",
-            "x-requested-with": "XMLHttpRequest",
-            cookie:
-               "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOjIzOSwiaWF0IjoxNTc5ODExNjk4LjU2Nn0.a1WmPzVYzXY5w_58sVlYX5McxxzZgzIKnfGtHbS_iew",
-         },
-         referrer:
-            "https://reporting.serviceevent.com:446/v/report.html?id=792&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOjIzOSwiaWF0IjoxNTc5ODExNjk4LjU2Nn0.a1WmPzVYzXY5w_58sVlYX5McxxzZgzIKnfGtHbS_iew",
-         referrerPolicy: "no-referrer-when-downgrade",
-         body:
-            '{"_source":["detailId","siteAddr","srmSiteCity","srmSiteState","createDt","createTm","srmPrio","srmSiteName","srmModelNo","srmModelDesc","__doc_count__"],"from":0,"size":50000,"sort":[],"query":{"term":{"srmSiteState":"CA"}}}',
-         method: "POST",
-         mode: "cors",
-      },
-      { json: true, defer: false, onResolve: geoCode }
-   );
+   const fetchState = useFetch<APIResult>(apiUrl, apiParameters, {
+      json: true,
+      defer: false,
+      onResolve: geoCode,
+   });
 
    const [viewport, setViewport] = useState({
       width: 400,
@@ -80,34 +57,66 @@ const App: React.FunctionComponent<appProps> = (props) => {
       zoom: 7.5,
    });
 
+   const [geoTickets, setGeoTickets] = useState<Ticket[]>([]);
+
+   const [selectedTicket, setSelectedTicket] = useState("");
+
+   const sortedApiTickets = sortBy<APITicket>(fetchState.data?.hits.hits, [
+      (o) => o._source.srmSiteCity,
+   ]);
+
    return (
       <>
-         <h3>Essintial Ticket Helper</h3>
+         <h3 className={"mx-auto"}>Essintial Ticket Helper</h3>
          <IfInitial state={fetchState}>Not running</IfInitial>
          <IfPending state={fetchState}>Fetching data...</IfPending>
          <IfFulfilled state={fetchState}>
-            {fetchState.data?.hits.hits.map((h) => {
-               return (
-                  <p key={h._id}>
-                     {h._source.detailId} {h._source.srmModelDesc}
-                  </p>
-               );
-            })}
+            <table className="table-auto text-sm">
+               <tbody>
+                  {sortedApiTickets.map((h) => {
+                     return (
+                        <tr
+                           key={h._id}
+                           className={classNames({
+                              "bg-yellow-500":
+                                 selectedTicket === h._source.detailId,
+                           })}
+                        >
+                           <td className={"border"}>{h._source.detailId}</td>
+                           <td className={"border"}>{h._source.siteAddr}</td>
+                           <td className={"border"}>{h._source.srmSiteCity}</td>
+                           <td className={"border"}>
+                              {h._source.srmModelDesc}
+                           </td>
+                        </tr>
+                     );
+                  })}
+               </tbody>
+            </table>
             <ReactMapGL
                {...viewport}
                mapboxApiAccessToken={mapboxToken}
                onViewportChange={(nextViewport) => {
                   setViewport(nextViewport);
-                  console.log(nextViewport);
+                  // console.log(nextViewport);
                }}
             >
                {geoTickets.map((gt) => (
                   <Marker
+                     captureClick={true}
                      key={gt.ticketNumber}
                      latitude={gt.location.features[0].geometry.coordinates[1]}
                      longitude={gt.location.features[0].geometry.coordinates[0]}
                   >
-                     {gt.ticketNumber}
+                     <div
+                        onClick={() => {
+                           setSelectedTicket(gt.ticketNumber);
+                        }}
+                     >
+                        {gt.ticketNumber}
+                        <br />
+                        {truncate(gt.partDescription, { length: 15 })}
+                     </div>
                   </Marker>
                ))}
             </ReactMapGL>
