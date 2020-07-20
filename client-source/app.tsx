@@ -12,7 +12,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { GeoJSON, Point } from "geojson";
 import { APIResult, APITicket, Ticket } from "./types";
 import { apiParameters, apiUrl, mapboxToken } from "./constants";
-import { sortBy, truncate } from "lodash";
+import { sortBy, replace, truncate, filter } from "lodash";
 const classNames = require("classnames");
 const datefns = require("date-fns");
 
@@ -26,19 +26,23 @@ const App: React.FunctionComponent<appProps> = (props) => {
 
       for await (const apiTicket of res.hits.hits) {
          try {
-            const geoQuery = `${apiTicket._source.siteAddr}, ${apiTicket._source.srmSiteCity}, ${apiTicket._source.srmSiteState}`;
+            const geoQuery = replace(
+               `${apiTicket._source.siteAddr}, ${apiTicket._source.srmSiteCity}, ${apiTicket._source.srmSiteState}`,
+               "#",
+               ""
+            );
             const response = await fetch(
                `https://api.mapbox.com/geocoding/v5/mapbox.places/${geoQuery}.json?limit=1&access_token=${mapboxToken}`
             );
             const geoPoint: GeoJSON.FeatureCollection<Point> = await response.json();
 
-            console.log(
-               apiTicket._source.detailId,
-               `${apiTicket._source.createDt[0].substr(
-                  0,
-                  10
-               )}${apiTicket._source.createTm[0].substr(10)}`
-            );
+            // console.log(
+            //    apiTicket._source.detailId,
+            //    `${apiTicket._source.createDt[0].substr(
+            //       0,
+            //       10
+            //    )}${apiTicket._source.createTm[0].substr(10)}`
+            // );
 
             tRes.push({
                siteName: apiTicket._source.srmSiteName,
@@ -64,7 +68,14 @@ const App: React.FunctionComponent<appProps> = (props) => {
          }
       }
 
-      const sortedTRes = sortBy<Ticket>(tRes, (o) => [o.city]);
+      //filter out tickets older than 1 week
+      const weekAgo = datefns.subWeeks(new Date(), 1);
+      const filteredTres = filter<Ticket>(tRes, (o) =>
+         datefns.isAfter(o.created, weekAgo)
+      );
+
+      //sort by city name
+      const sortedTRes = sortBy<Ticket>(filteredTres, (o) => [o.city]);
 
       setGeoTickets(sortedTRes);
       console.log(sortedTRes);
