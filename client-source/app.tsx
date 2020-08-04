@@ -189,7 +189,25 @@ const App: React.FunctionComponent<appProps> = (props) => {
                            </td>
                            <td className={"border"}>{h.priority}</td>
                            <td className={"border"}>
-                              {h.siteName} {h.address}
+                              <a
+                                 target={"_blank"}
+                                 className={"underline"}
+                                 href={`https://www.google.com/search?q=${encodeURI(
+                                    h.siteName
+                                 )}`}
+                              >
+                                 {h.siteName}
+                              </a>
+                              {" - "}
+                              <a
+                                 target={"_blank"}
+                                 className={"underline"}
+                                 href={`https://www.google.com/maps/search/?api=1&query=${encodeURI(
+                                    `${h.address},${h.city}`
+                                 )}`}
+                              >
+                                 {h.address}
+                              </a>
                            </td>
                            <td className={"border"}>{h.city}</td>
                            <td className={"border"}>{h.partNumber}</td>
