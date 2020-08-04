@@ -110,6 +110,12 @@ const App: React.FunctionComponent<appProps> = (props) => {
       (o) => o._source.srmSiteCity,
    ]);
 
+   const shippingCutoff = dateSet(new Date(), {
+      hours: 15,
+      minutes: 0,
+      seconds: 0,
+   });
+
    return (
       <>
          <IfInitial state={fetchState}>Not running</IfInitial>
@@ -170,8 +176,16 @@ const App: React.FunctionComponent<appProps> = (props) => {
                            }}
                         >
                            <td className={"border"}>{h.ticketNumber}</td>
-                           <td className={"border"}>
-                              {datefns.format(h.created, "L/d h:m b")}
+                           <td
+                              className={classNames({
+                                 border: true,
+                                 "text-red-600": isAfter(
+                                    h.created,
+                                    shippingCutoff
+                                 ),
+                              })}
+                           >
+                              {dateFormat(h.created, "L/d h:mm aa")}
                            </td>
                            <td className={"border"}>{h.priority}</td>
                            <td className={"border"}>
