@@ -110,12 +110,6 @@ const App: React.FunctionComponent<appProps> = (props) => {
       (o) => o._source.srmSiteCity,
    ]);
 
-   const shippingCutoff = dateSet(new Date(), {
-      hours: 15,
-      minutes: 0,
-      seconds: 0,
-   });
-
    return (
       <>
          <IfInitial state={fetchState}>Not running</IfInitial>
@@ -177,11 +171,17 @@ const App: React.FunctionComponent<appProps> = (props) => {
                         >
                            <td className={"border"}>{h.ticketNumber}</td>
                            <td
+                              // display a red shipping cutoff warning if the ticket was created after 3PM
+                              // as this delays parts delivery 1 day. use the day the ticket was created, not today's date
                               className={classNames({
                                  border: true,
                                  "text-red-600": isAfter(
                                     h.created,
-                                    shippingCutoff
+                                    dateSet(new Date(h.created.getTime()), {
+                                       hours: 15,
+                                       minutes: 0,
+                                       seconds: 0,
+                                    })
                                  ),
                               })}
                            >
