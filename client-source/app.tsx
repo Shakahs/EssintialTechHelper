@@ -14,7 +14,14 @@ import { APIResult, APITicket, Ticket } from "./types";
 import { apiParameters, apiUrl, mapboxToken } from "./constants";
 import { sortBy, replace, truncate, filter } from "lodash";
 const classNames = require("classnames");
-const datefns = require("date-fns");
+import {
+   parseISO,
+   subHours,
+   subWeeks,
+   isAfter,
+   format as dateFormat,
+   set as dateSet,
+} from "date-fns";
 
 interface appProps {}
 
@@ -44,6 +51,16 @@ const App: React.FunctionComponent<appProps> = (props) => {
             //    )}${apiTicket._source.createTm[0].substr(10)}`
             // );
 
+            const providedDate = parseISO(apiTicket._source.createDt[0]);
+            const providedTime = parseISO(apiTicket._source.createTm[0]);
+            const actualDate = new Date(
+               providedDate.getUTCFullYear(),
+               providedDate.getUTCMonth(),
+               providedDate.getUTCDate(),
+               providedTime.getHours(),
+               providedTime.getMinutes()
+            );
+
             tRes.push({
                siteName: apiTicket._source.srmSiteName,
                priority: apiTicket._source.srmPrio[0],
@@ -53,15 +70,7 @@ const App: React.FunctionComponent<appProps> = (props) => {
                ticketNumber: apiTicket._source.detailId,
                partNumber: apiTicket._source.srmModelNo[0],
                partDescription: apiTicket._source.srmModelDesc[0],
-               created: datefns.subHours(
-                  datefns.parseISO(
-                     `${apiTicket._source.createDt[0].substr(
-                        0,
-                        10
-                     )}${apiTicket._source.createTm[0].substr(10)}`
-                  ),
-                  1
-               ),
+               created: actualDate,
             });
          } catch (e) {
             console.log(e);
@@ -69,9 +78,9 @@ const App: React.FunctionComponent<appProps> = (props) => {
       }
 
       //filter out tickets older than 1 week
-      const weekAgo = datefns.subWeeks(new Date(), 1);
+      const weekAgo = subWeeks(new Date(), 1);
       const filteredTres = filter<Ticket>(tRes, (o) =>
-         datefns.isAfter(o.created, weekAgo)
+         isAfter(o.created, weekAgo)
       );
 
       //sort by city name
