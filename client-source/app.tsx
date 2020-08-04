@@ -88,8 +88,6 @@ const App: React.FunctionComponent<appProps> = (props) => {
    });
 
    const [viewport, setViewport] = useState({
-      width: "100%",
-      height: 400,
       latitude: 37.77323,
       longitude: -122.503434,
       zoom: 7.5,
@@ -110,9 +108,10 @@ const App: React.FunctionComponent<appProps> = (props) => {
          <IfFulfilled state={fetchState}>
             <ReactMapGL
                {...viewport}
+               width={"100%"}
+               height={"400px"}
                mapboxApiAccessToken={mapboxToken}
                onViewportChange={(nextViewport) => {
-                  //@ts-ignore
                   setViewport(nextViewport);
                   // console.log(nextViewport);
                }}
