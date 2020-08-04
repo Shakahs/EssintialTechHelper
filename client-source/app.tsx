@@ -88,10 +88,10 @@ const App: React.FunctionComponent<appProps> = (props) => {
    });
 
    const [viewport, setViewport] = useState({
-      width: 400,
+      width: "100%",
       height: 400,
-      latitude: 33.17690582202723,
-      longitude: -117.06797950716394,
+      latitude: 37.77323,
+      longitude: -122.503434,
       zoom: 7.5,
    });
 
@@ -112,6 +112,7 @@ const App: React.FunctionComponent<appProps> = (props) => {
                {...viewport}
                mapboxApiAccessToken={mapboxToken}
                onViewportChange={(nextViewport) => {
+                  //@ts-ignore
                   setViewport(nextViewport);
                   // console.log(nextViewport);
                }}
@@ -147,6 +148,18 @@ const App: React.FunctionComponent<appProps> = (props) => {
                               "bg-yellow-500":
                                  selectedTicket === h.ticketNumber,
                            })}
+                           onClick={() => {
+                              setSelectedTicket(h.ticketNumber);
+                              setViewport({
+                                 ...viewport,
+                                 latitude:
+                                    h.geocoding.features[0].geometry
+                                       .coordinates[1],
+                                 longitude:
+                                    h.geocoding.features[0].geometry
+                                       .coordinates[0],
+                              });
+                           }}
                         >
                            <td className={"border"}>{h.ticketNumber}</td>
                            <td className={"border"}>
