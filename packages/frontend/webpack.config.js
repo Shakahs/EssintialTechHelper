@@ -77,7 +77,7 @@ module.exports = {
    },
    output: {
       filename: "[name].[hash].js",
-      path: path.resolve(__dirname, "client-build/"),
+      path: path.resolve(__dirname, "../../build/frontend/"),
       // publicPath: isProduction ? "/static" : "/",
    },
    resolve: {
