@@ -1,3 +1,4 @@
+require("dotenv").config();
 import fetch, { RequestInit } from "node-fetch";
 import { apiParameters, apiUrl } from "./constants";
 import { APIResult, Ticket } from "../../types";
@@ -17,6 +18,12 @@ import { createConnection } from "typeorm";
 import { TicketEntity } from "./database/entity/Ticket";
 import { Connection } from "typeorm/connection/Connection";
 import { getManager } from "typeorm";
+import * as Twilio from "twilio";
+
+const twilioClient = Twilio(
+   process.env["TWILIO_ACCOUNT_SID"],
+   process.env["TWILIO_ACCOUNT_TOKEN"]
+);
 
 async function pullRawData(): Promise<APIResult> {
    const parameters: RequestInit = apiParameters;
@@ -100,8 +107,8 @@ const filterAndSort = (unfilteredTickets: Ticket[]): Ticket[] => {
 const persistTickets = async (
    tickets: Ticket[],
    connection: Connection
-): Promise<number> => {
-   let persistedTickets = 0;
+): Promise<Ticket[]> => {
+   let persistedTickets: Ticket[] = [];
 
    await connection.transaction(async (transaction) => {
       await transaction
@@ -119,7 +126,7 @@ const persistTickets = async (
             if (!found) {
                let dbInsert = TicketEntity.create(newTicket);
                await transaction.save(dbInsert);
-               persistedTickets++;
+               persistedTickets.push(newTicket);
             }
          } catch (err) {
             console.log("Could not insert", newTicket.ticketNumber, err);
@@ -128,6 +135,16 @@ const persistTickets = async (
    });
 
    return persistedTickets;
+};
+
+const sendNotifications = async (tickets: Ticket[]) => {
+   for await (const newTicket of tickets) {
+      const messageResult = await twilioClient.messages.create({
+         to: process.env["RECIPIENT_PHONE_NUMBER"],
+         from: process.env["SENDER_PHONE_NUMBER"],
+         body: `Subcase ${newTicket.ticketNumber} create in ${newTicket.city}`,
+      });
+   }
 };
 
 async function main() {
@@ -139,7 +156,7 @@ async function main() {
          username: "dev",
          password: "password",
          entities: [__dirname + "/database/entity/*.{js,ts}"],
-         logging: "all",
+         // logging: "all",
       });
       const rawTickets = await pullRawData();
       const processedTickets = await geoCode(rawTickets);
@@ -150,7 +167,8 @@ async function main() {
          dbConnection
       );
       await dbConnection.close();
-      console.log("persisted tickets:", persistedTickets);
+      console.log("persisted tickets:", persistedTickets.length);
+      await sendNotifications(persistedTickets);
    } catch (err) {
       console.log("An error occurred in main:", err);
    }
