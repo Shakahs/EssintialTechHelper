@@ -2,7 +2,20 @@
    "name": "backend",
    "private": true,
    "version": "0.0.1",
+   "scripts": {
+      "server-dev": "./node_modules/.bin/ts-node main.ts"
+   },
    "devDependencies": {
+      "@types/lodash": "^4.14.157",
+      "@types/node": "^14.0.13",
+      "@types/node-fetch": "^2.5.7",
+      "ts-node": "^9.0.0",
       "typescript": "^3.9.5"
+   },
+   "dependencies": {
+      "knex": "^0.21.5",
+      "node-fetch": "^2.6.1",
+      "objection": "^2.2.3",
+      "pg": "^8.3.3"
    }
 }

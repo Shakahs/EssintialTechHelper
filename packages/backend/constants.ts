@@ -1,6 +1,6 @@
 export const apiUrl =
    "https://reporting.serviceevent.com:446/api/datasets/b353a43e-819d-4d4f-9c28-cc7bc3a48a67/_search?report=702f5b27-d201-49d3-bd81-f8409ea192a9";
-export const apiParameters: RequestInit = {
+export const apiParameters = {
    headers: {
       accept: "application/hal+json",
       "accept-language": "en-US,en;q=0.9",
@@ -22,5 +22,3 @@ export const apiParameters: RequestInit = {
    method: "POST",
    mode: "cors",
 };
-export const mapboxToken =
-   "pk.eyJ1Ijoic2hha2FocyIsImEiOiJja2N0d2hkZG4yMmtqMnlsYnlldXc4Y29hIn0.4z1YQzLrDQDQ0dM3A-bzGw";
