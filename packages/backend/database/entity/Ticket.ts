@@ -1,9 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, PrimaryColumn } from "typeorm";
 
 @Entity()
 export class Ticket {
-   @PrimaryGeneratedColumn()
-   id: number;
+   @PrimaryColumn()
+   ticketNumber: string;
 
    @Column()
    siteName: string;
@@ -16,9 +16,6 @@ export class Ticket {
 
    @Column()
    city: string;
-
-   @Column()
-   ticketNumber: string;
 
    @Column()
    partNumber: string;
