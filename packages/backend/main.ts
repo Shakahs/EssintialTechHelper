@@ -16,6 +16,7 @@ import {
 import { createConnection } from "typeorm";
 import { TicketEntity } from "./database/entity/Ticket";
 import { Connection } from "typeorm/connection/Connection";
+import { getManager } from "typeorm";
 
 async function pullRawData(): Promise<APIResult> {
    const parameters: RequestInit = apiParameters;
@@ -102,31 +103,44 @@ const persistTickets = async (
 ): Promise<number> => {
    let persistedTickets = 0;
 
-   tickets.forEach((newTicket) => {
-      let dbInsert = new TicketEntity();
-      dbInsert.ticketNumber = newTicket.ticketNumber;
-      dbInsert.priority = newTicket.priority;
-      dbInsert.address = newTicket.address;
-      dbInsert.city = newTicket.city;
-      dbInsert.created = newTicket.created;
-      dbInsert.latitude = newTicket.latitude;
-      dbInsert.longitude = newTicket.longitude;
-      dbInsert.partNumber = newTicket.partNumber;
-      dbInsert.partDescription = newTicket.partDescription;
+   await connection.transaction(async (transaction) => {
+      await transaction
+         .createQueryBuilder()
+         .update(TicketEntity)
+         .set({ visible: false })
+         .execute();
 
-      try {
-         connection.manager.save(dbInsert);
-         persistedTickets++;
-      } catch (err) {
-         console.log("Could not insert", newTicket.ticketNumber);
+      for await (const newTicket of tickets) {
+         try {
+            const found = await transaction.findOne(
+               "TicketEntity",
+               newTicket.ticketNumber
+            );
+            if (!found) {
+               let dbInsert = TicketEntity.create(newTicket);
+               await transaction.save(dbInsert);
+               persistedTickets++;
+            }
+         } catch (err) {
+            console.log("Could not insert", newTicket.ticketNumber, err);
+         }
       }
    });
+
    return persistedTickets;
 };
 
 async function main() {
    try {
-      const dbConnection = await createConnection();
+      const dbConnection = await createConnection({
+         type: "postgres",
+         host: "localhost",
+         port: 5432,
+         username: "dev",
+         password: "password",
+         entities: [__dirname + "/database/entity/*.{js,ts}"],
+         logging: "all",
+      });
       const rawTickets = await pullRawData();
       const processedTickets = await geoCode(rawTickets);
       const filteredTickets = filterAndSort(processedTickets);

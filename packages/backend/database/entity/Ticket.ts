@@ -1,7 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, PrimaryColumn } from "typeorm";
+import {
+   Entity,
+   PrimaryGeneratedColumn,
+   Column,
+   PrimaryColumn,
+   BaseEntity,
+} from "typeorm";
 
 @Entity({ name: "ticket" })
-export class TicketEntity {
+export class TicketEntity extends BaseEntity {
    @PrimaryColumn()
    ticketNumber: string;
 
@@ -31,4 +37,7 @@ export class TicketEntity {
 
    @Column({ type: "float" })
    latitude: number;
+
+   @Column({ default: true })
+   visible: boolean;
 }

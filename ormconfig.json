@@ -5,7 +5,7 @@
    "username": "dev",
    "password": "password",
    "synchronize": true,
-   "logging": false,
+   "logging": true,
    "entities": ["database/entity/**/*.ts"],
    "migrations": ["database/migration/**/*.ts"],
    "subscribers": ["database/subscriber/**/*.ts"],
