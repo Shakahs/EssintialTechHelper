@@ -1,6 +1,7 @@
 {
    "name": "frontend",
    "private": true,
+   "version": "0.0.1",
    "main": "client-source/index.js",
    "scripts": {
       "client-dev": "NODE_ENV=development ./node_modules/.bin/webpack-dev-server --config webpack.config.js",

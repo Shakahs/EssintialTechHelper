@@ -1,15 +1,15 @@
 {
-  "name": "essintialtechhelper",
-  "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
-  "prettier": {
-    "tabWidth": 3,
-    "arrowParens": "always",
-    "jsxBracketSameLine": false
-  },
-  "devDependencies": {
-    "prettier": "^2.1.1"
-  }
+   "name": "essintialtechhelper",
+   "private": true,
+   "workspaces": [
+      "packages/*"
+   ],
+   "prettier": {
+      "tabWidth": 3,
+      "arrowParens": "always",
+      "jsxBracketSameLine": false
+   },
+   "devDependencies": {
+      "prettier": "^2.1.1"
+   }
 }
