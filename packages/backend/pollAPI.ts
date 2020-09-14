@@ -120,13 +120,19 @@ const persistTickets = async (
 
       for await (const newTicket of tickets) {
          try {
-            const found = await transaction.findOne(
+            //see if it exists
+            const preexistingTicket = await transaction.findOne(
                "TicketEntity",
                newTicket.ticketNumber
             );
-            if (!found) {
-               let dbInsert = TicketEntity.create(newTicket);
-               await transaction.save(dbInsert);
+
+            //upsert
+            let dbInsert = TicketEntity.create(newTicket);
+            dbInsert.visible = true;
+            await transaction.save(dbInsert);
+
+            //return as new if it wasn't already existing
+            if (!preexistingTicket) {
                persistedTickets.push(newTicket);
             }
          } catch (err) {
@@ -171,7 +177,7 @@ const sendNotifications = async (tickets: Ticket[]) => {
    }
 };
 
-async function main() {
+async function pollAPI() {
    try {
       const dbConnection = await createConnection({
          type: "postgres",
@@ -180,7 +186,7 @@ async function main() {
          username: "dev",
          password: "password",
          entities: [__dirname + "/database/entity/*.{js,ts}"],
-         // logging: "all",
+         logging: "all",
       });
       const rawTickets = await pullRawData();
       const processedTickets = await geoCode(rawTickets);
@@ -199,6 +205,6 @@ async function main() {
 }
 
 if (require.main === module) {
-   main();
-   setInterval(main, 5000);
+   pollAPI();
+   setInterval(pollAPI, 30000);
 }

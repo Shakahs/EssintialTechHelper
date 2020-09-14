@@ -26,7 +26,7 @@ export class TicketEntity extends BaseEntity {
    @Column()
    partNumber: string;
 
-   @Column()
+   @Column({ nullable: true })
    partDescription: string;
 
    @Column()
