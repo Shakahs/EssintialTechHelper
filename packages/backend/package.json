@@ -4,7 +4,7 @@
    "version": "0.0.1",
    "scripts": {
       "server-dev": "./node_modules/.bin/ts-node main.ts",
-      "start": "ts-node src/index.ts"
+      "migration-run": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:run"
    },
    "devDependencies": {
       "@types/lodash": "^4.14.157",

@@ -1,15 +1,15 @@
 import { Entity, PrimaryGeneratedColumn, Column, PrimaryColumn } from "typeorm";
 
-@Entity()
-export class Ticket {
+@Entity({ name: "ticket" })
+export class TicketEntity {
    @PrimaryColumn()
    ticketNumber: string;
 
-   @Column()
+   @Column({ nullable: true })
    siteName: string;
 
    @Column()
-   priority: number;
+   priority: string;
 
    @Column()
    address: string;
@@ -26,9 +26,9 @@ export class Ticket {
    @Column()
    created: Date;
 
-   @Column()
+   @Column({ type: "float" })
    longitude: number;
 
-   @Column()
+   @Column({ type: "float" })
    latitude: number;
 }

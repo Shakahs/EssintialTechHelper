@@ -2,7 +2,7 @@ import fetch, { RequestInit } from "node-fetch";
 import { apiParameters, apiUrl } from "./constants";
 import { APIResult, Ticket } from "../../types";
 import * as https from "https";
-import { filter, replace, sortBy } from "lodash";
+import { filter, replace, sortBy, forOwn } from "lodash";
 import { mapboxToken } from "../../constants";
 import { GeoJSON, Point } from "geojson";
 import {
@@ -13,6 +13,9 @@ import {
    format as dateFormat,
    set as dateSet,
 } from "date-fns";
+import { createConnection } from "typeorm";
+import { TicketEntity } from "./database/entity/Ticket";
+import { Connection } from "typeorm/connection/Connection";
 
 async function pullRawData(): Promise<APIResult> {
    const parameters: RequestInit = apiParameters;
@@ -93,12 +96,47 @@ const filterAndSort = (unfilteredTickets: Ticket[]): Ticket[] => {
    return sortedTickets;
 };
 
+const persistTickets = async (
+   tickets: Ticket[],
+   connection: Connection
+): Promise<number> => {
+   let persistedTickets = 0;
+
+   tickets.forEach((newTicket) => {
+      let dbInsert = new TicketEntity();
+      dbInsert.ticketNumber = newTicket.ticketNumber;
+      dbInsert.priority = newTicket.priority;
+      dbInsert.address = newTicket.address;
+      dbInsert.city = newTicket.city;
+      dbInsert.created = newTicket.created;
+      dbInsert.latitude = newTicket.latitude;
+      dbInsert.longitude = newTicket.longitude;
+      dbInsert.partNumber = newTicket.partNumber;
+      dbInsert.partDescription = newTicket.partDescription;
+
+      try {
+         connection.manager.save(dbInsert);
+         persistedTickets++;
+      } catch (err) {
+         console.log("Could not insert", newTicket.ticketNumber);
+      }
+   });
+   return persistedTickets;
+};
+
 async function main() {
    try {
+      const dbConnection = await createConnection();
       const rawTickets = await pullRawData();
       const processedTickets = await geoCode(rawTickets);
       const filteredTickets = filterAndSort(processedTickets);
-      console.log(filteredTickets);
+      // console.log(filteredTickets);
+      const persistedTickets = await persistTickets(
+         filteredTickets,
+         dbConnection
+      );
+      await dbConnection.close();
+      console.log("persisted tickets:", persistedTickets);
    } catch (err) {
       console.log("An error occurred in main:", err);
    }
