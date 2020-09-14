@@ -10,10 +10,12 @@
       "@types/lodash": "^4.14.157",
       "@types/node": "^8.0.29",
       "@types/node-fetch": "^2.5.7",
+      "@types/turf": "^3.5.32",
       "ts-node": "3.3.0",
       "typescript": "3.3.3333"
    },
    "dependencies": {
+      "@turf/turf": "^5.1.6",
       "node-fetch": "^2.6.1",
       "pg": "^8.3.3",
       "reflect-metadata": "^0.1.10",

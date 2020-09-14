@@ -17,8 +17,9 @@ import {
 import { createConnection } from "typeorm";
 import { TicketEntity } from "./database/entity/Ticket";
 import { Connection } from "typeorm/connection/Connection";
-import { getManager } from "typeorm";
 import * as Twilio from "twilio";
+import * as turfHelpers from "@turf/helpers";
+import { distance as turfDistance } from "@turf/turf";
 
 const twilioClient = Twilio(
    process.env["TWILIO_ACCOUNT_SID"],
@@ -139,11 +140,34 @@ const persistTickets = async (
 
 const sendNotifications = async (tickets: Ticket[]) => {
    for await (const newTicket of tickets) {
-      const messageResult = await twilioClient.messages.create({
-         to: process.env["RECIPIENT_PHONE_NUMBER"],
-         from: process.env["SENDER_PHONE_NUMBER"],
-         body: `Subcase ${newTicket.ticketNumber} create in ${newTicket.city}`,
-      });
+      const distance = turfDistance(
+         turfHelpers.point([newTicket.longitude, newTicket.latitude]),
+         turfHelpers.point([
+            Number(process.env["ORIGIN_LONGITUDE"]),
+            Number(process.env["ORIGIN_LATITUDE"]),
+         ]),
+         //@ts-ignore
+         { units: "miles" }
+      );
+      console.log(`${newTicket.ticketNumber} is ${distance} miles away`);
+
+      if (distance <= Number(process.env["NOTIFY_DISTANCE"])) {
+         try {
+            const messageResult = await twilioClient.messages.create({
+               to: process.env["RECIPIENT_PHONE_NUMBER"],
+               from: process.env["SENDER_PHONE_NUMBER"],
+               body: `${newTicket.ticketNumber}, P${newTicket.priority}, ${newTicket.address}, ${newTicket.city}, ${newTicket.partNumber}, ${newTicket.partDescription}`,
+            });
+            console.log(
+               `SMS ${messageResult.sid} sent for ${newTicket.ticketNumber}`
+            );
+         } catch (err) {
+            console.log(
+               `There was an error sending a notification for ${newTicket.ticketNumber}:`,
+               err
+            );
+         }
+      }
    }
 };
 
