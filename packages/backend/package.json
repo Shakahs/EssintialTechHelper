@@ -3,7 +3,8 @@
    "private": true,
    "version": "0.0.1",
    "scripts": {
-      "server-dev": "./node_modules/.bin/ts-node main.ts",
+      "poll-dev": "./node_modules/.bin/ts-node pollAPI.ts",
+      "server-dev": "./node_modules/.bin/ts-node server.ts",
       "migration-run": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:run"
    },
    "devDependencies": {
@@ -16,6 +17,7 @@
    },
    "dependencies": {
       "@turf/turf": "^5.1.6",
+      "fastify": "^3.3.0",
       "node-fetch": "^2.6.1",
       "pg": "^8.3.3",
       "reflect-metadata": "^0.1.10",
