@@ -11,7 +11,7 @@ import ReactMapGL, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { GeoJSON, Point } from "geojson";
 import { APIResult, APITicket, Ticket } from "../../../types";
-import { apiParameters, apiUrl, mapboxToken } from "./constants";
+import { mapboxToken } from "../../../constants";
 import { sortBy, replace, truncate, filter } from "lodash";
 const classNames = require("classnames");
 import {
@@ -22,6 +22,7 @@ import {
    format as dateFormat,
    set as dateSet,
 } from "date-fns";
+import { apiParameters, apiUrl } from "../../backend/constants";
 
 interface appProps {}
 
