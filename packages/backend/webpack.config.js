@@ -9,7 +9,7 @@ const isProduction = process.env.NODE_ENV === "production";
 module.exports = {
    mode: "development",
    entry: {
-      pollAPI: __dirname + "/poll.ts",
+      poll: __dirname + "/poll.ts",
       server: __dirname + "/server.ts",
    },
    devtool: "cheap-module-eval-source-map",

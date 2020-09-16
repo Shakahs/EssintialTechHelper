@@ -1,3 +1,5 @@
+import { TicketEntity } from "./database/entity/Ticket";
+
 const ormConfig = {
    type: "postgres",
    host: "localhost",
@@ -6,7 +8,7 @@ const ormConfig = {
    password: "password",
    synchronize: true,
    logging: true,
-   entities: ["database/entity/**/*.ts"],
+   entities: [TicketEntity],
    migrations: ["database/migration/**/*.ts"],
    subscribers: ["database/subscriber/**/*.ts"],
    cli: {
