@@ -2,10 +2,10 @@ import { TicketEntity } from "./database/entity/Ticket";
 
 const ormConfig = {
    type: "postgres",
-   host: "localhost",
-   port: "5432",
-   username: "dev",
-   password: "password",
+   host: process.env["DATABASE_HOST"],
+   port: process.env["DATABASE_PORT"],
+   username: process.env["DATABASE_USER"],
+   password: process.env["DATABASE_PASSWORD"],
    synchronize: true,
    // logging: true,
    entities: [TicketEntity],
