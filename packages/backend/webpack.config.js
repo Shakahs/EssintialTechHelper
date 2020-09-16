@@ -44,7 +44,7 @@ module.exports = {
       ],
    },
    output: {
-      filename: "[name].[hash].js",
+      filename: "[name].js",
       path: path.resolve(__dirname, "../../build/backend"),
       // publicPath: isProduction ? "/static" : "/",
    },

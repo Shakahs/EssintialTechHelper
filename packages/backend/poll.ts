@@ -210,6 +210,7 @@ async function poll() {
 }
 
 if (require.main === module) {
+   console.log("poller started");
    poll();
-   setInterval(poll, 30000);
+   setInterval(poll, 60000);
 }

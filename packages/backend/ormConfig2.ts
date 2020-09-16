@@ -7,7 +7,7 @@ const ormConfig = {
    username: "dev",
    password: "password",
    synchronize: true,
-   logging: true,
+   // logging: true,
    entities: [TicketEntity],
    migrations: ["database/migration/**/*.ts"],
    subscribers: ["database/subscriber/**/*.ts"],
