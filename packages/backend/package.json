@@ -3,7 +3,8 @@
    "private": true,
    "version": "0.0.1",
    "scripts": {
-      "poll-dev": "./node_modules/.bin/ts-node pollAPI.ts",
+      "backend-build": "rm -fv ../../build/backend/* && ./node_modules/.bin/webpack-cli",
+      "poll-dev": "./node_modules/.bin/ts-node poll.ts",
       "server-dev": "./node_modules/.bin/ts-node server.ts",
       "migration-run": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:run"
    },
@@ -12,8 +13,12 @@
       "@types/node": "^8.0.29",
       "@types/node-fetch": "^2.5.7",
       "@types/turf": "^3.5.32",
+      "fork-ts-checker-webpack-plugin": "^5.2.0",
       "ts-node": "3.3.0",
-      "typescript": "3.3.3333"
+      "typescript": "3.3.3333",
+      "webpack": "^4.43.0",
+      "webpack-cli": "^3.3.12",
+      "webpackbar": "^4.0.0"
    },
    "dependencies": {
       "@turf/turf": "^5.1.6",
@@ -21,6 +26,7 @@
       "node-fetch": "^2.6.1",
       "pg": "^8.3.3",
       "reflect-metadata": "^0.1.10",
+      "tiny-lru": "^7.0.6",
       "twilio": "^3.49.1",
       "typeorm": "0.2.26"
    }
