@@ -9,6 +9,7 @@
       "migration-run": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:run"
    },
    "devDependencies": {
+      "@types/common-tags": "^1.8.0",
       "@types/lodash": "^4.14.157",
       "@types/node": "^8.0.29",
       "@types/node-fetch": "^2.5.7",
@@ -23,6 +24,7 @@
    },
    "dependencies": {
       "@turf/turf": "^5.1.6",
+      "common-tags": "^1.8.0",
       "fastify": "^3.3.0",
       "node-fetch": "^2.6.1",
       "pg": "^8.3.3",

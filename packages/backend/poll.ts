@@ -3,7 +3,7 @@ import fetch, { RequestInit } from "node-fetch";
 import { apiParameters, apiUrl } from "./constants";
 import { APIResult, Ticket } from "../../types";
 import * as https from "https";
-import { filter, replace, sortBy, forOwn } from "lodash";
+import { filter, replace, sortBy, round } from "lodash";
 import { mapboxToken } from "../../constants";
 import { GeoJSON, Point } from "geojson";
 import {
@@ -21,6 +21,7 @@ import * as Twilio from "twilio";
 import * as turfHelpers from "@turf/helpers";
 import { distance as turfDistance } from "@turf/turf";
 import ormConfig from "./ormConfig2";
+import { stripIndents } from "common-tags";
 
 const twilioClient = Twilio(
    process.env["TWILIO_ACCOUNT_SID"],
@@ -156,14 +157,24 @@ const sendNotifications = async (tickets: Ticket[]) => {
          //@ts-ignore
          { units: "miles" }
       );
-      console.log(`${newTicket.ticketNumber} is ${distance} miles away`);
+      const roundedDistance = round(distance);
+      console.log(`${newTicket.ticketNumber} is ${roundedDistance} miles away`);
 
       if (distance <= Number(process.env["NOTIFY_DISTANCE"])) {
          try {
             const messageResult = await twilioClient.messages.create({
                to: process.env["RECIPIENT_PHONE_NUMBER"],
                from: process.env["SENDER_PHONE_NUMBER"],
-               body: `${newTicket.ticketNumber}, P${newTicket.priority}, ${newTicket.address}, ${newTicket.city}, ${newTicket.partNumber}, ${newTicket.partDescription}`,
+               body: stripIndents`${newTicket.ticketNumber}, P${
+                  newTicket.priority
+               }
+                ${newTicket.address}, ${
+                  newTicket.city
+               } (${roundedDistance} miles) 
+                ${newTicket.partNumber}, ${newTicket.partDescription}
+                https://www.google.com/maps/search/?api=1&query=${encodeURI(
+                   `Rite Aid, ${newTicket.address},${newTicket.city}, CA`
+                )}`,
             });
             console.log(
                `SMS ${messageResult.sid} sent for ${newTicket.ticketNumber}`
