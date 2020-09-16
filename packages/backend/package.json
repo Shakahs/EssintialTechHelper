@@ -18,6 +18,7 @@
       "typescript": "3.3.3333",
       "webpack": "^4.43.0",
       "webpack-cli": "^3.3.12",
+      "webpack-filter-warnings-plugin": "^1.2.1",
       "webpackbar": "^4.0.0"
    },
    "dependencies": {

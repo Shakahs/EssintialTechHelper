@@ -3,6 +3,7 @@ const webpack = require("webpack");
 const path = require("path");
 const WebpackBar = require("webpackbar");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const FilterWarningsPlugin = require("webpack-filter-warnings-plugin");
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -59,6 +60,23 @@ module.exports = {
       new webpack.IgnorePlugin(/^pg-native$/),
       new ForkTsCheckerWebpackPlugin(),
       new WebpackBar({ profile: true, fancy: true, basic: false }),
+      new FilterWarningsPlugin({
+         exclude: [
+            /mongodb/,
+            /mssql/,
+            /mysql/,
+            /mysql2/,
+            /oracledb/,
+            /pg/,
+            /pg-native/,
+            /pg-query-stream/,
+            /react-native-sqlite-storage/,
+            /redis/,
+            /sqlite3/,
+            /sql.js/,
+            /typeorm-aurora-data-api-driver/,
+         ],
+      }),
    ],
    node: {
       fs: "empty",
