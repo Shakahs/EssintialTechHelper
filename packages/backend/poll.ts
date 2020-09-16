@@ -20,6 +20,7 @@ import { Connection } from "typeorm/connection/Connection";
 import * as Twilio from "twilio";
 import * as turfHelpers from "@turf/helpers";
 import { distance as turfDistance } from "@turf/turf";
+import ormConfig from "./ormConfig2";
 
 const twilioClient = Twilio(
    process.env["TWILIO_ACCOUNT_SID"],
@@ -179,15 +180,8 @@ const sendNotifications = async (tickets: Ticket[]) => {
 
 async function poll() {
    try {
-      const dbConnection = await createConnection({
-         type: "postgres",
-         host: "localhost",
-         port: 5432,
-         username: "dev",
-         password: "password",
-         entities: [__dirname + "/database/entity/*.{js,ts}"],
-         logging: "all",
-      });
+      //@ts-ignore
+      const dbConnection = await createConnection(ormConfig);
       const rawTickets = await pullRawData();
       const processedTickets = await geoCode(rawTickets);
       const filteredTickets = filterAndSort(processedTickets);

@@ -2,6 +2,7 @@ import { createConnection } from "typeorm";
 import { Connection } from "typeorm/connection/Connection";
 import { TicketEntity } from "./database/entity/Ticket";
 const fastify = require("fastify")({ logger: true });
+import ormConfig from "./ormConfig2";
 
 let dbConnection: undefined | Connection;
 
@@ -23,15 +24,8 @@ const start = async () => {
    }
 };
 
-createConnection({
-   type: "postgres",
-   host: "localhost",
-   port: 5432,
-   username: "dev",
-   password: "password",
-   entities: [__dirname + "/database/entity/*.{js,ts}"],
-   logging: "all",
-}).then((conn) => {
+//@ts-ignore
+createConnection(ormConfig).then((conn) => {
    dbConnection = conn;
    start();
 });
