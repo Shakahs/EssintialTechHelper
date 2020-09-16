@@ -177,7 +177,7 @@ const sendNotifications = async (tickets: Ticket[]) => {
    }
 };
 
-async function pollAPI() {
+async function poll() {
    try {
       const dbConnection = await createConnection({
          type: "postgres",
@@ -205,6 +205,6 @@ async function pollAPI() {
 }
 
 if (require.main === module) {
-   pollAPI();
-   setInterval(pollAPI, 30000);
+   poll();
+   setInterval(poll, 30000);
 }
