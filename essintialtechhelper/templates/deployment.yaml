@@ -34,13 +34,15 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
             - name: DATABASE_HOST
-              value: chart-postgresql
+              value: {{ .Release.Name }}-ethdb
             - name: DATABASE_PORT
               value: "5432"
             - name: DATABASE_USER
               value: "postgres"
             - name: DATABASE_PASSWORD
-              value: "password"
+              value: "superfriends"
+            - name: DATABASE_NAME
+              value: ethdb
             - name: TWILIO_ACCOUNT_SID
               valueFrom:
                 secretKeyRef:
@@ -51,6 +53,16 @@ spec:
                 secretKeyRef:
                   name: pollsecrets
                   key: TWILIO_ACCOUNT_TOKEN
+            - name: NOTIFY_DISTANCE
+              value: '80'
+            - name: ORIGIN_LATITUDE
+              value: '37.790846'
+            - name: ORIGIN_LONGITUDE
+              value: '-122.400244'
+            - name: SENDER_PHONE_NUMBER
+              value: '+14153246300'
+            - name: RECIPIENT_PHONE_NUMBER
+              value: '+14247447171'
 
       {{- with .Values.nodeSelector }}
       nodeSelector:

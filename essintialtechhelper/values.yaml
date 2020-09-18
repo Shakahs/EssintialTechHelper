@@ -8,7 +8,7 @@ image:
   repository: gcr.io/essintial-tech-helper/poll
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -83,12 +83,13 @@ affinity: {}
 #    postgresqlPassword: password2
 #    postgresqlDatabase: db1
 
+#TODO: remove hardcoded postgress password
 postgresql:
-#  nameOverride: ethdb
-#  postgresqlUsername: ethdb
   postgresqlPassword: superfriends
-#  existingSecret: pgsecrets
   postgresqlDatabase: ethdb
+  nameOverride: ethdb
+    #  postgresqlUsername: ethdb
+    #  existingSecret: pgsecrets
 #  image:
 #    tag: 10
     #  global.postgresql.postgresqlPassword:testtest

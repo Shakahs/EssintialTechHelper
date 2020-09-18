@@ -193,8 +193,10 @@ async function poll() {
    try {
       //@ts-ignore
       const dbConnection = await createConnection(ormConfig);
+      console.log("polling ticket API");
       const rawTickets = await pullRawData();
       const processedTickets = await geoCode(rawTickets);
+      console.log(`${processedTickets.length} valid tickets found`);
       const filteredTickets = filterAndSort(processedTickets);
       // console.log(filteredTickets);
       const persistedTickets = await persistTickets(
