@@ -12,7 +12,7 @@ fastify.register(require("fastify-static"), {
    root: path.join(__dirname, "../../build/frontend"),
 });
 
-fastify.get("/available", async (request, reply) => {
+fastify.get("/api/available", async (request, reply) => {
    //@ts-ignore
    const ticketResults = await getConnection()
       .createQueryBuilder(TicketEntity, "t")
