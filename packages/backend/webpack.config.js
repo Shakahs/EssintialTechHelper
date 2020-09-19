@@ -51,8 +51,12 @@ module.exports = {
    resolve: {
       extensions: [".ts", ".js"],
       alias: {
-         //required due to a bug with Fastify and Webpack
-         "tiny-lru": path.join(__dirname, "../../node_modules/tiny-lru"),
+         //https://github.com/fastify/fastify/issues/2356
+         //this hack fixes Fastify in Webpack
+         "tiny-lru": path.join(
+            __dirname,
+            "../../node_modules/tiny-lru/lib/tiny-lru.cjs.js"
+         ),
       },
    },
    plugins: [

@@ -3,10 +3,14 @@
    "private": true,
    "version": "0.0.1",
    "scripts": {
-      "backend-build": "rm -fv ../../build/backend/* && ./node_modules/.bin/webpack-cli",
+      "build": "rm -fv ../../build/backend/* && ./node_modules/.bin/webpack-cli",
       "poll-dev": "./node_modules/.bin/ts-node poll.ts",
       "server-dev": "./node_modules/.bin/ts-node server.ts",
       "migration-run": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:run"
+   },
+   "nodemonConfig": {
+      "ext": "js,json,ts",
+      "exec": "./node_modules/.bin/ts-node ./server.ts"
    },
    "devDependencies": {
       "@types/common-tags": "^1.8.0",
@@ -15,6 +19,7 @@
       "@types/node-fetch": "^2.5.7",
       "@types/turf": "^3.5.32",
       "fork-ts-checker-webpack-plugin": "^5.2.0",
+      "nodemon": "^2.0.4",
       "ts-node": "3.3.0",
       "typescript": "3.3.3333",
       "webpack": "^4.43.0",
@@ -26,6 +31,7 @@
       "@turf/turf": "^5.1.6",
       "common-tags": "^1.8.0",
       "fastify": "^3.3.0",
+      "fastify-static": "^3.2.0",
       "node-fetch": "^2.6.1",
       "pg": "^8.3.3",
       "reflect-metadata": "^0.1.10",
