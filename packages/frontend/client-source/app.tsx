@@ -9,93 +9,39 @@ import {
 } from "react-async";
 import ReactMapGL, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { GeoJSON, Point } from "geojson";
-import { APIResult, APITicket, Ticket } from "../../../types";
+import { Ticket } from "../../../types";
 import { mapboxToken } from "../../../constants";
-import { sortBy, replace, truncate, filter } from "lodash";
-const classNames = require("classnames");
+import { sortBy, truncate } from "lodash";
 import {
-   parseISO,
-   subHours,
-   subWeeks,
-   isAfter,
    format as dateFormat,
+   isAfter,
+   parseJSON,
    set as dateSet,
 } from "date-fns";
-import { apiParameters, apiUrl } from "../../backend/constants";
+
+const classNames = require("classnames");
 
 interface appProps {}
 
 const App: React.FunctionComponent<appProps> = (props) => {
-   const geoCode = async (res: APIResult) => {
-      console.log(res);
-      const promises: Promise<Response>[] = [];
-      const tRes: Ticket[] = [];
-
-      for await (const apiTicket of res.hits.hits) {
-         try {
-            const geoQuery = replace(
-               `${apiTicket._source.siteAddr}, ${apiTicket._source.srmSiteCity}, ${apiTicket._source.srmSiteState}`,
-               "#",
-               ""
-            );
-            const response = await fetch(
-               `https://api.mapbox.com/geocoding/v5/mapbox.places/${geoQuery}.json?limit=1&access_token=${mapboxToken}`
-            );
-            const geoPoint: GeoJSON.FeatureCollection<Point> = await response.json();
-
-            // console.log(
-            //    apiTicket._source.detailId,
-            //    `${apiTicket._source.createDt[0].substr(
-            //       0,
-            //       10
-            //    )}${apiTicket._source.createTm[0].substr(10)}`
-            // );
-
-            const providedDate = parseISO(apiTicket._source.createDt[0]);
-            const providedTime = parseISO(apiTicket._source.createTm[0]);
-            const actualDate = new Date(
-               providedDate.getUTCFullYear(),
-               providedDate.getUTCMonth(),
-               providedDate.getUTCDate(),
-               providedTime.getHours(),
-               providedTime.getMinutes()
-            );
-
-            tRes.push({
-               siteName: apiTicket._source.srmSiteName,
-               priority: apiTicket._source.srmPrio[0],
-               address: apiTicket._source.siteAddr,
-               city: apiTicket._source.srmSiteCity,
-               geocoding: geoPoint,
-               ticketNumber: apiTicket._source.detailId,
-               partNumber: apiTicket._source.srmModelNo[0],
-               partDescription: apiTicket._source.srmModelDesc[0],
-               created: actualDate,
-            });
-         } catch (e) {
-            console.log(e);
-         }
+   const fetchState = useFetch<Ticket[]>(
+      "/api/available",
+      {},
+      {
+         json: true,
+         defer: false,
+         onResolve: (result: Ticket[]) => {
+            const dateDecoded = result.map((undecoded) => ({
+               ...undecoded,
+               created: parseJSON(undecoded.created),
+            }));
+            const sortedApiTickets = sortBy<Ticket>(dateDecoded, [
+               (o) => o.city,
+            ]);
+            setTickets(sortedApiTickets);
+         },
       }
-
-      //filter out tickets older than 1 week
-      const weekAgo = subWeeks(new Date(), 1);
-      const filteredTres = filter<Ticket>(tRes, (o) =>
-         isAfter(o.created, weekAgo)
-      );
-
-      //sort by city name
-      const sortedTRes = sortBy<Ticket>(filteredTres, (o) => [o.city]);
-
-      setGeoTickets(sortedTRes);
-      console.log(sortedTRes);
-   };
-
-   const fetchState = useFetch<APIResult>(apiUrl, apiParameters, {
-      json: true,
-      defer: false,
-      onResolve: geoCode,
-   });
+   );
 
    const [viewport, setViewport] = useState({
       latitude: 37.77323,
@@ -103,13 +49,9 @@ const App: React.FunctionComponent<appProps> = (props) => {
       zoom: 7.5,
    });
 
-   const [geoTickets, setGeoTickets] = useState<Ticket[]>([]);
+   const [tickets, setTickets] = useState<Ticket[]>([]);
 
    const [selectedTicket, setSelectedTicket] = useState("");
-
-   const sortedApiTickets = sortBy<APITicket>(fetchState.data?.hits.hits, [
-      (o) => o._source.srmSiteCity,
-   ]);
 
    return (
       <>
@@ -126,93 +68,92 @@ const App: React.FunctionComponent<appProps> = (props) => {
                   // console.log(nextViewport);
                }}
             >
-               {geoTickets.map((gt) => (
+               {tickets.map((ticket) => (
                   <Marker
                      captureClick={true}
-                     key={gt.ticketNumber}
-                     latitude={gt.geocoding.features[0].geometry.coordinates[1]}
-                     longitude={
-                        gt.geocoding.features[0].geometry.coordinates[0]
-                     }
+                     key={ticket.ticketNumber}
+                     latitude={ticket.latitude}
+                     longitude={ticket.longitude}
                   >
                      <div
                         onClick={() => {
-                           setSelectedTicket(gt.ticketNumber);
+                           setSelectedTicket(ticket.ticketNumber);
                         }}
                      >
-                        {gt.ticketNumber}
+                        {ticket.ticketNumber}
                         <br />
-                        {truncate(gt.partDescription, { length: 15 })}
+                        {truncate(ticket.partDescription, { length: 15 })}
                      </div>
                   </Marker>
                ))}
             </ReactMapGL>
             <table className="table-auto text-xs">
                <tbody>
-                  {geoTickets.map((h) => {
+                  {tickets.map((ticket) => {
                      return (
                         <tr
-                           key={h.ticketNumber}
+                           key={ticket.ticketNumber}
                            className={classNames({
                               "bg-yellow-500":
-                                 selectedTicket === h.ticketNumber,
+                                 selectedTicket === ticket.ticketNumber,
                            })}
                            onClick={() => {
-                              setSelectedTicket(h.ticketNumber);
+                              setSelectedTicket(ticket.ticketNumber);
                               setViewport({
                                  ...viewport,
-                                 latitude:
-                                    h.geocoding.features[0].geometry
-                                       .coordinates[1],
-                                 longitude:
-                                    h.geocoding.features[0].geometry
-                                       .coordinates[0],
+                                 latitude: ticket.latitude,
+                                 longitude: ticket.longitude,
                               });
                            }}
                         >
-                           <td className={"border"}>{h.ticketNumber}</td>
+                           <td className={"border"}>{ticket.ticketNumber}</td>
                            <td
                               // display a red shipping cutoff warning if the ticket was created after 3PM
                               // as this delays parts delivery 1 day. use the day the ticket was created, not today's date
                               className={classNames({
                                  border: true,
                                  "text-red-600": isAfter(
-                                    h.created,
-                                    dateSet(new Date(h.created.getTime()), {
-                                       hours: 15,
-                                       minutes: 0,
-                                       seconds: 0,
-                                    })
+                                    ticket.created,
+                                    dateSet(
+                                       new Date(ticket.created.getTime()),
+                                       {
+                                          hours: 15,
+                                          minutes: 0,
+                                          seconds: 0,
+                                       }
+                                    )
                                  ),
                               })}
                            >
-                              {dateFormat(h.created, "L/d h:mm aa")}
+                              {dateFormat(ticket.created, "L/d h:mm aa")}
                            </td>
-                           <td className={"border"}>{h.priority}</td>
+                           <td className={"border"}>{ticket.priority}</td>
                            <td className={"border"}>
                               <a
                                  target={"_blank"}
                                  className={"underline"}
                                  href={`https://www.google.com/search?q=${encodeURI(
-                                    h.siteName
+                                    ticket.siteName
                                  )}`}
                               >
-                                 {h.siteName}
+                                 {ticket.siteName}
                               </a>
                               {" - "}
                               <a
                                  target={"_blank"}
                                  className={"underline"}
                                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURI(
-                                    `${h.address},${h.city}`
+                                    `${ticket.address},${ticket.city}`
                                  )}`}
                               >
-                                 {h.address}
+                                 {ticket.address}
                               </a>
                            </td>
-                           <td className={"border"}>{h.city}</td>
-                           <td className={"border"}>{h.partNumber}</td>
-                           <td className={"border"}>{h.partDescription}</td>
+                           <td className={"border"}>{ticket.city}</td>
+                           <td className={"border"}>{ticket.partNumber}</td>
+                           <td className={"border"}>
+                              {ticket.partDescription}
+                           </td>
                         </tr>
                      );
                   })}
