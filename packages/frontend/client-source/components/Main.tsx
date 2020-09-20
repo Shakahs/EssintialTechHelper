@@ -1,7 +1,7 @@
 import * as React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Available from "./Available";
-import Manage from "./Manage";
+import Manage from "./Manage/Manage";
 import Navbar from "./Navbar";
 
 interface MainProps {}
