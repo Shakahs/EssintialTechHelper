@@ -9,8 +9,8 @@ import {
 } from "react-async";
 import ReactMapGL, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { Ticket } from "../../../types";
-import { mapboxToken } from "../../../constants";
+import { Ticket } from "../../../../types";
+import { mapboxToken } from "../../../../constants";
 import { sortBy, truncate } from "lodash";
 import {
    format as dateFormat,
@@ -23,7 +23,7 @@ const classNames = require("classnames");
 
 interface appProps {}
 
-const App: React.FunctionComponent<appProps> = (props) => {
+const Available: React.FunctionComponent<appProps> = (props) => {
    const fetchState = useFetch<Ticket[]>(
       "/api/available",
       {},
@@ -169,4 +169,4 @@ const App: React.FunctionComponent<appProps> = (props) => {
    );
 };
 
-export default App;
+export default Available;

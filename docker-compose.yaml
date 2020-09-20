@@ -6,9 +6,6 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_PASSWORD: password
-      POSTGRES_USER: dev
-  poll:
-    image: localhost/eth/poll
-    env_file:
-      - ./packages/backend/.env
+      POSTGRES_PASSWORD: superfriends
+      POSTGRES_USER: postgres
+      POSTGRES_DB: ethdb
