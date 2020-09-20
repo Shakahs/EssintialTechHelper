@@ -15,7 +15,7 @@ type Inputs = {
    password: string;
 };
 
-const Manage: React.FunctionComponent<ManageProps> = (props) => {
+const ProvideCredentials2: React.FunctionComponent<ManageProps> = (props) => {
    const dispatch = useDispatch();
 
    const { SessionID } = useSelector((state: RootState) => state.manageTickets);
@@ -115,4 +115,4 @@ const Manage: React.FunctionComponent<ManageProps> = (props) => {
    );
 };
 
-export default Manage;
+export default ProvideCredentials2;
