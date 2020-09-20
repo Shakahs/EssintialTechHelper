@@ -10,12 +10,14 @@ const Main: React.FunctionComponent<MainProps> = (props) => (
    <div>
       <Router>
          <Navbar />
-         <Route path={"/"} exact>
-            <Available />
-         </Route>
-         <Route path={"/manage"}>
-            <Manage />
-         </Route>
+         <div className={"m-2"}>
+            <Route path={"/"} exact>
+               <Available />
+            </Route>
+            <Route path={"/manage"}>
+               <Manage />
+            </Route>
+         </div>
       </Router>
    </div>
 );
