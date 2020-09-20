@@ -4,12 +4,12 @@ import * as ReactDOM from "react-dom";
 import Available from "./components/Available";
 import "./style.css";
 import Navbar from "./components/Navbar";
-import Main from "./components/Main";
+// import Main from "./components/Main";
 import store from "./store";
 import { Provider } from "react-redux";
 
 const render = () => {
-   // const Main = require("./components/Main").default;
+   const Main = require("./components/Main").default;
 
    ReactDOM.render(
       <Provider store={store}>
