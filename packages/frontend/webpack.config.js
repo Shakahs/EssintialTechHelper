@@ -3,6 +3,7 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const WebpackBar = require("webpackbar");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const cssnano = require("cssnano")({
@@ -20,11 +21,11 @@ const purgecss = require("@fullhuman/postcss-purgecss")({
    defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
 });
 
-const isProduction = process.env.NODE_ENV === "production";
+const isDevelopment = process.env.NODE_ENV !== "production";
 
 module.exports = {
    mode: "development",
-   entry: ["react-hot-loader/patch", __dirname + "/client-source/index.tsx"],
+   entry: [__dirname + "/client-source/index.tsx"],
    devtool: "cheap-module-eval-source-map",
    module: {
       rules: [
@@ -33,6 +34,9 @@ module.exports = {
             use: [
                {
                   loader: "babel-loader",
+                  options: {
+                     plugins: ["react-refresh/babel"],
+                  },
                },
                {
                   loader: "ts-loader",
@@ -93,6 +97,8 @@ module.exports = {
          // favicon: "client-source/favicon.png",
       }),
       // new ForkTsCheckerWebpackPlugin(),
+      isDevelopment && new ReactRefreshWebpackPlugin(),
+      isDevelopment && new webpack.HotModuleReplacementPlugin(),
       new WebpackBar({ profile: true, fancy: true, basic: false }),
    ],
    devServer: {

@@ -18,7 +18,7 @@ const Navbar: React.FunctionComponent<mainProps> = (props) => (
                className="block mt-2 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
             >
                <NavLink to={"/"} activeClassName={"underline"} exact>
-                  My Tickets
+                  Available Tickets
                </NavLink>
             </a>
             <a
@@ -26,7 +26,7 @@ const Navbar: React.FunctionComponent<mainProps> = (props) => (
                className="block mt-2 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
             >
                <NavLink to={"/manage"} activeClassName={"underline"}>
-                  Available Tickets
+                  My Tickets
                </NavLink>
             </a>
          </div>

@@ -8,9 +8,19 @@ import Main from "./components/Main";
 import store from "./store";
 import { Provider } from "react-redux";
 
-ReactDOM.render(
-   <Provider store={store}>
-      <Main />
-   </Provider>,
-   document.getElementById("reactApp")
-);
+const render = () => {
+   // const Main = require("./components/Main").default;
+
+   ReactDOM.render(
+      <Provider store={store}>
+         <Main />
+      </Provider>,
+      document.getElementById("reactApp")
+   );
+};
+
+render();
+
+if (process.env.NODE_ENV === "development" && module.hot) {
+   module.hot.accept("./components/Main", render);
+}
