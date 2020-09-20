@@ -3,9 +3,9 @@ import { RootState } from "../../rootReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { IfPending, useFetch } from "react-async";
-import { apiBase } from "../../constants";
+import { apiBase, defaultRequestHeaders } from "../../constants";
 import classNames from "classnames";
-import { LoginResponse } from "../../api";
+import { UnnecessaryArray, Account } from "../../api";
 import { changeAuth } from "../../features/manageTickets/manageTicketsSlice";
 
 interface ManageProps {}
@@ -21,13 +21,11 @@ const ProvideCredentials2: React.FunctionComponent<ManageProps> = (props) => {
    const { SessionID } = useSelector((state: RootState) => state.manageTickets);
    const { register, handleSubmit, watch, errors } = useForm<Inputs>();
 
-   const fetchState = useFetch<LoginResponse>(
+   const fetchState = useFetch<UnnecessaryArray<Account>>(
       `${apiBase}/session`,
       {
          method: "POST",
-         headers: {
-            "Content-Type": "application/json;charset=UTF-8",
-         },
+         headers: defaultRequestHeaders,
       },
       {
          onResolve: (acc) => {
