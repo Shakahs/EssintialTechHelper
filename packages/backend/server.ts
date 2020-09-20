@@ -1,5 +1,6 @@
 require("dotenv").config();
 import * as path from "path";
+import * as fs from "fs";
 import { createConnection, getConnection, getManager } from "typeorm";
 import { Connection } from "typeorm/connection/Connection";
 import { TicketEntity } from "./database/entity/Ticket";
@@ -14,10 +15,17 @@ const staticPath =
       ? "/app/static"
       : path.join(__dirname, "../../build/frontend");
 
+const indexHTML = path.join(staticPath, "index.html");
+
 console.log("staticpath is", staticPath);
 
 server.register(require("fastify-static"), {
    root: staticPath,
+});
+
+server.setNotFoundHandler((req, reply) => {
+   reply.status(200);
+   reply.type("text/html").send(fs.createReadStream(indexHTML));
 });
 
 server.get("/api/available", async (request, reply) => {
