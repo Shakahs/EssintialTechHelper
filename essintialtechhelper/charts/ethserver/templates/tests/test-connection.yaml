@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "ethserver.fullname" . }}-test-connection"
+  labels:
+    {{- include "ethserver.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "ethserver.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never

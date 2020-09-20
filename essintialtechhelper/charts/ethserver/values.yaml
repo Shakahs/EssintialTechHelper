@@ -1,11 +1,11 @@
-# Default values for essintialtechhelper.
+# Default values for ethserver.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: gcr.io/essintial-tech-helper/poll
+  repository: gcr.io/essintial-tech-helper/server
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
@@ -77,24 +77,3 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-#
-#global:
-#  postgresql:
-#    postgresqlPassword: password2
-#    postgresqlDatabase: db1
-
-#TODO: remove hardcoded postgress password
-global:
-  postgresql:
-    postgresqlUsername: postgres
-    postgresqlPassword: superfriends
-    postgresqlDatabase: ethdb
-
-postgresql:
-    nameOverride: ethdb
-    #  postgresqlUsername: ethdb
-    #  existingSecret: pgsecrets
-#  image:
-#    tag: 10
-    #  global.postgresql.postgresqlPassword:testtest
-    #  global.postgresql.postgresqlDatabase=db1

@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "essintialtechhelper.fullname" . }}
+  name: {{ include "ethserver.fullname" . }}
   labels:
-    {{- include "essintialtechhelper.labels" . | nindent 4 }}
+    {{- include "ethserver.labels" . | nindent 4 }}
 spec:
 {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
 {{- end }}
   selector:
     matchLabels:
-      {{- include "essintialtechhelper.selectorLabels" . | nindent 6 }}
+      {{- include "ethserver.selectorLabels" . | nindent 6 }}
   template:
     metadata:
     {{- with .Values.podAnnotations }}
@@ -18,21 +18,38 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       labels:
-        {{- include "essintialtechhelper.selectorLabels" . | nindent 8 }}
+        {{- include "ethserver.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+{{/*      serviceAccountName: {{ include "ethserver.serviceAccountName" . }}*/}}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
+            - name: NODE_ENV
+              value: "production"
             - name: DATABASE_HOST
               value: {{ .Release.Name }}-ethdb
             - name: DATABASE_PORT
@@ -43,27 +60,6 @@ spec:
               value: {{ .Values.global.postgresql.postgresqlPassword }}
             - name: DATABASE_NAME
               value: {{ .Values.global.postgresql.postgresqlDatabase }}
-            - name: TWILIO_ACCOUNT_SID
-              valueFrom:
-                secretKeyRef:
-                  name: pollsecrets
-                  key: TWILIO_ACCOUNT_SID
-            - name: TWILIO_ACCOUNT_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: pollsecrets
-                  key: TWILIO_ACCOUNT_TOKEN
-            - name: NOTIFY_DISTANCE
-              value: '80'
-            - name: ORIGIN_LATITUDE
-              value: '37.790846'
-            - name: ORIGIN_LONGITUDE
-              value: '-122.400244'
-            - name: SENDER_PHONE_NUMBER
-              value: '+14153246300'
-            - name: RECIPIENT_PHONE_NUMBER
-              value: '+14247447171'
-
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -76,4 +72,3 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-

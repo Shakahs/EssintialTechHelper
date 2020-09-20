@@ -8,7 +8,7 @@ const FilterWarningsPlugin = require("webpack-filter-warnings-plugin");
 const isProduction = process.env.NODE_ENV === "production";
 
 module.exports = {
-   mode: "development",
+   mode: "production",
    entry: {
       poll: __dirname + "/poll.ts",
       server: __dirname + "/server.ts",
@@ -86,4 +86,7 @@ module.exports = {
       fs: "empty",
    },
    target: "node",
+   optimization: {
+      minimize: false,
+   },
 };
