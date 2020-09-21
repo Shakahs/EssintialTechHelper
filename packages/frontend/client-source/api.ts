@@ -51,12 +51,14 @@ export enum CaseSummaryStatus {
    Complete = "CMPL",
 }
 
-export function isProjectWork(sb: CaseSummary): Boolean {
+export function isProjectWork(sb: CaseSummary): boolean {
    return sb.ProblemCode.endsWith("T");
 }
 
+export type NewStatusCode = "COMMIT";
+
 export interface NewStatusBody {
-   Code: CaseSummaryStatus;
+   Code: NewStatusCode;
    Comment: string;
    HoldReasonCode: string;
 }

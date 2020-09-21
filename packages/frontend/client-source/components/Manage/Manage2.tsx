@@ -43,7 +43,6 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
                subCases[sc.Id] = sc;
             });
             //update store
-            console.log(subCases);
             dispatch(updateTechSubcases({ caseSummaries: subCases }));
          },
          json: true,
@@ -61,7 +60,6 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
          <button
             className={"border p-2 block mb-3"}
             onClick={() => {
-               console.log("refresh");
                fetchState.run();
             }}
             disabled={fetchState.isPending}
