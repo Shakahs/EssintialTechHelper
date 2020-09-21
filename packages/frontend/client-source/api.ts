@@ -12,7 +12,7 @@ export interface Account {
    SessionId: string;
 }
 
-export interface TechSubcase {
+export interface CaseSummary {
    ArriveDateTime: Date;
    CompletionDateTime: Date;
    CustomerCompany: string;
@@ -23,8 +23,9 @@ export interface TechSubcase {
    OpenDate: Date;
    OpenDateTime: Date;
    Priority: string;
+   ProblemCode: string; // PROJECT / P3T (p3 tech only) / P2
    ScheduledDateTime: Date;
-   UserStatus: string; // CMPL=complete, CMTD=commited, etc.
+   UserStatus: CaseSummaryStatus; // CMPL=complete, CMTD=commited, ASGN=assigned
    Location: {
       Address1: string;
       City: string;
@@ -42,4 +43,20 @@ export interface GlossaryWord {
    mask: string;
    text: string;
    value: string;
+}
+
+export enum CaseSummaryStatus {
+   Assigned = "ASGN",
+   Committed = "CMTD",
+   Complete = "CMPL",
+}
+
+export function isProjectWork(sb: CaseSummary): Boolean {
+   return sb.ProblemCode.endsWith("T");
+}
+
+export interface NewStatusBody {
+   Code: CaseSummaryStatus;
+   Comment: string;
+   HoldReasonCode: string;
 }

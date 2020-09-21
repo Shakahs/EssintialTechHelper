@@ -1,19 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TechSubcase } from "../../api";
+import { CaseSummary } from "../../api";
 
 interface Authentication {
    SessionID: string | null;
 }
 
-interface TechSubcaseList {
-   techSubcases: { [key: string]: TechSubcase };
+interface CaseSummaries {
+   caseSummaries: { [key: string]: CaseSummary };
 }
 
-type ManagementState = Authentication & TechSubcaseList;
+type ManagementState = Authentication & CaseSummaries;
 
 let initialState: ManagementState = {
    SessionID: null,
-   techSubcases: {},
+   caseSummaries: {},
 };
 
 const manageTicketSlice = createSlice({
@@ -23,8 +23,8 @@ const manageTicketSlice = createSlice({
       changeAuth(state, action: PayloadAction<Authentication>) {
          state.SessionID = action.payload.SessionID;
       },
-      updateTechSubcases(state, action: PayloadAction<TechSubcaseList>) {
-         state.techSubcases = action.payload.techSubcases;
+      updateTechSubcases(state, action: PayloadAction<CaseSummaries>) {
+         state.caseSummaries = action.payload.caseSummaries;
       },
    },
 });
