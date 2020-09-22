@@ -1,20 +1,16 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import { apiBase, defaultRequestHeaders } from "../../constants";
 import { useFetch } from "react-async";
 import {
-   Account,
-   DoubleUnneccessaryArray,
    CaseSummary,
-   UnnecessaryArray,
+   CaseSummaryStatus,
+   DoubleUnneccessaryArray,
 } from "../../api";
-import {
-   changeAuth,
-   updateTechSubcases,
-} from "../../features/manageTickets/manageTicketsSlice";
+import { updateTechSubcases } from "../../features/manageTickets/manageTicketsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../rootReducer";
 import { map } from "lodash";
-import { useEffect } from "react";
 import CaseSummaryItem from "./CaseSummaryItem";
 import classnames from "classnames";
 
@@ -37,13 +33,13 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
       {
          onResolve: (acc) => {
             //convert to map
-            const subCases = {};
-            acc.Results[0].forEach((sc) => {
-               // debugger;
-               subCases[sc.Id] = sc;
-            });
+            // const subCases = {};
+            // acc.Results[0].forEach((sc) => {
+            //    // debugger;
+            //    subCases[sc.Id] = sc;
+            // });
             //update store
-            dispatch(updateTechSubcases({ caseSummaries: subCases }));
+            dispatch(updateTechSubcases({ caseSummaries: acc.Results[0] }));
          },
          json: true,
          defer: true,
@@ -55,34 +51,77 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
       fetchState.run();
    }, []);
 
+   type caseSumamryFilter = (cs: CaseSummary) => boolean;
+
+   const [caseStatusFilters, setCaseStatusFilters] = useState<
+      Set<CaseSummaryStatus>
+   >(new Set([CaseSummaryStatus.Assigned, CaseSummaryStatus.Committed]));
+
+   const applyCaseStatusFilters: caseSumamryFilter = (cs: CaseSummary) => {
+      //if we have filter properties set, check that this case summary matches them
+      if (caseStatusFilters.size > 0) {
+         return caseStatusFilters.has(cs.UserStatus);
+      }
+
+      //if not filter properties, pass the subcase
+      return true;
+   };
+
+   const filteredCaseSummaries = caseSummaries.filter(applyCaseStatusFilters);
+
    return (
       <div>
-         <button
-            className={"border p-2 block mb-3"}
-            onClick={() => {
-               fetchState.run();
-            }}
-            disabled={fetchState.isPending}
-         >
-            <svg
-               className={classnames("inline", {
-                  "animate-spin": fetchState.isPending,
-               })}
-               xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 20 20"
-               fill="currentColor"
-               height={30}
-               width={30}
+         <div className={"block"}>
+            <button
+               className={"border p-2 mb-3"}
+               onClick={() => {
+                  fetchState.run();
+               }}
+               disabled={fetchState.isPending}
             >
-               <path
-                  fillRule="evenodd"
-                  d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.56-.5-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.56.5.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.498-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z"
-                  clipRule="evenodd"
-               />
-            </svg>
-            Refresh
-         </button>
-         {map(caseSummaries, (sc) => (
+               <svg
+                  className={classnames("inline", {
+                     "animate-spin": fetchState.isPending,
+                  })}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  height={30}
+                  width={30}
+               >
+                  <path
+                     fillRule="evenodd"
+                     d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.56-.5-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.56.5.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.498-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z"
+                     clipRule="evenodd"
+                  />
+               </svg>
+               Refresh
+            </button>
+            <div className={"border border-solid border-1 inline p-2"}>
+               Case Status Filters:
+               {map(CaseSummaryStatus, (code, pretty) => (
+                  <div
+                     onClick={() => {
+                        const newSet = new Set(caseStatusFilters);
+                        if (newSet.has(code)) {
+                           newSet.delete(code);
+                        } else {
+                           newSet.add(code);
+                        }
+                        setCaseStatusFilters(newSet);
+                     }}
+                  >
+                     <input
+                        type={"checkbox"}
+                        name={`checkbox-${code}`}
+                        checked={caseStatusFilters.has(code)}
+                     />
+                     <label htmlFor={`checkbox-${code}`}>{pretty}</label>
+                  </div>
+               ))}
+            </div>
+         </div>
+         {map(filteredCaseSummaries, (sc) => (
             <CaseSummaryItem subcase={sc} key={sc.Id} />
          ))}
       </div>

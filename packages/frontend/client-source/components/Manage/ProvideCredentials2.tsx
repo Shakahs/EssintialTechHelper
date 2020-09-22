@@ -90,7 +90,7 @@ const ProvideCredentials2: React.FunctionComponent<ManageProps> = (props) => {
                   >
                      <IfPending state={fetchState}>
                         <svg
-                           className={"animate-spin"}
+                           className={"animate-spin inline"}
                            xmlns="http://www.w3.org/2000/svg"
                            viewBox="0 0 20 20"
                            fill="currentColor"

@@ -44,14 +44,30 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
    };
 
    return (
-      <div className={"w-full border mb-3 bg-grey-300"}>
+      <div
+         className={
+            "w-full border-solid border-black  border mb-3 bg-gray-300 p-1"
+         }
+      >
          <div className={"block"}>
-            {props.subcase.Id}
-            {props.subcase.Priority} {props.subcase.Model}
+            <span className={"underline mr-2"}>
+               <b>{props.subcase.Id}</b>
+            </span>
+            <span className={"mr-2"}>Priority: {props.subcase.Priority}</span>
             <Bool if={isProjectWork(props.subcase)}>Project Work</Bool>
          </div>
+         <div>Part Number: {props.subcase.Model}</div>
          <div>
-            {props.subcase.CustomerCompany} {props.subcase.Location.FullAddress}
+            <a
+               target={"_blank"}
+               className={"underline text-sm"}
+               href={`https://maps.google.com/maps?q=${encodeURI(
+                  `${props.subcase.CustomerCompany}, ${props.subcase.Location.FullAddress}`
+               )}`}
+            >
+               {props.subcase.CustomerCompany},
+               {props.subcase.Location.FullAddress}
+            </a>
          </div>
          <div>
             status:

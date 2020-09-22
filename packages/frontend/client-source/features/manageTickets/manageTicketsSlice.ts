@@ -6,14 +6,14 @@ interface Authentication {
 }
 
 interface CaseSummaries {
-   caseSummaries: { [key: string]: CaseSummary };
+   caseSummaries: CaseSummary[];
 }
 
 type ManagementState = Authentication & CaseSummaries;
 
 let initialState: ManagementState = {
    SessionID: null,
-   caseSummaries: {},
+   caseSummaries: [],
 };
 
 const manageTicketSlice = createSlice({
