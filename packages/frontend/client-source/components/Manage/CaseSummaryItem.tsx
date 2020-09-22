@@ -13,6 +13,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../rootReducer";
 import parseJSON from "date-fns/parseJSON";
 import dateFormat from "date-fns/format";
+import isBefore from "date-fns/isBefore";
+import classnames from "classnames";
 
 interface CaseSummaryItemProps {
    subcase: CaseSummary;
@@ -58,7 +60,13 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
                <b>{props.subcase.Id}</b>
             </span>
             <span className={"mr-2"}>Priority: {props.subcase.Priority}</span>
-            <span>Scheduled: {dateFormat(parsedETA, "L/d h:mm b")}</span>
+            <span
+               className={classnames({
+                  "bg-red-500": isBefore(parsedETA, new Date()),
+               })}
+            >
+               Scheduled: {dateFormat(parsedETA, "L/d h:mm b")}
+            </span>
          </div>
          <Bool if={isProjectWork(props.subcase)}>Project Work</Bool>
          <div>Part Number: {props.subcase.Model}</div>
