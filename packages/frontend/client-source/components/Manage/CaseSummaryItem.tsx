@@ -51,9 +51,13 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
 
    return (
       <div
-         className={
-            "w-full border-solid border-black  border mb-3 bg-gray-300 p-1"
-         }
+         className={classnames(
+            "w-full border-solid border-black  border mb-3 bg-gray-300 p-1",
+            {
+               "bg-yellow-500": props.subcase.Priority === "02",
+               "bg-red-500": props.subcase.Priority === "01",
+            }
+         )}
       >
          <div className={"block"}>
             <span className={"underline mr-2"}>
@@ -62,7 +66,7 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
             <span className={"mr-2"}>Priority: {props.subcase.Priority}</span>
             <span
                className={classnames({
-                  "bg-red-500": isBefore(parsedETA, new Date()),
+                  "bg-yellow-400": isBefore(parsedETA, new Date()),
                })}
             >
                Scheduled: {dateFormat(parsedETA, "L/d h:mm b")}
