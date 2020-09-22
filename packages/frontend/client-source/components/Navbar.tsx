@@ -29,6 +29,14 @@ const Navbar: React.FunctionComponent<mainProps> = (props) => (
                   My Tickets
                </NavLink>
             </a>
+            <a
+               href={
+                  "https://www.google.com/maps/d/u/2/viewer?ll=37.99581677180192%2C-122.04098581931868&z=9&mid=1d13LtxTrKnGI-RSrjDFo11SdXoB3YOMS"
+               }
+               target={"_blank"}
+            >
+               SLA Awareness Map
+            </a>
          </div>
       </div>
    </nav>
