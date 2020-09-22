@@ -5,15 +5,22 @@ interface Authentication {
    SessionID: string | null;
 }
 
-interface CaseSummaries {
-   caseSummaries: CaseSummary[];
+interface CurrentCaseSummaries {
+   currentCaseSummaries: CaseSummary[];
 }
 
-type ManagementState = Authentication & CaseSummaries;
+interface FutureCaseSummaries {
+   futureCaseSummaries: CaseSummary[];
+}
+
+type ManagementState = Authentication &
+   CurrentCaseSummaries &
+   FutureCaseSummaries;
 
 let initialState: ManagementState = {
    SessionID: null,
-   caseSummaries: [],
+   currentCaseSummaries: [],
+   futureCaseSummaries: [],
 };
 
 const manageTicketSlice = createSlice({
@@ -23,12 +30,25 @@ const manageTicketSlice = createSlice({
       changeAuth(state, action: PayloadAction<Authentication>) {
          state.SessionID = action.payload.SessionID;
       },
-      updateTechSubcases(state, action: PayloadAction<CaseSummaries>) {
-         state.caseSummaries = action.payload.caseSummaries;
+      updateCurrentCaseSummaries(
+         state,
+         action: PayloadAction<CurrentCaseSummaries>
+      ) {
+         state.currentCaseSummaries = action.payload.currentCaseSummaries;
+      },
+      updateFutureCaseSummaries(
+         state,
+         action: PayloadAction<FutureCaseSummaries>
+      ) {
+         state.futureCaseSummaries = action.payload.futureCaseSummaries;
       },
    },
 });
 
-export const { changeAuth, updateTechSubcases } = manageTicketSlice.actions;
+export const {
+   changeAuth,
+   updateCurrentCaseSummaries,
+   updateFutureCaseSummaries,
+} = manageTicketSlice.actions;
 
 export default manageTicketSlice.reducer;

@@ -8,7 +8,10 @@ import {
    DoubleUnneccessaryArray,
    isProjectWork,
 } from "../../api";
-import { updateTechSubcases } from "../../features/manageTickets/manageTicketsSlice";
+import {
+   updateCurrentCaseSummaries,
+   updateFutureCaseSummaries,
+} from "../../features/manageTickets/manageTicketsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../rootReducer";
 import { map } from "lodash";
@@ -20,11 +23,11 @@ interface Manage2Props {}
 const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
    const dispatch = useDispatch();
    const { SessionID } = useSelector((state: RootState) => state.manageTickets);
-   const { caseSummaries } = useSelector(
+   const { currentCaseSummaries, futureCaseSummaries } = useSelector(
       (state: RootState) => state.manageTickets
    );
 
-   const fetchState = useFetch<DoubleUnneccessaryArray<CaseSummary>>(
+   const fetchCurrentCases = useFetch<DoubleUnneccessaryArray<CaseSummary>>(
       `${apiBase}/subcases/ForTech`,
       {
          body: JSON.stringify({ Function: "CURRENT" }),
@@ -40,7 +43,31 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
             //    subCases[sc.Id] = sc;
             // });
             //update store
-            dispatch(updateTechSubcases({ caseSummaries: acc.Results[0] }));
+            dispatch(
+               updateCurrentCaseSummaries({
+                  currentCaseSummaries: acc.Results[0],
+               })
+            );
+         },
+         json: true,
+         defer: true,
+      }
+   );
+
+   const fetchFutureCases = useFetch<DoubleUnneccessaryArray<CaseSummary>>(
+      `${apiBase}/subcases/ForTech`,
+      {
+         body: JSON.stringify({ Function: "FUTURE" }),
+         method: "POST",
+         headers: { ...defaultRequestHeaders, Authorization: SessionID },
+      },
+      {
+         onResolve: (acc) => {
+            dispatch(
+               updateFutureCaseSummaries({
+                  futureCaseSummaries: acc.Results[0],
+               })
+            );
          },
          json: true,
          defer: true,
@@ -49,7 +76,8 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
 
    //run once on component mount
    useEffect(() => {
-      fetchState.run();
+      fetchCurrentCases.run();
+      fetchFutureCases.run();
    }, []);
 
    type caseSummaryFilter = (cs: CaseSummary) => boolean;
@@ -77,7 +105,10 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
       return true;
    };
 
-   const filteredCaseSummaries = caseSummaries
+   const filteredCaseSummaries = [
+      ...currentCaseSummaries,
+      ...futureCaseSummaries,
+   ]
       .filter(caseStatusFilter)
       .filter(projectWorkFilter);
 
@@ -87,13 +118,16 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
             <button
                className={"border p-2 mb-3"}
                onClick={() => {
-                  fetchState.run();
+                  fetchCurrentCases.run();
+                  fetchFutureCases.run();
                }}
-               disabled={fetchState.isPending}
+               disabled={
+                  fetchCurrentCases.isPending || fetchFutureCases.isPending
+               }
             >
                <svg
                   className={classnames("inline", {
-                     "animate-spin": fetchState.isPending,
+                     "animate-spin": fetchCurrentCases.isPending,
                   })}
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
