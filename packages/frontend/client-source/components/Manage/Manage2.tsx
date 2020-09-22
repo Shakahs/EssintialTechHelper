@@ -6,6 +6,7 @@ import {
    CaseSummary,
    CaseSummaryStatus,
    DoubleUnneccessaryArray,
+   isProjectWork,
 } from "../../api";
 import { updateTechSubcases } from "../../features/manageTickets/manageTicketsSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -51,23 +52,34 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
       fetchState.run();
    }, []);
 
-   type caseSumamryFilter = (cs: CaseSummary) => boolean;
+   type caseSummaryFilter = (cs: CaseSummary) => boolean;
 
-   const [caseStatusFilters, setCaseStatusFilters] = useState<
+   const [caseStatusFilterSet, changeCaseStatusFilterSet] = useState<
       Set<CaseSummaryStatus>
    >(new Set([CaseSummaryStatus.Assigned, CaseSummaryStatus.Committed]));
 
-   const applyCaseStatusFilters: caseSumamryFilter = (cs: CaseSummary) => {
+   const caseStatusFilter: caseSummaryFilter = (cs: CaseSummary) => {
       //if we have filter properties set, check that this case summary matches them
-      if (caseStatusFilters.size > 0) {
-         return caseStatusFilters.has(cs.UserStatus);
+      if (caseStatusFilterSet.size > 0) {
+         return caseStatusFilterSet.has(cs.UserStatus);
       }
 
       //if not filter properties, pass the subcase
       return true;
    };
 
-   const filteredCaseSummaries = caseSummaries.filter(applyCaseStatusFilters);
+   const [showProjectWork, setShowProjectWork] = useState(false);
+   const projectWorkFilter: caseSummaryFilter = (cs: CaseSummary) => {
+      if (isProjectWork(cs)) {
+         return showProjectWork;
+      }
+
+      return true;
+   };
+
+   const filteredCaseSummaries = caseSummaries
+      .filter(caseStatusFilter)
+      .filter(projectWorkFilter);
 
    return (
       <div>
@@ -101,24 +113,40 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
                Case Status Filters:
                {map(CaseSummaryStatus, (code, pretty) => (
                   <div
+                     className={"inline"}
                      onClick={() => {
-                        const newSet = new Set(caseStatusFilters);
+                        const newSet = new Set(caseStatusFilterSet);
                         if (newSet.has(code)) {
                            newSet.delete(code);
                         } else {
                            newSet.add(code);
                         }
-                        setCaseStatusFilters(newSet);
+                        changeCaseStatusFilterSet(newSet);
                      }}
                   >
                      <input
                         type={"checkbox"}
                         name={`checkbox-${code}`}
-                        checked={caseStatusFilters.has(code)}
+                        checked={caseStatusFilterSet.has(code)}
                      />
                      <label htmlFor={`checkbox-${code}`}>{pretty}</label>
                   </div>
                ))}
+            </div>
+            <div
+               className={"border border-solid border-1 inline p-2"}
+               onClick={() => {
+                  if (showProjectWork) {
+                     setShowProjectWork(false);
+                  } else setShowProjectWork(true);
+               }}
+            >
+               <input
+                  type={"checkbox"}
+                  name={`checkbox-projectwork`}
+                  checked={showProjectWork}
+               />
+               <label htmlFor={`checkbox-projectwork`}>Show Project work</label>
             </div>
          </div>
          {map(filteredCaseSummaries, (sc) => (

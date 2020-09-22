@@ -52,7 +52,7 @@ export enum CaseSummaryStatus {
 }
 
 export function isProjectWork(sb: CaseSummary): boolean {
-   return sb.ProblemCode.endsWith("T");
+   return sb.ProblemCode === "PROJECT";
 }
 
 export type NewStatusCode = "COMMIT";
