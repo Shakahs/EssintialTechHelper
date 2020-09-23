@@ -112,6 +112,10 @@ export const caseStatusMapping: Partial<CaseStatusMappingCollection> = {
       name: "Arrived",
       whenReading: "ARRV",
    },
+   Complete: {
+      name: "Completed",
+      whenReading: "CMPL",
+   },
 };
 
 export const findCaseStatusName = (cs: CaseSummary): CaseStatusMapping => {

@@ -92,18 +92,19 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
          <div>
             Current Status:
             {currentCaseStatus.name}
-            {currentCaseStatus?.nextStatus.map((nextStatus) => (
-               <button
-                  className={"border p-2 bg-blue-300 rounded-md"}
-                  onClick={() => {
-                     submitNewStatus(
-                        caseStatusMapping[nextStatus].whenUpdating
-                     );
-                  }}
-               >
-                  {caseStatusMapping[nextStatus].whenUpdating}
-               </button>
-            ))}
+            {currentCaseStatus.nextStatus &&
+               currentCaseStatus.nextStatus.map((nextStatus) => (
+                  <button
+                     className={"border p-2 bg-blue-300 rounded-md"}
+                     onClick={() => {
+                        submitNewStatus(
+                           caseStatusMapping[nextStatus].whenUpdating
+                        );
+                     }}
+                  >
+                     {caseStatusMapping[nextStatus].whenUpdating}
+                  </button>
+               ))}
          </div>
       </div>
    );
