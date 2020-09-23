@@ -160,11 +160,7 @@ const Available: React.FunctionComponent<appProps> = (props) => {
                </tbody>
             </table>
          </IfFulfilled>
-         <IfRejected state={fetchState}>
-            Fetch failed!:
-            <br />
-            {fetchState.error}
-         </IfRejected>
+         <IfRejected state={fetchState}>Fetch failed!</IfRejected>
       </>
    );
 };
