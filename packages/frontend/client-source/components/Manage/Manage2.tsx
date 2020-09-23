@@ -4,7 +4,7 @@ import { apiBase, defaultRequestHeaders } from "../../constants";
 import { useFetch } from "react-async";
 import {
    CaseSummary,
-   CaseSummaryStatus,
+   CurrentCaseStatus,
    DoubleUnneccessaryArray,
    isProjectWork,
 } from "../../api";
@@ -83,8 +83,8 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
    type caseSummaryFilter = (cs: CaseSummary) => boolean;
 
    const [caseStatusFilterSet, changeCaseStatusFilterSet] = useState<
-      Set<CaseSummaryStatus>
-   >(new Set([CaseSummaryStatus.Assigned, CaseSummaryStatus.Committed]));
+      Set<string>
+   >(new Set([CurrentCaseStatus.Assigned, CurrentCaseStatus.Committed]));
 
    const caseStatusFilter: caseSummaryFilter = (cs: CaseSummary) => {
       //if we have filter properties set, check that this case summary matches them
@@ -145,7 +145,7 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
             </button>
             <div className={"border border-solid border-1 inline p-2"}>
                Case Status Filters:
-               {map(CaseSummaryStatus, (code, pretty) => (
+               {map(CurrentCaseStatus, (code, pretty) => (
                   <div
                      className={"inline"}
                      onClick={() => {

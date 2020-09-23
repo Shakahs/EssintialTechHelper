@@ -1,10 +1,12 @@
 import * as React from "react";
 import {
    CaseSummary,
-   CaseSummaryStatus,
+   CurrentCaseStatus,
    isProjectWork,
    NewStatusBody,
    NewStatusCode,
+   findCaseStatusName,
+   caseStatusMapping,
 } from "../../api";
 import Bool from "../utility/Bool";
 import { useFetch } from "react-async";
@@ -38,7 +40,7 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
       }
    );
 
-   const submitNewStatus = (newStatus: NewStatusCode) => {
+   const submitNewStatus = (newStatus: string) => {
       const body: NewStatusBody = {
          Comment: "",
          HoldReasonCode: "",
@@ -48,6 +50,7 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
    };
 
    const parsedETA = parseJSON(props.subcase.ScheduledDateTime);
+   const currentCaseStatus = findCaseStatusName(props.subcase);
 
    return (
       <div
@@ -87,24 +90,20 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
             </a>
          </div>
          <div>
-            status:
-            <Bool if={props.subcase.UserStatus === CaseSummaryStatus.Assigned}>
-               Assigned
+            Current Status:
+            {currentCaseStatus.name}
+            {currentCaseStatus?.nextStatus.map((nextStatus) => (
                <button
                   className={"border p-2 bg-blue-300 rounded-md"}
                   onClick={() => {
-                     submitNewStatus("COMMIT");
+                     submitNewStatus(
+                        caseStatusMapping[nextStatus].whenUpdating
+                     );
                   }}
                >
-                  Commit
+                  {caseStatusMapping[nextStatus].whenUpdating}
                </button>
-            </Bool>
-            <Bool if={props.subcase.UserStatus === CaseSummaryStatus.Committed}>
-               Committed
-            </Bool>
-            <Bool if={props.subcase.UserStatus === CaseSummaryStatus.Complete}>
-               Complete
-            </Bool>
+            ))}
          </div>
       </div>
    );
