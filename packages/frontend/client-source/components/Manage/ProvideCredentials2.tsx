@@ -60,7 +60,7 @@ const ProvideCredentials2: React.FunctionComponent<ManageProps> = (props) => {
                   <input
                      className={"border rounded w-full shadow appearance-none"}
                      name="email"
-                     defaultValue="test"
+                     defaultValue="ssaleemi@essintial.com"
                      ref={register({ required: true })}
                   />
                </div>
