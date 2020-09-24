@@ -1,0 +1,3200 @@
+{
+   "RA-SECURITYSCREWS": {
+      "description": "Verifone security screw"
+   },
+   "RA-100003": {
+      "description": "FEDEX RTD RETURN LABEL (1 = 25) (4 MAX)"
+   },
+   "RA-100074": {
+      "description": "GRAY CAT5 CABLE 100'"
+   },
+   "RA-100076": {
+      "description": "GRAY CAT5 CABLE 50'"
+   },
+   "RA-100163": {
+      "description": "VGA EXTENDER CABLE 15'"
+   },
+   "RA-100180": {
+      "description": "GRAY CAT 5 CABLE 3'"
+   },
+   "RA-100181": {
+      "description": "BLACK CAT 5 CABLE 3'"
+   },
+   "RA-100182": {
+      "description": "BLUE CAT 5 CABLE 3'"
+   },
+   "RA-100183": {
+      "description": "GREEN CAT 5 CABLE 3'"
+   },
+   "RA-100184": {
+      "description": "ORANGE CAT 5 CABLE 3'"
+   },
+   "RA-100185": {
+      "description": "PURPLE CAT 5 CABLE 3'"
+   },
+   "RA-100186": {
+      "description": "RED CAT 5 CABLE 3'"
+   },
+   "RA-100187": {
+      "description": "WHITE CAT 5 CABLE 3'"
+   },
+   "RA-100188": {
+      "description": "YELLOW CAT 5 CABLE 3'"
+   },
+   "RA-100254": {
+      "description": "GRAY CAT5 CABLE 1'"
+   },
+   "RA-100429": {
+      "description": "7' LINE CORD FOR MODEM"
+   },
+   "RA-100587": {
+      "description": "8\"\" ZIP TIE WRAPS 1=1000"
+   },
+   "RA-100623": {
+      "description": "USB /SATO"
+   },
+   "RA-100849": {
+      "description": "RIGHT ANGLE POWER CABLE"
+   },
+   "RA-100850": {
+      "description": "AC PWR"
+   },
+   "RA-100915": {
+      "description": "8215-29U 160GB/250GB SAT"
+   },
+   "RA-100925": {
+      "description": "MX925 CREDIT CARD STICKER (1=10)"
+   },
+   "RA-100929": {
+      "description": "OKIDATA 321 TURBO COMPUTER PERIPHERAL"
+   },
+   "RA-101926": {
+      "description": "MX925 ANTI-SKIMMING STICKER (1=1)"
+   },
+   "RA-101927": {
+      "description": "RDL TX-LC2 AUDIO COMBINER"
+   },
+   "RA-101928": {
+      "description": "RDL POWER SUPPLY FOR TX-LC2"
+   },
+   "RA-200001": {
+      "description": "BIOMETRIC DEVICE"
+   },
+   "RA-200003": {
+      "description": "DELL POWEREDGE 2900 SERVER"
+   },
+   "RA-200004": {
+      "description": "DELL 17\" MONITOR"
+   },
+   "RA-200005": {
+      "description": "SATO CT410 LABEL PRINTER"
+   },
+   "RA-200006": {
+      "description": "NCR 7402 REGISTER"
+   },
+   "RA-200008": {
+      "description": "APC SMART UPS 750 UPS"
+   },
+   "RA-200009": {
+      "description": "3COM 24 PORT IP SWITCH"
+   },
+   "RA-200010": {
+      "description": "POWER SURGE STRIP NET 7"
+   },
+   "RA-200011": {
+      "description": "FUJITSU 5120 DOCUMENT SCANNER"
+   },
+   "RA-200013": {
+      "description": "TRENDNET 2PORT KVM SWITCH"
+   },
+   "RA-200014": {
+      "description": "RF MODULATOR"
+   },
+   "RA-200015": {
+      "description": "SC03 HARMONICA JACK"
+   },
+   "RA-200016": {
+      "description": "F-TYPE RG59 VIDEO CABLE 6'"
+   },
+   "RA-200018": {
+      "description": "GREEN CAT5 CABLE 7'"
+   },
+   "RA-200019": {
+      "description": "ORANGE CAT5 CABLE 7'"
+   },
+   "RA-200020": {
+      "description": "RED CAT5 CABLE 7'"
+   },
+   "RA-200021": {
+      "description": "GRAY CAT5 CABLE 7'"
+   },
+   "RA-200023": {
+      "description": "VIDEO SPLITTER"
+   },
+   "RA-200025": {
+      "description": "DESKTOP SPEAKER SET"
+   },
+   "RA-200026": {
+      "description": "PS/2 Keyboard"
+   },
+   "RA-200027": {
+      "description": "PS2 BLACK MOUSE"
+   },
+   "RA-200029": {
+      "description": "DIALOGIC CARD 4 PORT"
+   },
+   "RA-200030": {
+      "description": "DIALOGIC CABLE"
+   },
+   "RA-200031": {
+      "description": "MX870 SIGCAP"
+   },
+   "RA-200032": {
+      "description": "BLACK CAT5 CABLE 7'"
+   },
+   "RA-200033": {
+      "description": "WHITE CAT5 CABLE 7'"
+   },
+   "RA-200034": {
+      "description": "BLUE CAT5 CABLE 7'"
+   },
+   "RA-200035": {
+      "description": "PURPLE CAT5 CABLE 7'"
+   },
+   "RA-200036": {
+      "description": "YELLOW CAT5 CABLE 7'"
+   },
+   "RA-200037": {
+      "description": "GRAY CAT5 CABLE 15'"
+   },
+   "RA-200038": {
+      "description": "GRAY CAT5 CABLE 25'"
+   },
+   "RA-200040": {
+      "description": "GRAY CAT5 CABLE 8'"
+   },
+   "RA-200041": {
+      "description": "YELLOW CAT5 CABLE 10'"
+   },
+   "RA-200042": {
+      "description": "USB EXTENDER CABLE 6'"
+   },
+   "RA-200043": {
+      "description": "IBM THINKCENTRE M52 VRU"
+   },
+   "RA-200049": {
+      "description": "GREEN WITH WHITE STRIPE CAT5 CABLE 7'"
+   },
+   "RA-200055": {
+      "description": "IBM 17\" MONITOR"
+   },
+   "RA-200060": {
+      "description": "SYMBOL TECHNOLOGIES MC3090 RF DEVICE"
+   },
+   "RA-200061": {
+      "description": "MC3X90 SINGLE SLOT CRADLE"
+   },
+   "RA-200064": {
+      "description": "NCR 7402 BIOMETRIC KIT"
+   },
+   "RA-200067": {
+      "description": "3COM 8 PORT IP SWITCH"
+   },
+   "RA-200069": {
+      "description": "WINCOR NIXDORF TH420 REGISTER PRINTER"
+   },
+   "RA-200070": {
+      "description": "7402/IPOS CHERRY POS KEYBOARD"
+   },
+   "RA-200071": {
+      "description": "PURPLE WITH WHITE STRIPE CAT5 CABLE 7'"
+   },
+   "RA-200072": {
+      "description": "CISCO AIRONET 1131 ACCESS POINT"
+   },
+   "RA-200075": {
+      "description": "MOTO IMAGER POWER SUPPLY"
+   },
+   "RA-200076": {
+      "description": "MOTO IMAGER SERIAL CABLE"
+   },
+   "RA-200077": {
+      "description": "SC03 VRU SATIN CABLE"
+   },
+   "RA-200078": {
+      "description": "MAXELL HP200 HEADPHONES"
+   },
+   "RA-200079": {
+      "description": "TEST CHECK (1=1)"
+   },
+   "RA-200081": {
+      "description": "AUDIO EXTENSION CABLE 12 FT 3.5 MM"
+   },
+   "RA-200084": {
+      "description": "WHITE PHONE CORD 25'"
+   },
+   "RA-200085": {
+      "description": "MOTOROLA MC3190 RF DEVICE"
+   },
+   "RA-200088": {
+      "description": "TH420/A760 24V POWERED USB CABLE 12FT"
+   },
+   "RA-200089": {
+      "description": "HUGHES S VIDEO CABLE (AMINO 4 TO 1)"
+   },
+   "RA-200090": {
+      "description": "DIALOGIC CARD 8 PORT"
+   },
+   "RA-200091": {
+      "description": "4-PORT KVM SWITCH"
+   },
+   "RA-200092": {
+      "description": "BLACK REGISTER GROUNDING STRAP 4'"
+   },
+   "RA-200093": {
+      "description": "NCR BIOMETRIC MODULE (7402 7702)"
+   },
+   "RA-200094": {
+      "description": "MX925 WHITE CABLE"
+   },
+   "RA-200095": {
+      "description": "SC02 DELL 2900 RAM 1 GB"
+   },
+   "RA-200099": {
+      "description": "USB MOUSE - BLACK"
+   },
+   "RA-200100": {
+      "description": "DELL T440 TOWER SERVER"
+   },
+   "RA-200101": {
+      "description": "MC3090 RF SCANNER BATTERY"
+   },
+   "RA-200102": {
+      "description": "USB KEYBOARD - BLACK"
+   },
+   "RA-200105": {
+      "description": "6130 FUJITSU INPUT TRAY (CHUTE)"
+   },
+   "RA-200107": {
+      "description": "USB DB9F"
+   },
+   "RA-200108": {
+      "description": "CISCO 1131 AP MOUNTING BRACKET"
+   },
+   "RA-200109": {
+      "description": "NCR 740X CASH DRAWER TILL"
+   },
+   "RA-200117": {
+      "description": "MC3090 RF SCANNER OS RESET 2GB SD CARD"
+   },
+   "RA-200120": {
+      "description": "SATO ALCOHOL PAD (1=100)"
+   },
+   "RA-200121": {
+      "description": "MC3X90 RF SCANNER STYLUS PEN"
+   },
+   "RA-200123": {
+      "description": "SATO CT410 POWER SUPPLY"
+   },
+   "RA-200125": {
+      "description": "SC02 DELL 2900 RAID ZERO HARD DRIVE"
+   },
+   "RA-200126": {
+      "description": "SATO PRINTHEAD - CT410"
+   },
+   "RA-200127": {
+      "description": "SATO NIC COVER PLATE"
+   },
+   "RA-200128": {
+      "description": "SATO NIC CARD (REPAIR ONLY)"
+   },
+   "RA-200131": {
+      "description": "SATO PRINTHEAD THUMB SCREW (PB5A20001)"
+   },
+   "RA-200134": {
+      "description": "SATO CT410 TOP COVER"
+   },
+   "RA-200139": {
+      "description": "SATO CG412 LABEL PRINTER"
+   },
+   "RA-200140": {
+      "description": "SC03 M52 MOTHERBOARD (41X0436 REV. 3.3)"
+   },
+   "RA-200146": {
+      "description": "CISCO 1131 AP AIRONET POWER INJECTOR"
+   },
+   "RA-200147": {
+      "description": "CISCO 1131/3602/3702 POWER SUPPLY"
+   },
+   "RA-200148": {
+      "description": "CISCO 3602/3702 MOUNTING BRACKET"
+   },
+   "RA-200149": {
+      "description": "CISCO 3602/3702 CEILING CLIP"
+   },
+   "RA-200151": {
+      "description": "SATO CG412 PLATEN ROLL SUB (R14471010)"
+   },
+   "RA-200154": {
+      "description": "Console Cable"
+   },
+   "RA-200157": {
+      "description": "SATO CT410 PLATEN ROLLER SUB ASSY"
+   },
+   "RA-200159": {
+      "description": "DELL POWEREDGE T410 SERVER"
+   },
+   "RA-200165": {
+      "description": "SATO PRINTHEAD - CG412"
+   },
+   "RA-200168": {
+      "description": "5120 FUJITSU P/S >>> USE DIN 210362"
+   },
+   "RA-200169": {
+      "description": "CISCO AIRONET 3602 ACCESS POINT"
+   },
+   "RA-200171": {
+      "description": "CISCO 3602 / 3702 POWER INJECTOR"
+   },
+   "RA-200172": {
+      "description": "SC02 DELL T410 RAID ZERO HARD DRIVE"
+   },
+   "RA-200173": {
+      "description": "APC REPLACEMENT BATTERY (MUST ORDER IN 2'S)"
+   },
+   "RA-200180": {
+      "description": "SATO PLATEN ROLL (CT410)"
+   },
+   "RA-200181": {
+      "description": "SATO PLATEN ROLL GEAR (CT410)"
+   },
+   "RA-200188": {
+      "description": "FUJITSU 6130 DOCUMENT SCANNER"
+   },
+   "RA-200189": {
+      "description": "T640 OUTER REDRIVE DOOR - 40X0056"
+   },
+   "RA-200190": {
+      "description": "ASSET TAGS (1 = 100)"
+   },
+   "RA-200191": {
+      "description": "SERIAL TAGS (1=10)"
+   },
+   "RA-200194": {
+      "description": "5120/4120 FUJITSU SCAN PAD ASSEMBLY"
+   },
+   "RA-200195": {
+      "description": "5120/4120 FUJITSU PICK ROLLER"
+   },
+   "RA-200196": {
+      "description": "CAT5 COUPLER"
+   },
+   "RA-200197": {
+      "description": "LENOVO THINKCENTRE M58 COMPUTER"
+   },
+   "RA-200200": {
+      "description": "SCRIPTPRO SP200 MACHINE SCRIPTPRO"
+   },
+   "RA-200202": {
+      "description": "SATO CT410 FRONT PANEL"
+   },
+   "RA-200203": {
+      "description": "LEXMARK T652 LASER PRINTER"
+   },
+   "RA-200205": {
+      "description": "HONEYWELL GENESIS BARCODE SCANNER"
+   },
+   "RA-200206": {
+      "description": "A760 POWERED USB \"\"Y\"\" CABLE 4M"
+   },
+   "RA-200208": {
+      "description": "HONEYWELL IMAGER 10' CABLE"
+   },
+   "RA-200212": {
+      "description": "A760 POWERED USB \"\"Y\"\" CABLE 1M"
+   },
+   "RA-200219": {
+      "description": "HONEYWELL IMAGER 15' CABLE (WC ONLY)"
+   },
+   "RA-200222": {
+      "description": "SATO CG412 POWER SUPPLY - K00294010"
+   },
+   "RA-200225": {
+      "description": "HUGHES HR4700 FIREWALL"
+   },
+   "RA-200226": {
+      "description": "WESTERN UNION 6680 MONEY ORDER PRINTER REGISTER PERIPHERAL"
+   },
+   "RA-200227": {
+      "description": "MC3X90 UNIVERSAL BATTERY"
+   },
+   "RA-200228": {
+      "description": "FUJITSU 7160 DOCUMENT SCANNER"
+   },
+   "RA-200229": {
+      "description": "NCR 7616 / 7702 CASH DRAWER TILL"
+   },
+   "RA-200230": {
+      "description": "RCA CABLE - 6 FOOT"
+   },
+   "RA-200231": {
+      "description": "RCA CABLE - 12 FOOT"
+   },
+   "RA-200232": {
+      "description": "RCA COUPLER - F TO F"
+   },
+   "RA-200233": {
+      "description": "BLANK SATA HDD 3.5\"\" (FE01 SC03 RXWKSTN)"
+   },
+   "RA-200234": {
+      "description": "7160 FUJITSU USB 3.0 CABLE"
+   },
+   "RA-200235": {
+      "description": "7160 FUJITSU INPUT CHUTE"
+   },
+   "RA-200236": {
+      "description": "HUGHES HR4700 POWER SUPPLY"
+   },
+   "RA-200237": {
+      "description": "SATO CG412 PLATEN ROLLER CLIP (P27077020)"
+   },
+   "RA-200238": {
+      "description": "7160 FUJITSU BRAKE ROLLER TIRES (SET OF 2)"
+   },
+   "RA-200239": {
+      "description": "7160 FUJITSU PICK ROLLER TIRES (SET OF 2)"
+   },
+   "RA-200240": {
+      "description": "OFFICE RACK FASTENER KIT"
+   },
+   "RA-200242": {
+      "description": "SATO CG412 FRONT PANEL (P32685011)"
+   },
+   "RA-200243": {
+      "description": "CISCO AIRONET 3802 ACCESS POINT"
+   },
+   "RA-200244": {
+      "description": "CISCO 3802 MOUNTING BRACKET"
+   },
+   "RA-200245": {
+      "description": "CISCO 3802 CEILING CLIP"
+   },
+   "RA-200246": {
+      "description": "CISCO 3802 POWER INJECTOR"
+   },
+   "RA-200247": {
+      "description": "NCR 7702 KEY"
+   },
+   "RA-200248": {
+      "description": "MS711 CONTROLLER BOARD (40X7570)"
+   },
+   "RA-200249": {
+      "description": "MS711 HIGH VOLTAGE POWER SUPPLY (40X7578)"
+   },
+   "RA-200250": {
+      "description": "MS711 MAIN COOLING FAN (40X7579)"
+   },
+   "RA-200251": {
+      "description": "MS711 CARTRIDGE COOLING FAN (40X7580)"
+   },
+   "RA-200252": {
+      "description": "MS711 MEDIA TURN GUIDE (40X7583)"
+   },
+   "RA-200253": {
+      "description": "MS711 INNER GUIDE DEFLECTOR (40X7587)"
+   },
+   "RA-200254": {
+      "description": "MS711 FASTENER PLATE (40X7589)"
+   },
+   "RA-200255": {
+      "description": "MS711 MEDIA FEEDER (40X7591)"
+   },
+   "RA-200256": {
+      "description": "MS711 INTERRUPT SENSOR (40X7592)"
+   },
+   "RA-200257": {
+      "description": "MS711 MAIN DRIVE MOTOR (40X7594)"
+   },
+   "RA-200258": {
+      "description": "MS711 TONER ADD MOTOR (40X7596)"
+   },
+   "RA-200259": {
+      "description": "MS711 MPF FEEDER LIFT PLATE (40X7598)"
+   },
+   "RA-200260": {
+      "description": "MS711 MEDIA ALIGNER ROLLER (40X7599)"
+   },
+   "RA-200262": {
+      "description": "MS711 TRANSFER ROLLER LEFT ARM (40X7605)"
+   },
+   "RA-200263": {
+      "description": "MS711 TRANSFER ROLLER RIGHT ARM (40X7606)"
+   },
+   "RA-200264": {
+      "description": "MS711 INPUT SENSOR (40X7607)"
+   },
+   "RA-200265": {
+      "description": "MS711 DUPLEX FRONT FLAP (40X7667)"
+   },
+   "RA-200266": {
+      "description": "MS711 DUPLEX REAR FLAP (40X7668)"
+   },
+   "RA-200267": {
+      "description": "MS711 INNER LEFT COVER (40X7669)"
+   },
+   "RA-200268": {
+      "description": "MS711 RIGHT INNER COVER (40X7670)"
+   },
+   "RA-200269": {
+      "description": "MS711 REAR LOWER COVER (40X7671)"
+   },
+   "RA-200270": {
+      "description": "MS711 TOP COVER (40X7673)"
+   },
+   "RA-200271": {
+      "description": "MS711 Front Door (40X7674)"
+   },
+   "RA-200272": {
+      "description": "MS711 REAR DOOR (40X7678)"
+   },
+   "RA-200273": {
+      "description": "MS711 LEFT COVER (40X7679)"
+   },
+   "RA-200274": {
+      "description": "MS711 RIGHT COVER (40X7680)"
+   },
+   "RA-200275": {
+      "description": "MS711 CONTROL PANEL FRONT COVER (40X7681)"
+   },
+   "RA-200276": {
+      "description": "MS711 UPPER REDRIVE MOTOR? (40X7682)"
+   },
+   "RA-200277": {
+      "description": "MS711 DUPLEX MOTOR (40X7684)"
+   },
+   "RA-200278": {
+      "description": "MS711 IMAGING UNIT SMART CHIP CONTACT (40X7689)"
+   },
+   "RA-200279": {
+      "description": "MS711 LOW VOLTAGE POWER SUPPLY (40X7694)"
+   },
+   "RA-200280": {
+      "description": "MS711 DUPLEX COOLING FAN (40X7695)"
+   },
+   "RA-200281": {
+      "description": "MS711 2.4\"\" LCD CONTROL PANEL (40X7700)"
+   },
+   "RA-200282": {
+      "description": "MS711 IMAGE UNIT CLAMP (40X7714)"
+   },
+   "RA-200283": {
+      "description": "MS711 FRONT DOOR SUPPORT LINK (40X7715)"
+   },
+   "RA-200284": {
+      "description": "MS711 TONER CARTRIDGE LOCK (40X7716)"
+   },
+   "RA-200285": {
+      "description": "MS711 DUPLEX FLAP(S) TORSION SPRING (40X7723)"
+   },
+   "RA-200286": {
+      "description": "MS711 MPF TRAY (40X7725)"
+   },
+   "RA-200287": {
+      "description": "MS711 LEFT FRAME EXT. (40X7727)"
+   },
+   "RA-200288": {
+      "description": "MS711 RIGHT FRAME EXT. W/TRAY LATCH (40X7728)"
+   },
+   "RA-200289": {
+      "description": "MS711 CONTROL PANEL LATCH (40X7729)"
+   },
+   "RA-200290": {
+      "description": "MS711 LEFT CTRL PANEL LATCH TORSION SPRING? (40X7730)"
+   },
+   "RA-200291": {
+      "description": "MS711 RIGHT CTRL PANEL LATCH TORSION SPRING (40X7731)"
+   },
+   "RA-200292": {
+      "description": "MS711 LEFT FRAME PIVOT (40X7732)"
+   },
+   "RA-200293": {
+      "description": "MS711 RIGHT FRAME PIVOT (40X7733)"
+   },
+   "RA-200294": {
+      "description": "MS711 550 SHEET TRAY FRONT COVER (40X8109)"
+   },
+   "RA-200295": {
+      "description": "MS711 RIGHT CONTROL PANEL HINGE (40X8316)"
+   },
+   "RA-200296": {
+      "description": "MS711 FUSER WIPER COVER (40X8398)"
+   },
+   "RA-200297": {
+      "description": "MS711 FUSER ACCESS DOOR?(40X8399)"
+   },
+   "RA-200298": {
+      "description": "MS711 FUSER DRIVE MOTOR (40X8401)"
+   },
+   "RA-200299": {
+      "description": "MS711 LASER PRINTHEAD (40X8481)"
+   },
+   "RA-200300": {
+      "description": "MS711 FUSER COOLING FAN (40X8483)"
+   },
+   "RA-200301": {
+      "description": "MS711 TRANSFER GUIDE STATIC BRUSH (40X9754)"
+   },
+   "RA-200302": {
+      "description": "LENOVO P520 TOWER COMPUTER"
+   },
+   "RA-200303": {
+      "description": "LENOVO M920S WORKSTATION"
+   },
+   "RA-200304": {
+      "description": "MINI-DISPLAYPORT TO VGA ADPAPTER"
+   },
+   "RA-210004": {
+      "description": "SPECTRUM 24 ACCESS POINT P/S"
+   },
+   "RA-210007": {
+      "description": "RETRO-FIT VRU AT POWER SUPPLY"
+   },
+   "RA-210008": {
+      "description": "SC03 FE01 ATX POWER SUPPLY"
+   },
+   "RA-210009": {
+      "description": "A760 SERIAL/USB REGISTER PRINTER P/S"
+   },
+   "RA-210013": {
+      "description": "AXHIOM A760 REGISTER PRINTER"
+   },
+   "RA-210015": {
+      "description": "RAVRU/RETRO-FIT VRU DIALOGIC CARD"
+   },
+   "RA-210018": {
+      "description": "3COM 16 PORT IP SWITCH"
+   },
+   "RA-210031": {
+      "description": "RAVRU P/S"
+   },
+   "RA-210038": {
+      "description": "CISCO 48 PORT SWITCH MOUNTING KIT"
+   },
+   "RA-210050": {
+      "description": "CISCO 3560 48 PORT IP SWITCH"
+   },
+   "RA-210059": {
+      "description": "TRIPP LITE SMART 1050 NET SCRIPTPRO"
+   },
+   "RA-210061": {
+      "description": "SC01 UNIX SERVER"
+   },
+   "RA-210064": {
+      "description": "M55/RAVRU 60X20 MM FAN (2 1/4 IN)"
+   },
+   "RA-210066": {
+      "description": "M52/M55 WORKSTATION POWER SUPPLY"
+   },
+   "RA-210083": {
+      "description": "NT RAVRU VRU"
+   },
+   "RA-210084": {
+      "description": "CMOS BATTERY CR2032 (FOR REPAIR)"
+   },
+   "RA-210086": {
+      "description": "LEGACY MONEY ORDER MACHINE REGISTER PERIPHERAL"
+   },
+   "RA-210093": {
+      "description": "3 INCH 80 X 25 MM 3 PIN FAN"
+   },
+   "RA-210096": {
+      "description": "50MM 3 PIN FAN (2 IN PII CPU)"
+   },
+   "RA-210104": {
+      "description": "MONEY ORDER CABLE"
+   },
+   "RA-210105": {
+      "description": "RJ45 CONNECTOR"
+   },
+   "RA-210107": {
+      "description": "HNS 7700 MOUNTING BRACKET"
+   },
+   "RA-210109": {
+      "description": "SPRO BATTERY BACKUP REPLACEMENT BATTERY"
+   },
+   "RA-210112": {
+      "description": "USB MODEM FOR SC02"
+   },
+   "RA-210141": {
+      "description": "NCR 7616/7702 CASH DRAWER"
+   },
+   "RA-210142": {
+      "description": "LENOVO THINKCENTRE M92P WORKSTATION"
+   },
+   "RA-210168": {
+      "description": "VERIFONE MX TELESCOPING STAND"
+   },
+   "RA-210172": {
+      "description": "80 X 20 MM FAN 2-PIN M55 POWER SUPPLY"
+   },
+   "RA-210173": {
+      "description": "LENOVO THINKCENTRE M91P WORKSTATION"
+   },
+   "RA-210175": {
+      "description": "VGA CABLE 6'"
+   },
+   "RA-210178": {
+      "description": "6' RCA 4 IN 1 CABLE"
+   },
+   "RA-210189": {
+      "description": "SPRO OUTLET STRIP (4 PLUG)"
+   },
+   "RA-210194": {
+      "description": "MONEY ORDER RIBBONS"
+   },
+   "RA-210206": {
+      "description": "MC3090 BATTERY DOOR AND STRAP"
+   },
+   "RA-210208": {
+      "description": "SC02 DELL T410 4GB RAM DDR3-1600"
+   },
+   "RA-210212": {
+      "description": "RAVRU IDE HD"
+   },
+   "RA-210214": {
+      "description": "RETRO-FIT VRU"
+   },
+   "RA-210215": {
+      "description": "LINKSYS 10/100 8-PORT VPN ROUTER"
+   },
+   "RA-210216": {
+      "description": "LINKSYS 10/100 16-PORT VPN ROUTER"
+   },
+   "RA-210218": {
+      "description": "FUJITSU 4120/5120 INPUT PAPER TRAY"
+   },
+   "RA-210219": {
+      "description": "TRENDNET KVM SWITCH CABLE SET"
+   },
+   "RA-210220": {
+      "description": "SC02 DELL T410 POWER SUPPLY 580W"
+   },
+   "RA-210223": {
+      "description": "S50 WORKSTATION BLANK HARD DRIVE"
+   },
+   "RA-210228": {
+      "description": "MC3190 RF IMAGER BATTERY"
+   },
+   "RA-210229": {
+      "description": "SATA HDD 2.5\"\" 250/500GB (REPAIR ONLY)"
+   },
+   "RA-210231": {
+      "description": "RETRO-FIT VRU MOTHERBOARD"
+   },
+   "RA-210233": {
+      "description": "RAVRU NIC CARD"
+   },
+   "RA-210242": {
+      "description": "LENOVO THINKCENTRE M55 COMPUTER"
+   },
+   "RA-210243": {
+      "description": "NEC 17\" MONITOR"
+   },
+   "RA-210248": {
+      "description": "T640 HIGH VOLT P/S 40X4275"
+   },
+   "RA-210269": {
+      "description": "FUJITSU 4120 DOCUMENT SCANNER"
+   },
+   "RA-210271": {
+      "description": "VGA EXTENDER CABLE 6'"
+   },
+   "RA-210276": {
+      "description": "DB9F / DB25M 6' CABLE ADAPTER"
+   },
+   "RA-210277": {
+      "description": "PS2 EXTENDER CABLE 6'"
+   },
+   "RA-210284": {
+      "description": "RAVRU MOUNTING BRACKET"
+   },
+   "RA-210288": {
+      "description": "3 PIN PWR CABLE 6' - (LAPTOP 5120/6130/7160 PS)"
+   },
+   "RA-210289": {
+      "description": "2 PIN POWER CABLE 6' (USE ON 8-PORT SWITCH AND 7160)"
+   },
+   "RA-210290": {
+      "description": "3 PIN TO HOODED POWER EXTENSION CABLE 3'"
+   },
+   "RA-210293": {
+      "description": "CASH DRAWER KICKOUT CABLE APG"
+   },
+   "RA-210294": {
+      "description": "MC3X90 SINGLE SLOT CRADLE PS"
+   },
+   "RA-210296": {
+      "description": "USB CABLE MICRO (A TO MINI-B)"
+   },
+   "RA-210303": {
+      "description": "SCRIPTPRO COPY ME DRIVE"
+   },
+   "RA-210310": {
+      "description": "SCRIPTPRO SINGLE CELL"
+   },
+   "RA-210311": {
+      "description": "SCRIPTPRO DOUBLE CELL"
+   },
+   "RA-210316": {
+      "description": "CISCO 892 IP ROUTER"
+   },
+   "RA-210330": {
+      "description": "MX925 PRIVACY SHIELD"
+   },
+   "RA-210331": {
+      "description": "MX925 ADAPTER BLOCK"
+   },
+   "RA-210332": {
+      "description": "SIGCAP PIN PAD HOLDER"
+   },
+   "RA-210335": {
+      "description": "VERIFONE MX925 PAYMENT TERMINAL"
+   },
+   "RA-210336": {
+      "description": "Verifone MX925 - Stylus"
+   },
+   "RA-210342": {
+      "description": "SCRIPTPRO IDE CABLE - 18 INCHES (SHORT)"
+   },
+   "RA-210344": {
+      "description": "AT Adapter"
+   },
+   "RA-210346": {
+      "description": "7402/IPOS CHERRY POS KEYBOARD COVER"
+   },
+   "RA-210349": {
+      "description": "VERIFONE MX870 PRICE CHECKER"
+   },
+   "RA-210351": {
+      "description": "VERIFONE PRICE CHECKER STAND"
+   },
+   "RA-210352": {
+      "description": "NEC 15\" MONITOR"
+   },
+   "RA-210353": {
+      "description": "VERIFONE PRICE CHECKER P/S"
+   },
+   "RA-210356": {
+      "description": "LENOVO THINKCENTRE M57 COMPUTER"
+   },
+   "RA-210358": {
+      "description": "SSID"
+   },
+   "RA-210359": {
+      "description": "SCRIPTPRO 36 IN IDE CABLE (LONG)"
+   },
+   "RA-210361": {
+      "description": "WESTERN UNION NETWORK CABLE"
+   },
+   "RA-210362": {
+      "description": "7160/6130/5120 FUJITSU POWER SUPPLY"
+   },
+   "RA-210363": {
+      "description": "4120/5120 FUJITSU OUTPUT TRAY - CLEAR"
+   },
+   "RA-210364": {
+      "description": "APPLE IPAD 4 TABLET"
+   },
+   "RA-210365": {
+      "description": "LENOVO ALL IN ONE PC"
+   },
+   "RA-210366": {
+      "description": "HP AMERICAN WELL LASER PRINTER"
+   },
+   "RA-210367": {
+      "description": "APPLE IPAD 2 TABLET"
+   },
+   "RA-210368": {
+      "description": "HP OFFICEJET 6500A PRINTER"
+   },
+   "RA-210369": {
+      "description": "APPLE IPAD TABLET"
+   },
+   "RA-210370": {
+      "description": "APPLE IPAD 3 TABLET"
+   },
+   "RA-210371": {
+      "description": "HP OFFICEJET 6700 PRINTER"
+   },
+   "RA-210378": {
+      "description": "NCR 7702 2.5\"\" HARD DRIVE"
+   },
+   "RA-210379": {
+      "description": "APPLE IPAD AIR 5TH GEN TABLET"
+   },
+   "RA-210381": {
+      "description": "MOTOROLA MK3190 PRICE CHECKER"
+   },
+   "RA-210382": {
+      "description": "GRIFFIN SURVIVOR CASE (2-4 GEN IPADS)"
+   },
+   "RA-210383": {
+      "description": "GRIFFIN SURVIVOR CASE (AIR)"
+   },
+   "RA-210386": {
+      "description": "IPAD SATCHEL"
+   },
+   "RA-210387": {
+      "description": "APPLE IPAD 2 TABLET"
+   },
+   "RA-210388": {
+      "description": "HP OFFICEJET PRO 6830"
+   },
+   "RA-210389": {
+      "description": "SCRIPT PRO ONLY - MOTO DS9208 USB CABLE"
+   },
+   "RA-210390": {
+      "description": "SC02 DELL 2900/T410 PERC5 RAID BATTERY"
+   },
+   "RA-210391": {
+      "description": "CR13N BATTERY (REPAIR ROOM ONLY)"
+   },
+   "RA-210392": {
+      "description": "THERMALTAKE TG-2 THERMAL GREASE (REPAIR)"
+   },
+   "RA-210395": {
+      "description": "LENOVO THINKCENTRE M92 WORKSTATION"
+   },
+   "RA-210396": {
+      "description": "MC3190 BATTERY DOOR AND STRAP"
+   },
+   "RA-210399": {
+      "description": "LENOVO THINKCENTRE M93 WORKSTATION"
+   },
+   "RA-210450": {
+      "description": "LEXMARK MS711 LASER PRINTER"
+   },
+   "RA-210451": {
+      "description": "MS711 550 SHEET OPTION"
+   },
+   "RA-210452": {
+      "description": "MS711 Fuser Asm(40X8503)"
+   },
+   "RA-210453": {
+      "description": "MS711 Pick Roll Asm (40X7593)"
+   },
+   "RA-210455": {
+      "description": "MX925 CABLE CLIP SCREW MOUNT - 1 EA."
+   },
+   "RA-210456": {
+      "description": "Mag Stripe Cleaning Card"
+   },
+   "RA-210457": {
+      "description": "MS711 UPPER REDRIVE (40X7602)"
+   },
+   "RA-210458": {
+      "description": "MS711 TRANSFER ROLL (40X7582)"
+   },
+   "RA-210459": {
+      "description": "MS711 SEPARATOR ROLL ASSY (40X7713)"
+   },
+   "RA-210460": {
+      "description": "LENOVO M93 SFF FE01 SC03 SERVER"
+   },
+   "RA-210465": {
+      "description": "LCD WALL MOUNT - STORE OFFICE"
+   },
+   "RA-210466": {
+      "description": "MK3190 PRICE CHECK ENCLOSE - WHITE"
+   },
+   "RA-210467": {
+      "description": "MK3190 PRICE CHECKER WHITE ENCLOSURE KEY"
+   },
+   "RA-210468": {
+      "description": "MK3190 PRICE CHECK ENCLOSE - BLACK"
+   },
+   "RA-210469": {
+      "description": "MK3190 PRICE CHECKER STAND - BLACK"
+   },
+   "RA-210470": {
+      "description": "MK3190 PRICE CHECK PRN PWR SUPPLY"
+   },
+   "RA-210471": {
+      "description": "MK3190 PRICE CHECK PWR SUPPLY"
+   },
+   "RA-210472": {
+      "description": "MK3190 PRICE CHECK PRINTER"
+   },
+   "RA-210473": {
+      "description": "ROLL HOLD KIT MK3190 PR CHK PRINTER"
+   },
+   "RA-210474": {
+      "description": "PAPER OUT SENSOR 3190 PR CHK PRINTER"
+   },
+   "RA-210475": {
+      "description": "SCRIPTPRO 2.5\"\" SATA DRIVE"
+   },
+   "RA-210477": {
+      "description": "MK3190 PRICE CHECKER STAND - WHITE"
+   },
+   "RA-210478": {
+      "description": "MK3190 PRICE CHECK A TO B MINI USB CABLE"
+   },
+   "RA-210479": {
+      "description": "LENOVO THINKCENTRE M800 WORKSTATION"
+   },
+   "RA-210480": {
+      "description": "IPAD LIGHTNING POWER BRICK"
+   },
+   "RA-210485": {
+      "description": "IPAD 30-PIN CHARGE CABLE AND ADAPTER"
+   },
+   "RA-210489": {
+      "description": "LENOVO M800 TOWER COMPUTER"
+   },
+   "RA-210500": {
+      "description": "MOTOROLA DS9208 BARCODE SCANNER"
+   },
+   "RA-210501": {
+      "description": "MOTO IMAGER USB CABLE 9FT"
+   },
+   "RA-210502": {
+      "description": "MOTO IMAGER USB CABLE 18FT (WC ONLY)"
+   },
+   "RA-210503": {
+      "description": "DELL POWEREDGE R440 SERVER"
+   },
+   "RA-210505": {
+      "description": "MOTO IMAGER 9208 USB STRAIGHT CABLE"
+   },
+   "RA-210510": {
+      "description": "NCR 7616 REGISTER"
+   },
+   "RA-210511": {
+      "description": "CISCO CATALYST 9300 48-PORT IP SWITCH"
+   },
+   "RA-210520": {
+      "description": "APPLE IPAD 9.7\" TABLET"
+   },
+   "RA-210521": {
+      "description": "APPLE IPAD 9.7\" TABLET"
+   },
+   "RA-210522": {
+      "description": "PLANAR 22\" MONITOR"
+   },
+   "RA-210523": {
+      "description": "CASE FOR IPAD 9.7 WIFI AND CELLULAR"
+   },
+   "RA-210531": {
+      "description": "NCR 7402 HARD DRIVE"
+   },
+   "RA-210534": {
+      "description": "MX925 HOLSTER FOR STYLUS"
+   },
+   "RA-210535": {
+      "description": "MX925 REAR BAR WITH SCREWS"
+   },
+   "RA-210536": {
+      "description": "NCR 7167 PRINTHEAD"
+   },
+   "RA-210550": {
+      "description": "MOTOROLA SB1 SMART BADGE RF DEVICE"
+   },
+   "RA-210551": {
+      "description": "CS CUST DISP PWR CBL"
+   },
+   "RA-210552": {
+      "description": "CS CUST DISP PWR ADAPTER"
+   },
+   "RA-210553": {
+      "description": "CS CUST DISP ADAPT USB TO VGA"
+   },
+   "RA-210554": {
+      "description": "REDICLINIC - VGA 10FT CABLE"
+   },
+   "RA-210559": {
+      "description": "VERIFONE MX925 STAND"
+   },
+   "RA-210563": {
+      "description": "CLEAN SLATE 24\"\" POLE WITH BASE - NCR 7616"
+   },
+   "RA-210564": {
+      "description": "APPLE IPOD TOUCH 5TH GEN TABLET"
+   },
+   "RA-210565": {
+      "description": "MOUSE PAD"
+   },
+   "RA-210566": {
+      "description": "LENOVO M920Q WORKSTATION"
+   },
+   "RA-210567": {
+      "description": "LENOVO M920 VESA MOUNT"
+   },
+   "RA-210569": {
+      "description": "NCR 7167 PRINTER RIBBON"
+   },
+   "RA-210570": {
+      "description": "NCR 7702 REGISTER"
+   },
+   "RA-210571": {
+      "description": "NCR 7702 POLE MOUNT"
+   },
+   "RA-210572": {
+      "description": "NCR 7167 REGISTER PRINTER"
+   },
+   "RA-210573": {
+      "description": "NCR 7167/7197 PRINTER 'Y' CABLE 1 METER"
+   },
+   "RA-210574": {
+      "description": "NCR 7167/7197 PRINTER \"\"Y\"\" CABLE 4 METER"
+   },
+   "RA-210575": {
+      "description": "NCR 7702 INTEGRATION TRAY"
+   },
+   "RA-210576": {
+      "description": "CLEAN SLATE NCR XR7 DISPLAY WALL MOUNT KIT"
+   },
+   "RA-210577": {
+      "description": "MONEY ORDER CABLE FOR NCR 7702 REGISTER"
+   },
+   "RA-210578": {
+      "description": "APPLE IPAD PRO TABLET"
+   },
+   "RA-210579": {
+      "description": "CISCO AIRONET 3702 ACCESS POINT"
+   },
+   "RA-210580": {
+      "description": "IPAD PRO SURVIVOR CASE"
+   },
+   "RA-210581": {
+      "description": "7702 CASH DRAWER CABLE"
+   },
+   "RA-210582": {
+      "description": "HAND DIP WIRE SHELF 18\"\" WIDE"
+   },
+   "RA-210583": {
+      "description": "HAND DIP WIRE SHELF 24\"\" WIDE"
+   },
+   "RA-210584": {
+      "description": "M92P WORKSTATION RAM (1=1)"
+   },
+   "RA-210585": {
+      "description": "INTEL PRO 10/100/1000 MB NIC PCI (REPAIR ROOM)"
+   },
+   "RA-210586": {
+      "description": "SC02 DELL R430 HARD DRIVE 2.5 IN. SAS3"
+   },
+   "RA-210587": {
+      "description": "SC02 DELL R430 RAM 8GB DDR4-2133"
+   },
+   "RA-210588": {
+      "description": "SC02 DELL R430 POWER SUPPLY"
+   },
+   "RA-210589": {
+      "description": "IPAD 2018 SURVIVOR CASE"
+   },
+   "RA-210590": {
+      "description": "LENOVO M910 SFF FE01 SC03 SERVER"
+   },
+   "RA-210591": {
+      "description": "FTS VEHICLE GPS STICKER"
+   },
+   "RA-210592": {
+      "description": "MS711 550 SHEET PAPER TRAY INSERT (41X0976)"
+   },
+   "RA-210593": {
+      "description": "MX925 ANTI-SKIMMING KIT"
+   },
+   "RA-210594": {
+      "description": "SC02 DELL T410 8GB RAM DDR3-1600"
+   },
+   "RA-210595": {
+      "description": "DELL OPTIPLEX 3050 MICRO WORKSTATION"
+   },
+   "RA-210596": {
+      "description": "LENOVO 22\" TOUCHSCREEN TIO MONITOR"
+   },
+   "RA-210597": {
+      "description": "MVIX XHIBIT MYKRO (REDICLINIC ONLY)"
+   },
+   "RA-210598": {
+      "description": "M910 SFF FE01 NIC"
+   },
+   "RA-210600": {
+      "description": "APPLE IPAD 128GB TABLET"
+   },
+   "RA-210601": {
+      "description": "CAFE SCALE"
+   },
+   "RA-210602": {
+      "description": "ZEBRA MC33 RF GUN"
+   },
+   "RA-210603": {
+      "description": "ZEBRA MC33 CRADLE"
+   },
+   "RA-210604": {
+      "description": "ZEBRA MC33 CRADLE POWER BRICK"
+   },
+   "RA-210605": {
+      "description": "ZEBRA MC33 DC CABLE (BRICK TO CRADLE)"
+   },
+   "RA-210606": {
+      "description": "ZEBRA TC52 POWER CORD (7.5 FT)"
+   },
+   "RA-210607": {
+      "description": "ZEBRA TC51 RF DEVICE"
+   },
+   "RA-210608": {
+      "description": "ZEBRA TC52 HARD CASE WITH HAND STRAP"
+   },
+   "RA-210609": {
+      "description": "ZEBRA TC51 CRADLE"
+   },
+   "RA-210610": {
+      "description": "ZEBRA TC52 HOLSTER LANYARD"
+   },
+   "RA-210611": {
+      "description": "ZEBRA TECHNOLOGIES TC52 RF DEVICE"
+   },
+   "RA-210612": {
+      "description": "ZEBRA TC52 CRADLE (5-SLOT)"
+   },
+   "RA-210613": {
+      "description": "ZEBRA TC52 BATTERY"
+   },
+   "RA-210614": {
+      "description": "MK3190 PRICE CHECK PWR SUPPLY DC CABLE"
+   },
+   "RA-210615": {
+      "description": "MK3190 PRICE CHECK PWR SUPPLY AC CABLE"
+   },
+   "RA-210616": {
+      "description": "MK3190 PRICE CHECK PRN PWR SUPPLY AC CABLE"
+   },
+   "RA-210617": {
+      "description": "MK3190 PRICE CHECKER 6FT USB A/B CABLE"
+   },
+   "RA-210618": {
+      "description": "DELL R440 RAILS"
+   },
+   "RA-210750": {
+      "description": "APC BATTERY PLATE PUSH PINS (1=50)"
+   },
+   "RA-211001": {
+      "description": "SNAPSHELL R2 ID READER COMPUTER PERIPHERAL"
+   },
+   "RA-211002": {
+      "description": "DYMO 450 TURBO (REDICLINIC)"
+   },
+   "RA-211003": {
+      "description": "LEXMARK MS312 LASER PRINTER"
+   },
+   "RA-211004": {
+      "description": "LEXMARK MX310 LASER PRINTER"
+   },
+   "RA-211005": {
+      "description": "15' BLUE CAT5 (REDI-CLINIC)"
+   },
+   "RA-211006": {
+      "description": "APPLE IPAD AIR TABLET"
+   },
+   "RA-211007": {
+      "description": "OUTLET STRIP (REDI-CLINIC)"
+   },
+   "RA-211008": {
+      "description": "LENOVO THINKPAD L440 LAPTOP"
+   },
+   "RA-211009": {
+      "description": "CISCO 2960X 48 PORT IP SWITCH"
+   },
+   "RA-211010": {
+      "description": "CISCO GIGABIT MODULE (REDI-CLINIC)"
+   },
+   "RA-211012": {
+      "description": "TRIPP LITE 10FT USB 2.0 EXT CABLE (REDICLINIC)"
+   },
+   "RA-211013": {
+      "description": "LENOVO DOCKING STATION FOR L440 (REDICLINIC)"
+   },
+   "RA-211014": {
+      "description": "USB AUDIO ADAPTER EXTERNAL SOUND CARD (REDICLINIC)"
+   },
+   "RA-211015": {
+      "description": "PORTABLE 4 PORT SUPERSPEED MINI USB 3.0 HUB (REDICLINIC)"
+   },
+   "RA-211016": {
+      "description": "CLEAN SLATE/REDICLINIC NCR 7616 NO HINGE BASE KIT"
+   },
+   "RA-211017": {
+      "description": "SLIM 3.5MM STEREO AUDIO CABLE (REDICLINIC)"
+   },
+   "RA-211018": {
+      "description": "PRIVACY SCREEN (REDICLINIC)"
+   },
+   "RA-211019": {
+      "description": "CISCO 2960 24 PORT IP SWITCH"
+   },
+   "RA-211020": {
+      "description": "NCR REALPOS 82XRT REGISTER"
+   },
+   "RA-211023": {
+      "description": "LOGITECH KYB/MOUSE COMBO MK270 (REDICLINIC)"
+   },
+   "RA-211024": {
+      "description": "LENOVO TINY SANDWICH KIT (REDICLINIC)"
+   },
+   "RA-211025": {
+      "description": "LENOVO THINKCENTRE M83 TINY WORKSTATION"
+   },
+   "RA-211026": {
+      "description": "ACER 22\" TOUCHSCREEN MONITOR"
+   },
+   "RA-211027": {
+      "description": "NCR 7197 REGISTER PRINTER"
+   },
+   "RA-211028": {
+      "description": "NCR 7702 REGISTER"
+   },
+   "RA-211030": {
+      "description": "REDICLINIC IPAD STAND FOR SEAMLESS"
+   },
+   "RA-211031": {
+      "description": "REDICLINIC IPAD 2M LIGHTNING CABLE"
+   },
+   "RA-211032": {
+      "description": "IPAD LIGHTNING CABLE - WELLNESS"
+   },
+   "RA-211033": {
+      "description": "8 PORT CHARGING STATION (REDICLINIC)"
+   },
+   "RA-211034": {
+      "description": "BARCODE SCANNER - 22 INCH 7702 ( REDICLINIC )"
+   },
+   "RA-211035": {
+      "description": "APACER 120GB SSD DRIVE (REDICLINIC)"
+   },
+   "RA-211036": {
+      "description": "GOLD IPAD LIGHTNING CABLE (REDICLINIC)"
+   },
+   "RA-211037": {
+      "description": "EPSON CHECK SCANNER COMPUTER PERIPHERAL"
+   },
+   "RA-211050": {
+      "description": "PLANAR PLN2200 22\" WIDESCREEN (VGA/HDMI) MONITOR"
+   },
+   "RA-211141": {
+      "description": "NCR CASH DRAWER CABLE (REDICLINIC ONLY)"
+   },
+   "RA-211142": {
+      "description": "INGENICO CONVERSION PLATE (REDICLINIC)"
+   },
+   "RA-211430": {
+      "description": "DELL POWEREDGE R430 SERVER"
+   },
+   "RA-211431": {
+      "description": "HUGHES AMINO POWER SUPPLY"
+   },
+   "RA-211435": {
+      "description": "SC02 DELL R430 RACK RAILS"
+   },
+   "RA-211440": {
+      "description": "SC02 DELL R430 WALL MOUNT 1U"
+   },
+   "RA-211540": {
+      "description": "NCR 7702 POWER SUPPLY"
+   },
+   "RA-212002": {
+      "description": "NCR SELFSERV 90 REGISTER"
+   },
+   "RA-212003": {
+      "description": "ARM FOR NCR SCO (SELF CHECKOUT) UNIT"
+   },
+   "RA-212004": {
+      "description": "LAZY SUSAN FOR NCR SCO (SELF CHECKOUT) UNIT"
+   },
+   "RA-220000": {
+      "description": "EPSON V200, V300, V330 PHOTO"
+   },
+   "RA-220001": {
+      "description": "FUJI BLOCKS W/HARDWARE"
+   },
+   "RA-220002": {
+      "description": "6\"\"X9\"\" SCOTCHBRITE PADS"
+   },
+   "RA-220003": {
+      "description": "CHEMPAD (1=50)"
+   },
+   "RA-220004": {
+      "description": "COTTON SWABS (1=25)"
+   },
+   "RA-220005": {
+      "description": "4\"\"X4\"\" LINT FREE WIPES (1=100)"
+   },
+   "RA-220006": {
+      "description": "F6 PCB PRINT UNIT"
+   },
+   "RA-220007": {
+      "description": "F6 AD BOARD PCB"
+   },
+   "RA-220008": {
+      "description": "F6 SPEAKER"
+   },
+   "RA-220009": {
+      "description": "F6 INLET CABLE HARNESS"
+   },
+   "RA-220010": {
+      "description": "F6 PWRDC CABLE HARNESS"
+   },
+   "RA-220011": {
+      "description": "F6 IDE 5DC CABLE HARNESS"
+   },
+   "RA-220012": {
+      "description": "F6 HARNESS,IDE CABLE"
+   },
+   "RA-220013": {
+      "description": "F6 HARNESS, IDE 35DC"
+   },
+   "RA-220014": {
+      "description": "F6 HARNESS, PRDC CABLE"
+   },
+   "RA-220015": {
+      "description": "F6 HARNESS, AD CABLE"
+   },
+   "RA-220016": {
+      "description": "F6 HARNESS, LVDS CABLE"
+   },
+   "RA-220017": {
+      "description": "F6 HARNESS, SW CABLE"
+   },
+   "RA-220018": {
+      "description": "F6 HARNESS, INV CABLE"
+   },
+   "RA-220019": {
+      "description": "F6 HARNESS, TPDC CABLE"
+   },
+   "RA-220020": {
+      "description": "F6 HARNESS"
+   },
+   "RA-220021": {
+      "description": "F6 PRINTER"
+   },
+   "RA-220022": {
+      "description": "F6 SCREW SPECIAL 1=1"
+   },
+   "RA-220023": {
+      "description": "F6 SCREW SPECIAL - 308S0556"
+   },
+   "RA-220024": {
+      "description": "F6 GROMMET SET - 316N3049"
+   },
+   "RA-220025": {
+      "description": "FUJI FP2 RECEIPT PRINTER KEY"
+   },
+   "RA-220026": {
+      "description": "F6 ROLLER"
+   },
+   "RA-220028": {
+      "description": "F6 LCD COVER"
+   },
+   "RA-220029": {
+      "description": "F6 POWER SUPPLY UNIT"
+   },
+   "RA-220031": {
+      "description": "F6 BACK METAL COVER"
+   },
+   "RA-220032": {
+      "description": "F6 RACK, MMR5 CASE"
+   },
+   "RA-220033": {
+      "description": "F6 RACK, MMR35"
+   },
+   "RA-220034": {
+      "description": "F6 RACK, DVD CASE"
+   },
+   "RA-220035": {
+      "description": "F6 FOOT RUBBER"
+   },
+   "RA-220037": {
+      "description": "F6 MMR5 MULTI MEMORY READER W/O CASE"
+   },
+   "RA-220038": {
+      "description": "F6 MULTI MEMORY READER MMR35"
+   },
+   "RA-220042": {
+      "description": "F6 DVD DRIVE (BLACK)"
+   },
+   "RA-220044": {
+      "description": "ASK 2000/4000 DC24 POWER SUPPLY"
+   },
+   "RA-220047": {
+      "description": "ASK 4000 10S-RLY PCB ASSY TYPE-B"
+   },
+   "RA-220050": {
+      "description": "ASK 4000 SUPPLY MOTOR ASSY"
+   },
+   "RA-220051": {
+      "description": "ASK 4000 FEED PMT ASSY"
+   },
+   "RA-220052": {
+      "description": "ASK 4000 PINCH ROLLER MOTOR ASSY"
+   },
+   "RA-220054": {
+      "description": "ASK 2000/4000 40S-SNQ PCB ASSY"
+   },
+   "RA-220056": {
+      "description": "ASK 2000/4000 10S-SN3 PCB ASSY"
+   },
+   "RA-220057": {
+      "description": "ASK 2000/4000 10S-SN3 PCB ASSY TYPE-A"
+   },
+   "RA-220058": {
+      "description": "ASK 4000 DAMPER ASSY"
+   },
+   "RA-220059": {
+      "description": "ASK 4000 HEAD SW ASSY"
+   },
+   "RA-220060": {
+      "description": "ASK 4000 MOTOR (HEAD CAM) ASSY"
+   },
+   "RA-220061": {
+      "description": "ASK 2000/4000 40S-SNL PCB ASSY"
+   },
+   "RA-220062": {
+      "description": "ASK 4000 HEAD FAN ASSY"
+   },
+   "RA-220063": {
+      "description": "ASK 4000 THERMAL PRINT HEAD"
+   },
+   "RA-220069": {
+      "description": "ASK 2000/4000 FOOT ASSY"
+   },
+   "RA-220070": {
+      "description": "ASK 4000 AC SWITCH ASSY"
+   },
+   "RA-220071": {
+      "description": "ASK 4000 PLATEN ASSY"
+   },
+   "RA-220072": {
+      "description": "ASK 4000 GRIP ROLLER ASSY"
+   },
+   "RA-220073": {
+      "description": "ASK 4000 SHAFT RIBBON ASSY"
+   },
+   "RA-220077": {
+      "description": "ASK 4000 BELT MXL B59MXL6.4"
+   },
+   "RA-220078": {
+      "description": "ASK 4000 THERMISTOR ASSY"
+   },
+   "RA-220079": {
+      "description": "ASK 4000 HEAD-U SCREW ASSY"
+   },
+   "RA-220083": {
+      "description": "ASK 4000 PRINT TRAY ASSY"
+   },
+   "RA-220085": {
+      "description": "ASK 4000 FRONT PANEL"
+   },
+   "RA-220087": {
+      "description": "ASK 4000 LABEL (OPE-PANEL)"
+   },
+   "RA-220091": {
+      "description": "ASK 2000 BELT 273 STI.5ASA7.0G1B"
+   },
+   "RA-220094": {
+      "description": "ASK 2000 PAPER TRAY ASSY"
+   },
+   "RA-220095": {
+      "description": "ASK 2000 HEAD CAM GEARBOX ASSY W/O MOTOR"
+   },
+   "RA-220097": {
+      "description": "ASK 2000 ENTRANCE ROLLER SET"
+   },
+   "RA-220098": {
+      "description": "ASK 2000 TIMING BELT SET"
+   },
+   "RA-220104": {
+      "description": "ASK 2000 PINCH ROLLER SET"
+   },
+   "RA-220105": {
+      "description": "ASK 2000 20K-SN1 PCB"
+   },
+   "RA-220112": {
+      "description": "ASK 2000 RIBBON DRIVE-GEAR BX ASSY"
+   },
+   "RA-220113": {
+      "description": "ASK 2000 HEAD CAM GEAR BX ASSY"
+   },
+   "RA-220114": {
+      "description": "ASK 2000 FILTER HS"
+   },
+   "RA-220117": {
+      "description": "ASK 2000 FEED PMT ASSY"
+   },
+   "RA-220118": {
+      "description": "ASK 2000 PINCH ROLLER MOTOR ASSY"
+   },
+   "RA-220119": {
+      "description": "ASK 2000 CORE DRIVE ASSY"
+   },
+   "RA-220120": {
+      "description": "ASK 2000 GRIP ROLLER ASSY"
+   },
+   "RA-220121": {
+      "description": "ASK 2000 RIBBON SHAFT ASSY"
+   },
+   "RA-220123": {
+      "description": "ASK 2000 FLAT HEAD SCREW M3X6 (1=100PCS)"
+   },
+   "RA-220124": {
+      "description": "ASK 2000 E-RING 3MM (1=1)"
+   },
+   "RA-220128": {
+      "description": "ASK 2000 E-RING 10MM (1=1)"
+   },
+   "RA-220130": {
+      "description": "ASK 2000 CORE DRIVE ASSY W/O MOTOR"
+   },
+   "RA-220131": {
+      "description": "ASK 2000 MICRO SW SET"
+   },
+   "RA-220133": {
+      "description": "ASK 2000 PAPER GUIDE-LOW02 ASSY"
+   },
+   "RA-220136": {
+      "description": "ASK 2000 DISK DAMPER SET"
+   },
+   "RA-220137": {
+      "description": "ASK 2000 SHAFT-PINCH CAM SET"
+   },
+   "RA-220140": {
+      "description": "ASK 2000 LOCK SHAFT-TRAY SET"
+   },
+   "RA-220148": {
+      "description": "ASK 2000 SHAFT-HEAD CAM SET"
+   },
+   "RA-220149": {
+      "description": "ASK 2000 SENSOR PLATE SET"
+   },
+   "RA-220153": {
+      "description": "DELL GX755 PHOTO"
+   },
+   "RA-220154": {
+      "description": "DELL OPTIPLEX GX620 PHOTO"
+   },
+   "RA-220157": {
+      "description": "FUJIFILM F6 HEAD UNIT PHOTO"
+   },
+   "RA-220158": {
+      "description": "FUJIFILM ASK 2000 PRINTER PHOTO"
+   },
+   "RA-220159": {
+      "description": "FUJIFILM ASK 4000 PRINTER PHOTO"
+   },
+   "RA-220160": {
+      "description": "DAI NIPPON PRINTING DS80 PHOTO"
+   },
+   "RA-220161": {
+      "description": "DS80 PRINTER KIT"
+   },
+   "RA-220162": {
+      "description": "DS80 PHOTO PRINTER MEDIA"
+   },
+   "RA-220163": {
+      "description": "DS80 PHOTO PRINTER RISER ASSEMBLY"
+   },
+   "RA-220167": {
+      "description": "FS(BLUE)DELLGX270 BASE OS REC DISK SET (1 THROUGH 6)"
+   },
+   "RA-220169": {
+      "description": "KODAK G3 BASE OS RECOVERY DISK SET (1 THROUGH 4)"
+   },
+   "RA-220171": {
+      "description": "PARTNERTECH BLK BASE OS DISKS (1-4)"
+   },
+   "RA-220173": {
+      "description": "DPT-2 BASE OS REC DISK(MB-P5LD2VM)"
+   },
+   "RA-220181": {
+      "description": "PHOTO MEDIA CD"
+   },
+   "RA-220182": {
+      "description": "PHOTO WARNING STICKERS 1=100"
+   },
+   "RA-220184": {
+      "description": "PSID"
+   },
+   "RA-220185": {
+      "description": "FUJI FP2 AND FP3 CABINET KEY"
+   },
+   "RA-220186": {
+      "description": "DNP PRINT RUSH KEY"
+   },
+   "RA-220187": {
+      "description": "DNP BLUE FS KEY"
+   },
+   "RA-220188": {
+      "description": "FLYTECH AND F7 KEY"
+   },
+   "RA-220189": {
+      "description": "USB /Fortinet"
+   },
+   "RA-220191": {
+      "description": "FUJI P2 AND P3 CABINET PRINT CATCHER"
+   },
+   "RA-220192": {
+      "description": "FUJIFILM FP2 CABINET PHOTO"
+   },
+   "RA-220193": {
+      "description": "FUJIFILM F6 HEAD UNIT PHOTO"
+   },
+   "RA-220194": {
+      "description": "SONY DKC-C200X PHOTO"
+   },
+   "RA-220195": {
+      "description": "SONY UP-DX100 PHOTO"
+   },
+   "RA-220196": {
+      "description": "USB THUMB DRIVE (PHOTO TEST TOOLS)"
+   },
+   "RA-220197": {
+      "description": "FLYTECH FLYTECH KIOSK PHOTO"
+   },
+   "RA-220198": {
+      "description": "CITIZEN Q4 PRINTER PHOTO"
+   },
+   "RA-220200": {
+      "description": "DELL GX520 PHOTO"
+   },
+   "RA-220202": {
+      "description": "F6 DVD DRIVE (WHITE) - USE DIN 220042"
+   },
+   "RA-220204": {
+      "description": "NORITSU ADT-240 EXTRACTOR"
+   },
+   "RA-220205": {
+      "description": "ASK 2000/4000 HEAD POWER SUPPLY"
+   },
+   "RA-220206": {
+      "description": "ASK 2000 DC24 POWER SUPPLY"
+   },
+   "RA-220209": {
+      "description": "ASK 2000 SLUG BOX ASSY"
+   },
+   "RA-220210": {
+      "description": "ALTECH MEGAPIXEL III PHOTO"
+   },
+   "RA-220211": {
+      "description": "ASK 4000 ENTRANCE COVER SET"
+   },
+   "RA-220212": {
+      "description": "HOLD FOR REDEPLOYMENT STICKERS 1=4"
+   },
+   "RA-220213": {
+      "description": "EPSON V200 POWER ADAPTER"
+   },
+   "RA-220218": {
+      "description": "500ML GRADUATED CYLINDER"
+   },
+   "RA-220219": {
+      "description": "2.5 GALLON JUG"
+   },
+   "RA-220223": {
+      "description": "DS80 SCRAP BOX"
+   },
+   "RA-220225": {
+      "description": "NEXLAB 1000 CABINET PHOTO"
+   },
+   "RA-220226": {
+      "description": "DIGITAL MEDIA TEST KIT"
+   },
+   "RA-220227": {
+      "description": "FUJIFILM F7 KIOSK PHOTO"
+   },
+   "RA-220231": {
+      "description": "FUJIFILM DL430 PRINTER PHOTO"
+   },
+   "RA-220232": {
+      "description": "FUJIFILM DL430 CABINET PHOTO"
+   },
+   "RA-220234": {
+      "description": "Q8 PHOTO PRINTER PHOTO"
+   },
+   "RA-220235": {
+      "description": "MEDIUM ZIPPERED STORAGE BAG"
+   },
+   "RA-220236": {
+      "description": "KODAK PAKON F135 FILM SCANNER PHOTO"
+   },
+   "RA-220237": {
+      "description": "DAI NIPPON PRINTING M8 PRINTER PHOTO"
+   },
+   "RA-220238": {
+      "description": "M4 THERMAL PRINT HEAD - 23206510"
+   },
+   "RA-220239": {
+      "description": "Q4 THERMAL PRINT HEAD - 23206740S"
+   },
+   "RA-220241": {
+      "description": "KIOSK IPHONE USB COMBO CABLE"
+   },
+   "RA-220242": {
+      "description": "NEC 17\" PHOTO"
+   },
+   "RA-220243": {
+      "description": "PARATA SYSTEMS MINI PHOTO"
+   },
+   "RA-220244": {
+      "description": "PARATA SYSTEMS MAX PHOTO"
+   },
+   "RA-220245": {
+      "description": "FUJIFILM FRONTIER LITE CABINET"
+   },
+   "RA-220246": {
+      "description": "NORITSU T-15 FP PHOTO"
+   },
+   "RA-220247": {
+      "description": "NORITSU V-30 FP PHOTO"
+   },
+   "RA-220248": {
+      "description": "EPSON V700 PHOTO"
+   },
+   "RA-220249": {
+      "description": "EPSON V636 PHOTO"
+   },
+   "RA-220250": {
+      "description": "EPSON V1600 PHOTO"
+   },
+   "RA-220251": {
+      "description": "FUJIFILM FRONTIER LITE IBM PC"
+   },
+   "RA-220252": {
+      "description": "FILM SCAN PAKON 135 PHOTO"
+   },
+   "RA-220253": {
+      "description": "FUJIFILM SP500 FILM SCAN PHOTO"
+   },
+   "RA-220254": {
+      "description": "EPSON POSTER PRINTER PHOTO"
+   },
+   "RA-220255": {
+      "description": "EPSON 3170 SCANNER PHOTO"
+   },
+   "RA-220256": {
+      "description": "FUJIFILM DL400 PRINTER PHOTO"
+   },
+   "RA-220257": {
+      "description": "FUJIFILM DL410 PRINTER PHOTO"
+   },
+   "RA-220258": {
+      "description": "ELO TOUCH SCREEN PHOTO"
+   },
+   "RA-220259": {
+      "description": "ASPEN TOUCH SCREEN PHOTO"
+   },
+   "RA-220260": {
+      "description": "FUJIFILM DL410 CABINET PHOTO"
+   },
+   "RA-220261": {
+      "description": "FUJIFILM DL400 CABINET PHOTO"
+   },
+   "RA-220262": {
+      "description": "FUJIFILM DL400 WORKSTATION PHOTO"
+   },
+   "RA-220263": {
+      "description": "FUJIFILM DL410 WORKSTATION PHOTO"
+   },
+   "RA-220264": {
+      "description": "DENSITOMETER PHOTO"
+   },
+   "RA-220265": {
+      "description": "CHENBRO PC PHOTO"
+   },
+   "RA-220266": {
+      "description": "FUJIFILM DL430 WORKSTATION PHOTO"
+   },
+   "RA-220267": {
+      "description": "EPSON 7880 PHOTO"
+   },
+   "RA-220268": {
+      "description": "SILVER RECOVERY UNIT PHOTO"
+   },
+   "RA-220269": {
+      "description": "F6 INVERTER BOARD"
+   },
+   "RA-220270": {
+      "description": "SONY DKC-C300X PHOTO"
+   },
+   "RA-223240": {
+      "description": "FAN FILTER - P/N 25202160S"
+   },
+   "RA-223241": {
+      "description": "Q8 FILTER SET - P/N P5R-F6014"
+   },
+   "RA-223242": {
+      "description": "BLACK EX-S3C COMPLETE KIOSK READER"
+   },
+   "RA-223243": {
+      "description": "F6 MOUNTING BRACKET - P/N BRACKETFDBK"
+   },
+   "RA-223244": {
+      "description": "F6 CARD READER FILL PLATE - RIMG P/N 200512"
+   },
+   "RA-223245": {
+      "description": "RED PRINT RUSH CABINET PHOTO"
+   },
+   "RA-225200": {
+      "description": "HARD DRIVE BOX (1=15)"
+   },
+   "RA-225225": {
+      "description": "SERVER RETURN BOX"
+   },
+   "RA-225250": {
+      "description": "SC01 RETURN KIT"
+   },
+   "RA-230025": {
+      "description": "SCREW MOUNT ZIP TIE WRAPS (1=500)"
+   },
+   "RA-240000": {
+      "description": "DATALOGIC MAGELLAN 8400 SCALE"
+   },
+   "RA-240002": {
+      "description": "METTER TOLEDO BPRO MEAT SCALE"
+   },
+   "RA-240003": {
+      "description": "DATALOGIC 15' POWERED USB CABLE"
+   },
+   "RA-280000": {
+      "description": "LENOVO SLIM P/S 65W- 2 PIN"
+   },
+   "RA-280001": {
+      "description": "LENOVO SLIM P/S 65W- 3 PIN"
+   },
+   "RA-280002": {
+      "description": "CTS 2-PIN POWER CORD"
+   },
+   "RA-280003": {
+      "description": "CTS 3-PIN POWER CORD"
+   },
+   "RA-280004": {
+      "description": "LENOVO BARREL 65W P/S 2-PIN"
+   },
+   "RA-280005": {
+      "description": "LENOVO BARREL 90W P/S 2-PIN"
+   },
+   "RA-280006": {
+      "description": "SLIM EXTERNAL FLOPPY DRIVE"
+   },
+   "RA-280007": {
+      "description": "CTS YOGA S1/S12 STANDARD DOCK"
+   },
+   "RA-280008": {
+      "description": "CTS YOGA S1/S12 PRO DOCK"
+   },
+   "RA-280009": {
+      "description": "CTS USB DVD BURNER"
+   },
+   "RA-280010": {
+      "description": "CTS LENOVO T400 SERIES BATTERY"
+   },
+   "RA-280011": {
+      "description": "CTS LENOVO KEYBOARD"
+   },
+   "RA-280012": {
+      "description": "CTS DVI-D SINGLE LINK CABLE 6'"
+   },
+   "RA-280013": {
+      "description": "CTS VGA CABLE 6FT"
+   },
+   "RA-280014": {
+      "description": "CTS USB MOUSE"
+   },
+   "RA-280015": {
+      "description": "CTS A TO B USB CABLE"
+   },
+   "RA-280016": {
+      "description": "CTS HDMI TO DVI 6FT"
+   },
+   "RA-280017": {
+      "description": "CTS DISPLAY PORT TO DVI 6FT"
+   },
+   "RA-280018": {
+      "description": "CTS LENOVO USB ETHERNET"
+   },
+   "RA-280019": {
+      "description": "CTS LENOVO ONELINK+ YOGA 260 DOCK"
+   },
+   "RA-280020": {
+      "description": "CTS LENOVO USB 3.0 DOCK"
+   },
+   "RA-280021": {
+      "description": "CTS MINI HD TO VGA ADAPTER CONVERTER"
+   },
+   "RA-280022": {
+      "description": "CTS USB TO SERIAL RS-232 ADAPTER"
+   },
+   "RA-280023": {
+      "description": "CTS HD TO VGA ADAPTER CONVERTER"
+   },
+   "RA-280024": {
+      "description": "CTS DISPLAY PORT TO VGA ADAPTER CONVERTER"
+   },
+   "RA-280025": {
+      "description": "CTS LENOVO SLIM 90W P/S 2-PIN"
+   },
+   "RA-280026": {
+      "description": "CTS LENOVO T450 DOCK"
+   },
+   "RA-280027": {
+      "description": "CTS WIRELESS KEYBOARD AND MOUSE"
+   },
+   "RA-280028": {
+      "description": "CTS BASIC LAPTOP BAG"
+   },
+   "RA-280029": {
+      "description": "LAPTOP"
+   },
+   "RA-280030": {
+      "description": "LENOVO THINKPAD YOGA S1 HYBRID LAPTOP"
+   },
+   "RA-280031": {
+      "description": "LENOVO THINKPAD YOGA S1 HYBRID LAPTOP"
+   },
+   "RA-280032": {
+      "description": "LAPTOP"
+   },
+   "RA-280033": {
+      "description": "LENOVO THINKCENTRE M92 WORKSTATION"
+   },
+   "RA-280034": {
+      "description": "LENOVO THINKCENTRE M800 WORKSTATION"
+   },
+   "RA-280035": {
+      "description": "LENOVO THINKCENTRE M52 WORKSTATION"
+   },
+   "RA-280036": {
+      "description": "LENOVO THINKCENTRE M81 WORKSTATION"
+   },
+   "RA-280037": {
+      "description": "LENOVO THINKCENTRE S50 WORKSTATION"
+   },
+   "RA-280038": {
+      "description": "LENOVO 7052A7U WORKSTATION"
+   },
+   "RA-280039": {
+      "description": "CTS T652 550 SHEET TRAY"
+   },
+   "RA-280040": {
+      "description": "LENOVO M92 TOWER COMPUTER"
+   },
+   "RA-280041": {
+      "description": "PLANAR 22\" MONITOR"
+   },
+   "RA-280042": {
+      "description": "RX7-GAITH-SP4"
+   },
+   "RA-280044": {
+      "description": "LENOVO THINKCENTRE S51 WORKSTATION"
+   },
+   "RA-280045": {
+      "description": "LENOVO THINKCENTRE M57 WORKSTATION"
+   },
+   "RA-280046": {
+      "description": "LEXMARK OPTRA T652 LASER PRINTER"
+   },
+   "RA-280047": {
+      "description": "LENOVO 17\" MONITOR"
+   },
+   "RA-280048": {
+      "description": "VIEWSONIC 22\" MONITOR"
+   },
+   "RA-280049": {
+      "description": "LENOVO TINY IN ONE MONITOR"
+   },
+   "RA-280050": {
+      "description": "LENOVO THINKCENTRE M83 WORKSTATION"
+   },
+   "RA-280051": {
+      "description": "CTS STRATO USB KEYBOARD"
+   },
+   "RA-280052": {
+      "description": "LEXMARK C792 NETWORK PRINTER"
+   },
+   "RA-280053": {
+      "description": "CTS LENOVO EASY REACH MONITOR STAND"
+   },
+   "RA-280054": {
+      "description": "CTS T652 5 BIN MAILBOX"
+   },
+   "RA-280055": {
+      "description": "CTS USB TO VGA EXTERNAL MULTI-MONITOR VIDEO ADAPTER"
+   },
+   "RA-280056": {
+      "description": "CTS IBM DOCK STATION T400 SERIES"
+   },
+   "RA-280057": {
+      "description": "CTS COMPUTER SECURITY CABLE"
+   },
+   "RA-280058": {
+      "description": "HP OFFICEJET PRO X576DW LASER PRINTER"
+   },
+   "RA-280059": {
+      "description": "LEXMARK OPTRA T656 NETWORK PRINTER"
+   },
+   "RA-280060": {
+      "description": "LAPTOP"
+   },
+   "RA-280061": {
+      "description": "LENOVO THINKPAD L440 LAPTOP"
+   },
+   "RA-280062": {
+      "description": "LAPTOP"
+   },
+   "RA-280063": {
+      "description": "DELL HEALTHSPOT LAPTOP"
+   },
+   "RA-280065": {
+      "description": "DELL HEALTHSPOT WORKSTATION"
+   },
+   "RA-280066": {
+      "description": "CTS WIRELESS MOUSE"
+   },
+   "RA-280067": {
+      "description": "LEXMARK X364DN LASER PRINTER"
+   },
+   "RA-280068": {
+      "description": "CTS HDM1 2-IN-1 T ADAPTER"
+   },
+   "RA-280069": {
+      "description": "CTS HDMI CABLE 10 FEET B2B"
+   },
+   "RA-280070": {
+      "description": "CTS WIRELESS MOUSE 2.4 GHZ"
+   },
+   "RA-280071": {
+      "description": "CTS LEXMARK MS711 TONER (52D1X00)"
+   },
+   "RA-280087": {
+      "description": "PLANAR 24\" MONITOR"
+   },
+   "RA-280088": {
+      "description": "HP OFFICEJET PRO 7740 ALL-IN-ONE COMPUTER PERIPHERAL"
+   },
+   "RA-280089": {
+      "description": "CTS ONELINK TO ONELINK+ DATA CABLE"
+   },
+   "RA-280090": {
+      "description": "CTS PLANAR DUAL MONITOR STAND"
+   },
+   "RA-280091": {
+      "description": "DELL PRECISION M6600 LAPTOP"
+   },
+   "RA-280094": {
+      "description": "LAPTOP"
+   },
+   "RA-280095": {
+      "description": "LENOVO THINKPAD EDGE E420 LAPTOP"
+   },
+   "RA-280096": {
+      "description": "LENOVO THINKPAD EDGE E430 LAPTOP"
+   },
+   "RA-280097": {
+      "description": "LENOVO THINKPAD EDGE E431 LAPTOP"
+   },
+   "RA-280098": {
+      "description": "LENOVO THINKPAD HELIX LAPTOP"
+   },
+   "RA-280099": {
+      "description": "LENOVO THINKPAD L450 20DS LAPTOP"
+   },
+   "RA-280100": {
+      "description": "LENOVO THINKPAD SL410 LAPTOP"
+   },
+   "RA-280101": {
+      "description": "LENOVO THINKPAD SL510 LAPTOP"
+   },
+   "RA-280102": {
+      "description": "CW7-TCOLLINS"
+   },
+   "RA-280103": {
+      "description": "LENOVO THINKPAD T410 LAPTOP"
+   },
+   "RA-280104": {
+      "description": "LENOVO 41786VU LAPTOP"
+   },
+   "RA-280105": {
+      "description": "LENOVO THINKPAD T430S LAPTOP"
+   },
+   "RA-280106": {
+      "description": "LAPTOP"
+   },
+   "RA-280107": {
+      "description": "LENOVO THINKPAD T60 LAPTOP"
+   },
+   "RA-280108": {
+      "description": "LENOVO THINKPAD T61 LAPTOP"
+   },
+   "RA-280109": {
+      "description": "LAPTOP"
+   },
+   "RA-280111": {
+      "description": "LENOVO THINKPAD X230 LAPTOP"
+   },
+   "RA-280112": {
+      "description": "LENOVO 15\" MONITOR"
+   },
+   "RA-280115": {
+      "description": "LENOVO THINKCENTRE A70Z WORKSTATION"
+   },
+   "RA-280116": {
+      "description": "WORKSTATION"
+   },
+   "RA-280117": {
+      "description": "WORKSTATION"
+   },
+   "RA-280118": {
+      "description": "LENOVO THINKCENTRE EDGE 91Z WORKSTATION"
+   },
+   "RA-280119": {
+      "description": "WORKSTATION"
+   },
+   "RA-280120": {
+      "description": "WORKSTATION"
+   },
+   "RA-280121": {
+      "description": "LENOVO THINKSTATION P310 WORKSTATION"
+   },
+   "RA-280123": {
+      "description": "LEXMARK E323 PRINTER"
+   },
+   "RA-280124": {
+      "description": "LEXMARK E350D DUPLEX PRINTER"
+   },
+   "RA-280125": {
+      "description": "LEXMARK MS312 LASER PRINTER"
+   },
+   "RA-280126": {
+      "description": "LEXMARK MS711 LASER PRINTER"
+   },
+   "RA-280127": {
+      "description": "LEXMARK MS812 NETWORK PRINTER"
+   },
+   "RA-280129": {
+      "description": "LEXMARK OPTRA S1855 PRINTER"
+   },
+   "RA-280133": {
+      "description": "LEXMARK OPTRA T612 NETWORK PRINTER"
+   },
+   "RA-280135": {
+      "description": "LEXMARK OPTRA T630 NETWORK PRINTER"
+   },
+   "RA-280136": {
+      "description": "LEXMARK OPTRA T640 LASER PRINTER"
+   },
+   "RA-280138": {
+      "description": "LEXMARK Z515 PRINTER"
+   },
+   "RA-280139": {
+      "description": "PLANAR 27\" MONITOR"
+   },
+   "RA-280140": {
+      "description": "HP COMPAQ 8710W LAPTOP"
+   },
+   "RA-280141": {
+      "description": "LENOVO THINKPAD A30 LAPTOP"
+   },
+   "RA-280143": {
+      "description": "LENOVO THINKPAD T41 LAPTOP"
+   },
+   "RA-280145": {
+      "description": "LENOVO THINKPAD X220 LAPTOP"
+   },
+   "RA-280147": {
+      "description": "LAPTOP"
+   },
+   "RA-280148": {
+      "description": "PANASONIC TOUGHBOOK 54 LAPTOP"
+   },
+   "RA-280149": {
+      "description": "SAMSUNG PRO 700T LAPTOP"
+   },
+   "RA-280150": {
+      "description": "ACER 20\" MONITOR"
+   },
+   "RA-280151": {
+      "description": "ACER 19\" MONITOR"
+   },
+   "RA-280152": {
+      "description": "ACER 17\" MONITOR"
+   },
+   "RA-280154": {
+      "description": "ASUS 20\" MONITOR"
+   },
+   "RA-280156": {
+      "description": "DELL 20\" MONITOR"
+   },
+   "RA-280157": {
+      "description": "ENVISION AMERICA 22\" MONITOR"
+   },
+   "RA-280158": {
+      "description": "HP 23\" MONITOR"
+   },
+   "RA-280159": {
+      "description": "HP 19\" MONITOR"
+   },
+   "RA-280160": {
+      "description": "IBM 17\" MONITOR"
+   },
+   "RA-280161": {
+      "description": "LENOVO 22\" MONITOR"
+   },
+   "RA-280162": {
+      "description": "LENOVO 24\" MONITOR"
+   },
+   "RA-280164": {
+      "description": "LG 22\" MONITOR"
+   },
+   "RA-280166": {
+      "description": "NEC 19\" MONITOR"
+   },
+   "RA-280167": {
+      "description": "OPTIQUEST 17\" MONITOR"
+   },
+   "RA-280168": {
+      "description": "OPTIQUEST 15\" MONITOR"
+   },
+   "RA-280169": {
+      "description": "OPTIQUEST 19\" MONITOR"
+   },
+   "RA-280170": {
+      "description": "PLANAR 15\" MONITOR"
+   },
+   "RA-280171": {
+      "description": "PLANAR 17\" MONITOR"
+   },
+   "RA-280172": {
+      "description": "PLANAR 19\" MONITOR"
+   },
+   "RA-280173": {
+      "description": "CTS LEXMARK MS711 550 SHEET OPTION"
+   },
+   "RA-280174": {
+      "description": "VIEWSONIC 15\" MONITOR"
+   },
+   "RA-280175": {
+      "description": "VIEWSONIC 17\" MONITOR"
+   },
+   "RA-280176": {
+      "description": "VIEWSONIC 19\" MONITOR"
+   },
+   "RA-280177": {
+      "description": "VIEWSONIC 20\" MONITOR"
+   },
+   "RA-280178": {
+      "description": "VIEWSONIC 24\" MONITOR"
+   },
+   "RA-280179": {
+      "description": "VIEWSONIC 28\" MONITOR"
+   },
+   "RA-280180": {
+      "description": "CANON IMAGECLASS LBP6230 PRINTER"
+   },
+   "RA-280181": {
+      "description": "HP LASERJET CP2025 COLOR LASER PRINTER"
+   },
+   "RA-280182": {
+      "description": "HP DESIGNJET 111 COLOR LASER PRINTER"
+   },
+   "RA-280183": {
+      "description": "HP DESIGNJET T520 COLOR LASER PRINTER"
+   },
+   "RA-280184": {
+      "description": "HP LASERJET 3600N COLOR LASER PRINTER"
+   },
+   "RA-280185": {
+      "description": "HP LASERJET 9040DN MONOCHROME NETWORK PRINTER"
+   },
+   "RA-280186": {
+      "description": "BROTHER HL L2380 MONOCHROME PRINTER"
+   },
+   "RA-280188": {
+      "description": "CANON PIXMA MP830 PRINTER"
+   },
+   "RA-280189": {
+      "description": "DELL 2130CN COLOR PRINTER"
+   },
+   "RA-280190": {
+      "description": "EPSON STYLUS PHOTO R2000 PRINTER"
+   },
+   "RA-280191": {
+      "description": "HP DESIGNJET 800 PRINTER"
+   },
+   "RA-280192": {
+      "description": "HP DESIGNJET T795 PRINTER"
+   },
+   "RA-280193": {
+      "description": "HP DESKJET 3510 PRINTER"
+   },
+   "RA-280196": {
+      "description": "HP LASERJET 1320N PRINTER"
+   },
+   "RA-280197": {
+      "description": "HP LASERJET 2100TN MONOCHROME PRINTER"
+   },
+   "RA-280199": {
+      "description": "HP LASERJET P2055DN PRINTER"
+   },
+   "RA-280202": {
+      "description": "HP LASERJET PRO P1102W MONOCHROME PRINTER"
+   },
+   "RA-280203": {
+      "description": "HP OFFICEJET PRO 8600 PRINTER"
+   },
+   "RA-280204": {
+      "description": "HP OFFICEJET PRO 8610 PRINTER"
+   },
+   "RA-280205": {
+      "description": "HP OFFICEJET PRO 8620 PRINTER"
+   },
+   "RA-280206": {
+      "description": "HP OFFICEJET PRO 8710 PRINTER"
+   },
+   "RA-280209": {
+      "description": "LEXMARK MS811 PRINTER"
+   },
+   "RA-280210": {
+      "description": "LEXMARK OPTRA S4059 PRINTER"
+   },
+   "RA-280211": {
+      "description": "LEXMARK T644 PRINTER"
+   },
+   "RA-280212": {
+      "description": "PRIMERA TECHNOLOGY BRAVO 4100 PRINTER"
+   },
+   "RA-280216": {
+      "description": "COMPAQ ARMADA 1750 LAPTOP"
+   },
+   "RA-280217": {
+      "description": "SERVER"
+   },
+   "RA-280218": {
+      "description": "LENOVO THINKCENTRE M32 THIN CLIENT"
+   },
+   "RA-280219": {
+      "description": "SAMSUNG 20\" MONITOR"
+   },
+   "RA-280220": {
+      "description": "SAMSUNG 22\" MONITOR"
+   },
+   "RA-280222": {
+      "description": "AOC 24\" MONITOR"
+   },
+   "RA-280223": {
+      "description": "HP 20\" MONITOR"
+   },
+   "RA-280224": {
+      "description": "LENOVO THINKCENTRE EDGE 92Z WORKSTATION"
+   },
+   "RA-280226": {
+      "description": "ACER 22\" MONITOR"
+   },
+   "RA-280227": {
+      "description": "SAMSUNG 19\" MONITOR"
+   },
+   "RA-280228": {
+      "description": "IBM 15\" MONITOR"
+   },
+   "RA-280229": {
+      "description": "CTS MS711 4-BIN MAILBOX (40G0852)"
+   },
+   "RA-280231": {
+      "description": "LENOVO THINKPAD P50 LAPTOP"
+   },
+   "RA-280232": {
+      "description": "CTS LENOVO P50/P70 DOCKING STATION"
+   },
+   "RA-280233": {
+      "description": "CTS PLANAR 3 MONITOR STAND"
+   },
+   "RA-280234": {
+      "description": "EPSON WORKFORCE WF-2760 DESKTOP PRINTER"
+   },
+   "RA-280235": {
+      "description": "LENOVO THINKPAD P51 LAPTOP"
+   },
+   "RA-280236": {
+      "description": "CTS HDD/SDD MOUNTING BRACKET"
+   },
+   "RA-280237": {
+      "description": "CTS 250 GB SATA 2.5 IN SSD"
+   },
+   "RA-280238": {
+      "description": "CTS STRAIGHT END POWER CABLE"
+   },
+   "RA-280239": {
+      "description": "ZEBRA TECHNOLOGIES ET50 TABLET"
+   },
+   "RA-280240": {
+      "description": "PLANAR 24\" TOUCH SCREEN MONITOR"
+   },
+   "RA-280241": {
+      "description": "LEXMARK MS810 PRINTER"
+   },
+   "RA-280242": {
+      "description": "LENOVO THINKPAD YOGA X380 LAPTOP"
+   },
+   "RA-280243": {
+      "description": "CTS LENOVO USB-C DOCK (YOGA L380)"
+   },
+   "RA-280244": {
+      "description": "CTS LENOVO ENHANCED USB KEYBOARD"
+   },
+   "RA-280245": {
+      "description": "8019218 - APPLE MAC BOOK PRO 15.4\" (2015)"
+   },
+   "RA-280246": {
+      "description": "PLANAR HELIUM 22\" TOUCH SCREEN MONITOR"
+   },
+   "RA-280247": {
+      "description": "LENOVO M910Q TINY WORKSTATION"
+   },
+   "RA-280248": {
+      "description": "DYMO LABEL WRITER 450 TURBO PRINTER"
+   },
+   "RA-280249": {
+      "description": "CTS 500 GB SSD"
+   },
+   "RA-280250": {
+      "description": "HID GLOBAL ASSURETEC ID 150 DOCUMENT SCANNER"
+   },
+   "RA-280251": {
+      "description": "CTS LENOVO TINY SANDWICH KIT II"
+   },
+   "RA-280252": {
+      "description": "LENOVO THINKPAD YOGA L380 LAPTOP"
+   },
+   "RA-280253": {
+      "description": "CTS LENOVO 65W USB-C ADAPTER L380"
+   },
+   "RA-280254": {
+      "description": "CTS DVI-D DUAL LINK CABLE 6'"
+   },
+   "RA-280255": {
+      "description": "CTS MONITOR STAND COMFORT FIT"
+   },
+   "RA-280256": {
+      "description": "CTS DUAL PLATFORM NOTEBOOK MONITOR STAND"
+   },
+   "RA-280257": {
+      "description": "LENOVO M920T WORKSTATION"
+   },
+   "RA-280258": {
+      "description": "APC BACK-UPS 700 UPS"
+   },
+   "RA-280259": {
+      "description": "CTS DISPLAY PORT TO HDMI 4K CABLE 6 FT"
+   },
+   "RA-280260": {
+      "description": "CTS LIMBO LOW PROFILE MONITOR STAND"
+   },
+   "RA-280261": {
+      "description": "LENOVO M920Q WORKSTATION"
+   },
+   "RA-280262": {
+      "description": "CTS LENOVO TINY VESA MOUNT II"
+   },
+   "RA-280263": {
+      "description": "LEXMARK MS725DVN LASER PRINTER"
+   },
+   "RA-280264": {
+      "description": "WORKSTATION"
+   },
+   "RA-280265": {
+      "description": "SAMSUNG T5 500GB SSD HARD DRIVE"
+   },
+   "RA-280266": {
+      "description": "HP OFFICEJET PRO 9010 LASER PRINTER"
+   },
+   "RA-280267": {
+      "description": "APPLE MACBOOK AIR 13.3\" (2019) LAPTOP"
+   },
+   "RA-280268": {
+      "description": "APPLE MAC BOOK PRO 15.4\" (2016) LAPTOP"
+   },
+   "RA-280269": {
+      "description": "HP OFFICEJET PRO 9015 PRINTER"
+   },
+   "RA-280270": {
+      "description": "7168998 - LENOVO THINKPAD X1 YOGA (2ND GEN)"
+   },
+   "RA-280271": {
+      "description": "LENOVO THINKCENTRE M93P WORKSTATION"
+   },
+   "RA-280272": {
+      "description": "LENOVO THINKPAD P53 LAPTOP"
+   },
+   "RA-280273": {
+      "description": "LENOVO THINKPAD L390 YOGA LAPTOP"
+   },
+   "RA-280274": {
+      "description": "LAPTOP"
+   },
+   "RA-280275": {
+      "description": "LENOVO P520 TOWER WORKSTATION"
+   },
+   "RA-280276": {
+      "description": "CTS LENOVO MINI DISPLAYPORT ADAPTER"
+   },
+   "RA-280277": {
+      "description": "VIEWSONIC 27\" 4K UHD LED MONITOR"
+   },
+   "RA-290000": {
+      "description": "DELL PRECISION T1700 LAPTOP"
+   },
+   "RA-290001": {
+      "description": "DELL PRECISION T1700 LAPTOP"
+   },
+   "RA-290002": {
+      "description": "DELL POWEREDGE R610 SERVER"
+   },
+   "RA-290003": {
+      "description": "DELL POWEREDGE R620 SERVER"
+   },
+   "RA-290004": {
+      "description": "DELL POWERVAULT NX3200 SERVER"
+   },
+   "RA-290005": {
+      "description": "LAPTOP"
+   },
+   "RA-290006": {
+      "description": "CISCO 4331 ROUTER IP ROUTER"
+   },
+   "RA-290007": {
+      "description": "CISCO AIRONET 3702 ACCESS POINT"
+   },
+   "RA-290008": {
+      "description": "CISCO CATALYST 2960X 48 PORT IP SWITCH"
+   },
+   "RA-290010": {
+      "description": "ELO 19\" MONITOR"
+   },
+   "RA-290011": {
+      "description": "SAMSUNG SYNCMASTER 32\" MONITOR"
+   },
+   "RA-290012": {
+      "description": "DELL 24\" MONITOR"
+   },
+   "RA-290013": {
+      "description": "DELL LATITUDE E5430 LAPTOP"
+   },
+   "RA-290014": {
+      "description": "DELL OPTIPLEX XE2 WORKSTATION"
+   },
+   "RA-290015": {
+      "description": "DELL PRECISION M4700 LAPTOP"
+   },
+   "RA-290020": {
+      "description": "CISCO MERAKI MX65 FIREWALL"
+   },
+   "RA-290022": {
+      "description": "APPLE IPAD 9.7\" TABLET"
+   },
+   "RA-290023": {
+      "description": "JABRA SPEAKER 410 MS (RC EXPRESS) - DO NOT USE"
+   },
+   "RA-290024": {
+      "description": "PROVIDER HEADSET AL-60L (RC EXPRESS)"
+   },
+   "RA-290025": {
+      "description": "LOGITECH USB WEBCAM (RC EXPRESS)"
+   },
+   "RA-290026": {
+      "description": "DELL B1260DN MONOCHROME LASER PRINTER"
+   },
+   "RA-290027": {
+      "description": "APC PRO 1000 BATTERY BACKUP UPS"
+   },
+   "RA-290028": {
+      "description": "SONICWALL FIREWALL POWER SUPPLY"
+   },
+   "RA-290029": {
+      "description": "PHILIPS 32\" MONITOR"
+   },
+   "RA-290030": {
+      "description": "DELL OPTIPLEX 990 WORKSTATION"
+   },
+   "RA-290031": {
+      "description": "MOTOROLA DS457 USB BARCODE SCANNER"
+   },
+   "RA-290039": {
+      "description": "BIOCAM 2.0 OTOSCOPE COMPUTER PERIPHERAL"
+   },
+   "RA-290040": {
+      "description": "DELL OPTIPLEX 9010 WORKSTATION"
+   },
+   "RA-290041": {
+      "description": "WCR3237 CARD READER"
+   },
+   "RA-290042": {
+      "description": "DELL LATITUDE E5440 LAPTOP"
+   },
+   "RA-290043": {
+      "description": "3-PIN POWER CABLE (HEALTHSPOT)"
+   },
+   "RA-290044": {
+      "description": "LED DESK LAMP (HEALTHSPOT)"
+   },
+   "RA-290045": {
+      "description": "PHILIPS TV REMOTE (RC EXPRESS)"
+   },
+   "RA-290046": {
+      "description": "SAMSUNG TV REMOTE (HEALTHSPOT)"
+   },
+   "RA-290047": {
+      "description": "SONY DR-EX61IP HEADPHONES (HEALTHSPOT)"
+   },
+   "RA-290048": {
+      "description": "FORACARE IR22 THERMOMETER (RC EXPRESS)"
+   },
+   "RA-290049": {
+      "description": "PULSE OXIMETER 3231 (RC EXPRESS)"
+   },
+   "RA-290050": {
+      "description": "CYBER ACOUSTICS USB SPEAKERS (RC EXPRESS)"
+   },
+   "RA-290051": {
+      "description": "14\"\" PRIVACY SCREEN (HEALTHSPOT)"
+   },
+   "RA-290052": {
+      "description": "DELL B1260 TONER (HEALTHSPOT)"
+   },
+   "RA-290053": {
+      "description": "ELO TOUCH SCREEN P/S (RC EXPRESS)"
+   },
+   "RA-290054": {
+      "description": "COMPUTER FANS 6' (RC EXPRESS)"
+   },
+   "RA-290055": {
+      "description": "ACCESS RELAY BOARD (RC EXPRESS)"
+   },
+   "RA-290056": {
+      "description": "ACCESS RELAY WIRING HARNESS (RC EXPRESS)"
+   },
+   "RA-290057": {
+      "description": "HDMI TO DISPLAY PORT ADAPTER (HEALTHSPOT)"
+   },
+   "RA-290058": {
+      "description": "VGA CABLE (RC EXPRESS)"
+   },
+   "RA-290059": {
+      "description": "6' USB EXTENSION CABLES (RC EXPRESS)"
+   },
+   "RA-290060": {
+      "description": "6' POWER EXTENSTION CABLE (RC EXPRESS)"
+   },
+   "RA-290061": {
+      "description": "15' POWER EXTENSION CABLE (RC EXPRESS)"
+   },
+   "RA-290062": {
+      "description": "25' POWER EXTENSION CABLE (RC EXPRESS)"
+   },
+   "RA-290063": {
+      "description": "STRAIGHT END POWER CABLE (HEALTHSPOT)"
+   },
+   "RA-290064": {
+      "description": "RIGHT ANGLE POWER CABLE (HEALTHSPOT)"
+   },
+   "RA-290065": {
+      "description": "4 OUTLET JUNCTION BOX (RC EXPRESS)"
+   },
+   "RA-290066": {
+      "description": "MASTERLOCK COMBINATION LOCK (HEALTHSPOT)"
+   },
+   "RA-290067": {
+      "description": "BLUE BAG (HEALTHSPOT)"
+   },
+   "RA-290068": {
+      "description": "UV LIGHT BULBS (HEALTHSPOT)"
+   },
+   "RA-290069": {
+      "description": "TRIPP LITE POWER STRIP (RC EXPRESS)"
+   },
+   "RA-290070": {
+      "description": "USB A TO B CABLE (RC EXPRESS)"
+   },
+   "RA-290071": {
+      "description": "USB MICRO CABLE (HEALTHSPOT)"
+   },
+   "RA-290072": {
+      "description": "TWO PIN POWER CABLE (HEALTHSPOT)"
+   },
+   "RA-290073": {
+      "description": "DISPLAY PORT TO DVI ADAPTER (RC EXPRESS)"
+   },
+   "RA-290074": {
+      "description": "15' CAT5 CABLE BLACK (RC EXPRESS)"
+   },
+   "RA-290075": {
+      "description": "25' CAT5 CABLE RED (RC EXPRESS)"
+   },
+   "RA-290076": {
+      "description": "10' CAT5 CABLE BLUE (RC EXPRESS)"
+   },
+   "RA-290077": {
+      "description": "10' HDMI TO DIPLAY PORT CABLE (RC EXPRESS)"
+   },
+   "RA-290078": {
+      "description": "USB500 SCALE (RC EXPRESS)"
+   },
+   "RA-290079": {
+      "description": "PLANTRONIC CALISTO 420 SPEAKER (RC EXPRESS)"
+   },
+   "RA-290080": {
+      "description": "LAPTOP SECURITY LOCK (HEALTHSPOT)"
+   },
+   "RA-290081": {
+      "description": "SABRANT USB SOUND ADAPTER (HEALTHSPOT)"
+   },
+   "RA-290082": {
+      "description": "LINDY USB DRIVE W/ LOCK AND KEY (HEALTHSPOT)"
+   },
+   "RA-290083": {
+      "description": "LOGITECH WIRELESS KEYBOARD (HEALTHSPOT)"
+   },
+   "RA-290084": {
+      "description": "LOGITECH WIRELESS MOUSE (HEALTHSPOT)"
+   },
+   "RA-290085": {
+      "description": "DELL LAPTOP POWER BRICK (HEALTHSPOT)"
+   },
+   "RA-290086": {
+      "description": "ATLAS AM1200 SOUND AMPLIFIER (RC EXPRESS)"
+   },
+   "RA-290087": {
+      "description": "AMBIR IMAGESCAN PRO PS667 (RC EXPRESS)"
+   },
+   "RA-290088": {
+      "description": "CORDED LANDLINE PHONE (RC EXPRESS)"
+   },
+   "RA-290089": {
+      "description": "COCAM USB-225 MAGNASCOPE (RC EXPRESS)"
+   },
+   "RA-290090": {
+      "description": "AUDIO EXTENSTION CABLE (HEALTHSPOT)"
+   },
+   "RA-290091": {
+      "description": "BLOOD PRESSURE MACHINE (RC EXPERSS)"
+   },
+   "RA-290092": {
+      "description": "USB KEYBOARD (HEALTHSPOT)"
+   },
+   "RA-290093": {
+      "description": "USB MOUSE (HEALTHSPOT)"
+   },
+   "RA-290094": {
+      "description": "CABLE MANAGEMENT TUBING (HEALTHSPOT)"
+   },
+   "RA-290095": {
+      "description": "MINI DISPLAY PORT TO DVI ADAPTER (HEALTHSPOT)"
+   },
+   "RA-290096": {
+      "description": "VGA TO DISPLAY PORT ADAPTER (RC EXPRESS)"
+   },
+   "RA-290097": {
+      "description": "USB STETHOSCOPE (RC EXPRESS)"
+   },
+   "RA-290098": {
+      "description": "ADULT THIGH 13 BLOOD PRESSURE CUFF (HEALTHSPOT)"
+   },
+   "RA-290099": {
+      "description": "ADULT 12 BLOOD PRESSURE CUFF (HEALTHSPOT)"
+   },
+   "RA-290100": {
+      "description": "ADULT 11 BLOOD PRESSURE CUFF (HEALTHSPOT)"
+   },
+   "RA-290101": {
+      "description": "SMALL ADULT 10 BLOOD PRESSURE CUFF (HEALTHSPOT)"
+   },
+   "RA-290102": {
+      "description": "CHILD 9 BLOOD PRESSURE CUFF (HEALTHSPOT)"
+   },
+   "RA-290103": {
+      "description": "SMALL CHILD 8 BLOOD PRESSURE CUFF (HEALTHSPOT)"
+   },
+   "RA-290104": {
+      "description": "INFANT 7 BLOOD PRESSURE CUFF (HEALTHSPOT)"
+   },
+   "RA-290105": {
+      "description": "ATLAS SOUND RECEIVER POWER SUPPLY (RC EXPRESS)"
+   },
+   "RA-290106": {
+      "description": "VGA ADAPTER (RC EXPRESS)"
+   },
+   "RA-290107": {
+      "description": "LENOVO M910Q TINY WORKSTATION"
+   },
+   "RA-290108": {
+      "description": "MICRO USB CABLE (RC EXPRESS)"
+   },
+   "RA-290109": {
+      "description": "ABUS SECURITY CHAIN (HEALTHSPOT)"
+   },
+   "RA-290113": {
+      "description": "DELL LATITUDE E5420 LAPTOP"
+   },
+   "RA-290114": {
+      "description": "DELL LATITUDE E7440 LAPTOP"
+   },
+   "RA-290115": {
+      "description": "DELL VOSTRO 3400 LAPTOP"
+   },
+   "RA-290116": {
+      "description": "DELL DOCKING STATION (HEALTHSPOT)"
+   },
+   "RA-290117": {
+      "description": "TARGUS DISPLAY LINK (HEALTHSPOT)"
+   },
+   "RA-290118": {
+      "description": "DELL LATITUDE E5520 LAPTOP"
+   },
+   "RA-290119": {
+      "description": "HDMI CABLE (RC EXPRESS)"
+   },
+   "RA-290125": {
+      "description": "OBSOLETE - HOLD FOR NEW ITEM"
+   },
+   "RA-290165": {
+      "description": "15' USB A TO A CABLE (RC EXPRESS)"
+   },
+   "RA-290166": {
+      "description": "2 OUTLET JUNCTION BOX (RC EXPRESS)"
+   },
+   "RA-290167": {
+      "description": "LENOVO TINY VESA MOUNT (RC EXPRESS)"
+   },
+   "RA-290168": {
+      "description": "INGENICO MOUNT (RC EXPRESS)"
+   },
+   "RA-290169": {
+      "description": "INGENICO MOUNT 3M TAPE (RC EXPRESS)"
+   },
+   "RA-290170": {
+      "description": "JABRA SPEAKER 510MS COMPUTER PERIPHERAL"
+   },
+   "RA-290172": {
+      "description": "LENOVO M920S WORKSTATION"
+   },
+   "RA-290173": {
+      "description": "HP CONNECT 1405 8 PORT IP SWITCH"
+   },
+   "RA-290174": {
+      "description": "USB EXPANSION CARD FOR KIOSK PC'S (RC EXPRESS)"
+   },
+   "RA-290175": {
+      "description": "THERMOMETER (RC EXPRESS)"
+   },
+   "RA-290176": {
+      "description": "LENOVO 22\" TOUCHSCREEN TIO MONITOR"
+   },
+   "RA-290177": {
+      "description": "LENOVO M920Q WORKSTATION"
+   },
+   "RA-290178": {
+      "description": "PLANTRONICS SPEAKER/MIC (RC EXPRESS)"
+   },
+   "RA-290179": {
+      "description": "KONFTEL SPEAKER (RC EXPRESS)"
+   },
+   "RA-290180": {
+      "description": "BOSE HEADSET (RC EXPRESS)"
+   },
+   "RA-290181": {
+      "description": "PLANAR WALLMOUNT KIT"
+   },
+   "RA-290182": {
+      "description": "6' HDMI TO DVI CABLE (RC EXPRESS)"
+   },
+   "RA-290183": {
+      "description": "C2G DISPLAYPORT TO VGA CABLE 6' (RC EXPRESS)"
+   },
+   "RA-290184": {
+      "description": "FIREFLY OTOSCOPE (RC EXPRESS)"
+   },
+   "RA-290185": {
+      "description": "FIREFLY DERMASCOPE (RC EXPRESS)"
+   },
+   "RA-290186": {
+      "description": "SCALE (RC EXPRESS)"
+   },
+   "RA-300000": {
+      "description": "TRIPP LITE 12 OUTLET 20A PDU"
+   },
+   "RA-300001": {
+      "description": "NSG CISCO IP PHONE EXPANSION MODULE 8800"
+   },
+   "RA-300002": {
+      "description": "NSG CISCO POWER ADAPTER PWR-2504-AC"
+   },
+   "RA-300003": {
+      "description": "CISCO CATALYST 3850 24 PORT IP SWITCH"
+   },
+   "RA-300004": {
+      "description": "CISCO CATALYST 3850 24 PORT IP SWITCH"
+   },
+   "RA-300005": {
+      "description": "CISCO 4331 IP ROUTER"
+   },
+   "RA-300006": {
+      "description": "CISCO NEXUS 2232TM-3 10GE FABRIC EXT. IP SWITCH"
+   },
+   "RA-300007": {
+      "description": "NSG CISCO HYPERLOCATION ANTENNA"
+   },
+   "RA-300008": {
+      "description": "CISCO AIRONET 3802I ACCESS POINT"
+   },
+   "RA-300009": {
+      "description": "NSG 4P 10G ADAPTER FOR OMNIPLIANCE (COMPLETE)"
+   },
+   "RA-300010": {
+      "description": "NSG APC CABLE ORGANIZER - AR8425A"
+   },
+   "RA-300011": {
+      "description": "CISCO ONE 8540 WIRELESS CONTROLLER"
+   },
+   "RA-300012": {
+      "description": "CISCO 8540 WIRELESS CONTROLLER"
+   },
+   "RA-300013": {
+      "description": "CISCO 892FSP IP ROUTER"
+   },
+   "RA-300014": {
+      "description": "CISCO MERAKI MX65W FIREWALL"
+   },
+   "RA-300015": {
+      "description": "UCS C240 M4 VIRTUALIZATION SERVER"
+   },
+   "RA-300016": {
+      "description": "CISCO ISR 4451 IP ROUTER"
+   },
+   "RA-300017": {
+      "description": "CISCO 4331 IP ROUTER"
+   },
+   "RA-300018": {
+      "description": "CISCO MERAKI MX100 FIREWALL"
+   },
+   "RA-300019": {
+      "description": "HUGHES SATELLITE HUB CDS NETWORK INFRASTRUCTURE ITEM"
+   },
+   "RA-300020": {
+      "description": "CISCO ASA 5545-X FIREWALL"
+   },
+   "RA-300021": {
+      "description": "APC SMART UPS 1500 RM2U UPS"
+   },
+   "RA-300022": {
+      "description": "CISCO MERAKI MX64 FIREWALL"
+   },
+   "RA-300023": {
+      "description": "CISCO 7811 IP PHONE"
+   },
+   "RA-300024": {
+      "description": "CISCO 7821 IP PHONE"
+   },
+   "RA-300025": {
+      "description": "CISCO 8811 IP PHONE"
+   },
+   "RA-300026": {
+      "description": "CISCO ATA 190 NETWORK ADAPTER"
+   },
+   "RA-300027": {
+      "description": "CISCO VG202 GATEWAY IP ROUTER"
+   },
+   "RA-300028": {
+      "description": "CISCO 8821 IP PHONE"
+   },
+   "RA-300029": {
+      "description": "NSG JABRA EVOLVE 40 STEREO HEADSET"
+   },
+   "RA-300031": {
+      "description": "NSG JABRA 930 UC HEADSET"
+   },
+   "RA-300033": {
+      "description": "CISCO MERAKI MX65 FIREWALL"
+   },
+   "RA-300034": {
+      "description": "CISCO CATALYST 2960X 48 PORT IP SWITCH"
+   },
+   "RA-300035": {
+      "description": "NSG CISCO FLEXSTACK MODULE"
+   },
+   "RA-300036": {
+      "description": "NSG CISCO 4TH GEN NETWORK INTERFACE"
+   },
+   "RA-300037": {
+      "description": "CISCO ASA 5516-X IP ROUTER"
+   },
+   "RA-300041": {
+      "description": "HUGHES DNCC G9 DL360 NETWORK INFRASTRUCTURE ITEM"
+   },
+   "RA-300042": {
+      "description": "CISCO NEXUS 9300 48 PORT IP SWITCH"
+   },
+   "RA-300043": {
+      "description": "CITRIX SYSTEMS NETSCALER MPX8005 LOAD BALANCER"
+   },
+   "RA-300044": {
+      "description": "SAVVIUS OMNIPLIANCE C100 8T NETWORK INFRASTRUCTURE ITEM"
+   },
+   "RA-300045": {
+      "description": "GIGAMON GIGAVUE HC2 NETWORK INFRASTRUCTURE ITEM"
+   },
+   "RA-300046": {
+      "description": "HUGHES ERICSSON ENCODER AVP2000 AV ENCODER"
+   },
+   "RA-300047": {
+      "description": "CISCO 5520 WIRELESS CONTROLLER"
+   },
+   "RA-300048": {
+      "description": "CISCO AIRONET 3702 ACCESS POINT"
+   },
+   "RA-300049": {
+      "description": "CISCO CATALYST 2960X 48 PORT LPS IP SWITCH"
+   },
+   "RA-300050": {
+      "description": "CISCO CATALYST 2960X 48 PORT FPS IP SWITCH"
+   },
+   "RA-300051": {
+      "description": "CISCO 8865 IP PHONE"
+   },
+   "RA-300052": {
+      "description": "NSG CISCO MULTIFLEX CLEAR CHAN T1 MODULE"
+   },
+   "RA-300053": {
+      "description": "CISCO 2911 IP ROUTER"
+   },
+   "RA-300054": {
+      "description": "CISCO AIRONET 3602 ACCESS POINT"
+   },
+   "RA-300055": {
+      "description": "CRADLEPOINT MBR1200B IP ROUTER"
+   },
+   "RA-300056": {
+      "description": "APC SMART UPS 2000 RACK"
+   },
+   "RA-300057": {
+      "description": "CISCO MERAKI MS210 48-PORT POE IP SWITCH"
+   },
+   "RA-300058": {
+      "description": "CISCO CATALYST 4500-X 40-PORT IP SWITCH"
+   },
+   "RA-300059": {
+      "description": "CISCO CATALYST 9300 48-PORT IP SWITCH"
+   },
+   "RA-300060": {
+      "description": "TRIPP LITE 48 PORT CONSOLE IP SWITCH"
+   },
+   "Trunk stock below": {
+      "description": "Trunk stock in Blue"
+   }
+}

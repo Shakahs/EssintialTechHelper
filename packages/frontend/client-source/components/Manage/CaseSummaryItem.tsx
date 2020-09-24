@@ -17,6 +17,8 @@ import parseJSON from "date-fns/parseJSON";
 import dateFormat from "date-fns/format";
 import isBefore from "date-fns/isBefore";
 import classnames from "classnames";
+import partsList from "../../assets/riteAidPartList.json";
+// const partsList = require('../../assets/partList.json')
 
 interface CaseSummaryItemProps {
    subcase: CaseSummary;
@@ -76,7 +78,11 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
             </span>
          </div>
          <Bool if={isProjectWork(props.subcase)}>Project Work</Bool>
-         <div>Part Number: {props.subcase.Model}</div>
+         <div>
+            Part: {props.subcase.Model}
+            {partsList[props.subcase.Model] &&
+               partsList[props.subcase.Model].description}
+         </div>
          <div>
             <a
                target={"_blank"}
