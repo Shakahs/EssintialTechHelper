@@ -14,7 +14,7 @@ import {
    format as dateFormat,
    set as dateSet,
 } from "date-fns";
-import { createConnection } from "typeorm";
+import { createConnection, getConnection } from "typeorm";
 import { TicketEntity } from "./database/entity/Ticket";
 import { Connection } from "typeorm/connection/Connection";
 import * as Twilio from "twilio";
@@ -191,8 +191,7 @@ const sendNotifications = async (tickets: Ticket[]) => {
 
 async function poll() {
    try {
-      //@ts-ignore
-      const dbConnection = await createConnection(ormConfig);
+      const dbConnection = await getConnection();
       console.log("polling ticket API");
       const rawTickets = await pullRawData();
       const processedTickets = await geoCode(rawTickets);
@@ -203,16 +202,24 @@ async function poll() {
          filteredTickets,
          dbConnection
       );
-      await dbConnection.close();
       console.log("persisted tickets:", persistedTickets.length);
       await sendNotifications(persistedTickets);
    } catch (err) {
       console.log("An error occurred in main:", err);
+      process.exit(1);
    }
 }
 
 if (require.main === module) {
-   console.log("poller started");
-   poll();
-   setInterval(poll, 60000);
+   //@ts-ignore
+   createConnection(ormConfig)
+      .then(() => {
+         console.log("poller started");
+         poll();
+         setInterval(poll, 60000);
+      })
+      .catch((err) => {
+         console.log("An error occurred in startup:", err);
+         process.exit(1);
+      });
 }

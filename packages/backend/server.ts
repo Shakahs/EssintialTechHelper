@@ -39,14 +39,19 @@ server.get("/api/available", async (request, reply) => {
 
 const start = async () => {
    try {
-      console.log("starting fastify");
+      console.log("connecting to database");
       //@ts-ignore
       await createConnection(ormConfig);
+   } catch (err) {
+      console.log("database connection failed:", err);
+   }
 
+   try {
+      console.log("starting fastify");
       await server.listen(3000, "0.0.0.0");
       server.log.info(`server listening on ${server.server.address().port}`);
    } catch (err) {
-      server.log.error(err);
+      server.log.error("starting fastify failed:", err);
       process.exit(1);
    }
 };
