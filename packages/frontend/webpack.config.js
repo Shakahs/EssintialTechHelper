@@ -35,7 +35,9 @@ module.exports = {
                {
                   loader: "babel-loader",
                   options: {
-                     plugins: ["react-refresh/babel"],
+                     plugins: [
+                        isDevelopment && require.resolve("react-refresh/babel"),
+                     ].filter(Boolean),
                   },
                },
                {
@@ -100,7 +102,7 @@ module.exports = {
       isDevelopment && new ReactRefreshWebpackPlugin(),
       isDevelopment && new webpack.HotModuleReplacementPlugin(),
       new WebpackBar({ profile: true, fancy: true, basic: false }),
-   ],
+   ].filter(Boolean),
    devServer: {
       port: 3001,
       inline: true,
