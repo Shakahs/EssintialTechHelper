@@ -8,7 +8,7 @@ import {
    DoubleUnneccessaryArray,
    isProjectWork,
 } from "../../api";
-import { updateCaseSummaries } from "../../features/manageTickets/manageTicketsSlice";
+import { updateCaseSummaries } from "../../features/manageTickets/caseSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../rootReducer";
 import { map } from "lodash";
@@ -17,7 +17,7 @@ import classnames from "classnames";
 import {
    debouncedFetchCases,
    fetchCases,
-} from "../../features/manageTickets/thunks";
+} from "../../features/manageTickets/caseThunks";
 
 interface Manage2Props {}
 

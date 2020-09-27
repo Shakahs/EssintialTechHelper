@@ -3,11 +3,9 @@ import { CaseSummary } from "../../api";
 import { RootState } from "../../rootReducer";
 import { AppDispatch } from "../../store";
 import { apiBase, defaultRequestHeaders } from "../../constants";
-import {
-   manageTicketsSliceName,
-   updateCaseSummaries,
-} from "./manageTicketsSlice";
+import { updateCaseSummaries } from "./caseSlice";
 import { debounce } from "lodash";
+import { sliceName } from "./caseConstants";
 
 export const fetchCases = createAsyncThunk<
    CaseSummary[],
@@ -18,7 +16,7 @@ export const fetchCases = createAsyncThunk<
       rejectValue: string;
    }
 >(
-   `${manageTicketsSliceName}/fetchCases`,
+   `${sliceName}/fetchCases`,
    // `sliceName/fetchCases`,
    // Declare the type your function argument here:
    async (_, thunkAPI) => {

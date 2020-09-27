@@ -5,7 +5,8 @@ import {
    PayloadAction,
 } from "@reduxjs/toolkit";
 import { CaseSummary } from "../../api";
-import { fetchCases, fetchCasesState } from "./thunks";
+import { fetchCases, fetchCasesState } from "./caseThunks";
+import { sliceName } from "./caseConstants";
 
 interface CurrentCaseSummaries {
    currentCaseSummaries: EntityState<CaseSummary>;
@@ -27,9 +28,8 @@ let initialState: StateShape = {
    },
 };
 
-export const manageTicketsSliceName = "manageTickets";
-export const manageTicketSlice = createSlice({
-   name: manageTicketsSliceName,
+export const caseSlice = createSlice({
+   name: sliceName,
    initialState,
    reducers: {
       updateCaseSummaries(state, action: PayloadAction<CaseSummary[]>) {
@@ -52,6 +52,6 @@ export const manageTicketSlice = createSlice({
    },
 });
 
-export const { updateCaseSummaries } = manageTicketSlice.actions;
+export const { updateCaseSummaries } = caseSlice.actions;
 
-export default manageTicketSlice.reducer;
+export default caseSlice.reducer;

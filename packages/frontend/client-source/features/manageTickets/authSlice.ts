@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CaseSummary } from "../../api";
-import { fetchCases } from "./thunks";
+import { fetchCases } from "./caseThunks";
 
 export interface Authentication {
    SessionID: string | null;
