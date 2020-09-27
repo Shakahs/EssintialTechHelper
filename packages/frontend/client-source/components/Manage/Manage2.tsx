@@ -82,26 +82,25 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
 
    type caseSummaryFilter = (cs: CaseSummary) => boolean;
 
+   //case status filter
    const [caseStatusFilterSet, changeCaseStatusFilterSet] = useState<
       Set<string>
    >(new Set([CurrentCaseStatus.Assigned, CurrentCaseStatus.Committed]));
-
    const caseStatusFilter: caseSummaryFilter = (cs: CaseSummary) => {
       //if we have filter properties set, check that this case summary matches them
       if (caseStatusFilterSet.size > 0) {
          return caseStatusFilterSet.has(cs.UserStatus);
       }
-
-      //if not filter properties, pass the subcase
+      //if no filter properties, pass the subcase
       return true;
    };
 
+   //project work filter
    const [showProjectWork, setShowProjectWork] = useState(false);
    const projectWorkFilter: caseSummaryFilter = (cs: CaseSummary) => {
       if (isProjectWork(cs)) {
          return showProjectWork;
       }
-
       return true;
    };
 
@@ -143,44 +142,49 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
                </svg>
                Refresh
             </button>
-            <div className={"border border-solid border-1 inline p-2"}>
-               Case Status Filters:
-               {map(CurrentCaseStatus, (code, pretty) => (
-                  <div
-                     className={"inline"}
-                     onClick={() => {
-                        const newSet = new Set(caseStatusFilterSet);
-                        if (newSet.has(code)) {
-                           newSet.delete(code);
-                        } else {
-                           newSet.add(code);
-                        }
-                        changeCaseStatusFilterSet(newSet);
-                     }}
-                  >
-                     <input
-                        type={"checkbox"}
-                        name={`checkbox-${code}`}
-                        checked={caseStatusFilterSet.has(code)}
-                     />
-                     <label htmlFor={`checkbox-${code}`}>{pretty}</label>
-                  </div>
-               ))}
-            </div>
-            <div
-               className={"border border-solid border-1 inline p-2"}
-               onClick={() => {
-                  if (showProjectWork) {
-                     setShowProjectWork(false);
-                  } else setShowProjectWork(true);
-               }}
-            >
-               <input
-                  type={"checkbox"}
-                  name={`checkbox-projectwork`}
-                  checked={showProjectWork}
-               />
-               <label htmlFor={`checkbox-projectwork`}>Show Project work</label>
+            <div>
+               Filters:
+               <div className={"border border-solid border-1 inline p-2"}>
+                  Case Status:
+                  {map(CurrentCaseStatus, (code, pretty) => (
+                     <div
+                        className={"inline"}
+                        onClick={() => {
+                           const newSet = new Set(caseStatusFilterSet);
+                           if (newSet.has(code)) {
+                              newSet.delete(code);
+                           } else {
+                              newSet.add(code);
+                           }
+                           changeCaseStatusFilterSet(newSet);
+                        }}
+                     >
+                        <input
+                           type={"checkbox"}
+                           name={`checkbox-${code}`}
+                           checked={caseStatusFilterSet.has(code)}
+                        />
+                        <label htmlFor={`checkbox-${code}`}>{pretty}</label>
+                     </div>
+                  ))}
+               </div>
+               <div
+                  className={"border border-solid border-1 inline p-2"}
+                  onClick={() => {
+                     if (showProjectWork) {
+                        setShowProjectWork(false);
+                     } else setShowProjectWork(true);
+                  }}
+               >
+                  <input
+                     type={"checkbox"}
+                     name={`checkbox-projectwork`}
+                     checked={showProjectWork}
+                  />
+                  <label htmlFor={`checkbox-projectwork`}>
+                     Show Project work
+                  </label>
+               </div>
             </div>
          </div>
          {map(filteredCaseSummaries, (sc) => (
