@@ -1,6 +1,6 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import manageTicketsReducer from "./features/manageTickets/caseSlice";
-import { authSlice, authReducer } from "./features/manageTickets/authSlice";
+import manageTicketsReducer from "./features/cases/caseSlice";
+import { authSlice, authReducer } from "./features/auth/authSlice";
 
 const rootReducer = combineReducers({
    manageTickets: manageTicketsReducer,

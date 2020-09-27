@@ -4,9 +4,9 @@ import {
    getCasesCommitted,
    getCasesComplete,
    getCasesEnroute,
-} from "./features/manageTickets/caseSelectors";
+} from "./features/cases/caseSelectors";
 import store from "./store";
-import { updateFilters } from "./features/manageTickets/caseSlice";
+import { updateFilters } from "./features/cases/caseSlice";
 import { CaseStatusMappingCollection } from "./api";
 
 export const apiBase = "https://srmbuddy.essintial.com/webapi/api";

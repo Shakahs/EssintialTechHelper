@@ -6,7 +6,7 @@ import { IfPending, useFetch } from "react-async";
 import { apiBase, defaultRequestHeaders } from "../../constants";
 import classNames from "classnames";
 import { UnnecessaryArray, Account } from "../../api";
-import { changeAuth } from "../../features/manageTickets/authSlice";
+import { changeAuth } from "../../features/auth/authSlice";
 
 interface ManageProps {}
 
