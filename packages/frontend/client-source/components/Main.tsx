@@ -6,7 +6,7 @@ import Navbar from "./Navbar";
 import { useSelector } from "react-redux";
 import { RootState } from "../rootReducer";
 import Bool from "./utility/Bool";
-import Manage2 from "./Manage/Manage2";
+import CaseSummaryList from "./Manage/CaseSummaryList";
 
 interface MainProps {}
 
@@ -23,7 +23,7 @@ const Main: React.FunctionComponent<MainProps> = (props) => {
                </Route>
                <Route path={"/manage"}>
                   <Bool if={!!SessionID}>
-                     <Manage2 />
+                     <CaseSummaryList />
                   </Bool>
                   <Bool if={!SessionID}>
                      <ProvideCredentials2 />

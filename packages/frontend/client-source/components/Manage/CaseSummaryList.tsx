@@ -18,10 +18,12 @@ import {
    debouncedFetchCases,
    fetchCases,
 } from "../../features/manageTickets/caseThunks";
+import CaseSummaryFilters from "./CaseSummaryFilters";
+import { getCaseFilterResult } from "../../features/manageTickets/caseSelectors";
 
 interface Manage2Props {}
 
-const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
+const CaseSummaryList: React.FunctionComponent<Manage2Props> = (props) => {
    const dispatch = useDispatch();
    const { SessionID } = useSelector((state: RootState) => state.manageAuth);
    const { currentCaseSummaries, fetchState } = useSelector(
@@ -63,7 +65,7 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
    //    .filter(caseStatusFilter)
    //    .filter(projectWorkFilter);
 
-   const filteredCaseSummaries = currentCaseSummaries;
+   const filteredCaseSummaries = useSelector(getCaseFilterResult);
 
    return (
       <div>
@@ -100,59 +102,13 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
                   There was an error refreshing your subcase list.
                </span>
             )}
-            <div>
-               Filters:
-               <div className={"border border-solid border-1 inline p-2"}>
-                  Case Status:
-                  {map(CurrentCaseStatus, (code, pretty) => (
-                     <div
-                        key={code}
-                        className={"inline"}
-                        onClick={() => {
-                           const newSet = new Set(caseStatusFilterSet);
-                           if (newSet.has(code)) {
-                              newSet.delete(code);
-                           } else {
-                              newSet.add(code);
-                           }
-                           changeCaseStatusFilterSet(newSet);
-                        }}
-                     >
-                        <input
-                           type={"checkbox"}
-                           name={`checkbox-${code}`}
-                           checked={caseStatusFilterSet.has(code)}
-                           readOnly
-                        />
-                        <label htmlFor={`checkbox-${code}`}>{pretty}</label>
-                     </div>
-                  ))}
-               </div>
-               <div
-                  className={"border border-solid border-1 inline p-2"}
-                  onClick={() => {
-                     if (showProjectWork) {
-                        setShowProjectWork(false);
-                     } else setShowProjectWork(true);
-                  }}
-               >
-                  <input
-                     type={"checkbox"}
-                     name={`checkbox-projectwork`}
-                     checked={showProjectWork}
-                     readOnly
-                  />
-                  <label htmlFor={`checkbox-projectwork`}>
-                     Show Project work
-                  </label>
-               </div>
-            </div>
+            <CaseSummaryFilters />
          </div>
-         {map(filteredCaseSummaries.entities, (sc) => (
+         {map(filteredCaseSummaries, (sc) => (
             <CaseSummaryItem subcase={sc} key={sc.Id} />
          ))}
       </div>
    );
 };
 
-export default Manage2;
+export default CaseSummaryList;

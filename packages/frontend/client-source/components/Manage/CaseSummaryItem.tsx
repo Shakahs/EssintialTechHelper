@@ -28,7 +28,7 @@ interface CaseSummaryItemProps {
 const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
    props
 ) => {
-   const { SessionID } = useSelector((state: RootState) => state.manageTickets);
+   const { SessionID } = useSelector((state: RootState) => state.manageAuth);
 
    const fetchState = useFetch(
       `${apiBase}/subcases/${props.subcase.Id}/status`,

@@ -12,7 +12,17 @@ interface CurrentCaseSummaries {
    currentCaseSummaries: EntityState<CaseSummary>;
 }
 
-type StateShape = CurrentCaseSummaries & {
+interface CaseFilters {
+   showAssigned: boolean;
+   showCommitted: boolean;
+   showEnroute: boolean;
+   showArrived: boolean;
+   showComplete: boolean;
+   showHold: boolean;
+   showProjectWork: boolean;
+}
+
+type StateShape = CurrentCaseSummaries & { caseFilters: CaseFilters } & {
    fetchState: fetchCasesState;
 };
 
@@ -22,6 +32,15 @@ const caseAdapter = createEntityAdapter<CaseSummary>({
 
 let initialState: StateShape = {
    currentCaseSummaries: caseAdapter.getInitialState(),
+   caseFilters: {
+      showAssigned: true,
+      showCommitted: true,
+      showEnroute: true,
+      showArrived: true,
+      showComplete: false,
+      showHold: true,
+      showProjectWork: false,
+   },
    fetchState: {
       loading: false,
       error: "",
@@ -34,6 +53,9 @@ export const caseSlice = createSlice({
    reducers: {
       updateCaseSummaries(state, action: PayloadAction<CaseSummary[]>) {
          caseAdapter.setAll(state.currentCaseSummaries, action.payload);
+      },
+      updateFilters(state, action: PayloadAction<CaseFilters>) {
+         state.caseFilters = action.payload;
       },
    },
    extraReducers: (builder) => {
@@ -52,6 +74,6 @@ export const caseSlice = createSlice({
    },
 });
 
-export const { updateCaseSummaries } = caseSlice.actions;
+export const { updateCaseSummaries, updateFilters } = caseSlice.actions;
 
 export default caseSlice.reducer;
