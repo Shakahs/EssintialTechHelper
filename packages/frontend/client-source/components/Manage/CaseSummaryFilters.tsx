@@ -65,7 +65,7 @@ const CaseSummaryFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
                checked={caseFilters.showProjectWork}
                readOnly
             />
-            <label htmlFor={`checkbox-projectwork`}>Show Project work</label>
+            <label htmlFor={`checkbox-projectwork`}>Include Project work</label>
          </div>
       </div>
    );
