@@ -1,7 +1,8 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../../rootReducer";
 import { filter, intersection, intersectionBy, intersectionWith } from "lodash";
-import { caseStatusMapping, CaseSummary, isProjectWork } from "../../api";
+import { CaseSummary, isProjectWork } from "../../api";
+import { caseStatusMapping } from "../../constants";
 
 const getCaseFilters = (state: RootState) => state.manageTickets.caseFilters;
 

@@ -2,8 +2,9 @@ import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../rootReducer";
 import { map } from "lodash";
-import { caseStatusMapping, CurrentCaseStatus } from "../../api";
+import { CurrentCaseStatus } from "../../api";
 import { updateFilters } from "../../features/manageTickets/caseSlice";
+import { caseStatusMapping } from "../../constants";
 
 interface CaseSummaryFiltersProps {}
 

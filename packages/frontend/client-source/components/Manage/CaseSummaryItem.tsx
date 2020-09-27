@@ -6,11 +6,14 @@ import {
    NewStatusBody,
    NewStatusCode,
    findCaseStatusName,
-   caseStatusMapping,
 } from "../../api";
 import Bool from "../utility/Bool";
 import { useFetch } from "react-async";
-import { apiBase, defaultRequestHeaders } from "../../constants";
+import {
+   apiBase,
+   caseStatusMapping,
+   defaultRequestHeaders,
+} from "../../constants";
 import { useSelector } from "react-redux";
 import { RootState } from "../../rootReducer";
 import parseJSON from "date-fns/parseJSON";
