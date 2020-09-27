@@ -23,7 +23,7 @@ interface Manage2Props {}
 
 const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
    const dispatch = useDispatch();
-   const { SessionID } = useSelector((state: RootState) => state.manageTickets);
+   const { SessionID } = useSelector((state: RootState) => state.manageAuth);
    const { currentCaseSummaries, fetchState } = useSelector(
       (state: RootState) => state.manageTickets
    );

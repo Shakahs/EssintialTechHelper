@@ -7,25 +7,19 @@ import {
 import { CaseSummary } from "../../api";
 import { fetchCases, fetchCasesState } from "./thunks";
 
-interface Authentication {
-   SessionID: string | null;
-}
-
 interface CurrentCaseSummaries {
    currentCaseSummaries: EntityState<CaseSummary>;
 }
 
-type ManagementState = Authentication &
-   CurrentCaseSummaries & {
-      fetchState: fetchCasesState;
-   };
+type StateShape = CurrentCaseSummaries & {
+   fetchState: fetchCasesState;
+};
 
 const caseAdapter = createEntityAdapter<CaseSummary>({
    selectId: (c) => c.Id,
 });
 
-let initialState: ManagementState = {
-   SessionID: null,
+let initialState: StateShape = {
    currentCaseSummaries: caseAdapter.getInitialState(),
    fetchState: {
       loading: false,
@@ -38,9 +32,6 @@ export const manageTicketSlice = createSlice({
    name: manageTicketsSliceName,
    initialState,
    reducers: {
-      changeAuth(state, action: PayloadAction<Authentication>) {
-         state.SessionID = action.payload.SessionID;
-      },
       updateCaseSummaries(state, action: PayloadAction<CaseSummary[]>) {
          caseAdapter.setAll(state.currentCaseSummaries, action.payload);
       },
@@ -61,6 +52,6 @@ export const manageTicketSlice = createSlice({
    },
 });
 
-export const { changeAuth, updateCaseSummaries } = manageTicketSlice.actions;
+export const { updateCaseSummaries } = manageTicketSlice.actions;
 
 export default manageTicketSlice.reducer;

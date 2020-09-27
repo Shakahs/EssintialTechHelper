@@ -29,7 +29,7 @@ export const fetchCases = createAsyncThunk<
                method: "POST",
                headers: {
                   ...defaultRequestHeaders,
-                  Authorization: thunkAPI.getState().manageTickets.SessionID,
+                  Authorization: thunkAPI.getState().manageAuth.SessionID,
                },
             }),
             fetch(`${apiBase}/subcases/ForTech`, {
@@ -37,8 +37,7 @@ export const fetchCases = createAsyncThunk<
                method: "POST",
                headers: {
                   ...defaultRequestHeaders,
-                  // Authorization: thunkAPI.getState().manageTickets.SessionID,
-                  Authorization: "",
+                  Authorization: thunkAPI.getState().manageAuth.SessionID,
                },
             }),
          ]);

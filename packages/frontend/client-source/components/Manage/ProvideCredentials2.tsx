@@ -6,7 +6,7 @@ import { IfPending, useFetch } from "react-async";
 import { apiBase, defaultRequestHeaders } from "../../constants";
 import classNames from "classnames";
 import { UnnecessaryArray, Account } from "../../api";
-import { changeAuth } from "../../features/manageTickets/manageTicketsSlice";
+import { changeAuth } from "../../features/manageTickets/authSlice";
 
 interface ManageProps {}
 
@@ -18,7 +18,7 @@ type Inputs = {
 const ProvideCredentials2: React.FunctionComponent<ManageProps> = (props) => {
    const dispatch = useDispatch();
 
-   const { SessionID } = useSelector((state: RootState) => state.manageTickets);
+   const { SessionID } = useSelector((state: RootState) => state.manageAuth);
    const { register, handleSubmit, watch, errors } = useForm<Inputs>();
 
    const fetchState = useFetch<UnnecessaryArray<Account>>(

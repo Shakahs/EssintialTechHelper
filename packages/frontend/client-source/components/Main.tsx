@@ -11,7 +11,7 @@ import Manage2 from "./Manage/Manage2";
 interface MainProps {}
 
 const Main: React.FunctionComponent<MainProps> = (props) => {
-   const { SessionID } = useSelector((state: RootState) => state.manageTickets);
+   const { SessionID } = useSelector((state: RootState) => state.manageAuth);
 
    return (
       <div>
