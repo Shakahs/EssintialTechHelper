@@ -9,8 +9,8 @@ import {
    isProjectWork,
 } from "../../api";
 import {
-   updateCurrentCaseSummaries,
-   updateFutureCaseSummaries,
+   fetchCases,
+   updateCaseSummaries,
 } from "../../features/manageTickets/manageTicketsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../rootReducer";
@@ -23,61 +23,60 @@ interface Manage2Props {}
 const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
    const dispatch = useDispatch();
    const { SessionID } = useSelector((state: RootState) => state.manageTickets);
-   const { currentCaseSummaries, futureCaseSummaries } = useSelector(
+   const { currentCaseSummaries } = useSelector(
       (state: RootState) => state.manageTickets
    );
 
-   const fetchCurrentCases = useFetch<DoubleUnneccessaryArray<CaseSummary>>(
-      `${apiBase}/subcases/ForTech`,
-      {
-         body: JSON.stringify({ Function: "CURRENT" }),
-         method: "POST",
-         headers: { ...defaultRequestHeaders, Authorization: SessionID },
-      },
-      {
-         onResolve: (acc) => {
-            //convert to map
-            // const subCases = {};
-            // acc.Results[0].forEach((sc) => {
-            //    // debugger;
-            //    subCases[sc.Id] = sc;
-            // });
-            //update store
-            dispatch(
-               updateCurrentCaseSummaries({
-                  currentCaseSummaries: acc.Results[0],
-               })
-            );
-         },
-         json: true,
-         defer: true,
-      }
-   );
-
-   const fetchFutureCases = useFetch<DoubleUnneccessaryArray<CaseSummary>>(
-      `${apiBase}/subcases/ForTech`,
-      {
-         body: JSON.stringify({ Function: "FUTURE" }),
-         method: "POST",
-         headers: { ...defaultRequestHeaders, Authorization: SessionID },
-      },
-      {
-         onResolve: (acc) => {
-            dispatch(
-               updateFutureCaseSummaries({
-                  futureCaseSummaries: acc.Results[0],
-               })
-            );
-         },
-         json: true,
-         defer: true,
-      }
-   );
+   // const fetchCurrentCases = useFetch<DoubleUnneccessaryArray<CaseSummary>>(
+   //    `${apiBase}/subcases/ForTech`,
+   //    {
+   //       body: JSON.stringify({ Function: "CURRENT" }),
+   //       method: "POST",
+   //       headers: { ...defaultRequestHeaders, Authorization: SessionID },
+   //    },
+   //    {
+   //       onResolve: (acc) => {
+   //          //convert to map
+   //          // const subCases = {};
+   //          // acc.Results[0].forEach((sc) => {
+   //          //    // debugger;
+   //          //    subCases[sc.Id] = sc;
+   //          // });
+   //          //update store
+   //          dispatch(
+   //             updateCaseSummaries({
+   //                currentCaseSummaries: acc.Results[0],
+   //             })
+   //          );
+   //       },
+   //       json: true,
+   //       defer: true,
+   //    }
+   // );
+   //
+   // const fetchFutureCases = useFetch<DoubleUnneccessaryArray<CaseSummary>>(
+   //    `${apiBase}/subcases/ForTech`,
+   //    {
+   //       body: JSON.stringify({ Function: "FUTURE" }),
+   //       method: "POST",
+   //       headers: { ...defaultRequestHeaders, Authorization: SessionID },
+   //    },
+   //    {
+   //       onResolve: (acc) => {
+   //          dispatch(
+   //             updateFutureCaseSummaries({
+   //                futureCaseSummaries: acc.Results[0],
+   //             })
+   //          );
+   //       },
+   //       json: true,
+   //       defer: true,
+   //    }
+   // );
 
    //run once on component mount
    useEffect(() => {
-      fetchCurrentCases.run();
-      fetchFutureCases.run();
+      dispatch(fetchCases());
    }, []);
 
    type caseSummaryFilter = (cs: CaseSummary) => boolean;
@@ -104,12 +103,13 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
       return true;
    };
 
-   const filteredCaseSummaries = [
-      ...currentCaseSummaries,
-      ...futureCaseSummaries,
-   ]
-      .filter(caseStatusFilter)
-      .filter(projectWorkFilter);
+   // const filteredCaseSummaries = [
+   //    ...currentCaseSummaries,
+   // ]
+   //    .filter(caseStatusFilter)
+   //    .filter(projectWorkFilter);
+
+   const filteredCaseSummaries = currentCaseSummaries;
 
    return (
       <div>
@@ -117,16 +117,17 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
             <button
                className={"border p-2 mb-3"}
                onClick={() => {
-                  fetchCurrentCases.run();
-                  fetchFutureCases.run();
+                  // fetchCurrentCases.run();
+                  // fetchFutureCases.run();
+                  dispatch(fetchCases());
                }}
-               disabled={
-                  fetchCurrentCases.isPending || fetchFutureCases.isPending
-               }
+               // disabled={
+               //    fetchCurrentCases.isPending || fetchFutureCases.isPending
+               // }
             >
                <svg
                   className={classnames("inline", {
-                     "animate-spin": fetchCurrentCases.isPending,
+                     // "animate-spin": fetchCurrentCases.isPending,
                   })}
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
@@ -190,7 +191,7 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
                </div>
             </div>
          </div>
-         {map(filteredCaseSummaries, (sc) => (
+         {map(filteredCaseSummaries.entities, (sc) => (
             <CaseSummaryItem subcase={sc} key={sc.Id} />
          ))}
       </div>
