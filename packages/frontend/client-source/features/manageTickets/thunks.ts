@@ -19,21 +19,35 @@ export const fetchCases = createAsyncThunk<
    `${manageTicketsSliceName}/fetchCases`,
    // Declare the type your function argument here:
    async (_, thunkAPI) => {
-      const response = await fetch(`${apiBase}/subcases/ForTech`, {
-         body: JSON.stringify({ Function: "CURRENT" }),
-         method: "POST",
-         headers: {
-            ...defaultRequestHeaders,
-            Authorization: thunkAPI.getState().manageTickets.SessionID,
-         },
-      });
+      const responses = await Promise.all([
+         fetch(`${apiBase}/subcases/ForTech`, {
+            body: JSON.stringify({ Function: "CURRENT" }),
+            method: "POST",
+            headers: {
+               ...defaultRequestHeaders,
+               Authorization: thunkAPI.getState().manageTickets.SessionID,
+            },
+         }),
+         fetch(`${apiBase}/subcases/ForTech`, {
+            body: JSON.stringify({ Function: "FUTURE" }),
+            method: "POST",
+            headers: {
+               ...defaultRequestHeaders,
+               Authorization: thunkAPI.getState().manageTickets.SessionID,
+            },
+         }),
+      ]);
 
-      const j = await response.json();
-      const results = j.Results[0] as CaseSummary[];
-      thunkAPI.dispatch(updateCaseSummaries(results));
+      let finalResponse: CaseSummary[] = [];
 
-      // Inferred return type: Promise<MyData>
-      return results;
+      for await (const r of responses) {
+         const j = await r.json();
+         const thisResult = j.Results[0] as CaseSummary[];
+         finalResponse = [...finalResponse, ...thisResult];
+      }
+      thunkAPI.dispatch(updateCaseSummaries(finalResponse));
+
+      return finalResponse;
    }
 );
 
