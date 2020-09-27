@@ -36,6 +36,11 @@ export interface CaseSummary {
       State: string;
       Zip: string;
    };
+   Milestones: {
+      ActualDateTime: Date;
+      CalculatedDateTime: Date;
+      Code: string;
+   }[];
 }
 
 export interface GlossaryWord {

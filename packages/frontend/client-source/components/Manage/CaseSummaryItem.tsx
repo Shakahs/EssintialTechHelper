@@ -16,6 +16,7 @@ import { RootState } from "../../rootReducer";
 import parseJSON from "date-fns/parseJSON";
 import dateFormat from "date-fns/format";
 import isBefore from "date-fns/isBefore";
+import isToday from "date-fns/isToday";
 import classnames from "classnames";
 import partsList from "../../assets/riteAidPartList.json";
 // const partsList = require('../../assets/partList.json')
@@ -70,11 +71,26 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
             </span>
             <span className={"mr-2"}>Priority: {props.subcase.Priority}</span>
             <span
-               className={classnames({
+               className={classnames("mr-2", {
                   "bg-yellow-400": isBefore(parsedETA, new Date()),
                })}
             >
-               Scheduled: {dateFormat(parsedETA, "L/d h:mm b")}
+               ETA: {dateFormat(parsedETA, "L/d h:mm b")}
+            </span>
+            <span>
+               SLA:
+               {props.subcase.Milestones.map((ms) => {
+                  const parsedSLA = parseJSON(ms.CalculatedDateTime);
+                  return (
+                     <span
+                        className={classnames("mr-2", {
+                           "bg-yellow-400": isToday(parsedSLA),
+                        })}
+                     >
+                        {ms.Code} {dateFormat(parsedSLA, "L/d h:mm b")}
+                     </span>
+                  );
+               })}
             </span>
          </div>
          <Bool if={isProjectWork(props.subcase)}>Project Work</Bool>
@@ -84,6 +100,9 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
                partsList[props.subcase.Model].description}
          </div>
          <div>
+            {props.subcase.CustomerCompany}
+            {props.subcase.Location.FullAddress}
+            (Copy Address)
             <a
                target={"_blank"}
                className={"underline text-sm"}
@@ -91,8 +110,7 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
                   `${props.subcase.CustomerCompany}, ${props.subcase.Location.FullAddress}`
                )}`}
             >
-               {props.subcase.CustomerCompany},
-               {props.subcase.Location.FullAddress}
+               (Google Map)
             </a>
          </div>
          <div>
