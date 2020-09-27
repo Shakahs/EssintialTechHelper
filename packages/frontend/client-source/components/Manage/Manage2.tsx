@@ -148,6 +148,7 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
                   Case Status:
                   {map(CurrentCaseStatus, (code, pretty) => (
                      <div
+                        key={code}
                         className={"inline"}
                         onClick={() => {
                            const newSet = new Set(caseStatusFilterSet);
@@ -163,6 +164,7 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
                            type={"checkbox"}
                            name={`checkbox-${code}`}
                            checked={caseStatusFilterSet.has(code)}
+                           readOnly
                         />
                         <label htmlFor={`checkbox-${code}`}>{pretty}</label>
                      </div>
@@ -180,6 +182,7 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
                      type={"checkbox"}
                      name={`checkbox-projectwork`}
                      checked={showProjectWork}
+                     readOnly
                   />
                   <label htmlFor={`checkbox-projectwork`}>
                      Show Project work

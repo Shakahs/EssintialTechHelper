@@ -83,6 +83,7 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
                   const parsedSLA = parseJSON(ms.CalculatedDateTime);
                   return (
                      <span
+                        key={ms.Code}
                         className={classnames("mr-2", {
                            "bg-yellow-400": isToday(parsedSLA),
                         })}
@@ -119,6 +120,7 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
             {currentCaseStatus.nextStatus &&
                currentCaseStatus.nextStatus.map((nextStatus) => (
                   <button
+                     key={nextStatus}
                      className={"border p-2 bg-blue-300 rounded-md"}
                      onClick={() => {
                         submitNewStatus(
