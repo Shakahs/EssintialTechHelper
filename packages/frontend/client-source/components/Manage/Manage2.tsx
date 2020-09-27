@@ -8,22 +8,20 @@ import {
    DoubleUnneccessaryArray,
    isProjectWork,
 } from "../../api";
-import {
-   fetchCases,
-   updateCaseSummaries,
-} from "../../features/manageTickets/manageTicketsSlice";
+import { updateCaseSummaries } from "../../features/manageTickets/manageTicketsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../rootReducer";
 import { map } from "lodash";
 import CaseSummaryItem from "./CaseSummaryItem";
 import classnames from "classnames";
+import { fetchCases } from "../../features/manageTickets/thunks";
 
 interface Manage2Props {}
 
 const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
    const dispatch = useDispatch();
    const { SessionID } = useSelector((state: RootState) => state.manageTickets);
-   const { currentCaseSummaries } = useSelector(
+   const { currentCaseSummaries, fetchState } = useSelector(
       (state: RootState) => state.manageTickets
    );
 
@@ -121,13 +119,11 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
                   // fetchFutureCases.run();
                   dispatch(fetchCases());
                }}
-               // disabled={
-               //    fetchCurrentCases.isPending || fetchFutureCases.isPending
-               // }
+               disabled={fetchState.loading}
             >
                <svg
                   className={classnames("inline", {
-                     // "animate-spin": fetchCurrentCases.isPending,
+                     "animate-spin": fetchState.loading,
                   })}
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"

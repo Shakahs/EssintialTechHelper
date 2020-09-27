@@ -1,14 +1,11 @@
 import {
-   createAsyncThunk,
    createEntityAdapter,
    createSlice,
    EntityState,
    PayloadAction,
 } from "@reduxjs/toolkit";
 import { CaseSummary } from "../../api";
-import { apiBase, defaultRequestHeaders } from "../../constants";
-import { RootState } from "../../rootReducer";
-import { AppDispatch } from "../../store";
+import { fetchCases, fetchCasesState } from "./thunks";
 
 interface Authentication {
    SessionID: string | null;
@@ -18,7 +15,10 @@ interface CurrentCaseSummaries {
    currentCaseSummaries: EntityState<CaseSummary>;
 }
 
-type ManagementState = Authentication & CurrentCaseSummaries;
+type ManagementState = Authentication &
+   CurrentCaseSummaries & {
+      fetchState: fetchCasesState;
+   };
 
 const caseAdapter = createEntityAdapter<CaseSummary>({
    selectId: (c) => c.Id,
@@ -27,10 +27,15 @@ const caseAdapter = createEntityAdapter<CaseSummary>({
 let initialState: ManagementState = {
    SessionID: null,
    currentCaseSummaries: caseAdapter.getInitialState(),
+   fetchState: {
+      loading: false,
+      error: "",
+   },
 };
 
-const manageTicketSlice = createSlice({
-   name: "manageTickets",
+export const manageTicketsSliceName = "manageTickets";
+export const manageTicketSlice = createSlice({
+   name: manageTicketsSliceName,
    initialState,
    reducers: {
       changeAuth(state, action: PayloadAction<Authentication>) {
@@ -40,36 +45,21 @@ const manageTicketSlice = createSlice({
          caseAdapter.setAll(state.currentCaseSummaries, action.payload);
       },
    },
+   extraReducers: (builder) => {
+      builder
+         .addCase(fetchCases.pending, (state, action) => {
+            state.fetchState.loading = true;
+            state.fetchState.error = "";
+         })
+         .addCase(fetchCases.fulfilled, (state, action) => {
+            state.fetchState.loading = false;
+         })
+         .addCase(fetchCases.rejected, (state, action) => {
+            state.fetchState.loading = false;
+            state.fetchState.error = action.error.message;
+         });
+   },
 });
-
-export const fetchCases = createAsyncThunk<
-   CaseSummary[],
-   undefined,
-   {
-      state: RootState;
-      dispatch: AppDispatch;
-   }
->(
-   manageTicketSlice.actions.updateCaseSummaries.type,
-   // Declare the type your function argument here:
-   async (_, thunkAPI) => {
-      const response = await fetch(`${apiBase}/subcases/ForTech`, {
-         body: JSON.stringify({ Function: "CURRENT" }),
-         method: "POST",
-         headers: {
-            ...defaultRequestHeaders,
-            Authorization: thunkAPI.getState().manageTickets.SessionID,
-         },
-      });
-
-      const j = await response.json();
-      const results = j.Results[0] as CaseSummary[];
-      thunkAPI.dispatch(updateCaseSummaries(results));
-
-      // Inferred return type: Promise<MyData>
-      return results;
-   }
-);
 
 export const { changeAuth, updateCaseSummaries } = manageTicketSlice.actions;
 
