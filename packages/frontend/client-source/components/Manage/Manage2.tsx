@@ -14,7 +14,10 @@ import { RootState } from "../../rootReducer";
 import { map } from "lodash";
 import CaseSummaryItem from "./CaseSummaryItem";
 import classnames from "classnames";
-import { fetchCases } from "../../features/manageTickets/thunks";
+import {
+   debouncedFetchCases,
+   fetchCases,
+} from "../../features/manageTickets/thunks";
 
 interface Manage2Props {}
 
@@ -25,56 +28,9 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
       (state: RootState) => state.manageTickets
    );
 
-   // const fetchCurrentCases = useFetch<DoubleUnneccessaryArray<CaseSummary>>(
-   //    `${apiBase}/subcases/ForTech`,
-   //    {
-   //       body: JSON.stringify({ Function: "CURRENT" }),
-   //       method: "POST",
-   //       headers: { ...defaultRequestHeaders, Authorization: SessionID },
-   //    },
-   //    {
-   //       onResolve: (acc) => {
-   //          //convert to map
-   //          // const subCases = {};
-   //          // acc.Results[0].forEach((sc) => {
-   //          //    // debugger;
-   //          //    subCases[sc.Id] = sc;
-   //          // });
-   //          //update store
-   //          dispatch(
-   //             updateCaseSummaries({
-   //                currentCaseSummaries: acc.Results[0],
-   //             })
-   //          );
-   //       },
-   //       json: true,
-   //       defer: true,
-   //    }
-   // );
-   //
-   // const fetchFutureCases = useFetch<DoubleUnneccessaryArray<CaseSummary>>(
-   //    `${apiBase}/subcases/ForTech`,
-   //    {
-   //       body: JSON.stringify({ Function: "FUTURE" }),
-   //       method: "POST",
-   //       headers: { ...defaultRequestHeaders, Authorization: SessionID },
-   //    },
-   //    {
-   //       onResolve: (acc) => {
-   //          dispatch(
-   //             updateFutureCaseSummaries({
-   //                futureCaseSummaries: acc.Results[0],
-   //             })
-   //          );
-   //       },
-   //       json: true,
-   //       defer: true,
-   //    }
-   // );
-
    //run once on component mount
    useEffect(() => {
-      dispatch(fetchCases());
+      dispatch(debouncedFetchCases());
    }, []);
 
    type caseSummaryFilter = (cs: CaseSummary) => boolean;
@@ -117,7 +73,7 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
                onClick={() => {
                   // fetchCurrentCases.run();
                   // fetchFutureCases.run();
-                  dispatch(fetchCases());
+                  dispatch(debouncedFetchCases());
                }}
                disabled={fetchState.loading}
             >
@@ -139,6 +95,11 @@ const Manage2: React.FunctionComponent<Manage2Props> = (props) => {
                </svg>
                Refresh
             </button>
+            {fetchState.error && (
+               <span className={"text-red-500"}>
+                  There was an error refreshing your subcase list.
+               </span>
+            )}
             <div>
                Filters:
                <div className={"border border-solid border-1 inline p-2"}>

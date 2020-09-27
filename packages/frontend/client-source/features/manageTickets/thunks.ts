@@ -7,6 +7,7 @@ import {
    manageTicketsSliceName,
    updateCaseSummaries,
 } from "./manageTicketsSlice";
+import { debounce } from "lodash";
 
 export const fetchCases = createAsyncThunk<
    CaseSummary[],
@@ -14,42 +15,56 @@ export const fetchCases = createAsyncThunk<
    {
       state: RootState;
       dispatch: AppDispatch;
+      rejectValue: string;
    }
 >(
    `${manageTicketsSliceName}/fetchCases`,
+   // `sliceName/fetchCases`,
    // Declare the type your function argument here:
    async (_, thunkAPI) => {
-      const responses = await Promise.all([
-         fetch(`${apiBase}/subcases/ForTech`, {
-            body: JSON.stringify({ Function: "CURRENT" }),
-            method: "POST",
-            headers: {
-               ...defaultRequestHeaders,
-               Authorization: thunkAPI.getState().manageTickets.SessionID,
-            },
-         }),
-         fetch(`${apiBase}/subcases/ForTech`, {
-            body: JSON.stringify({ Function: "FUTURE" }),
-            method: "POST",
-            headers: {
-               ...defaultRequestHeaders,
-               Authorization: thunkAPI.getState().manageTickets.SessionID,
-            },
-         }),
-      ]);
+      try {
+         const responses = await Promise.all([
+            fetch(`${apiBase}/subcases/ForTech`, {
+               body: JSON.stringify({ Function: "CURRENT" }),
+               method: "POST",
+               headers: {
+                  ...defaultRequestHeaders,
+                  Authorization: thunkAPI.getState().manageTickets.SessionID,
+               },
+            }),
+            fetch(`${apiBase}/subcases/ForTech`, {
+               body: JSON.stringify({ Function: "FUTURE" }),
+               method: "POST",
+               headers: {
+                  ...defaultRequestHeaders,
+                  // Authorization: thunkAPI.getState().manageTickets.SessionID,
+                  Authorization: "",
+               },
+            }),
+         ]);
 
-      let finalResponse: CaseSummary[] = [];
+         let finalResponse: CaseSummary[] = [];
 
-      for await (const r of responses) {
-         const j = await r.json();
-         const thisResult = j.Results[0] as CaseSummary[];
-         finalResponse = [...finalResponse, ...thisResult];
+         if (responses) {
+            for await (const r of responses) {
+               const j = await r.json();
+               const thisResult = j.Results[0] as CaseSummary[];
+               finalResponse = [...finalResponse, ...thisResult];
+            }
+            thunkAPI.dispatch(updateCaseSummaries(finalResponse));
+         }
+
+         return finalResponse;
+      } catch (err) {
+         return thunkAPI.rejectWithValue("Fetching cases failed");
       }
-      thunkAPI.dispatch(updateCaseSummaries(finalResponse));
-
-      return finalResponse;
    }
 );
+
+export const debouncedFetchCases = debounce(() => fetchCases(), 5000, {
+   leading: true,
+   trailing: false,
+});
 
 export interface fetchCasesState {
    loading: boolean;
