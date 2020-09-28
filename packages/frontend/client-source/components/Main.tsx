@@ -7,11 +7,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "../rootReducer";
 import Bool from "./utility/Bool";
 import CaseSummaryList from "./Manage/CaseSummaryList";
+import { getIsLoggedIn } from "../features/auth/authSelectors";
 
 interface MainProps {}
 
 const Main: React.FunctionComponent<MainProps> = (props) => {
-   const { SessionID } = useSelector((state: RootState) => state.manageAuth);
+   const loggedIn = useSelector(getIsLoggedIn);
 
    return (
       <div>
@@ -22,10 +23,10 @@ const Main: React.FunctionComponent<MainProps> = (props) => {
                   <Available />
                </Route>
                <Route path={"/manage"}>
-                  <Bool if={!!SessionID}>
+                  <Bool if={loggedIn}>
                      <CaseSummaryList />
                   </Bool>
-                  <Bool if={!SessionID}>
+                  <Bool if={!loggedIn}>
                      <ProvideCredentials2 />
                   </Bool>
                </Route>

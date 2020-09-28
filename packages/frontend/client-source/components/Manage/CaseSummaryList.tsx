@@ -20,13 +20,15 @@ import {
 } from "../../features/cases/caseThunks";
 import CaseSummaryFilters from "./CaseSummaryFilters";
 import { getCaseFilterResult } from "../../features/cases/caseSelectors";
+import { getAPISession } from "../../features/auth/authSelectors";
+import { resetAuthentication } from "../../features/auth/authSlice";
 
 interface Manage2Props {}
 
 const CaseSummaryList: React.FunctionComponent<Manage2Props> = (props) => {
    const dispatch = useDispatch();
-   const { SessionID } = useSelector((state: RootState) => state.manageAuth);
-   const { currentCaseSummaries, fetchState } = useSelector(
+   const { SessionId } = useSelector(getAPISession);
+   const { currentCaseSummaries, fetchCaseState } = useSelector(
       (state: RootState) => state.manageTickets
    );
 
@@ -69,6 +71,16 @@ const CaseSummaryList: React.FunctionComponent<Manage2Props> = (props) => {
 
    return (
       <div>
+         <div>
+            <button
+               className={"border p-2 mb-3"}
+               onClick={() => {
+                  dispatch(resetAuthentication());
+               }}
+            >
+               Logout
+            </button>
+         </div>
          <div className={"block"}>
             <button
                className={"border p-2 mb-3"}
@@ -77,11 +89,11 @@ const CaseSummaryList: React.FunctionComponent<Manage2Props> = (props) => {
                   // fetchFutureCases.run();
                   dispatch(debouncedFetchCases());
                }}
-               disabled={fetchState.loading}
+               disabled={fetchCaseState.loading}
             >
                <svg
                   className={classnames("inline", {
-                     "animate-spin": fetchState.loading,
+                     "animate-spin": fetchCaseState.loading,
                   })}
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
@@ -97,7 +109,7 @@ const CaseSummaryList: React.FunctionComponent<Manage2Props> = (props) => {
                </svg>
                Refresh
             </button>
-            {fetchState.error && (
+            {fetchCaseState.error && (
                <span className={"text-red-500"}>
                   There was an error refreshing your subcase list.
                </span>

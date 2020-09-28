@@ -2,15 +2,17 @@ import { find } from "lodash";
 import { RootState } from "./rootReducer";
 import { caseStatusMapping } from "./constants";
 
-export interface UnnecessaryArray<T> {
+export interface ResultsObject<T> {
    Results: T[];
+   ReturnCode: number;
+   ReturnMessage: string;
 }
 
 export interface DoubleUnneccessaryArray<T> {
    Results: T[][];
 }
 
-export interface Account {
+export interface APISession {
    Id: string;
    Name: string;
    SessionId: string;
@@ -107,4 +109,14 @@ export interface NewStatusBody {
    Code: string;
    Comment: string;
    HoldReasonCode: string;
+}
+
+export interface Credentials {
+   email: string | null;
+   password: string | null;
+}
+
+export interface APISessionState {
+   apiSessionData: APISession | null;
+   apiSessionCreation: string | null;
 }

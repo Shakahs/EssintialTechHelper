@@ -1,4 +1,4 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, unwrapResult } from "@reduxjs/toolkit";
 import { CaseSummary } from "../../api";
 import { RootState } from "../../rootReducer";
 import { AppDispatch } from "../../store";
@@ -6,6 +6,7 @@ import { apiBase, defaultRequestHeaders } from "../../constants";
 import { updateCaseSummaries } from "./caseSlice";
 import { debounce } from "lodash";
 import { sliceName } from "./caseConstants";
+import { checkAPISession } from "../auth/authThunks";
 
 export const fetchCases = createAsyncThunk<
    CaseSummary[],
@@ -20,6 +21,9 @@ export const fetchCases = createAsyncThunk<
    // `sliceName/fetchCases`,
    // Declare the type your function argument here:
    async (_, thunkAPI) => {
+      const APISessionWrapped = await thunkAPI.dispatch(checkAPISession());
+      const APISession = unwrapResult(APISessionWrapped);
+
       try {
          const responses = await Promise.all([
             fetch(`${apiBase}/subcases/ForTech`, {
@@ -27,7 +31,7 @@ export const fetchCases = createAsyncThunk<
                method: "POST",
                headers: {
                   ...defaultRequestHeaders,
-                  Authorization: thunkAPI.getState().manageAuth.SessionID,
+                  Authorization: APISession.SessionId,
                },
             }),
             fetch(`${apiBase}/subcases/ForTech`, {
@@ -35,7 +39,7 @@ export const fetchCases = createAsyncThunk<
                method: "POST",
                headers: {
                   ...defaultRequestHeaders,
-                  Authorization: thunkAPI.getState().manageAuth.SessionID,
+                  Authorization: APISession.SessionId,
                },
             }),
          ]);
@@ -62,8 +66,3 @@ export const debouncedFetchCases = debounce(() => fetchCases(), 5000, {
    leading: true,
    trailing: false,
 });
-
-export interface fetchCasesState {
-   loading: boolean;
-   error: string;
-}

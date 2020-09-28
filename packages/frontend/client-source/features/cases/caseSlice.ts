@@ -5,8 +5,9 @@ import {
    PayloadAction,
 } from "@reduxjs/toolkit";
 import { CaseSummary } from "../../api";
-import { fetchCases, fetchCasesState } from "./caseThunks";
+import { fetchCases } from "./caseThunks";
 import { sliceName } from "./caseConstants";
+import { fetchState } from "../common";
 
 interface CurrentCaseSummaries {
    currentCaseSummaries: EntityState<CaseSummary>;
@@ -23,7 +24,7 @@ interface CaseFilters {
 }
 
 type StateShape = CurrentCaseSummaries & { caseFilters: CaseFilters } & {
-   fetchState: fetchCasesState;
+   fetchCaseState: fetchState;
 };
 
 const caseAdapter = createEntityAdapter<CaseSummary>({
@@ -41,7 +42,7 @@ let initialState: StateShape = {
       showHold: true,
       showProjectWork: false,
    },
-   fetchState: {
+   fetchCaseState: {
       loading: false,
       error: "",
    },
@@ -61,15 +62,15 @@ export const caseSlice = createSlice({
    extraReducers: (builder) => {
       builder
          .addCase(fetchCases.pending, (state, action) => {
-            state.fetchState.loading = true;
-            state.fetchState.error = "";
+            state.fetchCaseState.loading = true;
+            state.fetchCaseState.error = "";
          })
          .addCase(fetchCases.fulfilled, (state, action) => {
-            state.fetchState.loading = false;
+            state.fetchCaseState.loading = false;
          })
          .addCase(fetchCases.rejected, (state, action) => {
-            state.fetchState.loading = false;
-            state.fetchState.error = action.error.message;
+            state.fetchCaseState.loading = false;
+            state.fetchCaseState.error = action.error.message;
          });
    },
 });

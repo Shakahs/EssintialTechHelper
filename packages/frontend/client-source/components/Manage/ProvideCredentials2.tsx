@@ -1,49 +1,38 @@
 import * as React from "react";
 import { RootState } from "../../rootReducer";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { IfPending, useFetch } from "react-async";
-import { apiBase, defaultRequestHeaders } from "../../constants";
 import classNames from "classnames";
-import { UnnecessaryArray, Account } from "../../api";
-import { changeAuth } from "../../features/auth/authSlice";
+import {
+   updateCredentials,
+   updateAPISession,
+} from "../../features/auth/authSlice";
+import { loginAPISession } from "../../features/auth/authThunks";
+import { unwrapResult } from "@reduxjs/toolkit";
+import store from "../../store";
+import Bool from "../utility/Bool";
+import { Credentials } from "../../api";
 
 interface ManageProps {}
 
-type Inputs = {
-   email: string;
-   password: string;
-};
-
 const ProvideCredentials2: React.FunctionComponent<ManageProps> = (props) => {
    const dispatch = useDispatch();
-
-   const { SessionID } = useSelector((state: RootState) => state.manageAuth);
-   const { register, handleSubmit, watch, errors } = useForm<Inputs>();
-
-   const fetchState = useFetch<UnnecessaryArray<Account>>(
-      `${apiBase}/session`,
-      {
-         method: "POST",
-         headers: defaultRequestHeaders,
-      },
-      {
-         onResolve: (acc) => {
-            dispatch(changeAuth({ SessionID: acc.Results[0].SessionId }));
-         },
-         json: true,
-      }
+   const { loginFetchState } = useSelector(
+      (state: RootState) => state.manageAuth
    );
-   const { isPending, error, run } = fetchState;
 
-   const onSubmit = (data: Inputs) => {
-      run({
-         body: JSON.stringify({
-            Password: data.password,
-            SourceSystem: "BUDDY",
-            UserId: data.email,
-         }),
-      });
+   const { register, handleSubmit, watch, errors } = useForm<Credentials>();
+
+   const onSubmit = async (credentials: Credentials) => {
+      const wrappedResult = await store.dispatch(loginAPISession(credentials));
+      const APISession = unwrapResult(wrappedResult);
+      dispatch(
+         updateAPISession({
+            apiSessionData: APISession,
+            apiSessionCreation: new Date().toISOString(),
+         })
+      );
+      dispatch(updateCredentials(credentials));
    };
 
    return (
@@ -86,9 +75,9 @@ const ProvideCredentials2: React.FunctionComponent<ManageProps> = (props) => {
                         "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4",
                         " rounded focus:outline-none focus:shadow-outline ",
                      ])}
-                     disabled={isPending}
+                     // disabled={isPending}
                   >
-                     <IfPending state={fetchState}>
+                     <Bool if={loginFetchState.loading}>
                         <svg
                            className={"animate-spin inline"}
                            xmlns="http://www.w3.org/2000/svg"
@@ -103,10 +92,15 @@ const ProvideCredentials2: React.FunctionComponent<ManageProps> = (props) => {
                               clipRule="evenodd"
                            />
                         </svg>
-                     </IfPending>
+                     </Bool>
                      Log In
                   </button>
                </div>
+               {loginFetchState.error && (
+                  <span className={"text-red-500"}>
+                     {loginFetchState.error}
+                  </span>
+               )}
             </form>
          </div>
       </div>
