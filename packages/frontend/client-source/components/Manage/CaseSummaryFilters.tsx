@@ -32,10 +32,7 @@ const CaseSummaryFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
                            type={"checkbox"}
                            name={`checkbox-${name}`}
                            // checked={caseFilters[`show${pretty}`]}
-                           checked={
-                              csm.reduxFilterSelector &&
-                              csm.reduxFilterSelector()
-                           }
+                           checked={csm?.reduxFilterSelector()}
                            readOnly
                         />
                         <label htmlFor={`checkbox-${csm.name}`}>

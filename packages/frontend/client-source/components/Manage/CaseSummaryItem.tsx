@@ -100,8 +100,7 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
          <Bool if={isProjectWork(props.subcase)}>Project Work</Bool>
          <div>
             Part: {props.subcase.Model}
-            {partsList[props.subcase.Model] &&
-               partsList[props.subcase.Model].description}
+            {partsList?.[props.subcase.Model]?.description}
          </div>
          <div>
             {props.subcase.CustomerCompany}
@@ -120,20 +119,19 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
          <div>
             Current Status:
             {currentCaseStatus.name}
-            {currentCaseStatus.nextStatus &&
-               currentCaseStatus.nextStatus.map((nextStatus) => (
-                  <button
-                     key={nextStatus}
-                     className={"border p-2 bg-blue-300 rounded-md"}
-                     onClick={() => {
-                        submitNewStatus(
-                           caseStatusMapping[nextStatus].whenUpdating
-                        );
-                     }}
-                  >
-                     {caseStatusMapping[nextStatus].whenUpdating}
-                  </button>
-               ))}
+            {currentCaseStatus?.nextStatus?.map((nextStatus) => (
+               <button
+                  key={nextStatus}
+                  className={"border p-2 bg-blue-300 rounded-md"}
+                  onClick={() => {
+                     submitNewStatus(
+                        caseStatusMapping[nextStatus].whenUpdating
+                     );
+                  }}
+               >
+                  {caseStatusMapping[nextStatus].whenUpdating}
+               </button>
+            ))}
          </div>
       </div>
    );
