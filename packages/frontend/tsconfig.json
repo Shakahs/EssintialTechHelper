@@ -6,7 +6,7 @@
       "dom"
     ],
     "target": "es2018",
-    "module": "commonjs",
+    "module": "ES6",
     "moduleResolution": "node",
     "outDir": "build",
     "emitDecoratorMetadata": true,
