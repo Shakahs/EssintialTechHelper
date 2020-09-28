@@ -6,6 +6,7 @@ import {
    NewStatusBody,
    NewStatusCode,
    findCaseStatusName,
+   ResultsObject,
 } from "../../api";
 import Bool from "../utility/Bool";
 import { useFetch } from "react-async";
@@ -14,7 +15,7 @@ import {
    caseStatusMapping,
    defaultRequestHeaders,
 } from "../../constants";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../rootReducer";
 import parseJSON from "date-fns/parseJSON";
 import dateFormat from "date-fns/format";
@@ -22,6 +23,9 @@ import isBefore from "date-fns/isBefore";
 import isToday from "date-fns/isToday";
 import classnames from "classnames";
 import partsList from "../../assets/riteAidPartList.json";
+import { getAPISession } from "../../features/auth/authSelectors";
+import { upsertCaseSummary } from "../../features/cases/caseSlice";
+import CaseSummaryRefresh from "./CaseSummaryRefresh";
 // const partsList = require('../../assets/partList.json')
 
 interface CaseSummaryItemProps {
@@ -31,13 +35,38 @@ interface CaseSummaryItemProps {
 const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
    props
 ) => {
-   const { SessionID } = useSelector((state: RootState) => state.manageAuth);
+   const dispatch = useDispatch();
+   const { SessionId } = useSelector((state: RootState) =>
+      useSelector(getAPISession)
+   );
 
-   const fetchState = useFetch(
+   const updateCaseFetchState = useFetch<ResultsObject<CaseSummary>>(
+      `${apiBase}/cases/${props.subcase.Id}/subcases/${props.subcase.Id}`,
+      {
+         headers: { ...defaultRequestHeaders, Authorization: SessionId },
+      },
+      {
+         onResolve: (wrappedCaseSummary) => {
+            const cs = wrappedCaseSummary.Results[0];
+            dispatch(upsertCaseSummary(cs));
+         },
+         json: true,
+         defer: true,
+      }
+   );
+
+   const {
+      isLoading: updateCaseIsLoading,
+      error: updateCaseError,
+   } = updateCaseFetchState;
+
+   const runUpdateCase = () => updateCaseFetchState.run();
+
+   const updateStatusFetchState = useFetch(
       `${apiBase}/subcases/${props.subcase.Id}/status`,
       {
          method: "POST",
-         headers: { ...defaultRequestHeaders, Authorization: SessionID },
+         headers: { ...defaultRequestHeaders, Authorization: SessionId },
       },
       {
          onResolve: (acc) => {},
@@ -52,7 +81,7 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
          HoldReasonCode: "",
          Code: newStatus,
       };
-      fetchState.run({ body: JSON.stringify(body) });
+      updateStatusFetchState.run({ body: JSON.stringify(body) });
    };
 
    const parsedETA = parseJSON(props.subcase.ScheduledDateTime);
@@ -68,6 +97,11 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
             }
          )}
       >
+         <CaseSummaryRefresh
+            loading={updateCaseIsLoading}
+            error={updateCaseError}
+            run={runUpdateCase}
+         />
          <div className={"block"}>
             <span className={"underline mr-2"}>
                <b>{props.subcase.Id}</b>

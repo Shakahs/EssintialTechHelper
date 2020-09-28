@@ -3,7 +3,7 @@ import { CaseSummary } from "../../api";
 import { RootState } from "../../rootReducer";
 import { AppDispatch } from "../../store";
 import { apiBase, defaultRequestHeaders } from "../../constants";
-import { updateCaseSummaries } from "./caseSlice";
+import { replaceCaseSummaries } from "./caseSlice";
 import { debounce } from "lodash";
 import { sliceName } from "./caseConstants";
 import { checkAPISession } from "../auth/authThunks";
@@ -52,7 +52,7 @@ export const fetchCases = createAsyncThunk<
                const thisResult = j.Results[0] as CaseSummary[];
                finalResponse = [...finalResponse, ...thisResult];
             }
-            thunkAPI.dispatch(updateCaseSummaries(finalResponse));
+            thunkAPI.dispatch(replaceCaseSummaries(finalResponse));
          }
 
          return finalResponse;

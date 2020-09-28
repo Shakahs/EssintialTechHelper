@@ -1,23 +1,12 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { apiBase, defaultRequestHeaders } from "../../constants";
-import { useFetch } from "react-async";
-import {
-   CaseSummary,
-   CurrentCaseStatus,
-   DoubleUnneccessaryArray,
-   isProjectWork,
-} from "../../api";
-import { updateCaseSummaries } from "../../features/cases/caseSlice";
+import { CaseSummary, CurrentCaseStatus, isProjectWork } from "../../api";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../rootReducer";
 import { map } from "lodash";
 import CaseSummaryItem from "./CaseSummaryItem";
 import classnames from "classnames";
-import {
-   debouncedFetchCases,
-   fetchCases,
-} from "../../features/cases/caseThunks";
+import { debouncedFetchCases } from "../../features/cases/caseThunks";
 import CaseSummaryFilters from "./CaseSummaryFilters";
 import { getCaseFilterResult } from "../../features/cases/caseSelectors";
 import { getAPISession } from "../../features/auth/authSelectors";
