@@ -3,12 +3,14 @@ import { APISessionState, Credentials } from "../../api";
 import { sliceName } from "./authConstants";
 import { fetchState } from "../common";
 import { loginAPISession } from "./authThunks";
+import { init } from "react-async";
+import { merge } from "lodash";
 
 type StateShape = { credentials: Credentials } & {
    apiSession: APISessionState;
 } & { loginFetchState: fetchState };
 
-let initialState: StateShape = {
+const initialState: StateShape = {
    credentials: { email: null, password: null },
    apiSession: {
       apiSessionCreation: null,
@@ -31,7 +33,9 @@ export const authSlice = createSlice({
          state.apiSession = action.payload;
       },
       resetAuthentication(state) {
-         state = initialState;
+         // state.credentials = initialState.credentials;
+         // state.apiSession = initialState.apiSession;
+         merge(state, initialState);
       },
    },
    extraReducers: (builder) => {
