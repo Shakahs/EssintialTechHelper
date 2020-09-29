@@ -29,6 +29,7 @@ import CaseSummaryRefresh from "./CaseSummaryRefresh";
 import { zonedTimeToUtc } from "date-fns-tz";
 import CaseSummaryStatus from "./CaseSummaryStatus";
 import CaseSummaryETASLA from "./CaseSummaryETASLA";
+import { caseInProgress } from "./common";
 
 interface CaseSummaryItemProps {
    subcase: CaseSummary;
@@ -67,10 +68,18 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
    return (
       <div
          className={classnames(
-            "w-full border-solid border-black  border mb-3 bg-gray-300 p-1",
+            "w-full border-solid border-black mb-3 bg-gray-300 p-1",
             {
                "bg-yellow-500": props.subcase.Priority === "02",
                "bg-red-500": props.subcase.Priority === "01",
+            },
+            {
+               border: !caseInProgress(props.subcase),
+            },
+            {
+               "border-dashed border-green-500 border-4": caseInProgress(
+                  props.subcase
+               ),
             }
          )}
       >
