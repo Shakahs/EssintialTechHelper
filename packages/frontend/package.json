@@ -16,6 +16,7 @@
       "@types/react-redux": "^7.1.9",
       "classnames": "^2.2.6",
       "date-fns": "^2.15.0",
+      "date-fns-tz": "^1.0.10",
       "lodash": "^4.17.20",
       "mapbox-gl": "^1.11.1",
       "mapbox.js": "^3.3.1",

@@ -26,7 +26,7 @@ import partsList from "../../assets/riteAidPartList.json";
 import { getAPISession } from "../../features/auth/authSelectors";
 import { upsertCaseSummary } from "../../features/cases/caseSlice";
 import CaseSummaryRefresh from "./CaseSummaryRefresh";
-// const partsList = require('../../assets/partList.json')
+import { zonedTimeToUtc } from "date-fns-tz";
 
 interface CaseSummaryItemProps {
    subcase: CaseSummary;
@@ -106,26 +106,55 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
             <span className={"underline mr-2"}>
                <b>{props.subcase.Id}</b>
             </span>
-            <span className={"mr-2"}>Priority: {props.subcase.Priority}</span>
+            <span className={"mr-2"}>
+               <b>Priority:</b> {props.subcase.Priority}
+            </span>
+            <div className={"inline"}>
+               <b>Current Status:</b>
+               {currentCaseStatus.name}
+               {currentCaseStatus?.nextStatus?.map((nextStatus) => (
+                  <button
+                     key={nextStatus}
+                     className={"border p-2 bg-blue-300 rounded-md"}
+                     onClick={() => {
+                        submitNewStatus(
+                           caseStatusMapping[nextStatus].whenUpdating
+                        );
+                     }}
+                  >
+                     {caseStatusMapping[nextStatus].whenUpdating}
+                  </button>
+               ))}
+            </div>
+         </div>
+         <div className={"block"}>
             <span
                className={classnames("mr-2", {
                   "bg-yellow-400": isBefore(parsedETA, new Date()),
                })}
             >
-               ETA: {dateFormat(parsedETA, "L/d h:mm b")}
+               <b>ETA:</b> {dateFormat(parsedETA, "L/d h:mm b")}
             </span>
             <span>
-               SLA:
+               <b>SLA: </b>
                {props.subcase.Milestones.map((ms) => {
-                  const parsedSLA = parseJSON(ms.CalculatedDateTime);
+                  //Big assumption here: the user is in the same time zone as the store.
+                  //SLA is in the store's timezone, here we are reading it from the user
+                  const parsedSLA_UTC = zonedTimeToUtc(
+                     ms.CalculatedDateTime,
+                     Intl.DateTimeFormat().resolvedOptions().timeZone
+                  );
                   return (
                      <span
                         key={ms.Code}
                         className={classnames("mr-2", {
-                           "bg-yellow-400": isToday(parsedSLA),
+                           "bg-yellow-400": isToday(parsedSLA_UTC),
                         })}
                      >
-                        {ms.Code} {dateFormat(parsedSLA, "L/d h:mm b")}
+                        {ms.Code === "ARR" && "Arrive"}
+                        {ms.Code === "FIX" && "Fix"}
+                        {dateFormat(parsedSLA_UTC, "L/d h:mm b")}
+                        {/*{ms.CalculatedDateTime}*/}
                      </span>
                   );
                })}
@@ -133,13 +162,17 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
          </div>
          <Bool if={isProjectWork(props.subcase)}>Project Work</Bool>
          <div>
-            Part: {props.subcase.Model}
+            <b>Part:</b> {props.subcase.Model}
             {partsList?.[props.subcase.Model]?.description}
          </div>
          <div>
-            {props.subcase.CustomerCompany}
-            {props.subcase.Location.FullAddress}
-            (Copy Address)
+            <span className={"mr-2"}>
+               <b>Store:</b> {props.subcase.CustomerCompany}
+            </span>
+            <span className={"mr-2"}>
+               <b>Address:</b> {props.subcase.Location.FullAddress} (Copy
+               Address)
+            </span>
             <a
                target={"_blank"}
                className={"underline text-sm"}
@@ -149,23 +182,6 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
             >
                (Google Map)
             </a>
-         </div>
-         <div>
-            Current Status:
-            {currentCaseStatus.name}
-            {currentCaseStatus?.nextStatus?.map((nextStatus) => (
-               <button
-                  key={nextStatus}
-                  className={"border p-2 bg-blue-300 rounded-md"}
-                  onClick={() => {
-                     submitNewStatus(
-                        caseStatusMapping[nextStatus].whenUpdating
-                     );
-                  }}
-               >
-                  {caseStatusMapping[nextStatus].whenUpdating}
-               </button>
-            ))}
          </div>
       </div>
    );
