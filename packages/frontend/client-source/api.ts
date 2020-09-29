@@ -16,6 +16,9 @@ export interface APISession {
    Id: string;
    Name: string;
    SessionId: string;
+   ServiceRep: {
+      Id: string;
+   };
 }
 
 export interface CaseSummary {
@@ -109,6 +112,14 @@ export interface NewStatusBody {
    Code: string;
    Comment: string;
    HoldReasonCode: string;
+}
+
+export interface NewETABody {
+   NewSubcaseComment: string;
+   ScheduledDateTime: string;
+   ServiceRep: {
+      Id: string;
+   };
 }
 
 export interface Credentials {

@@ -28,6 +28,7 @@ import { upsertCaseSummary } from "../../features/cases/caseSlice";
 import CaseSummaryRefresh from "./CaseSummaryRefresh";
 import { zonedTimeToUtc } from "date-fns-tz";
 import CaseSummaryStatus from "./CaseSummaryStatus";
+import CaseSummaryETASLA from "./CaseSummaryETASLA";
 
 interface CaseSummaryItemProps {
    subcase: CaseSummary;
@@ -63,8 +64,6 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
 
    const runUpdateCase = () => updateCaseFetchState.run();
 
-   const parsedETA = parseJSON(props.subcase.ScheduledDateTime);
-
    return (
       <div
          className={classnames(
@@ -92,37 +91,7 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
             </div>
          </div>
          <div className={"block"}>
-            <span
-               className={classnames("mr-2", {
-                  "bg-yellow-400": isBefore(parsedETA, new Date()),
-               })}
-            >
-               <b>ETA:</b> {dateFormat(parsedETA, "L/d h:mm b")}
-            </span>
-            <span>
-               <b>SLA: </b>
-               {props.subcase.Milestones.map((ms) => {
-                  //Big assumption here: the user is in the same time zone as the store.
-                  //SLA is in the store's timezone, here we are reading it from the user
-                  const parsedSLA_UTC = zonedTimeToUtc(
-                     ms.CalculatedDateTime,
-                     Intl.DateTimeFormat().resolvedOptions().timeZone
-                  );
-                  return (
-                     <span
-                        key={ms.Code}
-                        className={classnames("mr-2", {
-                           "bg-yellow-400": isToday(parsedSLA_UTC),
-                        })}
-                     >
-                        {ms.Code === "ARR" && "Arrive"}
-                        {ms.Code === "FIX" && "Fix"}
-                        {dateFormat(parsedSLA_UTC, "L/d h:mm b")}
-                        {/*{ms.CalculatedDateTime}*/}
-                     </span>
-                  );
-               })}
-            </span>
+            <CaseSummaryETASLA subcase={props.subcase} />
          </div>
          <Bool if={isProjectWork(props.subcase)}>Project Work</Bool>
          <div>
