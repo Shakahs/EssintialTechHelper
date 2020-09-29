@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../../rootReducer";
-import { filter, intersection, intersectionBy, intersectionWith } from "lodash";
+import { filter, sortBy, remove } from "lodash";
 import { CaseSummary, isProjectWork } from "../../api";
 import { caseStatusMapping } from "../../constants";
 
@@ -92,5 +92,25 @@ export const getCaseFilterResult = createSelector(
       }
 
       return caseSequenceFilterResult;
+   }
+);
+
+export const getFilteredSortedCases = createSelector(
+   getCaseFilterResult,
+   (filteredCases) => {
+      const others = sortBy(filteredCases, (i) => i.ScheduledDateTime);
+
+      const arrived = remove(
+         others,
+         (i) => i.UserStatus === caseStatusMapping.Arrive.whenReading
+      );
+      const enroute = remove(
+         others,
+         (i) => i.UserStatus === caseStatusMapping.Enroute.whenReading
+      );
+
+      const sortedResult = [...arrived, ...enroute, ...others];
+
+      return sortedResult;
    }
 );

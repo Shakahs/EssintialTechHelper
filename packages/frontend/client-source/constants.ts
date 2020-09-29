@@ -77,6 +77,7 @@ export const caseStatusMapping: Partial<CaseStatusMappingCollection> = {
    Arrive: {
       name: "Arrived",
       whenReading: "ARRV",
+      whenUpdating: "ARRIVE",
       isCaseSequenceFilter: true,
       reduxCaseSelector: getCasesArrive,
       reduxFilterSelector: () =>

@@ -8,7 +8,10 @@ import CaseSummaryItem from "./CaseSummaryItem";
 import classnames from "classnames";
 import { debouncedFetchCases } from "../../features/cases/caseThunks";
 import CaseSummaryFilters from "./CaseSummaryFilters";
-import { getCaseFilterResult } from "../../features/cases/caseSelectors";
+import {
+   getCaseFilterResult,
+   getFilteredSortedCases,
+} from "../../features/cases/caseSelectors";
 import { getAPISession } from "../../features/auth/authSelectors";
 import { resetAuthentication } from "../../features/auth/authSlice";
 
@@ -56,7 +59,7 @@ const CaseSummaryList: React.FunctionComponent<Manage2Props> = (props) => {
    //    .filter(caseStatusFilter)
    //    .filter(projectWorkFilter);
 
-   const filteredCaseSummaries = useSelector(getCaseFilterResult);
+   const filteredCaseSummaries = useSelector(getFilteredSortedCases);
 
    return (
       <div>
