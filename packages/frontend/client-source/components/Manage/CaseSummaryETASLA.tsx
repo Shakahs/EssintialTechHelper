@@ -102,7 +102,7 @@ const CaseSummaryETASLA: React.FunctionComponent<CaseSummaryETASLAProps> = (
                showTimeSelect
                timeIntervals={15}
                dateFormat={"MMMM d, yyyy h:mm aa"}
-               withPortal
+               // withPortal
             />
             <Bool if={newETA !== null}>
                <button
