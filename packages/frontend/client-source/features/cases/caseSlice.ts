@@ -58,6 +58,9 @@ export const caseSlice = createSlice({
       replaceCaseSummaries(state, action: PayloadAction<CaseSummary[]>) {
          caseAdapter.setAll(state.currentCaseSummaries, action.payload);
       },
+      deleteCaseSummary(state, action: PayloadAction<string>) {
+         caseAdapter.removeOne(state.currentCaseSummaries, action.payload);
+      },
       updateFilters(state, action: PayloadAction<CaseFilters>) {
          state.caseFilters = action.payload;
       },
@@ -82,6 +85,7 @@ export const {
    replaceCaseSummaries,
    updateFilters,
    upsertCaseSummary,
+   deleteCaseSummary,
 } = caseSlice.actions;
 
 export default caseSlice.reducer;

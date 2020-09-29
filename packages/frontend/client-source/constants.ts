@@ -60,7 +60,7 @@ export const caseStatusMapping: Partial<CaseStatusMappingCollection> = {
       name: "Enroute",
       whenReading: "ENRT",
       whenUpdating: "ENROUTE",
-      nextStatus: ["Arrive"],
+      nextStatus: ["Commit", "Arrive"],
       isCaseSequenceFilter: true,
       reduxCaseSelector: getCasesEnroute,
       reduxFilterSelector: () =>

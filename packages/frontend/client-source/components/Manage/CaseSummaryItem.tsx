@@ -27,6 +27,7 @@ import { getAPISession } from "../../features/auth/authSelectors";
 import { upsertCaseSummary } from "../../features/cases/caseSlice";
 import CaseSummaryRefresh from "./CaseSummaryRefresh";
 import { zonedTimeToUtc } from "date-fns-tz";
+import CaseSummaryStatus from "./CaseSummaryStatus";
 
 interface CaseSummaryItemProps {
    subcase: CaseSummary;
@@ -62,30 +63,7 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
 
    const runUpdateCase = () => updateCaseFetchState.run();
 
-   const updateStatusFetchState = useFetch(
-      `${apiBase}/subcases/${props.subcase.Id}/status`,
-      {
-         method: "POST",
-         headers: { ...defaultRequestHeaders, Authorization: SessionId },
-      },
-      {
-         onResolve: (acc) => {},
-         json: true,
-         defer: true,
-      }
-   );
-
-   const submitNewStatus = (newStatus: string) => {
-      const body: NewStatusBody = {
-         Comment: "",
-         HoldReasonCode: "",
-         Code: newStatus,
-      };
-      updateStatusFetchState.run({ body: JSON.stringify(body) });
-   };
-
    const parsedETA = parseJSON(props.subcase.ScheduledDateTime);
-   const currentCaseStatus = findCaseStatusName(props.subcase);
 
    return (
       <div
@@ -110,21 +88,7 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
                <b>Priority:</b> {props.subcase.Priority}
             </span>
             <div className={"inline"}>
-               <b>Current Status:</b>
-               {currentCaseStatus.name}
-               {currentCaseStatus?.nextStatus?.map((nextStatus) => (
-                  <button
-                     key={nextStatus}
-                     className={"border p-2 bg-blue-300 rounded-md"}
-                     onClick={() => {
-                        submitNewStatus(
-                           caseStatusMapping[nextStatus].whenUpdating
-                        );
-                     }}
-                  >
-                     {caseStatusMapping[nextStatus].whenUpdating}
-                  </button>
-               ))}
+               <CaseSummaryStatus cs={props.subcase} />
             </div>
          </div>
          <div className={"block"}>
