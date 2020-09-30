@@ -33,7 +33,7 @@ export interface CaseSummary {
    OpenDateTime: Date;
    Priority: string;
    ProblemCode: string; // PROJECT / P3T (p3 tech only) / P2
-   ScheduledDateTime: Date;
+   ScheduledDateTime: string;
    UserStatus: string; // CMPL=complete, CMTD=commited, ASGN=assigned
    Location: {
       Address1: string;

@@ -1,10 +1,11 @@
 import * as React from "react";
 import isBefore from "date-fns/isBefore";
 import dateFormat from "date-fns/format";
-import { zonedTimeToUtc } from "date-fns-tz";
+import { zonedTimeToUtc, utcToZonedTime } from "date-fns-tz";
 import isToday from "date-fns/isToday";
 import { CaseSummary, NewETABody, NewStatusBody } from "../../api";
 import parseJSON from "date-fns/parseJSON";
+import parseISO from "date-fns/parseISO";
 import classnames from "classnames";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -34,7 +35,7 @@ const CaseSummaryETASLA: React.FunctionComponent<CaseSummaryETASLAProps> = (
       useSelector(getAPISession)
    );
 
-   const parsedETA = parseJSON(props.subcase.ScheduledDateTime);
+   const parsedETA = parseISO(props.subcase.ScheduledDateTime);
    const [newETA, setNewETA] = useState<Date | null>(null);
 
    const updateETAFetchState = useFetch(
