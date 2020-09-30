@@ -92,11 +92,18 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
             <span className={"underline mr-2"}>
                <b>{props.subcase.Id}</b>
             </span>
-            <span className={"mr-2"}>
+            <span className={"mr-1"}>
                <b>Priority:</b> {props.subcase.Priority}
             </span>
+            <span
+               className={classnames("p-1", {
+                  "bg-green-500": caseInProgress(props.subcase),
+               })}
+            >
+               {findCaseStatusName(props.subcase).name}
+            </span>
             <div className={"inline"}>
-               <CaseSummaryStatus cs={props.subcase} />
+               <CaseSummaryStatus cs={props.subcase} refresh={runUpdateCase} />
             </div>
          </div>
          <div className={"block"}>

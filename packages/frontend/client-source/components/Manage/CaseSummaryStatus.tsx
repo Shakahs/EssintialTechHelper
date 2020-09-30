@@ -14,9 +14,11 @@ import Bool from "../utility/Bool";
 import { useState } from "react";
 import classnames from "classnames";
 import { deleteCaseSummary } from "../../features/cases/caseSlice";
+import { caseInProgress } from "./common";
 
 interface CaseSummaryStatusProps {
    cs: CaseSummary;
+   refresh: () => void;
 }
 
 const CaseSummaryStatus: React.FunctionComponent<CaseSummaryStatusProps> = (
@@ -39,6 +41,8 @@ const CaseSummaryStatus: React.FunctionComponent<CaseSummaryStatusProps> = (
          onResolve: () => {
             if (clickedStatus === caseStatusMapping.Reject.whenUpdating) {
                dispatch(deleteCaseSummary(props.cs.Id));
+            } else {
+               props.refresh();
             }
          },
          json: true,
@@ -57,8 +61,7 @@ const CaseSummaryStatus: React.FunctionComponent<CaseSummaryStatusProps> = (
 
    return (
       <div>
-         <b>Current Status:</b>
-         {currentCaseStatus.name}
+         <b className={"mr-2"}>Change Status:</b>
          {currentCaseStatus?.nextStatus?.map((nextStatus) => (
             <button
                key={nextStatus}
