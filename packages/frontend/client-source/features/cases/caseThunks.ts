@@ -24,6 +24,8 @@ export const fetchCases = createAsyncThunk<
       const APISessionWrapped = await thunkAPI.dispatch(checkAPISession());
       const APISession = unwrapResult(APISessionWrapped);
 
+      thunkAPI.dispatch(replaceCaseSummaries([]));
+
       try {
          const responses = await Promise.all([
             fetch(`${apiBase}/subcases/ForTech`, {
