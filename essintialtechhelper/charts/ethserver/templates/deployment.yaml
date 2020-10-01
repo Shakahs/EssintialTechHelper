@@ -60,6 +60,11 @@ spec:
               value: {{ .Values.global.postgresql.postgresqlPassword }}
             - name: DATABASE_NAME
               value: {{ .Values.global.postgresql.postgresqlDatabase }}
+            - name: EASYPOST_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: serversecrets
+                  key: EASYPOST_TOKEN
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
