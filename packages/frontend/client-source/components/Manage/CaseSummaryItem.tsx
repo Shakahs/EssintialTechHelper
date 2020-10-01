@@ -107,7 +107,10 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
             </div>
          </div>
          <div className={"block"}>
-            <CaseSummaryETASLA subcase={props.subcase} />
+            <CaseSummaryETASLA
+               subcase={props.subcase}
+               refresh={runUpdateCase}
+            />
          </div>
          <Bool if={isProjectWork(props.subcase)}>Project Work</Bool>
          <div>
