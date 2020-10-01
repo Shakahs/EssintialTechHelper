@@ -1,5 +1,3 @@
-import { GeoJSON, MultiPoint, Point } from "geojson";
-
 export interface APITicket {
    _id: string;
    _source: {
@@ -35,4 +33,29 @@ export interface Ticket {
    siteName: string;
    longitude: number;
    latitude: number;
+}
+
+export interface TrackingDetail {
+   message: string;
+   description: string;
+   status: string;
+   status_detail: string;
+   datetime: string;
+   source: string;
+   tracking_location: {
+      city: string;
+      state: string;
+      zip: string;
+   };
+}
+
+export interface Tracker {
+   object: "Tracker";
+   tracking_code: string;
+   carrier: string;
+   id: string;
+   status: string;
+   created_at: string;
+   updated_at: string;
+   tracking_details: TrackingDetail[];
 }

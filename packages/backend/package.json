@@ -28,6 +28,7 @@
       "webpackbar": "^4.0.0"
    },
    "dependencies": {
+      "@easypost/api": "^3.9.1",
       "@turf/turf": "^5.1.6",
       "common-tags": "^1.8.0",
       "fastify": "^3.3.0",

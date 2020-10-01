@@ -6,6 +6,9 @@ import { Connection } from "typeorm/connection/Connection";
 import { TicketEntity } from "./database/entity/Ticket";
 import fastify from "fastify";
 import ormConfig from "./ormConfig2";
+import { Tracker } from "../../types";
+const Easypost = require("@easypost/api");
+const easypostAPI = new Easypost(process.env["EASYPOST_TOKEN"]);
 
 const server = fastify({ logger: true });
 let dbConnection: undefined | Connection;
@@ -35,6 +38,27 @@ server.get("/api/available", async (request, reply) => {
       .where({ visible: true })
       .getMany();
    return ticketResults;
+});
+
+server.get("/api/tracking", async (req, reply) => {
+   //@ts-ignore
+   const { trackingNumber } = req.query;
+   if (trackingNumber) {
+      const trackerPost = new easypostAPI.Tracker({
+         tracking_code: trackingNumber,
+         carrier: "FedEx",
+      });
+      const trackerPostResult: Tracker = await trackerPost.save();
+      if (trackerPostResult?.object === "Tracker") {
+         return trackerPostResult;
+      } else {
+         reply.status(500);
+         reply.send("");
+      }
+   } else {
+      reply.status(500);
+      reply.send("");
+   }
 });
 
 const start = async () => {
