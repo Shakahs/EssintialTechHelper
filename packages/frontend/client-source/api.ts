@@ -1,6 +1,6 @@
 import { find } from "lodash";
 import { RootState } from "./rootReducer";
-import { caseStatusMapping } from "./constants";
+import { caseStatusMapping, defaultRequestHeaders } from "./constants";
 
 export interface ResultsObject<T> {
    Results: T[];
@@ -8,7 +8,7 @@ export interface ResultsObject<T> {
    ReturnMessage: string;
 }
 
-export interface DoubleUnneccessaryArray<T> {
+export interface ResultsObjectDoubleWrapped<T extends ResultsObject<T>> {
    Results: T[][];
 }
 
@@ -131,3 +131,20 @@ export interface APISessionState {
    apiSessionData: APISession | null;
    apiSessionCreation: string | null;
 }
+
+export interface PartsShipment {
+   DetailSequence: string; //shipment F number
+   PartDescription: string;
+   PartNo: string;
+   ShipVia: string;
+   PartShipped: {
+      SerialNumbers: string[];
+      ShippedQty: number;
+      TrackingNumbers: string[];
+   }[];
+}
+
+export const buildRequestHeaders = (apiSession: APISession) => ({
+   ...defaultRequestHeaders,
+   Authorization: apiSession.SessionId,
+});

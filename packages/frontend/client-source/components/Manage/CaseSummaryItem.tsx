@@ -30,6 +30,8 @@ import { zonedTimeToUtc } from "date-fns-tz";
 import CaseSummaryStatus from "./CaseSummaryStatus";
 import CaseSummaryETASLA from "./CaseSummaryETASLA";
 import { caseInProgress } from "./common";
+import { useState } from "react";
+import CaseSummaryPartsList from "./CaseSummaryPartsList";
 
 interface CaseSummaryItemProps {
    subcase: CaseSummary;
@@ -64,6 +66,8 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
    } = updateCaseFetchState;
 
    const runUpdateCase = () => updateCaseFetchState.run();
+
+   const [showTracking, setShowTracking] = useState(false);
 
    return (
       <div
@@ -135,6 +139,15 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
                (Google Map)
             </a>
          </div>
+         <button
+            className={"border p-2 bg-blue-300 rounded-md"}
+            onClick={() => {
+               setShowTracking(!showTracking);
+            }}
+         >
+            Toggle Parts Display
+         </button>
+         {showTracking && <CaseSummaryPartsList subcase={props.subcase} />}
       </div>
    );
 };

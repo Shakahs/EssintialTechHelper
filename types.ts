@@ -57,5 +57,6 @@ export interface Tracker {
    status: string;
    created_at: string;
    updated_at: string;
+   est_delivery_date: null | string;
    tracking_details: TrackingDetail[];
 }
