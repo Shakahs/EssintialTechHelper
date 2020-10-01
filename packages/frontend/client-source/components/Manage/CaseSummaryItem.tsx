@@ -67,8 +67,6 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
 
    const runUpdateCase = () => updateCaseFetchState.run();
 
-   const [showTracking, setShowTracking] = useState(false);
-
    return (
       <div
          className={classnames(
@@ -139,15 +137,9 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
                (Google Map)
             </a>
          </div>
-         <button
-            className={"border p-2 bg-blue-300 rounded-md"}
-            onClick={() => {
-               setShowTracking(!showTracking);
-            }}
-         >
-            Toggle Parts Display
-         </button>
-         {showTracking && <CaseSummaryPartsList subcase={props.subcase} />}
+         <div>
+            <CaseSummaryPartsList subcase={props.subcase} />
+         </div>
       </div>
    );
 };

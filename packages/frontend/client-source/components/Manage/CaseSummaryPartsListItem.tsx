@@ -5,6 +5,8 @@ import { apiBase } from "../../constants";
 import { useState } from "react";
 import { Tracker, TrackingDetail } from "../../../../../types";
 import { parseJSON, format } from "date-fns";
+import Bool from "../utility/Bool";
+import LoadingIcon from "../LoadingIcon";
 
 interface CaseSummaryPartsListItemProps {
    trackingNumber: string;
@@ -34,7 +36,13 @@ const CaseSummaryPartsListItem: React.FunctionComponent<CaseSummaryPartsListItem
 
    return (
       <div>
-         <span className={"mr-1"}>Status: {trackingInfo?.status}</span>
+         <span className={"mr-1"}>
+            Status:
+            <Bool if={partsShippedFetchState.isLoading}>
+               <LoadingIcon />
+            </Bool>
+            {trackingInfo?.status}
+         </span>
 
          {showDeliveryETA && (
             <span>

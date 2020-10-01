@@ -12,6 +12,8 @@ import { getAPISessionInComponent } from "../utility";
 import { useEffect, useState } from "react";
 import { debouncedFetchCases } from "../../features/cases/caseThunks";
 import CaseSummaryPartsListItem from "./CaseSummaryPartsListItem";
+import LoadingIcon from "../LoadingIcon";
+import Bool from "../utility/Bool";
 
 interface CaseSummaryPartsProps {
    subcase: CaseSummary;
@@ -46,12 +48,20 @@ const CaseSummaryPartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
       });
    };
 
-   useEffect(() => {
-      runFetchParts();
-   }, []);
-
    return (
       <div>
+         <button
+            className={"border p-2 bg-blue-300 rounded-md"}
+            onClick={() => {
+               setPartsShipments(null);
+               runFetchParts();
+            }}
+         >
+            <Bool if={partsShippedFetchState.isLoading}>
+               <LoadingIcon />
+            </Bool>
+            Toggle Parts Display
+         </button>
          {partsShipments?.map((eachShipment) => (
             <>
                <div>{eachShipment.PartDescription}</div>
