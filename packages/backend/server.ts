@@ -7,8 +7,10 @@ import { TicketEntity } from "./database/entity/Ticket";
 import fastify from "fastify";
 import ormConfig from "./ormConfig2";
 import { Tracker } from "../../types";
-const Easypost = require("@easypost/api");
-const easypostAPI = new Easypost(process.env["EASYPOST_TOKEN"]);
+import fetch from "node-fetch";
+import FormData from "form-data";
+
+const easypostAPIToken = process.env["EASYPOST_TOKEN"];
 
 const server = fastify({ logger: true });
 let dbConnection: undefined | Connection;
@@ -43,18 +45,33 @@ server.get("/api/available", async (request, reply) => {
 server.get("/api/tracking", async (req, reply) => {
    //@ts-ignore
    const { trackingNumber } = req.query;
-   if (trackingNumber) {
-      const trackerPost = new easypostAPI.Tracker({
-         tracking_code: trackingNumber,
-         carrier: "FedEx",
-      });
-      const trackerPostResult: Tracker = await trackerPost.save();
-      if (trackerPostResult?.object === "Tracker") {
-         return trackerPostResult;
-      } else {
-         reply.status(500);
-         reply.send("");
+   if (!trackingNumber) {
+      reply.status(400);
+      reply.send("trackingNumber required");
+      return;
+   }
+
+   const data = new FormData();
+   data.append("tracker[carrier]", "FedEx");
+   data.append("tracker[tracking_code]", trackingNumber);
+
+   const trackerResultRaw = await fetch(
+      "https://api.easypost.com/v2/trackers",
+      {
+         method: "POST",
+         headers: {
+            // "Content-Type": `multipart/form-data' boundary=${data.getBoundary()}`,
+            // "Content-Length": `${data.getLengthSync()}`,
+            // Authorization: `Basic ${easypostAPIToken}`,
+            Authorization: `Basic RVpBSzI4NDk4M2UyMDRkOTQ5OGM4Nzc2ZGQ5MWEwNzExNTE1em1tZFRsSkt3R0ZKOTNpVm9NcTBNUTo=`,
+         },
+         body: data,
       }
+   );
+   const trackerResult: Tracker = await trackerResultRaw.json();
+
+   if (trackerResult?.object === "Tracker") {
+      return trackerResult;
    } else {
       reply.status(500);
       reply.send("");
