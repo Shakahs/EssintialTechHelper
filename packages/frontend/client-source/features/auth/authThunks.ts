@@ -1,4 +1,4 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, SerializedError } from "@reduxjs/toolkit";
 import { sliceName } from "./authConstants";
 import { APISession, Credentials, ResultsObject } from "../../api";
 import { RootState } from "../../rootReducer";
@@ -15,7 +15,7 @@ export const loginAPISession = createAsyncThunk<
    {
       state: RootState;
       dispatch: AppDispatch;
-      rejectValue: string;
+      rejectValue: SerializedError;
    }
 >(`${sliceName}/loginAPISession`, async (creds, thunkAPI) => {
    const sessionResponse = await fetch(`${apiBase}/session`, {
@@ -30,7 +30,7 @@ export const loginAPISession = createAsyncThunk<
 
    const result: ResultsObject<APISession> = await sessionResponse.json();
    if (result.Results.length === 0) {
-      return thunkAPI.rejectWithValue(result.ReturnMessage);
+      throw { name: "AuthError", message: "Invalid Credentials" };
    }
 
    const apiSessionData = result.Results[0];

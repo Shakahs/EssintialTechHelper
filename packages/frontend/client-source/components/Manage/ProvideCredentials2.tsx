@@ -8,12 +8,11 @@ import {
    updateAPISession,
 } from "../../features/auth/authSlice";
 import { loginAPISession } from "../../features/auth/authThunks";
-import { unwrapResult } from "@reduxjs/toolkit";
+import { SerializedError, unwrapResult } from "@reduxjs/toolkit";
 import { store } from "../../store";
 import Bool from "../utility/Bool";
 import { Credentials } from "../../api";
 import Refresh from "../../assets/refresh.svg";
-
 interface ManageProps {}
 
 const ProvideCredentials2: React.FunctionComponent<ManageProps> = (props) => {
@@ -22,18 +21,30 @@ const ProvideCredentials2: React.FunctionComponent<ManageProps> = (props) => {
       (state: RootState) => state.authSlice
    );
 
-   const { register, handleSubmit, watch, errors } = useForm<Credentials>();
+   const { register, handleSubmit, watch, errors, setError } = useForm<
+      Credentials
+   >();
 
    const onSubmit = async (credentials: Credentials) => {
-      const wrappedResult = await store.dispatch(loginAPISession(credentials));
-      const APISession = unwrapResult(wrappedResult);
-      dispatch(
-         updateAPISession({
-            apiSessionData: APISession,
-            apiSessionCreation: new Date().toISOString(),
-         })
-      );
-      dispatch(updateCredentials(credentials));
+      try {
+         const wrappedResult = await store.dispatch(
+            loginAPISession(credentials)
+         );
+         const APISession = unwrapResult(wrappedResult);
+         dispatch(
+            updateAPISession({
+               apiSessionData: APISession,
+               apiSessionCreation: new Date().toISOString(),
+            })
+         );
+         dispatch(updateCredentials(credentials));
+      } catch (err) {
+         const typedError: SerializedError = err;
+         setError("password", {
+            type: "manual",
+            message: typedError.message ?? "Unable to login",
+         });
+      }
    };
 
    return (
@@ -51,8 +62,13 @@ const ProvideCredentials2: React.FunctionComponent<ManageProps> = (props) => {
                      className={"border rounded w-full shadow appearance-none"}
                      name="email"
                      defaultValue="ssaleemi@essintial.com"
-                     ref={register({ required: true })}
+                     ref={register({ required: "Required field" })}
                   />
+                  {errors.email && (
+                     <span className={"block text-red-600"}>
+                        {errors.email.message}
+                     </span>
+                  )}
                </div>
                <div className={"mb-4"}>
                   <label htmlFor={"password"} className={"block mb-2"}>
@@ -61,11 +77,11 @@ const ProvideCredentials2: React.FunctionComponent<ManageProps> = (props) => {
                   <input
                      name="password"
                      className={"border rounded w-full shadow appearance-none"}
-                     ref={register({ required: true })}
+                     ref={register({ required: "Required field" })}
                   />
                   {errors.password && (
                      <span className={"block text-red-600"}>
-                        This field is required
+                        {errors.password.message}
                      </span>
                   )}
                </div>

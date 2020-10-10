@@ -49,7 +49,7 @@ export const authSlice = createSlice({
          })
          .addCase(loginAPISession.rejected, (state, action) => {
             state.loginFetchState.loading = false;
-            state.loginFetchState.error = action.payload;
+            state.loginFetchState.error = action.payload.message;
          });
    },
 });
