@@ -48,16 +48,16 @@ export const checkAPISession = createAsyncThunk<
    }
 >(`${sliceName}/checkAPISession`, async (_, thunkAPI) => {
    if (
-      thunkAPI.getState().manageAuth.apiSession.apiSessionData &&
+      thunkAPI.getState().authSlice.apiSession.apiSessionData &&
       differenceInMinutes(
          new Date(),
-         parseISO(thunkAPI.getState().manageAuth.apiSession.apiSessionCreation)
+         parseISO(thunkAPI.getState().authSlice.apiSession.apiSessionCreation)
       ) <= 30
    ) {
-      return thunkAPI.getState().manageAuth.apiSession.apiSessionData;
+      return thunkAPI.getState().authSlice.apiSession.apiSessionData;
    } else {
       const newSession = await thunkAPI.dispatch(
-         loginAPISession(thunkAPI.getState().manageAuth.credentials)
+         loginAPISession(thunkAPI.getState().authSlice.credentials)
       );
       const unwrapped = unwrapResult(newSession);
       return unwrapped;

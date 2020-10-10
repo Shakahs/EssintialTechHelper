@@ -10,11 +10,12 @@ import {
    REGISTER,
    REHYDRATE,
 } from "redux-persist/es/constants";
+import { authSlice } from "./features/auth/authSlice";
 
 const persistConfig = {
    key: "root",
    storage,
-   debug: true,
+   whitelist: [authSlice.name],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

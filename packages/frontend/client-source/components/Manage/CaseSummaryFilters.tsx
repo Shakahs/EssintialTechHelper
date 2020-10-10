@@ -12,9 +12,7 @@ const CaseSummaryFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
    props
 ) => {
    const dispatch = useDispatch();
-   const { caseFilters } = useSelector(
-      (state: RootState) => state.manageTickets
-   );
+   const { caseFilters } = useSelector((state: RootState) => state.caseSlice);
    return (
       <div>
          Filters:

@@ -19,7 +19,7 @@ interface ManageProps {}
 const ProvideCredentials2: React.FunctionComponent<ManageProps> = (props) => {
    const dispatch = useDispatch();
    const { loginFetchState } = useSelector(
-      (state: RootState) => state.manageAuth
+      (state: RootState) => state.authSlice
    );
 
    const { register, handleSubmit, watch, errors } = useForm<Credentials>();

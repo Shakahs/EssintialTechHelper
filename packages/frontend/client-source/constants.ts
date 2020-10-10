@@ -23,12 +23,12 @@ export const caseStatusMapping: Partial<CaseStatusMappingCollection> = {
       isCaseSequenceFilter: true,
       reduxCaseSelector: getCasesAssigned,
       reduxFilterSelector: () =>
-         store.getState().manageTickets.caseFilters.showAssigned,
+         store.getState().caseSlice.caseFilters.showAssigned,
       reduxToggle: () =>
          store.dispatch(
             updateFilters({
-               ...store.getState().manageTickets.caseFilters,
-               showAssigned: !store.getState().manageTickets.caseFilters
+               ...store.getState().caseSlice.caseFilters,
+               showAssigned: !store.getState().caseSlice.caseFilters
                   .showAssigned,
             })
          ),
@@ -41,12 +41,12 @@ export const caseStatusMapping: Partial<CaseStatusMappingCollection> = {
       isCaseSequenceFilter: true,
       reduxCaseSelector: getCasesCommitted,
       reduxFilterSelector: () =>
-         store.getState().manageTickets.caseFilters.showCommitted,
+         store.getState().caseSlice.caseFilters.showCommitted,
       reduxToggle: () =>
          store.dispatch(
             updateFilters({
-               ...store.getState().manageTickets.caseFilters,
-               showCommitted: !store.getState().manageTickets.caseFilters
+               ...store.getState().caseSlice.caseFilters,
+               showCommitted: !store.getState().caseSlice.caseFilters
                   .showCommitted,
             })
          ),
@@ -64,13 +64,12 @@ export const caseStatusMapping: Partial<CaseStatusMappingCollection> = {
       isCaseSequenceFilter: true,
       reduxCaseSelector: getCasesEnroute,
       reduxFilterSelector: () =>
-         store.getState().manageTickets.caseFilters.showEnroute,
+         store.getState().caseSlice.caseFilters.showEnroute,
       reduxToggle: () =>
          store.dispatch(
             updateFilters({
-               ...store.getState().manageTickets.caseFilters,
-               showEnroute: !store.getState().manageTickets.caseFilters
-                  .showEnroute,
+               ...store.getState().caseSlice.caseFilters,
+               showEnroute: !store.getState().caseSlice.caseFilters.showEnroute,
             })
          ),
    },
@@ -81,13 +80,12 @@ export const caseStatusMapping: Partial<CaseStatusMappingCollection> = {
       isCaseSequenceFilter: true,
       reduxCaseSelector: getCasesArrive,
       reduxFilterSelector: () =>
-         store.getState().manageTickets.caseFilters.showArrived,
+         store.getState().caseSlice.caseFilters.showArrived,
       reduxToggle: () =>
          store.dispatch(
             updateFilters({
-               ...store.getState().manageTickets.caseFilters,
-               showArrived: !store.getState().manageTickets.caseFilters
-                  .showArrived,
+               ...store.getState().caseSlice.caseFilters,
+               showArrived: !store.getState().caseSlice.caseFilters.showArrived,
             })
          ),
    },
@@ -97,12 +95,12 @@ export const caseStatusMapping: Partial<CaseStatusMappingCollection> = {
       isCaseSequenceFilter: true,
       reduxCaseSelector: getCasesComplete,
       reduxFilterSelector: () =>
-         store.getState().manageTickets.caseFilters.showComplete,
+         store.getState().caseSlice.caseFilters.showComplete,
       reduxToggle: () =>
          store.dispatch(
             updateFilters({
-               ...store.getState().manageTickets.caseFilters,
-               showComplete: !store.getState().manageTickets.caseFilters
+               ...store.getState().caseSlice.caseFilters,
+               showComplete: !store.getState().caseSlice.caseFilters
                   .showComplete,
             })
          ),

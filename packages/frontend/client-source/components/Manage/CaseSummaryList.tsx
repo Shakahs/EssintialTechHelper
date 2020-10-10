@@ -21,7 +21,7 @@ const CaseSummaryList: React.FunctionComponent<Manage2Props> = (props) => {
    const dispatch = useDispatch();
    const { SessionId } = useSelector(getAPISession);
    const { currentCaseSummaries, fetchCaseState } = useSelector(
-      (state: RootState) => state.manageTickets
+      (state: RootState) => state.caseSlice
    );
 
    //run once on component mount

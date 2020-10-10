@@ -4,10 +4,10 @@ import { filter, sortBy, remove } from "lodash";
 import { CaseSummary, isProjectWork } from "../../api";
 import { caseStatusMapping } from "../../constants";
 
-const getCaseFilters = (state: RootState) => state.manageTickets.caseFilters;
+const getCaseFilters = (state: RootState) => state.caseSlice.caseFilters;
 
 const allCases = (state: RootState) =>
-   state.manageTickets.currentCaseSummaries.entities;
+   state.caseSlice.currentCaseSummaries.entities;
 
 const preFilteredCases = createSelector(
    [allCases, getCaseFilters],
