@@ -23,6 +23,7 @@ import { distance as turfDistance } from "@turf/turf";
 import ormConfig from "./ormConfig2";
 import { stripIndents } from "common-tags";
 
+//@ts-ignore
 const twilioClient = Twilio(
    process.env["TWILIO_ACCOUNT_SID"],
    process.env["TWILIO_ACCOUNT_TOKEN"]
@@ -51,7 +52,7 @@ const geoCode = async (res: APIResult): Promise<Ticket[]> => {
          const geoQuery = `${rawJSONTicket._source.siteAddr}, ${rawJSONTicket._source.srmSiteCity}, ${rawJSONTicket._source.srmSiteState}`;
          const geoQueryURLSafe = replace(geoQuery, "#", "");
          const mapboxResponse = await fetch(
-            `https://api.mapbox.com/geocoding/v5/mapbox.places/${geoQueryURLSafe}.json?limit=1&access_token=${mapboxToken}`
+            `https://api.mapbox.com/geocoding/v5/mapbox.places/${geoQueryURLSafe}.json?limit=1&access_token=${mapboxToken}&country=US`
          );
          const mapboxGeoPoint: GeoJSON.FeatureCollection<Point> = await mapboxResponse.json();
 
@@ -216,7 +217,7 @@ if (require.main === module) {
       .then(() => {
          console.log("poller started");
          poll();
-         setInterval(poll, 60000);
+         setInterval(poll, 1000 * 10);
       })
       .catch((err) => {
          console.log("An error occurred in startup:", err);
