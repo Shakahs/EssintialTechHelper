@@ -1,4 +1,4 @@
-import store from "../../store";
+import { store } from "../../store";
 import { checkAPISession } from "../../features/auth/authThunks";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { updateAPISession } from "../../features/auth/authSlice";

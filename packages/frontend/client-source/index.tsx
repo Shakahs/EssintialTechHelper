@@ -7,15 +7,18 @@ import Available from "./components/Available";
 import "./style.css";
 import Navbar from "./components/Navbar";
 // import Main from "./components/Main";
-import store from "./store";
+import { store, persistor } from "./store";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
 const render = () => {
    const Main = require("./components/Main").default;
 
    ReactDOM.render(
       <Provider store={store}>
+         {/*<PersistGate loading={null} persistor={persistor}>*/}
          <Main />
+         {/*</PersistGate>*/}
       </Provider>,
       document.getElementById("reactApp")
    );

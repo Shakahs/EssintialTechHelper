@@ -9,7 +9,7 @@ import {
 } from "../../features/auth/authSlice";
 import { loginAPISession } from "../../features/auth/authThunks";
 import { unwrapResult } from "@reduxjs/toolkit";
-import store from "../../store";
+import { store } from "../../store";
 import Bool from "../utility/Bool";
 import { Credentials } from "../../api";
 import Refresh from "../../assets/refresh.svg";

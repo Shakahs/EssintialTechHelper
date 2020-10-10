@@ -5,7 +5,7 @@ import {
    getCasesComplete,
    getCasesEnroute,
 } from "./features/cases/caseSelectors";
-import store from "./store";
+import { store } from "./store";
 import { updateFilters } from "./features/cases/caseSlice";
 import { CaseStatusMappingCollection } from "./api";
 
