@@ -32,6 +32,7 @@ import CaseSummaryETASLA from "./CaseSummaryETASLA";
 import { caseInProgress } from "./common";
 import { useState } from "react";
 import CaseSummaryPartsList from "./CaseSummaryPartsList";
+import CaseSummaryComments from "./CaseSummaryComments";
 
 interface CaseSummaryItemProps {
    subcase: CaseBase;
@@ -136,6 +137,7 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
             <CaseSummaryPartsList subcase={props.subcase} />
 
             <CaseSummaryStatus cs={props.subcase} refresh={runUpdateCase} />
+            <CaseSummaryComments sc={props.subcase} />
          </div>
       </div>
    );

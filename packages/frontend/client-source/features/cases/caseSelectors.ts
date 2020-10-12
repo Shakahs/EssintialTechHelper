@@ -6,8 +6,7 @@ import { caseStatusMapping } from "../../constants";
 
 const getCaseFilters = (state: RootState) => state.caseSlice.caseFilters;
 
-const allCases = (state: RootState) =>
-   state.caseSlice.currentCaseSummaries.entities;
+const allCases = (state: RootState) => state.caseSlice.caseSummaries.entities;
 
 const preFilteredCases = createSelector(
    [allCases, getCaseFilters],

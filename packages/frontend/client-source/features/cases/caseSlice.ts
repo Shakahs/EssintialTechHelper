@@ -4,13 +4,13 @@ import {
    EntityState,
    PayloadAction,
 } from "@reduxjs/toolkit";
-import { CaseBase } from "../../api";
+import { CaseBase, CaseSummary } from "../../api";
 import { fetchCases } from "./caseThunks";
 import { sliceName } from "./caseConstants";
 import { fetchState } from "../common";
 
 interface CurrentCaseSummaries {
-   currentCaseSummaries: EntityState<CaseBase>;
+   caseSummaries: EntityState<CaseSummary>;
 }
 
 interface CaseFilters {
@@ -27,12 +27,12 @@ type StateShape = CurrentCaseSummaries & { caseFilters: CaseFilters } & {
    fetchCaseState: fetchState;
 };
 
-const caseAdapter = createEntityAdapter<CaseBase>({
+const caseAdapter = createEntityAdapter<CaseSummary>({
    selectId: (c) => c.Id,
 });
 
 let initialState: StateShape = {
-   currentCaseSummaries: caseAdapter.getInitialState(),
+   caseSummaries: caseAdapter.getInitialState(),
    caseFilters: {
       showAssigned: true,
       showCommitted: true,
@@ -53,13 +53,13 @@ export const caseSlice = createSlice({
    initialState,
    reducers: {
       upsertCaseSummary(state, action: PayloadAction<CaseBase>) {
-         caseAdapter.upsertOne(state.currentCaseSummaries, action.payload);
+         caseAdapter.upsertOne(state.caseSummaries, action.payload);
       },
       replaceCaseSummaries(state, action: PayloadAction<CaseBase[]>) {
-         caseAdapter.setAll(state.currentCaseSummaries, action.payload);
+         caseAdapter.setAll(state.caseSummaries, action.payload);
       },
       deleteCaseSummary(state, action: PayloadAction<string>) {
-         caseAdapter.removeOne(state.currentCaseSummaries, action.payload);
+         caseAdapter.removeOne(state.caseSummaries, action.payload);
       },
       updateFilters(state, action: PayloadAction<CaseFilters>) {
          state.caseFilters = action.payload;

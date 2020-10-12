@@ -14,13 +14,14 @@ import {
 } from "../../features/cases/caseSelectors";
 import { getAPISession } from "../../features/auth/authSelectors";
 import { resetAuthentication } from "../../features/auth/authSlice";
+import CaseSummaryComments from "./CaseSummaryComments";
 
 interface Manage2Props {}
 
 const CaseSummaryList: React.FunctionComponent<Manage2Props> = (props) => {
    const dispatch = useDispatch();
    const { SessionId } = useSelector(getAPISession);
-   const { currentCaseSummaries, fetchCaseState } = useSelector(
+   const { caseSummaries, fetchCaseState } = useSelector(
       (state: RootState) => state.caseSlice
    );
 
