@@ -1,7 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../../rootReducer";
 import { filter, sortBy, remove } from "lodash";
-import { CaseSummary, isProjectWork } from "../../api";
+import { CaseBase, isProjectWork } from "../../api";
 import { caseStatusMapping } from "../../constants";
 
 const getCaseFilters = (state: RootState) => state.caseSlice.caseFilters;
@@ -74,7 +74,7 @@ export const getCaseFilterResult = createSelector(
       casesComplete,
       filters
    ) => {
-      const caseSequenceFilterResult: CaseSummary[] = [];
+      const caseSequenceFilterResult: CaseBase[] = [];
       if (filters.showAssigned) {
          caseSequenceFilterResult.push(...casesAssigned);
       }

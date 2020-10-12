@@ -21,7 +21,7 @@ export interface APISession {
    };
 }
 
-export interface CaseSummary {
+export interface CaseBase {
    ArriveDateTime: Date;
    CompletionDateTime: Date;
    CustomerCompany: string;
@@ -49,6 +49,19 @@ export interface CaseSummary {
    }[];
 }
 
+export interface Comment {
+   CommentText: string;
+   ServiceRepresentativeId: string;
+   CommentDateTime: string;
+}
+
+export interface CaseFullFields {
+   Comments: Comment[];
+}
+
+export type CaseSummary = CaseBase & Partial<CaseFullFields>;
+export type CaseFull = CaseBase & CaseFullFields;
+
 export interface GlossaryWord {
    code: string;
    dropdown: string;
@@ -71,7 +84,7 @@ export enum CurrentCaseStatus {
    ReleaseHold = "HOLDREL",
 }
 
-export function isProjectWork(sb: CaseSummary): boolean {
+export function isProjectWork(sb: CaseBase): boolean {
    return sb.ProblemCode === "PROJECT";
 }
 
@@ -94,14 +107,14 @@ export interface CaseStatusMapping {
    isCaseSequenceFilter: boolean;
    reduxFilterSelector?: () => boolean;
    reduxToggle?: () => void;
-   reduxCaseSelector?: (s: RootState) => CaseSummary[];
+   reduxCaseSelector?: (s: RootState) => CaseBase[];
 }
 
 export type CaseStatusMappingCollection = {
    [key in StatusCodes]: CaseStatusMapping;
 };
 
-export const findCaseStatusName = (cs: CaseSummary): CaseStatusMapping => {
+export const findCaseStatusName = (cs: CaseBase): CaseStatusMapping => {
    return find(
       caseStatusMapping,
       (possStatus) => cs.UserStatus === possStatus.whenReading

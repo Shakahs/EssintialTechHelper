@@ -4,13 +4,13 @@ import {
    EntityState,
    PayloadAction,
 } from "@reduxjs/toolkit";
-import { CaseSummary } from "../../api";
+import { CaseBase } from "../../api";
 import { fetchCases } from "./caseThunks";
 import { sliceName } from "./caseConstants";
 import { fetchState } from "../common";
 
 interface CurrentCaseSummaries {
-   currentCaseSummaries: EntityState<CaseSummary>;
+   currentCaseSummaries: EntityState<CaseBase>;
 }
 
 interface CaseFilters {
@@ -27,7 +27,7 @@ type StateShape = CurrentCaseSummaries & { caseFilters: CaseFilters } & {
    fetchCaseState: fetchState;
 };
 
-const caseAdapter = createEntityAdapter<CaseSummary>({
+const caseAdapter = createEntityAdapter<CaseBase>({
    selectId: (c) => c.Id,
 });
 
@@ -52,10 +52,10 @@ export const caseSlice = createSlice({
    name: sliceName,
    initialState,
    reducers: {
-      upsertCaseSummary(state, action: PayloadAction<CaseSummary>) {
+      upsertCaseSummary(state, action: PayloadAction<CaseBase>) {
          caseAdapter.upsertOne(state.currentCaseSummaries, action.payload);
       },
-      replaceCaseSummaries(state, action: PayloadAction<CaseSummary[]>) {
+      replaceCaseSummaries(state, action: PayloadAction<CaseBase[]>) {
          caseAdapter.setAll(state.currentCaseSummaries, action.payload);
       },
       deleteCaseSummary(state, action: PayloadAction<string>) {

@@ -3,7 +3,7 @@ import { useFetch } from "react-async";
 import { apiBase, buttonStyle, defaultRequestHeaders } from "../../constants";
 import {
    buildRequestHeaders,
-   CaseSummary,
+   CaseBase,
    PartsShipment,
    ResultsObject,
    ResultsObjectDoubleWrapped,
@@ -16,7 +16,7 @@ import LoadingIcon from "../LoadingIcon";
 import Bool from "../utility/Bool";
 
 interface CaseSummaryPartsProps {
-   subcase: CaseSummary;
+   subcase: CaseBase;
 }
 
 const CaseSummaryPartsList: React.FunctionComponent<CaseSummaryPartsProps> = (

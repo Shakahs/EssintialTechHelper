@@ -5,7 +5,7 @@ import dateFormat from "date-fns/format";
 import formatDate from "date-fns/format";
 import { zonedTimeToUtc } from "date-fns-tz";
 import isToday from "date-fns/isToday";
-import { CaseSummary, NewETABody } from "../../api";
+import { CaseBase, NewETABody } from "../../api";
 import parseISO from "date-fns/parseISO";
 import classnames from "classnames";
 import DatePicker from "react-datepicker";
@@ -20,7 +20,7 @@ import { getAPISessionInComponent } from "../utility";
 import LoadingIcon from "../LoadingIcon";
 
 interface CaseSummaryETASLAProps {
-   subcase: CaseSummary;
+   subcase: CaseBase;
    refresh: () => void;
 }
 

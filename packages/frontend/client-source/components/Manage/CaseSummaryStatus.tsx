@@ -5,7 +5,7 @@ import {
    caseStatusMapping,
    defaultRequestHeaders,
 } from "../../constants";
-import { CaseSummary, findCaseStatusName, NewStatusBody } from "../../api";
+import { CaseBase, findCaseStatusName, NewStatusBody } from "../../api";
 import { useFetch } from "react-async";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../rootReducer";
@@ -18,7 +18,7 @@ import { deleteCaseSummary } from "../../features/cases/caseSlice";
 import { caseInProgress } from "./common";
 
 interface CaseSummaryStatusProps {
-   cs: CaseSummary;
+   cs: CaseBase;
    refresh: () => void;
 }
 

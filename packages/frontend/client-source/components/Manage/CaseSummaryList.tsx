@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { CaseSummary, CurrentCaseStatus, isProjectWork } from "../../api";
+import { CaseBase, CurrentCaseStatus, isProjectWork } from "../../api";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../rootReducer";
 import { map } from "lodash";
@@ -29,13 +29,13 @@ const CaseSummaryList: React.FunctionComponent<Manage2Props> = (props) => {
       dispatch(debouncedFetchCases());
    }, []);
 
-   type caseSummaryFilter = (cs: CaseSummary) => boolean;
+   type caseSummaryFilter = (cs: CaseBase) => boolean;
 
    //case status filter
    const [caseStatusFilterSet, changeCaseStatusFilterSet] = useState<
       Set<string>
    >(new Set([CurrentCaseStatus.Assigned, CurrentCaseStatus.Committed]));
-   const caseStatusFilter: caseSummaryFilter = (cs: CaseSummary) => {
+   const caseStatusFilter: caseSummaryFilter = (cs: CaseBase) => {
       //if we have filter properties set, check that this case summary matches them
       if (caseStatusFilterSet.size > 0) {
          return caseStatusFilterSet.has(cs.UserStatus);
@@ -46,7 +46,7 @@ const CaseSummaryList: React.FunctionComponent<Manage2Props> = (props) => {
 
    //project work filter
    const [showProjectWork, setShowProjectWork] = useState(false);
-   const projectWorkFilter: caseSummaryFilter = (cs: CaseSummary) => {
+   const projectWorkFilter: caseSummaryFilter = (cs: CaseBase) => {
       if (isProjectWork(cs)) {
          return showProjectWork;
       }

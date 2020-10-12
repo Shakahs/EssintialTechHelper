@@ -1,6 +1,6 @@
 import * as React from "react";
 import {
-   CaseSummary,
+   CaseBase,
    CurrentCaseStatus,
    isProjectWork,
    NewStatusBody,
@@ -34,7 +34,7 @@ import { useState } from "react";
 import CaseSummaryPartsList from "./CaseSummaryPartsList";
 
 interface CaseSummaryItemProps {
-   subcase: CaseSummary;
+   subcase: CaseBase;
 }
 
 const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
@@ -45,7 +45,7 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
       useSelector(getAPISession)
    );
 
-   const updateCaseFetchState = useFetch<ResultsObject<CaseSummary>>(
+   const updateCaseFetchState = useFetch<ResultsObject<CaseBase>>(
       `${apiBase}/cases/${props.subcase.Id}/subcases/${props.subcase.Id}`,
       {
          headers: { ...defaultRequestHeaders, Authorization: SessionId },

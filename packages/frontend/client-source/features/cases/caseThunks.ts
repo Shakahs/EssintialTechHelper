@@ -1,5 +1,5 @@
 import { createAsyncThunk, unwrapResult } from "@reduxjs/toolkit";
-import { CaseSummary } from "../../api";
+import { CaseBase } from "../../api";
 import { RootState } from "../../rootReducer";
 import { AppDispatch } from "../../store";
 import { apiBase, defaultRequestHeaders } from "../../constants";
@@ -9,7 +9,7 @@ import { sliceName } from "./caseConstants";
 import { checkAPISession } from "../auth/authThunks";
 
 export const fetchCases = createAsyncThunk<
-   CaseSummary[],
+   CaseBase[],
    undefined,
    {
       state: RootState;
@@ -46,12 +46,12 @@ export const fetchCases = createAsyncThunk<
             }),
          ]);
 
-         let finalResponse: CaseSummary[] = [];
+         let finalResponse: CaseBase[] = [];
 
          if (responses) {
             for await (const r of responses) {
                const j = await r.json();
-               const thisResult = j.Results[0] as CaseSummary[];
+               const thisResult = j.Results[0] as CaseBase[];
                finalResponse = [...finalResponse, ...thisResult];
             }
             thunkAPI.dispatch(replaceCaseSummaries(finalResponse));
