@@ -86,11 +86,12 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
          )}
       >
          <div className={"block"}>
-            <span className={"underline mr-2"}>
+            <span className={"underline mr-1"}>
                <b>{props.subcase.Id}</b>
             </span>
+            <span className={"mr-1"}>{props.subcase.CustomerCompany}</span>
             <span className={"mr-1"}>
-               <b>Priority:</b> {props.subcase.Priority}
+               <b>Priority {props.subcase.Priority}</b>
             </span>
             <span
                className={classnames("p-1", {
@@ -99,9 +100,6 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
             >
                {findCaseStatusName(props.subcase).name}
             </span>
-            <div className={"inline"}>
-               <CaseSummaryStatus cs={props.subcase} refresh={runUpdateCase} />
-            </div>
          </div>
          <div className={"block"}>
             <CaseSummaryETASLA
@@ -117,11 +115,7 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
          </div>
          <div>
             <span className={"mr-2"}>
-               <b>Store:</b> {props.subcase.CustomerCompany}
-            </span>
-            <span className={"mr-2"}>
-               <b>Address:</b> {props.subcase.Location.FullAddress} (Copy
-               Address)
+               <b>Address:</b> {props.subcase.Location.FullAddress}
             </span>
             <a
                target={"_blank"}
@@ -140,6 +134,8 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
                run={runUpdateCase}
             />
             <CaseSummaryPartsList subcase={props.subcase} />
+
+            <CaseSummaryStatus cs={props.subcase} refresh={runUpdateCase} />
          </div>
       </div>
    );

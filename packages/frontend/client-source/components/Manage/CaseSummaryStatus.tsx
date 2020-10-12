@@ -61,8 +61,8 @@ const CaseSummaryStatus: React.FunctionComponent<CaseSummaryStatusProps> = (
    };
 
    return (
-      <div>
-         <b className={"mr-2"}>Change Status:</b>
+      <div className={"inline"}>
+         <b className={"mr-2"}>Status:</b>
          {currentCaseStatus?.nextStatus?.map((nextStatus) => (
             <button
                key={nextStatus}
