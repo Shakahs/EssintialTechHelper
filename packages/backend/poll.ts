@@ -17,13 +17,12 @@ import {
 import { createConnection, getConnection } from "typeorm";
 import { TicketEntity } from "./database/entity/Ticket";
 import { Connection } from "typeorm/connection/Connection";
-import * as Twilio from "twilio";
+const Twilio = require("twilio");
 import * as turfHelpers from "@turf/helpers";
 import { distance as turfDistance } from "@turf/turf";
 import ormConfig from "./ormConfig2";
 import { stripIndents } from "common-tags";
 
-//@ts-ignore
 const twilioClient = Twilio(
    process.env["TWILIO_ACCOUNT_SID"],
    process.env["TWILIO_ACCOUNT_TOKEN"]
