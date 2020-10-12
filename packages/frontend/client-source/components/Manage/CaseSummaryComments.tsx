@@ -11,6 +11,8 @@ import { apiBase, buttonStyle } from "../../constants";
 import { useDispatch } from "react-redux";
 import { upsertCaseSummary } from "../../features/cases/caseSlice";
 import { getAPISessionInComponent } from "../utility";
+import LoadingIcon from "../LoadingIcon";
+import Bool from "../utility/Bool";
 
 interface CaseSummaryCommentsProps {
    sc: CaseSummary;
@@ -52,8 +54,12 @@ const CaseSummaryComments: React.FunctionComponent<CaseSummaryCommentsProps> = (
             }}
             disabled={caseFullFetchState.isLoading}
          >
+            <Bool if={caseFullFetchState.isLoading}>
+               <LoadingIcon />
+            </Bool>
             Show Case Comments
          </button>
+         {props.sc?.ProblemDesc}
          {props.sc?.Comments?.map((comment) => (
             <div>
                {comment.CommentDateTime} {comment.CommentText}

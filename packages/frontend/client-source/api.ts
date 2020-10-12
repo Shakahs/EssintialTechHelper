@@ -56,6 +56,7 @@ export interface Comment {
 }
 
 export interface CaseFullFields {
+   ProblemDesc: string;
    Comments: Comment[];
 }
 
