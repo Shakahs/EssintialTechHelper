@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useFetch } from "react-async";
-import { apiBase, defaultRequestHeaders } from "../../constants";
+import { apiBase, buttonStyle, defaultRequestHeaders } from "../../constants";
 import {
    buildRequestHeaders,
    CaseSummary,
@@ -49,9 +49,9 @@ const CaseSummaryPartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
    };
 
    return (
-      <div>
+      <div className={"inline"}>
          <button
-            className={"border p-2 bg-blue-300 rounded-md"}
+            className={buttonStyle}
             onClick={() => {
                setPartsShipments(null);
                runFetchParts();

@@ -11,7 +11,7 @@ import classnames from "classnames";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useFetch } from "react-async";
-import { apiBase, defaultRequestHeaders } from "../../constants";
+import { apiBase, buttonStyle, defaultRequestHeaders } from "../../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../rootReducer";
 import { getAPISession } from "../../features/auth/authSelectors";
@@ -113,7 +113,7 @@ const CaseSummaryETASLA: React.FunctionComponent<CaseSummaryETASLAProps> = (
             />
             <Bool if={newETA !== null}>
                <button
-                  className={classnames("border p-2 bg-blue-300 rounded-md", {
+                  className={classnames(buttonStyle, {
                      "text-gray-500": updateETAFetchState.isLoading,
                   })}
                   disabled={updateETAFetchState.isLoading}
@@ -127,7 +127,7 @@ const CaseSummaryETASLA: React.FunctionComponent<CaseSummaryETASLAProps> = (
                   Save new ETA
                </button>
                <button
-                  className={classnames("border p-2 bg-blue-300 rounded-md", {
+                  className={classnames(buttonStyle, {
                      "text-gray-500": updateETAFetchState.isLoading,
                   })}
                   disabled={updateETAFetchState.isLoading}

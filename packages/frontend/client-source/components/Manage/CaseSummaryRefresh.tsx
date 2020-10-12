@@ -1,6 +1,7 @@
 import * as React from "react";
 import Bool from "../utility/Bool";
 import Refresh from "../../assets/refresh.svg";
+import { buttonStyle } from "../../constants";
 
 interface CaseSummaryRefreshProps {
    loading: boolean;
@@ -11,9 +12,9 @@ interface CaseSummaryRefreshProps {
 const CaseSummaryRefresh: React.FunctionComponent<CaseSummaryRefreshProps> = (
    props
 ) => (
-   <div>
+   <div className={"inline"}>
       <button
-         className={"border p-2 bg-blue-300 rounded-md"}
+         className={buttonStyle}
          onClick={() => props.run()}
          disabled={props.loading}
       >
@@ -21,7 +22,7 @@ const CaseSummaryRefresh: React.FunctionComponent<CaseSummaryRefreshProps> = (
             <img src={Refresh} className={"animate-spin inline"} />
             Case is updating...
          </Bool>
-         <Bool if={!props.loading}>Update case</Bool>
+         <Bool if={!props.loading}>Refresh</Bool>
       </button>
    </div>
 );

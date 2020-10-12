@@ -1,6 +1,7 @@
 import * as React from "react";
 import {
    apiBase,
+   buttonStyle,
    caseStatusMapping,
    defaultRequestHeaders,
 } from "../../constants";
@@ -65,7 +66,7 @@ const CaseSummaryStatus: React.FunctionComponent<CaseSummaryStatusProps> = (
          {currentCaseStatus?.nextStatus?.map((nextStatus) => (
             <button
                key={nextStatus}
-               className={classnames("border p-2 bg-blue-300 rounded-md", {
+               className={classnames(buttonStyle, {
                   "text-gray-500": updateStatusFetchState.isLoading,
                })}
                onClick={() => {

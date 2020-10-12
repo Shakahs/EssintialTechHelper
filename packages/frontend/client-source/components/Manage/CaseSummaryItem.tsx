@@ -70,7 +70,7 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
    return (
       <div
          className={classnames(
-            "w-full border-solid border-black mb-3 bg-gray-300 p-1",
+            "w-full border-solid border-black mb-3 bg-gray-300 p-1 text-sm",
             {
                "bg-yellow-500": props.subcase.Priority === "02",
                "bg-red-500": props.subcase.Priority === "01",
@@ -85,11 +85,6 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
             }
          )}
       >
-         <CaseSummaryRefresh
-            loading={updateCaseIsLoading}
-            error={updateCaseError}
-            run={runUpdateCase}
-         />
          <div className={"block"}>
             <span className={"underline mr-2"}>
                <b>{props.subcase.Id}</b>
@@ -116,8 +111,9 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
          </div>
          <Bool if={isProjectWork(props.subcase)}>Project Work</Bool>
          <div>
-            <b>Part:</b> {props.subcase.Model}
-            {partsList?.[props.subcase.Model]?.description}
+            <b>Part:</b>
+            {partsList?.[props.subcase.Model]?.description ??
+               props.subcase.Model}
          </div>
          <div>
             <span className={"mr-2"}>
@@ -138,6 +134,11 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
             </a>
          </div>
          <div>
+            <CaseSummaryRefresh
+               loading={updateCaseIsLoading}
+               error={updateCaseError}
+               run={runUpdateCase}
+            />
             <CaseSummaryPartsList subcase={props.subcase} />
          </div>
       </div>
