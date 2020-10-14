@@ -21,44 +21,8 @@ interface CaseSummaryCommentsProps {
 const CaseComments: React.FunctionComponent<CaseSummaryCommentsProps> = (
    props
 ) => {
-   const dispatch = useDispatch();
-
-   const caseFullFetchState = useFetch<ResultsObject<CaseFull>>(
-      `${apiBase}/cases/${props.sc.Id}/subcases/${props.sc.Id}`,
-      {
-         method: "GET",
-      },
-
-      {
-         json: true,
-         defer: true,
-         onResolve: async (res) => {
-            await dispatch(upsertCaseSummary(res.Results[0]));
-         },
-      }
-   );
-
-   const runFetchCase = async () => {
-      const thisAPISession = await getAPISessionInComponent();
-      caseFullFetchState.run({
-         headers: buildRequestHeaders(thisAPISession),
-      });
-   };
-
    return (
       <div>
-         <button
-            className={buttonStyle}
-            onClick={async () => {
-               await runFetchCase();
-            }}
-            disabled={caseFullFetchState.isLoading}
-         >
-            <Bool if={caseFullFetchState.isLoading}>
-               <LoadingIcon />
-            </Bool>
-            Show Case Comments
-         </button>
          {props.sc?.ProblemDesc}
          {props.sc?.Comments?.map((comment) => (
             <div>

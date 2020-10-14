@@ -98,7 +98,6 @@ const CaseListItem: React.FunctionComponent<CaseSummaryItemProps> = (props) => {
             />
 
             <CaseStatus cs={props.subcase} refresh={runUpdateCase} />
-            <CaseComments sc={props.subcase} />
          </div>
          <div>
             <CaseExtendedData subcase={props.subcase} />
