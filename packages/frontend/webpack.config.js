@@ -16,6 +16,15 @@ const purgecss = require("@fullhuman/postcss-purgecss")({
       "client-source" + "/**/*.tsx",
       "client-source" + "/**/*.ts",
    ],
+   // css: glob.sync(
+   //    `${path.join(__dirname, "node_modules", "tailwindcss")}/**/*.css`,
+   //    {
+   //       nodir: true,
+   //    }
+   // ),
+   // safelist: {
+   //    greedy: [/^react-datepicker.*/],
+   // },
 
    // Include any special characters you're using in this regular expression
    defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
@@ -95,7 +104,7 @@ module.exports = {
       extensions: [".tsx", ".ts", ".js"],
    },
    plugins: [
-      new MiniCssExtractPlugin(),
+      new MiniCssExtractPlugin({ filename: "[name].[hash].css" }),
       new HtmlWebpackPlugin({
          template: __dirname + "/client-source/index.html",
          // favicon: "client-source/favicon.png",
