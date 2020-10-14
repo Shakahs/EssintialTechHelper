@@ -15,7 +15,7 @@ import { Credentials } from "../../api";
 import Refresh from "../../assets/refresh.svg";
 interface ManageProps {}
 
-const ProvideCredentials2: React.FunctionComponent<ManageProps> = (props) => {
+const ProvideCredentials: React.FunctionComponent<ManageProps> = (props) => {
    const dispatch = useDispatch();
    const { loginFetchState } = useSelector(
       (state: RootState) => state.authSlice
@@ -114,4 +114,4 @@ const ProvideCredentials2: React.FunctionComponent<ManageProps> = (props) => {
    );
 };
 
-export default ProvideCredentials2;
+export default ProvideCredentials;

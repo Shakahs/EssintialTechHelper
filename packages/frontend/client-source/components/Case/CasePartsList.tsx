@@ -11,7 +11,7 @@ import {
 import { getAPISessionInComponent } from "../utility";
 import { useEffect, useState } from "react";
 import { debouncedFetchCases } from "../../features/cases/caseThunks";
-import CaseSummaryPartsListItem from "./CaseSummaryPartsListItem";
+import CasePartsListItem from "./CasePartsListItem";
 import LoadingIcon from "../LoadingIcon";
 import Bool from "../utility/Bool";
 
@@ -19,7 +19,7 @@ interface CaseSummaryPartsProps {
    subcase: CaseBase;
 }
 
-const CaseSummaryPartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
+const CasePartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
    props
 ) => {
    const [partsShipments, setPartsShipments] = useState<null | PartsShipment[]>(
@@ -66,7 +66,7 @@ const CaseSummaryPartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
             <>
                <div>{eachShipment.PartDescription}</div>
                {eachShipment.PartShipped?.map((eachItem) => (
-                  <CaseSummaryPartsListItem
+                  <CasePartsListItem
                      trackingNumber={eachItem.TrackingNumbers[0]}
                   />
                ))}
@@ -79,4 +79,4 @@ const CaseSummaryPartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
    );
 };
 
-export default CaseSummaryPartsList;
+export default CasePartsList;

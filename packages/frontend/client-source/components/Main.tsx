@@ -1,12 +1,12 @@
 import * as React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Available from "./Available";
-import ProvideCredentials2 from "./Manage/ProvideCredentials2";
+import ProvideCredentials from "./Auth/ProvideCredentials";
 import Navbar from "./Navbar";
 import { useSelector } from "react-redux";
 import { RootState } from "../rootReducer";
 import Bool from "./utility/Bool";
-import CaseSummaryList from "./Manage/CaseSummaryList";
+import CaseList from "./Case/CaseList";
 import { getIsLoggedIn } from "../features/auth/authSelectors";
 
 interface MainProps {}
@@ -24,10 +24,10 @@ const Main: React.FunctionComponent<MainProps> = (props) => {
                </Route>
                <Route path={"/manage"}>
                   <Bool if={loggedIn}>
-                     <CaseSummaryList />
+                     <CaseList />
                   </Bool>
                   <Bool if={!loggedIn}>
-                     <ProvideCredentials2 />
+                     <ProvideCredentials />
                   </Bool>
                </Route>
             </div>

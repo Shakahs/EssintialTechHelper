@@ -25,22 +25,20 @@ import classnames from "classnames";
 import partsList from "../../assets/riteAidPartList.json";
 import { getAPISession } from "../../features/auth/authSelectors";
 import { upsertCaseSummary } from "../../features/cases/caseSlice";
-import CaseSummaryRefresh from "./CaseSummaryRefresh";
+import CaseRefresh from "./CaseRefresh";
 import { zonedTimeToUtc } from "date-fns-tz";
-import CaseSummaryStatus from "./CaseSummaryStatus";
-import CaseSummaryETASLA from "./CaseSummaryETASLA";
+import CaseStatus from "./CaseStatus";
+import CaseETASLA from "./CaseETASLA";
 import { caseInProgress } from "./common";
 import { useState } from "react";
-import CaseSummaryPartsList from "./CaseSummaryPartsList";
-import CaseSummaryComments from "./CaseSummaryComments";
+import CasePartsList from "./CasePartsList";
+import CaseComments from "./CaseComments";
 
 interface CaseSummaryItemProps {
    subcase: CaseBase;
 }
 
-const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
-   props
-) => {
+const CaseListItem: React.FunctionComponent<CaseSummaryItemProps> = (props) => {
    const dispatch = useDispatch();
    const { SessionId } = useSelector((state: RootState) =>
       useSelector(getAPISession)
@@ -103,10 +101,7 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
             </span>
          </div>
          <div className={"block"}>
-            <CaseSummaryETASLA
-               subcase={props.subcase}
-               refresh={runUpdateCase}
-            />
+            <CaseETASLA subcase={props.subcase} refresh={runUpdateCase} />
          </div>
          <Bool if={isProjectWork(props.subcase)}>Project Work</Bool>
          <div>
@@ -129,18 +124,18 @@ const CaseSummaryItem: React.FunctionComponent<CaseSummaryItemProps> = (
             </a>
          </div>
          <div>
-            <CaseSummaryRefresh
+            <CaseRefresh
                loading={updateCaseIsLoading}
                error={updateCaseError}
                run={runUpdateCase}
             />
-            <CaseSummaryPartsList subcase={props.subcase} />
+            <CasePartsList subcase={props.subcase} />
 
-            <CaseSummaryStatus cs={props.subcase} refresh={runUpdateCase} />
-            <CaseSummaryComments sc={props.subcase} />
+            <CaseStatus cs={props.subcase} refresh={runUpdateCase} />
+            <CaseComments sc={props.subcase} />
          </div>
       </div>
    );
 };
 
-export default CaseSummaryItem;
+export default CaseListItem;

@@ -4,21 +4,21 @@ import { CaseBase, CurrentCaseStatus, isProjectWork } from "../../api";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../rootReducer";
 import { map } from "lodash";
-import CaseSummaryItem from "./CaseSummaryItem";
+import CaseListItem from "./CaseListItem";
 import classnames from "classnames";
 import { debouncedFetchCases } from "../../features/cases/caseThunks";
-import CaseSummaryFilters from "./CaseSummaryFilters";
+import CaseFilters from "./CaseFilters";
 import {
    getCaseFilterResult,
    getFilteredSortedCases,
 } from "../../features/cases/caseSelectors";
 import { getAPISession } from "../../features/auth/authSelectors";
 import { resetAuthentication } from "../../features/auth/authSlice";
-import CaseSummaryComments from "./CaseSummaryComments";
+import CaseComments from "./CaseComments";
 
 interface Manage2Props {}
 
-const CaseSummaryList: React.FunctionComponent<Manage2Props> = (props) => {
+const CaseList: React.FunctionComponent<Manage2Props> = (props) => {
    const dispatch = useDispatch();
    const { SessionId } = useSelector(getAPISession);
    const { caseSummaries, fetchCaseState } = useSelector(
@@ -107,13 +107,13 @@ const CaseSummaryList: React.FunctionComponent<Manage2Props> = (props) => {
                   There was an error refreshing your subcase list.
                </span>
             )}
-            <CaseSummaryFilters />
+            <CaseFilters />
          </div>
          {map(filteredCaseSummaries, (sc) => (
-            <CaseSummaryItem subcase={sc} key={sc.Id} />
+            <CaseListItem subcase={sc} key={sc.Id} />
          ))}
       </div>
    );
 };
 
-export default CaseSummaryList;
+export default CaseList;

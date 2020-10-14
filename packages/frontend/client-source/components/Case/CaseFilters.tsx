@@ -8,7 +8,7 @@ import { caseStatusMapping } from "../../constants";
 
 interface CaseSummaryFiltersProps {}
 
-const CaseSummaryFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
+const CaseFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
    props
 ) => {
    const dispatch = useDispatch();
@@ -67,4 +67,4 @@ const CaseSummaryFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
    );
 };
 
-export default CaseSummaryFilters;
+export default CaseFilters;

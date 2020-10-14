@@ -22,9 +22,7 @@ interface CaseSummaryStatusProps {
    refresh: () => void;
 }
 
-const CaseSummaryStatus: React.FunctionComponent<CaseSummaryStatusProps> = (
-   props
-) => {
+const CaseStatus: React.FunctionComponent<CaseSummaryStatusProps> = (props) => {
    const dispatch = useDispatch();
    const { SessionId } = useSelector((state: RootState) =>
       useSelector(getAPISession)
@@ -91,4 +89,4 @@ const CaseSummaryStatus: React.FunctionComponent<CaseSummaryStatusProps> = (
    );
 };
 
-export default CaseSummaryStatus;
+export default CaseStatus;

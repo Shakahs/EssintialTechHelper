@@ -24,9 +24,7 @@ interface CaseSummaryETASLAProps {
    refresh: () => void;
 }
 
-const CaseSummaryETASLA: React.FunctionComponent<CaseSummaryETASLAProps> = (
-   props
-) => {
+const CaseETASLA: React.FunctionComponent<CaseSummaryETASLAProps> = (props) => {
    const dispatch = useDispatch();
    const { SessionId, ServiceRep } = useSelector((state: RootState) =>
       useSelector(getAPISession)
@@ -143,4 +141,4 @@ const CaseSummaryETASLA: React.FunctionComponent<CaseSummaryETASLAProps> = (
    );
 };
 
-export default CaseSummaryETASLA;
+export default CaseETASLA;

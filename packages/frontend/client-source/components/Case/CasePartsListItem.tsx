@@ -12,7 +12,7 @@ interface CaseSummaryPartsListItemProps {
    trackingNumber: string;
 }
 
-const CaseSummaryPartsListItem: React.FunctionComponent<CaseSummaryPartsListItemProps> = (
+const CasePartsListItem: React.FunctionComponent<CaseSummaryPartsListItemProps> = (
    props
 ) => {
    const [trackingInfo, setTrackingInfo] = useState<null | Tracker>(null);
@@ -54,4 +54,4 @@ const CaseSummaryPartsListItem: React.FunctionComponent<CaseSummaryPartsListItem
    );
 };
 
-export default CaseSummaryPartsListItem;
+export default CasePartsListItem;

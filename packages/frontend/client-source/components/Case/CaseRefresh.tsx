@@ -9,7 +9,7 @@ interface CaseSummaryRefreshProps {
    run: () => void;
 }
 
-const CaseSummaryRefresh: React.FunctionComponent<CaseSummaryRefreshProps> = (
+const CaseRefresh: React.FunctionComponent<CaseSummaryRefreshProps> = (
    props
 ) => (
    <div className={"inline"}>
@@ -27,4 +27,4 @@ const CaseSummaryRefresh: React.FunctionComponent<CaseSummaryRefreshProps> = (
    </div>
 );
 
-export default CaseSummaryRefresh;
+export default CaseRefresh;

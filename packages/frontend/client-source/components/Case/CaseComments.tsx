@@ -18,7 +18,7 @@ interface CaseSummaryCommentsProps {
    sc: CaseSummary;
 }
 
-const CaseSummaryComments: React.FunctionComponent<CaseSummaryCommentsProps> = (
+const CaseComments: React.FunctionComponent<CaseSummaryCommentsProps> = (
    props
 ) => {
    const dispatch = useDispatch();
@@ -69,4 +69,4 @@ const CaseSummaryComments: React.FunctionComponent<CaseSummaryCommentsProps> = (
    );
 };
 
-export default CaseSummaryComments;
+export default CaseComments;
