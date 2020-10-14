@@ -21,8 +21,7 @@ interface Manage2Props {}
 
 const CaseList: React.FunctionComponent<Manage2Props> = (props) => {
    const dispatch = useDispatch();
-   const { SessionId } = useSelector(getAPISession);
-   const { caseSummaries, fetchCaseState } = useSelector(
+   const { fetchCaseState } = useSelector(
       (state: RootState) => state.caseSlice
    );
 
@@ -30,36 +29,6 @@ const CaseList: React.FunctionComponent<Manage2Props> = (props) => {
    useEffect(() => {
       dispatch(debouncedFetchCases());
    }, []);
-
-   type caseSummaryFilter = (cs: CaseBase) => boolean;
-
-   //case status filter
-   const [caseStatusFilterSet, changeCaseStatusFilterSet] = useState<
-      Set<string>
-   >(new Set([CurrentCaseStatus.Assigned, CurrentCaseStatus.Committed]));
-   const caseStatusFilter: caseSummaryFilter = (cs: CaseBase) => {
-      //if we have filter properties set, check that this case summary matches them
-      if (caseStatusFilterSet.size > 0) {
-         return caseStatusFilterSet.has(cs.UserStatus);
-      }
-      //if no filter properties, pass the subcase
-      return true;
-   };
-
-   //project work filter
-   const [showProjectWork, setShowProjectWork] = useState(false);
-   const projectWorkFilter: caseSummaryFilter = (cs: CaseBase) => {
-      if (isProjectWork(cs)) {
-         return showProjectWork;
-      }
-      return true;
-   };
-
-   // const filteredCaseSummaries = [
-   //    ...currentCaseSummaries,
-   // ]
-   //    .filter(caseStatusFilter)
-   //    .filter(projectWorkFilter);
 
    const filteredCaseSummaries = useSelector(getFilteredSortedCases);
 
