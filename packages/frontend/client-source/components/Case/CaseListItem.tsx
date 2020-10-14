@@ -33,6 +33,7 @@ import { caseInProgress } from "./common";
 import { useState } from "react";
 import CasePartsList from "./CasePartsList";
 import CaseComments from "./CaseComments";
+import CasePrimaryData from "./CasePrimaryData";
 
 interface CaseSummaryItemProps {
    subcase: CaseBase;
@@ -84,45 +85,10 @@ const CaseListItem: React.FunctionComponent<CaseSummaryItemProps> = (props) => {
             }
          )}
       >
-         <div className={"block"}>
-            <span className={"underline mr-1"}>
-               <b>{props.subcase.Id}</b>
-            </span>
-            <span className={"mr-1"}>{props.subcase.CustomerCompany}</span>
-            <span className={"mr-1"}>
-               <b>Priority {props.subcase.Priority}</b>
-            </span>
-            <span
-               className={classnames("p-1", {
-                  "bg-green-500": caseInProgress(props.subcase),
-               })}
-            >
-               {findCaseStatusName(props.subcase).name}
-            </span>
-         </div>
-         <div className={"block"}>
-            <CaseETASLA subcase={props.subcase} refresh={runUpdateCase} />
-         </div>
-         <Bool if={isProjectWork(props.subcase)}>Project Work</Bool>
-         <div>
-            <b>Part:</b>
-            {partsList?.[props.subcase.Model]?.description ??
-               props.subcase.Model}
-         </div>
-         <div>
-            <span className={"mr-2"}>
-               <b>Address:</b> {props.subcase.Location.FullAddress}
-            </span>
-            <a
-               target={"_blank"}
-               className={"underline text-sm"}
-               href={`https://maps.google.com/maps?q=${encodeURI(
-                  `${props.subcase.CustomerCompany}, ${props.subcase.Location.FullAddress}`
-               )}`}
-            >
-               (Google Map)
-            </a>
-         </div>
+         <CasePrimaryData
+            subcase={props.subcase}
+            runUpdateCase={runUpdateCase}
+         />
          <div>
             <CaseRefresh
                loading={updateCaseIsLoading}
