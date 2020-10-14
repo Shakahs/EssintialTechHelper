@@ -27,7 +27,6 @@ import { getAPISession } from "../../features/auth/authSelectors";
 import { upsertCaseSummary } from "../../features/cases/caseSlice";
 import CaseRefresh from "./CaseRefresh";
 import { zonedTimeToUtc } from "date-fns-tz";
-import CaseStatus from "./CaseStatus";
 import CaseETASLA from "./CaseETASLA";
 import { caseInProgress } from "./common";
 import { useState } from "react";
@@ -96,11 +95,9 @@ const CaseListItem: React.FunctionComponent<CaseSummaryItemProps> = (props) => {
                error={updateCaseError}
                run={runUpdateCase}
             />
-
-            <CaseStatus cs={props.subcase} refresh={runUpdateCase} />
          </div>
          <div>
-            <CaseExtendedData subcase={props.subcase} />
+            <CaseExtendedData subcase={props.subcase} refresh={runUpdateCase} />
          </div>
       </div>
    );

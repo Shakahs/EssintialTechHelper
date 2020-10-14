@@ -14,11 +14,14 @@ import Refresh from "../../assets/refresh.svg";
 import Bool from "../utility/Bool";
 import { useState } from "react";
 import classnames from "classnames";
-import { deleteCaseSummary } from "../../features/cases/caseSlice";
+import {
+   deleteCaseSummary,
+   upsertCaseSummary,
+} from "../../features/cases/caseSlice";
 import { caseInProgress } from "./common";
 
 interface CaseSummaryStatusProps {
-   cs: CaseBase;
+   subcase: CaseBase;
    refresh: () => void;
 }
 
@@ -29,9 +32,9 @@ const CaseStatus: React.FunctionComponent<CaseSummaryStatusProps> = (props) => {
    );
    const [clickedStatus, setClickedStatus] = useState("");
 
-   const currentCaseStatus = findCaseStatusName(props.cs);
+   const currentCaseStatus = findCaseStatusName(props.subcase);
    const updateStatusFetchState = useFetch(
-      `${apiBase}/subcases/${props.cs.Id}/status`,
+      `${apiBase}/subcases/${props.subcase.Id}/status`,
       {
          method: "POST",
          headers: { ...defaultRequestHeaders, Authorization: SessionId },
@@ -39,7 +42,7 @@ const CaseStatus: React.FunctionComponent<CaseSummaryStatusProps> = (props) => {
       {
          onResolve: () => {
             if (clickedStatus === caseStatusMapping.Reject.whenUpdating) {
-               dispatch(deleteCaseSummary(props.cs.Id));
+               dispatch(deleteCaseSummary(props.subcase.Id));
             } else {
                props.refresh();
             }
@@ -60,7 +63,7 @@ const CaseStatus: React.FunctionComponent<CaseSummaryStatusProps> = (props) => {
 
    return (
       <div className={"inline"}>
-         <b className={"mr-2"}>Status:</b>
+         <b className={"mr-2"}>Update Status:</b>
          {currentCaseStatus?.nextStatus?.map((nextStatus) => (
             <button
                key={nextStatus}
