@@ -41,7 +41,7 @@ const CasePartsListItem: React.FunctionComponent<CaseSummaryPartsListItemProps> 
             <Bool if={partsShippedFetchState.isLoading}>
                <LoadingIcon />
             </Bool>
-            {trackingInfo?.status}
+            {trackingInfo?.status ?? "Unknown, try again later"}
          </span>
 
          {showDeliveryETA && (

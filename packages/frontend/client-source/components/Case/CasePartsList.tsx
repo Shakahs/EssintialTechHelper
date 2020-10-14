@@ -14,6 +14,7 @@ import { debouncedFetchCases } from "../../features/cases/caseThunks";
 import CasePartsListItem from "./CasePartsListItem";
 import LoadingIcon from "../LoadingIcon";
 import Bool from "../utility/Bool";
+import AjaxButton from "../utility/AjaxButton";
 
 interface CaseSummaryPartsProps {
    subcase: CaseBase;
@@ -48,20 +49,22 @@ const CasePartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
       });
    };
 
+   useEffect(() => {
+      runFetchParts();
+   }, []);
+
    return (
       <div className={"inline"}>
-         <button
-            className={buttonStyle}
-            onClick={() => {
-               setPartsShipments(null);
-               runFetchParts();
-            }}
-         >
-            <Bool if={partsShippedFetchState.isLoading}>
-               <LoadingIcon />
-            </Bool>
-            Toggle Parts Display
-         </button>
+         <div>
+            <AjaxButton
+               loading={partsShippedFetchState.isLoading}
+               onClick={() => {
+                  runFetchParts();
+               }}
+            >
+               <span>Refresh Parts</span>
+            </AjaxButton>
+         </div>
          {partsShipments?.map((eachShipment) => (
             <>
                <div>{eachShipment.PartDescription}</div>

@@ -34,6 +34,7 @@ import { useState } from "react";
 import CasePartsList from "./CasePartsList";
 import CaseComments from "./CaseComments";
 import CasePrimaryData from "./CasePrimaryData";
+import CaseExtendedData from "./CaseExtendedData";
 
 interface CaseSummaryItemProps {
    subcase: CaseBase;
@@ -95,10 +96,12 @@ const CaseListItem: React.FunctionComponent<CaseSummaryItemProps> = (props) => {
                error={updateCaseError}
                run={runUpdateCase}
             />
-            <CasePartsList subcase={props.subcase} />
 
             <CaseStatus cs={props.subcase} refresh={runUpdateCase} />
             <CaseComments sc={props.subcase} />
+         </div>
+         <div>
+            <CaseExtendedData subcase={props.subcase} />
          </div>
       </div>
    );
