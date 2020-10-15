@@ -23,9 +23,7 @@ interface CaseSummaryPartsProps {
 const CasePartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
    props
 ) => {
-   const [partsShipments, setPartsShipments] = useState<null | PartsShipment[]>(
-      null
-   );
+   const [partsShipments, setPartsShipments] = useState<PartsShipment[]>([]);
 
    const partsShippedFetchState = useFetch<ResultsObject<PartsShipment[]>>(
       `${apiBase}/parts/shipped/${props.subcase.Id}`,
@@ -59,23 +57,29 @@ const CasePartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
             <AjaxButton
                loading={partsShippedFetchState.isLoading}
                onClick={() => {
+                  setPartsShipments([]);
                   runFetchParts();
                }}
             >
                <span>Refresh Parts</span>
             </AjaxButton>
          </div>
-         {partsShipments?.map((eachShipment) => (
-            <>
-               <div>{eachShipment.PartDescription}</div>
-               {eachShipment.PartShipped?.map((eachItem) => (
-                  <CasePartsListItem
-                     trackingNumber={eachItem.TrackingNumbers[0]}
-                  />
+         {partsShipments?.length > 0 && (
+            <ul>
+               {partsShipments?.map((eachShipment) => (
+                  <li key={eachShipment.DetailSequence}>
+                     <div>{eachShipment.PartDescription}</div>
+                     {eachShipment.PartShipped?.map((eachItem) => (
+                        <CasePartsListItem
+                           key={eachItem.TrackingNumbers[0]}
+                           trackingNumber={eachItem.TrackingNumbers[0]}
+                        />
+                     ))}
+                  </li>
                ))}
-            </>
-         ))}
-         {partsShipments?.length === 0 && (
+            </ul>
+         )}
+         {partsShipments?.length === 0 && !partsShippedFetchState.isLoading && (
             <span>There are no parts shipped for this case.</span>
          )}
       </div>
