@@ -216,7 +216,8 @@ if (require.main === module) {
       .then(() => {
          console.log("poller started");
          poll();
-         setInterval(poll, 1000 * 10);
+         //set to 10 minutes for now
+         setInterval(poll, 1000 * 60 * 10);
       })
       .catch((err) => {
          console.log("An error occurred in startup:", err);
