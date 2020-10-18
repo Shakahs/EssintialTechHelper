@@ -1,6 +1,6 @@
 import * as React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Available from "./Available";
+import AvailableCases from "./AvailableCases/AvailableCases";
 import ProvideCredentials from "./Auth/ProvideCredentials";
 import Navbar from "./Navbar";
 import { useSelector } from "react-redux";
@@ -20,7 +20,7 @@ const Main: React.FunctionComponent<MainProps> = (props) => {
             <Navbar />
             <div className={"m-2"}>
                <Route path={"/"} exact>
-                  <Available />
+                  <AvailableCases />
                </Route>
                <Route path={"/manage"}>
                   <Bool if={loggedIn}>

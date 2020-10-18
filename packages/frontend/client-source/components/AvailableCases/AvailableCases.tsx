@@ -9,8 +9,8 @@ import {
 } from "react-async";
 import ReactMapGL, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { Ticket } from "../../../../types";
-import { mapboxToken } from "../../../../constants";
+import { Ticket } from "../../../../../types";
+import { mapboxToken } from "../../../../../constants";
 import { sortBy, truncate } from "lodash";
 import {
    format as dateFormat,
@@ -23,7 +23,7 @@ const classNames = require("classnames");
 
 interface appProps {}
 
-const Available: React.FunctionComponent<appProps> = (props) => {
+const AvailableCases: React.FunctionComponent<appProps> = (props) => {
    const fetchState = useFetch<Ticket[]>(
       "/api/available",
       {},
@@ -69,22 +69,24 @@ const Available: React.FunctionComponent<appProps> = (props) => {
                }}
             >
                {tickets.map((ticket) => (
-                  <Marker
-                     captureClick={true}
-                     key={ticket.ticketNumber}
-                     latitude={ticket.latitude}
-                     longitude={ticket.longitude}
-                  >
-                     <div
-                        onClick={() => {
-                           setSelectedTicket(ticket.ticketNumber);
-                        }}
+                  <div>
+                     <Marker
+                        captureClick={true}
+                        key={ticket.ticketNumber}
+                        latitude={ticket.latitude}
+                        longitude={ticket.longitude}
                      >
-                        {ticket.ticketNumber}
-                        <br />
-                        {truncate(ticket.partDescription, { length: 15 })}
-                     </div>
-                  </Marker>
+                        <div
+                           onClick={() => {
+                              setSelectedTicket(ticket.ticketNumber);
+                           }}
+                        >
+                           {ticket.ticketNumber}
+                           <br />
+                           {truncate(ticket.partDescription, { length: 15 })}
+                        </div>
+                     </Marker>
+                  </div>
                ))}
             </ReactMapGL>
             <table className="table-auto text-xs">
@@ -165,4 +167,4 @@ const Available: React.FunctionComponent<appProps> = (props) => {
    );
 };
 
-export default Available;
+export default AvailableCases;
