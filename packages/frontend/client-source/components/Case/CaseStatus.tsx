@@ -1,24 +1,15 @@
 import * as React from "react";
+import { apiBase, caseStatusMapping } from "../../constants";
 import {
-   apiBase,
-   buttonStyle,
-   caseStatusMapping,
-   defaultRequestHeaders,
-} from "../../constants";
-import { CaseBase, findCaseStatusName, NewStatusBody } from "../../api";
+   buildRequestHeaders,
+   CaseBase,
+   findCaseStatusName,
+   NewStatusBody,
+} from "../../api";
 import { useFetch } from "react-async";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../rootReducer";
-import { getAPISession } from "../../features/auth/authSelectors";
-import Refresh from "../../assets/refresh.svg";
-import Bool from "../utility/Bool";
-import { useState } from "react";
-import classnames from "classnames";
-import {
-   deleteCaseSummary,
-   upsertCaseSummary,
-} from "../../features/cases/caseSlice";
-import { caseInProgress } from "./common";
+import { useDispatch } from "react-redux";
+import { deleteCaseSummary } from "../../features/cases/caseSlice";
+import RefreshingAjaxButton from "../utility/RefreshingAjaxButton";
 
 interface CaseSummaryStatusProps {
    subcase: CaseBase;
@@ -27,67 +18,50 @@ interface CaseSummaryStatusProps {
 
 const CaseStatus: React.FunctionComponent<CaseSummaryStatusProps> = (props) => {
    const dispatch = useDispatch();
-   const { SessionId } = useSelector((state: RootState) =>
-      useSelector(getAPISession)
-   );
-   const [clickedStatus, setClickedStatus] = useState("");
 
    const currentCaseStatus = findCaseStatusName(props.subcase);
-   const updateStatusFetchState = useFetch(
-      `${apiBase}/subcases/${props.subcase.Id}/status`,
-      {
-         method: "POST",
-         headers: { ...defaultRequestHeaders, Authorization: SessionId },
-      },
-      {
-         onResolve: () => {
-            if (clickedStatus === caseStatusMapping.Reject.whenUpdating) {
-               dispatch(deleteCaseSummary(props.subcase.Id));
-            } else {
-               props.refresh();
-            }
-         },
-         json: true,
-         defer: true,
-      }
-   );
-
-   const submitNewStatus = (newStatus: string) => {
-      const body: NewStatusBody = {
-         Comment: "",
-         HoldReasonCode: "",
-         Code: newStatus,
-      };
-      updateStatusFetchState.run({ body: JSON.stringify(body) });
-   };
-
    return (
       <div className={"inline"}>
          <b className={"mr-2"}>Update Status:</b>
-         {currentCaseStatus?.nextStatus?.map((nextStatus) => (
-            <button
-               key={nextStatus}
-               className={classnames(buttonStyle, {
-                  "text-gray-500": updateStatusFetchState.isLoading,
-               })}
-               onClick={() => {
-                  setClickedStatus(caseStatusMapping[nextStatus].whenUpdating);
-                  submitNewStatus(caseStatusMapping[nextStatus].whenUpdating);
-               }}
-               disabled={updateStatusFetchState.isLoading}
-            >
-               <Bool
-                  if={
-                     updateStatusFetchState.isLoading &&
-                     caseStatusMapping[nextStatus].whenUpdating ===
-                        clickedStatus
-                  }
+         {currentCaseStatus?.nextStatus?.map((nextStatus) => {
+            const updateStatusFetchState = useFetch(
+               `${apiBase}/subcases/${props.subcase.Id}/status`,
+               {
+                  method: "POST",
+               },
+               {
+                  onResolve: () => {
+                     if (nextStatus === "Reject") {
+                        dispatch(deleteCaseSummary(props.subcase.Id));
+                     } else {
+                        props.refresh();
+                     }
+                  },
+                  json: true,
+                  defer: true,
+               }
+            );
+
+            return (
+               <RefreshingAjaxButton
+                  key={nextStatus}
+                  async={updateStatusFetchState}
+                  onClick={(apiSession) => {
+                     const statusBody: NewStatusBody = {
+                        Comment: "",
+                        HoldReasonCode: "",
+                        Code: caseStatusMapping[nextStatus].whenUpdating,
+                     };
+                     updateStatusFetchState.run({
+                        body: JSON.stringify(statusBody),
+                        headers: buildRequestHeaders(apiSession),
+                     });
+                  }}
                >
-                  <img src={Refresh} className={"inline animate-spin mr-2 "} />
-               </Bool>
-               {caseStatusMapping[nextStatus].whenUpdating}
-            </button>
-         ))}
+                  <span>{caseStatusMapping[nextStatus].whenUpdating}</span>
+               </RefreshingAjaxButton>
+            );
+         })}
       </div>
    );
 };

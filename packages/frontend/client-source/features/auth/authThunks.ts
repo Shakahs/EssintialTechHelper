@@ -56,6 +56,9 @@ export const loginAPISession = createAsyncThunk<
 });
 
 //return the existing session data if it is less than 30 minutes old
+//otherwise refresh it and return new
+//TODO: add error handling here for when refresh fails
+//this shouldn't be called directly, use getAPISessionInComponent instead
 export const checkAPISession = createAsyncThunk<
    APISession,
    undefined,

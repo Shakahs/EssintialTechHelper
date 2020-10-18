@@ -15,6 +15,7 @@ import CasePartsListItem from "./CasePartsListItem";
 import LoadingIcon from "../LoadingIcon";
 import Bool from "../utility/Bool";
 import AjaxButton from "../utility/AjaxButton";
+import RefreshingAjaxButton from "../utility/RefreshingAjaxButton";
 
 interface CaseSummaryPartsProps {
    subcase: CaseBase;
@@ -54,15 +55,17 @@ const CasePartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
    return (
       <div className={"inline"}>
          <div>
-            <AjaxButton
-               loading={partsShippedFetchState.isLoading}
-               onClick={() => {
+            <RefreshingAjaxButton
+               async={partsShippedFetchState}
+               onClick={(apiSession) => {
                   setPartsShipments([]);
-                  runFetchParts();
+                  partsShippedFetchState.run({
+                     headers: buildRequestHeaders(apiSession),
+                  });
                }}
             >
                <span>Refresh Parts</span>
-            </AjaxButton>
+            </RefreshingAjaxButton>
          </div>
          {partsShipments?.length > 0 && (
             <ul>
