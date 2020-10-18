@@ -1,7 +1,7 @@
 require("dotenv").config();
 import fetch, { RequestInit } from "node-fetch";
 import { apiParameters, apiUrl } from "./constants";
-import { APIResult, Ticket } from "../../types";
+import { APIResult, Ticket, UngeocodedTicket } from "../../types";
 import * as https from "https";
 import { filter, replace, sortBy, round } from "lodash";
 import { mapboxToken } from "../../constants";
@@ -43,46 +43,49 @@ async function pullRawData(): Promise<APIResult> {
    return rawJson;
 }
 
-const geoCode = async (res: APIResult): Promise<Ticket[]> => {
-   const ticketResult: Ticket[] = [];
+const transformFromAPI = (res: APIResult): UngeocodedTicket[] => {
+   const ticketResult: UngeocodedTicket[] = [];
 
-   for await (const rawJSONTicket of res.hits.hits) {
+   for (let rawJSONTicket of res.hits.hits) {
+      const apiProvidedDate = parseISO(rawJSONTicket._source.createDt[0]);
+      const providedTime = parseISO(rawJSONTicket._source.createTm[0]);
+      const actualDate = new Date(
+         apiProvidedDate.getUTCFullYear(),
+         apiProvidedDate.getUTCMonth(),
+         apiProvidedDate.getUTCDate(),
+         providedTime.getHours(),
+         providedTime.getMinutes()
+      );
+      ticketResult.push({
+         siteName: rawJSONTicket._source.srmSiteName,
+         priority: rawJSONTicket._source.srmPrio[0],
+         address: rawJSONTicket._source.siteAddr,
+         city: rawJSONTicket._source.srmSiteCity,
+         state: rawJSONTicket._source.srmSiteState,
+         ticketNumber: rawJSONTicket._source.detailId,
+         partNumber: rawJSONTicket._source.srmModelNo[0],
+         partDescription: rawJSONTicket._source.srmModelDesc[0],
+         created: actualDate,
+      });
+   }
+
+   return ticketResult;
+};
+
+const geoCodeTickets = async (ungeo: UngeocodedTicket[]): Promise<Ticket[]> => {
+   const geoCodedTickets: Ticket[] = [];
+
+   for await (const t of ungeo) {
       try {
-         const geoQuery = `${rawJSONTicket._source.siteAddr}, ${rawJSONTicket._source.srmSiteCity}, ${rawJSONTicket._source.srmSiteState}`;
+         const geoQuery = `${t.address}, ${t.city}, ${t.state}`;
          const geoQueryURLSafe = replace(geoQuery, "#", "");
          const mapboxResponse = await fetch(
             `https://api.mapbox.com/geocoding/v5/mapbox.places/${geoQueryURLSafe}.json?limit=1&access_token=${mapboxToken}&country=US`
          );
          const mapboxGeoPoint: GeoJSON.FeatureCollection<Point> = await mapboxResponse.json();
 
-         // console.log(
-         //    apiTicket._source.detailId,
-         //    `${apiTicket._source.createDt[0].substr(
-         //       0,
-         //       10
-         //    )}${apiTicket._source.createTm[0].substr(10)}`
-         // );
-
-         const apiProvidedDate = parseISO(rawJSONTicket._source.createDt[0]);
-         const providedTime = parseISO(rawJSONTicket._source.createTm[0]);
-         const actualDate = new Date(
-            apiProvidedDate.getUTCFullYear(),
-            apiProvidedDate.getUTCMonth(),
-            apiProvidedDate.getUTCDate(),
-            providedTime.getHours(),
-            providedTime.getMinutes()
-         );
-
-         ticketResult.push({
-            siteName: rawJSONTicket._source.srmSiteName,
-            priority: rawJSONTicket._source.srmPrio[0],
-            address: rawJSONTicket._source.siteAddr,
-            city: rawJSONTicket._source.srmSiteCity,
-            // geocoding: mapboxGeoPoint,
-            ticketNumber: rawJSONTicket._source.detailId,
-            partNumber: rawJSONTicket._source.srmModelNo[0],
-            partDescription: rawJSONTicket._source.srmModelDesc[0],
-            created: actualDate,
+         geoCodedTickets.push({
+            ...t,
             longitude: mapboxGeoPoint.features[0].geometry.coordinates[0],
             latitude: mapboxGeoPoint.features[0].geometry.coordinates[1],
          });
@@ -91,20 +94,36 @@ const geoCode = async (res: APIResult): Promise<Ticket[]> => {
       }
    }
 
-   return ticketResult;
+   return geoCodedTickets;
 };
 
-const filterAndSort = (unfilteredTickets: Ticket[]): Ticket[] => {
+const filterBadTickets = (
+   unfilteredTickets: UngeocodedTicket[]
+): UngeocodedTicket[] => {
    //filter out tickets older than 1 week
    const weekAgo = subWeeks(new Date(), 1);
-   const filteredTickets = filter<Ticket>(unfilteredTickets, (o) =>
+   const filteredTickets = filter(unfilteredTickets, (o) =>
       isAfter(o.created, weekAgo)
    );
 
    //sort by city name
-   const sortedTickets = sortBy<Ticket>(filteredTickets, (o) => [o.city]);
+   // const sortedTickets = sortBy(filteredTickets, (o) => [o.city]);
 
-   return sortedTickets;
+   return filteredTickets;
+};
+
+const filterExistingTickets = async (
+   candidates: UngeocodedTicket[],
+   connection: Connection
+): Promise<UngeocodedTicket[]> => {
+   const newTickets: UngeocodedTicket[] = [];
+   for await (const c of candidates) {
+      const result = await TicketEntity.findOne(c.ticketNumber);
+      if (result === undefined) {
+         newTickets.push(c);
+      }
+   }
+   return newTickets;
 };
 
 const persistTickets = async (
@@ -122,21 +141,11 @@ const persistTickets = async (
 
       for await (const newTicket of tickets) {
          try {
-            //see if it exists
-            const preexistingTicket = await transaction.findOne(
-               "TicketEntity",
-               newTicket.ticketNumber
-            );
-
             //upsert
             let dbInsert = TicketEntity.create(newTicket);
             dbInsert.visible = true;
             await transaction.save(dbInsert);
-
-            //return as new if it wasn't already existing
-            if (!preexistingTicket) {
-               persistedTickets.push(newTicket);
-            }
+            persistedTickets.push(newTicket);
          } catch (err) {
             console.log("Could not insert", newTicket.ticketNumber, err);
          }
@@ -194,12 +203,19 @@ async function poll() {
       const dbConnection = await getConnection();
       console.log("polling ticket API");
       const rawTickets = await pullRawData();
-      const processedTickets = await geoCode(rawTickets);
-      console.log(`${processedTickets.length} valid tickets found`);
-      const filteredTickets = filterAndSort(processedTickets);
+      const transformedTickets = transformFromAPI(rawTickets);
+      const filteredTickets = filterBadTickets(transformedTickets);
+      console.log(`${filteredTickets.length} valid tickets found`);
+      const newTickets = await filterExistingTickets(
+         filteredTickets,
+         dbConnection
+      );
+      console.log(`${newTickets.length} new tickets found`);
+      const geoCodedTickets = await geoCodeTickets(newTickets);
+
       // console.log(filteredTickets);
       const persistedTickets = await persistTickets(
-         filteredTickets,
+         geoCodedTickets,
          dbConnection
       );
       console.log("persisted tickets:", persistedTickets.length);

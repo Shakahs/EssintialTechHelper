@@ -21,7 +21,7 @@ export interface APIResult {
    };
 }
 
-export interface Ticket {
+export interface UngeocodedTicket {
    ticketNumber: string;
    partNumber: string;
    partDescription: string;
@@ -29,11 +29,15 @@ export interface Ticket {
    // geocoding: GeoJSON.FeatureCollection<Point>;
    address: string;
    city: string;
+   state: string;
    priority: string;
    siteName: string;
+}
+
+export type Ticket = UngeocodedTicket & {
    longitude: number;
    latitude: number;
-}
+};
 
 export interface TrackingDetail {
    message: string;
