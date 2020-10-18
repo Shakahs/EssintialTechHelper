@@ -7,6 +7,7 @@ import { apiBase, defaultRequestHeaders } from "../../constants";
 import differenceInMinutes from "date-fns/differenceInMinutes";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { parseISO } from "date-fns";
+import { FetchError } from "react-async";
 
 //login to the API, store the received session data
 export const loginAPISession = createAsyncThunk<
@@ -18,26 +19,40 @@ export const loginAPISession = createAsyncThunk<
       rejectValue: SerializedError;
    }
 >(`${sliceName}/loginAPISession`, async (creds, thunkAPI) => {
-   const sessionResponse = await fetch(`${apiBase}/session`, {
-      method: "POST",
-      headers: defaultRequestHeaders,
-      body: JSON.stringify({
-         Password: creds.password,
-         SourceSystem: "BUDDY",
-         UserId: creds.email,
-      }),
-   });
+   try {
+      const sessionResponse = await fetch(`${apiBase}/session`, {
+         method: "POST",
+         headers: defaultRequestHeaders,
+         body: JSON.stringify({
+            Password: creds.password,
+            SourceSystem: "BUDDY",
+            UserId: creds.email,
+         }),
+      });
 
-   const result: ResultsObject<APISession> = await sessionResponse.json();
-   if (result.Results.length === 0) {
+      if (!sessionResponse.ok) {
+         return thunkAPI.rejectWithValue({
+            name: "AuthError",
+            message: "Server Error",
+         });
+      }
+
+      const result: ResultsObject<APISession> = await sessionResponse.json();
+      if (result.Results.length === 0) {
+         return thunkAPI.rejectWithValue({
+            name: "AuthError",
+            message: "Invalid Credentials",
+         });
+      }
+
+      const apiSessionData = result.Results[0];
+      return apiSessionData;
+   } catch (err) {
       return thunkAPI.rejectWithValue({
          name: "AuthError",
-         message: "Invalid Credentials",
+         message: "Unknown error, check your connection",
       });
    }
-
-   const apiSessionData = result.Results[0];
-   return apiSessionData;
 });
 
 //return the existing session data if it is less than 30 minutes old
