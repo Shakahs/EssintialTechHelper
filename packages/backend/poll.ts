@@ -117,12 +117,25 @@ const filterExistingTickets = async (
    connection: Connection
 ): Promise<UngeocodedTicket[]> => {
    const newTickets: UngeocodedTicket[] = [];
-   for await (const c of candidates) {
-      const result = await TicketEntity.findOne(c.ticketNumber);
-      if (result === undefined) {
-         newTickets.push(c);
+
+   await connection.transaction(async (transaction) => {
+      await transaction
+         .createQueryBuilder()
+         .update(TicketEntity)
+         .set({ visible: false })
+         .execute();
+
+      for await (const c of candidates) {
+         const result = await TicketEntity.findOne(c.ticketNumber);
+         if (result) {
+            result.visible = true;
+            await transaction.save(result);
+         } else {
+            newTickets.push(c);
+         }
       }
-   }
+   });
+
    return newTickets;
 };
 
@@ -133,12 +146,6 @@ const persistTickets = async (
    let persistedTickets: Ticket[] = [];
 
    await connection.transaction(async (transaction) => {
-      await transaction
-         .createQueryBuilder()
-         .update(TicketEntity)
-         .set({ visible: false })
-         .execute();
-
       for await (const newTicket of tickets) {
          try {
             //upsert
