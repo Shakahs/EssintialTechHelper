@@ -40,10 +40,10 @@ const ProvideCredentials: React.FunctionComponent<ManageProps> = (props) => {
          dispatch(updateCredentials(credentials));
       } catch (err) {
          const typedError: SerializedError = err;
-         setError("password", {
-            type: "manual",
-            message: typedError.message ?? "Unable to login",
-         });
+         // setError("password", {
+         //    type: "manual",
+         //    message: typedError.message ?? "Unable to login",
+         // });
       }
    };
 
@@ -104,7 +104,7 @@ const ProvideCredentials: React.FunctionComponent<ManageProps> = (props) => {
                   </button>
                </div>
                {loginFetchState.error && (
-                  <span className={"text-red-500"}>
+                  <span className={"text-red-600"}>
                      {loginFetchState.error}
                   </span>
                )}

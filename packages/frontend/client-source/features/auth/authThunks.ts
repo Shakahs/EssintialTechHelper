@@ -30,7 +30,10 @@ export const loginAPISession = createAsyncThunk<
 
    const result: ResultsObject<APISession> = await sessionResponse.json();
    if (result.Results.length === 0) {
-      throw { name: "AuthError", message: "Invalid Credentials" };
+      return thunkAPI.rejectWithValue({
+         name: "AuthError",
+         message: "Invalid Credentials",
+      });
    }
 
    const apiSessionData = result.Results[0];
