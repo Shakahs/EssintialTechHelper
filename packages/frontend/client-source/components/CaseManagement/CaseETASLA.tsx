@@ -31,40 +31,6 @@ const CaseETASLA: React.FunctionComponent<CaseSummaryETASLAProps> = (props) => {
    );
 
    const parsedETA = parseISO(props.subcase.ScheduledDateTime);
-   const [newETA, setNewETA] = useState<Date | null>(null);
-
-   const updateETAFetchState = useFetch(
-      `${apiBase}/subcases/${props.subcase.Id}/reschedule`,
-      {
-         method: "POST",
-         headers: { ...defaultRequestHeaders, Authorization: SessionId },
-      },
-      {
-         onResolve: () => {
-            setNewETA(null);
-            props.refresh();
-         },
-
-         json: true,
-         defer: true,
-      }
-   );
-
-   const submitNewETA = async (newETA: Date) => {
-      const thisAPISession = await getAPISessionInComponent();
-      const body: NewETABody = {
-         NewSubcaseComment: "Updating ETA",
-         ScheduledDateTime: formatDate(newETA, "LLL dd, yyyy hh:mm aa"),
-         ServiceRep: thisAPISession.ServiceRep,
-      };
-      updateETAFetchState.run({
-         body: JSON.stringify(body),
-         headers: {
-            ...defaultRequestHeaders,
-            Authorization: thisAPISession.SessionId,
-         },
-      });
-   };
 
    return (
       <div>
@@ -98,44 +64,6 @@ const CaseETASLA: React.FunctionComponent<CaseSummaryETASLAProps> = (props) => {
                   </span>
                );
             })}
-         </span>
-         <span>
-            <DatePicker
-               selected={newETA || parsedETA}
-               //coerce the type because the library definitions say it COULD be 2 dates representing a range
-               onChange={(date: Date) => setNewETA(date)}
-               showTimeSelect
-               timeIntervals={15}
-               dateFormat={"MMMM d, yyyy h:mm aa"}
-               // withPortal
-            />
-            <Bool if={newETA !== null}>
-               <button
-                  className={classnames(buttonStyle, {
-                     "text-gray-500": updateETAFetchState.isLoading,
-                  })}
-                  disabled={updateETAFetchState.isLoading}
-                  onClick={() => {
-                     submitNewETA(newETA);
-                  }}
-               >
-                  <Bool if={updateETAFetchState.isLoading}>
-                     <LoadingIcon />
-                  </Bool>
-                  Save new ETA
-               </button>
-               <button
-                  className={classnames(buttonStyle, {
-                     "text-gray-500": updateETAFetchState.isLoading,
-                  })}
-                  disabled={updateETAFetchState.isLoading}
-                  onClick={() => {
-                     setNewETA(null);
-                  }}
-               >
-                  Cancel
-               </button>
-            </Bool>
          </span>
       </div>
    );

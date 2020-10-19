@@ -7,7 +7,8 @@ import CasePartsList from "./CasePartsList";
 import { CaseBase } from "../../api";
 import EnsureFullCase from "../utility/EnsureFullCase";
 import CaseComments from "./CaseComments";
-import CaseStatus from "./CaseStatus";
+import CaseStatusUpdate from "./CaseStatus/CaseStatusUpdate";
+import CaseStatus from "./CaseStatus/CaseStatus";
 
 interface CaseExtendedDataProps {
    subcase: CaseBase;

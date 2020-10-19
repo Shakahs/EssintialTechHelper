@@ -1,22 +1,24 @@
 import * as React from "react";
-import { apiBase, caseStatusMapping } from "../../constants";
+import { apiBase, caseStatusMapping } from "../../../constants";
 import {
    buildRequestHeaders,
    CaseBase,
    findCaseStatusName,
    NewStatusBody,
-} from "../../api";
+} from "../../../api";
 import { useFetch } from "react-async";
 import { useDispatch } from "react-redux";
-import { deleteCaseSummary } from "../../features/cases/caseSlice";
-import RefreshingAjaxButton from "../utility/RefreshingAjaxButton";
+import { deleteCaseSummary } from "../../../features/cases/caseSlice";
+import RefreshingAjaxButton from "../../utility/RefreshingAjaxButton";
 
 interface CaseSummaryStatusProps {
    subcase: CaseBase;
    refresh: () => void;
 }
 
-const CaseStatus: React.FunctionComponent<CaseSummaryStatusProps> = (props) => {
+const CaseStatusUpdate: React.FunctionComponent<CaseSummaryStatusProps> = (
+   props
+) => {
    const dispatch = useDispatch();
 
    const currentCaseStatus = findCaseStatusName(props.subcase);
@@ -66,4 +68,4 @@ const CaseStatus: React.FunctionComponent<CaseSummaryStatusProps> = (props) => {
    );
 };
 
-export default CaseStatus;
+export default CaseStatusUpdate;
