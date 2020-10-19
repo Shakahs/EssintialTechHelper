@@ -6,7 +6,7 @@ import Navbar from "./Navbar";
 import { useSelector } from "react-redux";
 import { RootState } from "../rootReducer";
 import Bool from "./utility/Bool";
-import CaseList from "./Case/CaseList";
+import CaseList from "./CaseList/CaseList";
 import { getIsLoggedIn } from "../features/auth/authSelectors";
 
 interface MainProps {}
