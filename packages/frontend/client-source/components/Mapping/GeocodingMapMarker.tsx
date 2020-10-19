@@ -10,8 +10,8 @@ import { useState } from "react";
 import { CaseBase } from "../../api";
 
 interface GeocodingMapMarkerProps {
-   case: CaseBase;
-   setSelectedTicket: (ticket: string) => void;
+   query: string;
+   children: React.ReactElement;
 }
 
 const GeocodingMapMarker: React.FunctionComponent<GeocodingMapMarkerProps> = (
@@ -19,8 +19,7 @@ const GeocodingMapMarker: React.FunctionComponent<GeocodingMapMarkerProps> = (
 ) => {
    const [position, setPosition] = useState<Position | null>();
 
-   const geoQuery = props.case?.Location.FullAddress;
-   const geoQueryURLSafe = replace(geoQuery, "#", "");
+   const geoQueryURLSafe = replace(props.query, "#", "");
    const geocodingFetchState = useFetch<GeoJSON.FeatureCollection<Point>>(
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${geoQueryURLSafe}.json?limit=1&access_token=${mapboxToken}&country=US`,
       {},
@@ -38,19 +37,10 @@ const GeocodingMapMarker: React.FunctionComponent<GeocodingMapMarkerProps> = (
          {position && (
             <Marker
                captureClick={true}
-               key={props.case.Id}
                latitude={position[1]}
                longitude={position[0]}
             >
-               <div
-                  onClick={() => {
-                     props.setSelectedTicket(props.case.Id);
-                  }}
-               >
-                  {props.case.Id}
-                  <br />
-                  {truncate(props.case.Model, { length: 15 })}
-               </div>
+               {props.children}
             </Marker>
          )}
       </IfFulfilled>

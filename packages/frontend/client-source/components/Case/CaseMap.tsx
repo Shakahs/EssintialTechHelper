@@ -3,8 +3,9 @@ import { mapboxToken } from "../../../../../constants";
 import ReactMapGL from "react-map-gl";
 import { useState } from "react";
 import { Ticket } from "../../../../../types";
-import GeocodingMapMarker from "./GeocodingMapMarker";
+import GeocodingMapMarker from "../Mapping/GeocodingMapMarker";
 import { CaseBase } from "../../api";
+import CaseMapMarker from "./CaseMapMarker";
 
 interface CaseMapProps {
    tickets: CaseBase[];
@@ -29,7 +30,10 @@ const CaseMap: React.FunctionComponent<CaseMapProps> = (props) => {
          }}
       >
          {props.tickets.map((c) => (
-            <GeocodingMapMarker case={c} setSelectedTicket={(_) => {}} />
+            <CaseMapMarker
+               case={c}
+               setSelectedTicket={(id) => console.log(id)}
+            />
          ))}
       </ReactMapGL>
    );
