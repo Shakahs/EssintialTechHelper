@@ -35,7 +35,23 @@ const CaseList: React.FunctionComponent<Manage2Props> = (props) => {
 
    return (
       <div>
-         <div>
+         <div className={"flex flex-row justify-between"}>
+            <div>
+               <AjaxButton
+                  loading={fetchCaseState.loading}
+                  onClick={() => {
+                     dispatch(debouncedFetchCases());
+                  }}
+                  className={"border p-2 mb-3 bg-green-300"}
+               >
+                  <span>Refresh Cases</span>
+               </AjaxButton>
+               {fetchCaseState.error && (
+                  <span className={"text-red-500"}>
+                     There was an error refreshing your subcase list.
+                  </span>
+               )}
+            </div>
             <button
                className={"border p-2 mb-3"}
                onClick={() => {
@@ -46,25 +62,12 @@ const CaseList: React.FunctionComponent<Manage2Props> = (props) => {
             </button>
          </div>
          <div>
-            <CaseMap tickets={filteredCaseSummaries} />
-         </div>
-         <div className={"block"}>
-            <AjaxButton
-               loading={fetchCaseState.loading}
-               onClick={() => {
-                  dispatch(debouncedFetchCases());
-               }}
-               className={"border p-2 mb-3 bg-green-300"}
-            >
-               <span>Refresh Cases</span>
-            </AjaxButton>
-            {fetchCaseState.error && (
-               <span className={"text-red-500"}>
-                  There was an error refreshing your subcase list.
-               </span>
-            )}
             <CaseFilters />
          </div>
+         <div>
+            <CaseMap tickets={filteredCaseSummaries} />
+         </div>
+
          {map(filteredCaseSummaries, (sc) => (
             <CaseListItem subcase={sc} key={sc.Id} />
          ))}
