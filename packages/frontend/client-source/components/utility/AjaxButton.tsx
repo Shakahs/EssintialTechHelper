@@ -10,13 +10,14 @@ interface AjaxButtonProps {
    onClick: () => void;
    children: ReactElement;
    className?: string;
+   disabled?: boolean;
 }
 
 const AjaxButton: React.FunctionComponent<AjaxButtonProps> = (props) => (
    <button
       className={props.className ?? buttonStyle}
       onClick={props.onClick}
-      disabled={props.loading}
+      disabled={props.loading || props.disabled}
    >
       <Bool if={props.loading}>
          <span className={"mr-1"}>

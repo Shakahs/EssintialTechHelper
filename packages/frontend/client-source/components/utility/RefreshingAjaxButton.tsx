@@ -10,6 +10,7 @@ interface RefreshingAjaxButtonProps {
    onClick: (apiSession: APISession) => void;
    children: ReactElement;
    className?: string;
+   disabled?: boolean;
 }
 
 const RefreshingAjaxButton: React.FunctionComponent<RefreshingAjaxButtonProps> = (
@@ -35,6 +36,7 @@ const RefreshingAjaxButton: React.FunctionComponent<RefreshingAjaxButtonProps> =
          onClick={async () => {
             await execute();
          }}
+         disabled={props.disabled}
          className={props.className}
       >
          {props.children}
