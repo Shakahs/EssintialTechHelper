@@ -16,7 +16,7 @@ interface CaseSummaryStatusProps {
    refresh: () => void;
 }
 
-const CaseStatusUpdate: React.FunctionComponent<CaseSummaryStatusProps> = (
+const CaseStatusUpdater: React.FunctionComponent<CaseSummaryStatusProps> = (
    props
 ) => {
    const dispatch = useDispatch();
@@ -68,4 +68,4 @@ const CaseStatusUpdate: React.FunctionComponent<CaseSummaryStatusProps> = (
    );
 };
 
-export default CaseStatusUpdate;
+export default CaseStatusUpdater;

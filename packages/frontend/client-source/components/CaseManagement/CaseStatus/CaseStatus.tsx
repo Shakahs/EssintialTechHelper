@@ -1,7 +1,9 @@
 import * as React from "react";
 import CaseETAUpdater from "./CaseETAUpdater";
 import { CaseBase } from "../../../api";
-import CaseStatusUpdate from "./CaseStatusUpdate";
+import CaseStatusUpdater from "./CaseStatusUpdater";
+import Bool from "../../utility/Bool";
+import { caseStatusMapping } from "../../../constants";
 
 interface CaseStatusProps {
    subcase: CaseBase;
@@ -10,8 +12,16 @@ interface CaseStatusProps {
 
 const CaseStatus: React.FunctionComponent<CaseStatusProps> = (props) => (
    <div>
-      <CaseETAUpdater subcase={props.subcase} refresh={props.refresh} />
-      <CaseStatusUpdate subcase={props.subcase} refresh={props.refresh} />
+      <Bool
+         if={[
+            caseStatusMapping.Assign.whenReading,
+            caseStatusMapping.Commit.whenReading,
+            caseStatusMapping.Enroute.whenReading,
+         ].includes(props.subcase.UserStatus)}
+      >
+         <CaseETAUpdater subcase={props.subcase} refresh={props.refresh} />
+         <CaseStatusUpdater subcase={props.subcase} refresh={props.refresh} />
+      </Bool>
    </div>
 );
 
