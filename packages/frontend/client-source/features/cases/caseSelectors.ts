@@ -57,22 +57,8 @@ export const getCasesComplete = createSelector(preFilteredCases, (cases) => {
 });
 
 export const getCaseFilterResult = createSelector(
-   [
-      getCasesAssigned,
-      getCasesCommitted,
-      getCasesEnroute,
-      getCasesArrive,
-      getCasesComplete,
-      getCaseFilters,
-   ],
-   (
-      casesAssigned,
-      casesCommitted,
-      casesEnroute,
-      casesArrive,
-      casesComplete,
-      filters
-   ) => {
+   [getCasesAssigned, getCasesCommitted, getCasesComplete, getCaseFilters],
+   (casesAssigned, casesCommitted, casesComplete, filters) => {
       const caseSequenceFilterResult: CaseBase[] = [];
       if (filters.showAssigned) {
          caseSequenceFilterResult.push(...casesAssigned);
@@ -80,12 +66,7 @@ export const getCaseFilterResult = createSelector(
       if (filters.showCommitted) {
          caseSequenceFilterResult.push(...casesCommitted);
       }
-      if (filters.showEnroute) {
-         caseSequenceFilterResult.push(...casesEnroute);
-      }
-      if (filters.showArrived) {
-         caseSequenceFilterResult.push(...casesArrive);
-      }
+
       if (filters.showComplete) {
          caseSequenceFilterResult.push(...casesComplete);
       }

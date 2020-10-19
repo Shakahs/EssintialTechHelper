@@ -61,7 +61,7 @@ export const caseStatusMapping: Partial<CaseStatusMappingCollection> = {
       whenReading: "ENRT",
       whenUpdating: "ENROUTE",
       nextStatus: ["Commit", "Arrive"],
-      isCaseSequenceFilter: true,
+      isCaseSequenceFilter: false,
       reduxCaseSelector: getCasesEnroute,
       reduxFilterSelector: () =>
          store.getState().caseSlice.caseFilters.showEnroute,
@@ -77,7 +77,7 @@ export const caseStatusMapping: Partial<CaseStatusMappingCollection> = {
       name: "Arrived",
       whenReading: "ARRV",
       whenUpdating: "ARRIVE",
-      isCaseSequenceFilter: true,
+      isCaseSequenceFilter: false,
       reduxCaseSelector: getCasesArrive,
       reduxFilterSelector: () =>
          store.getState().caseSlice.caseFilters.showArrived,

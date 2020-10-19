@@ -14,16 +14,15 @@ const CaseFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
    const dispatch = useDispatch();
    const { caseFilters } = useSelector((state: RootState) => state.caseSlice);
    return (
-      <div>
+      <div className={"border border-solid border-1 p-2"}>
          Filters:
-         <div className={"border border-solid border-1 inline p-2"}>
-            Case Status:
+         <div className={"flex flex-row justify-between"}>
             {map(caseStatusMapping, (csm) => {
                if (csm.isCaseSequenceFilter) {
                   return (
                      <div
                         key={csm.name}
-                        className={"inline"}
+                        className={"inline mr-1"}
                         onClick={csm.reduxToggle}
                      >
                         <input
@@ -43,25 +42,26 @@ const CaseFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
                   );
                }
             })}
-         </div>
-         <div
-            className={"border border-solid border-1 inline p-2"}
-            onClick={() => {
-               dispatch(
-                  updateFilters({
-                     ...caseFilters,
-                     showProjectWork: !caseFilters.showProjectWork,
-                  })
-               );
-            }}
-         >
-            <input
-               type={"checkbox"}
-               name={`checkbox-projectwork`}
-               checked={caseFilters.showProjectWork}
-               readOnly
-            />
-            <label htmlFor={`checkbox-projectwork`}>Include Project work</label>
+            <div
+               onClick={() => {
+                  dispatch(
+                     updateFilters({
+                        ...caseFilters,
+                        showProjectWork: !caseFilters.showProjectWork,
+                     })
+                  );
+               }}
+            >
+               <input
+                  type={"checkbox"}
+                  name={`checkbox-projectwork`}
+                  checked={caseFilters.showProjectWork}
+                  readOnly
+               />
+               <label htmlFor={`checkbox-projectwork`}>
+                  Include Project work
+               </label>
+            </div>
          </div>
       </div>
    );

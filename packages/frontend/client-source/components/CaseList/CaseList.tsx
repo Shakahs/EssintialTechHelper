@@ -10,6 +10,8 @@ import { debouncedFetchCases } from "../../features/cases/caseThunks";
 import CaseFilters from "./CaseFilters";
 import {
    getCaseFilterResult,
+   getCasesArrive,
+   getCasesEnroute,
    getFilteredSortedCases,
 } from "../../features/cases/caseSelectors";
 import { getAPISession } from "../../features/auth/authSelectors";
@@ -31,6 +33,8 @@ const CaseList: React.FunctionComponent<Manage2Props> = (props) => {
       dispatch(debouncedFetchCases());
    }, []);
 
+   const arrivedCases = useSelector(getCasesArrive);
+   const enrouteCases = useSelector(getCasesEnroute);
    const filteredCaseSummaries = useSelector(getFilteredSortedCases);
 
    return (
@@ -51,7 +55,8 @@ const CaseList: React.FunctionComponent<Manage2Props> = (props) => {
                      There was an error refreshing your subcase list.
                   </span>
                )}
-            </div>
+            </div>{" "}
+            <CaseFilters />
             <button
                className={"border p-2 mb-3"}
                onClick={() => {
@@ -61,12 +66,18 @@ const CaseList: React.FunctionComponent<Manage2Props> = (props) => {
                Logout
             </button>
          </div>
-         <div>
-            <CaseFilters />
-         </div>
+         <div></div>
          <div>
             <CaseMap tickets={filteredCaseSummaries} />
          </div>
+
+         {map(arrivedCases, (sc) => (
+            <CaseListItem subcase={sc} key={sc.Id} />
+         ))}
+
+         {map(enrouteCases, (sc) => (
+            <CaseListItem subcase={sc} key={sc.Id} />
+         ))}
 
          {map(filteredCaseSummaries, (sc) => (
             <CaseListItem subcase={sc} key={sc.Id} />
