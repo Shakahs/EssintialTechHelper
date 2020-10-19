@@ -22,7 +22,7 @@ import CaseMap from "./CaseMap";
 
 interface Manage2Props {}
 
-const CaseList: React.FunctionComponent<Manage2Props> = (props) => {
+const CaseManagement: React.FunctionComponent<Manage2Props> = (props) => {
    const dispatch = useDispatch();
    const { fetchCaseState } = useSelector(
       (state: RootState) => state.caseSlice
@@ -86,4 +86,4 @@ const CaseList: React.FunctionComponent<Manage2Props> = (props) => {
    );
 };
 
-export default CaseList;
+export default CaseManagement;

@@ -6,7 +6,7 @@ import Navbar from "./Navbar";
 import { useSelector } from "react-redux";
 import { RootState } from "../rootReducer";
 import Bool from "./utility/Bool";
-import CaseList from "./CaseList/CaseList";
+import CaseManagement from "./CaseManagement/CaseManagement";
 import { getIsLoggedIn } from "../features/auth/authSelectors";
 
 interface MainProps {}
@@ -24,7 +24,7 @@ const Main: React.FunctionComponent<MainProps> = (props) => {
                </Route>
                <Route path={"/manage"}>
                   <Bool if={loggedIn}>
-                     <CaseList />
+                     <CaseManagement />
                   </Bool>
                   <Bool if={!loggedIn}>
                      <ProvideCredentials />
