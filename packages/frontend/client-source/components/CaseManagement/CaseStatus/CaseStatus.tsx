@@ -4,6 +4,7 @@ import { CaseBase } from "../../../api";
 import CaseStatusUpdater from "./CaseStatusUpdater";
 import Bool from "../../utility/Bool";
 import { caseStatusMapping } from "../../../constants";
+import CaseCheckout from "./CaseCheckout";
 
 interface CaseStatusProps {
    subcase: CaseBase;
@@ -22,6 +23,7 @@ const CaseStatus: React.FunctionComponent<CaseStatusProps> = (props) => (
          <CaseETAUpdater subcase={props.subcase} refresh={props.refresh} />
          <CaseStatusUpdater subcase={props.subcase} refresh={props.refresh} />
       </Bool>
+      <CaseCheckout subcase={props.subcase} refresh={props.refresh} />
    </div>
 );
 
