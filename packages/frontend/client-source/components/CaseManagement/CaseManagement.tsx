@@ -19,6 +19,7 @@ import { resetAuthentication } from "../../features/auth/authSlice";
 import CaseComments from "./CaseComments";
 import AjaxButton from "../utility/AjaxButton";
 import CaseMap from "./CaseMap";
+import CaseList from "./CaseList";
 
 interface Manage2Props {}
 
@@ -33,13 +34,11 @@ const CaseManagement: React.FunctionComponent<Manage2Props> = (props) => {
       dispatch(debouncedFetchCases());
    }, []);
 
-   const arrivedCases = useSelector(getCasesArrive);
-   const enrouteCases = useSelector(getCasesEnroute);
    const filteredCaseSummaries = useSelector(getFilteredSortedCases);
 
    return (
       <div>
-         <div className={"flex flex-row justify-between"}>
+         <div className={"flex flex-row justify-between items-center"}>
             <div>
                <AjaxButton
                   loading={fetchCaseState.loading}
@@ -66,22 +65,12 @@ const CaseManagement: React.FunctionComponent<Manage2Props> = (props) => {
                Logout
             </button>
          </div>
-         <div></div>
-         <div>
+         <div className={"mt-2"}>
             <CaseMap tickets={filteredCaseSummaries} />
          </div>
-
-         {map(arrivedCases, (sc) => (
-            <CaseListItem subcase={sc} key={sc.Id} />
-         ))}
-
-         {map(enrouteCases, (sc) => (
-            <CaseListItem subcase={sc} key={sc.Id} />
-         ))}
-
-         {map(filteredCaseSummaries, (sc) => (
-            <CaseListItem subcase={sc} key={sc.Id} />
-         ))}
+         <div>
+            <CaseList />
+         </div>
       </div>
    );
 };
