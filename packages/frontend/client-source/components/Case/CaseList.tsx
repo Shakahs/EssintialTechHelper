@@ -16,6 +16,7 @@ import { getAPISession } from "../../features/auth/authSelectors";
 import { resetAuthentication } from "../../features/auth/authSlice";
 import CaseComments from "./CaseComments";
 import AjaxButton from "../utility/AjaxButton";
+import CaseMap from "./CaseMap";
 
 interface Manage2Props {}
 
@@ -43,6 +44,9 @@ const CaseList: React.FunctionComponent<Manage2Props> = (props) => {
             >
                Logout
             </button>
+         </div>
+         <div>
+            <CaseMap tickets={filteredCaseSummaries} />
          </div>
          <div className={"block"}>
             <AjaxButton
