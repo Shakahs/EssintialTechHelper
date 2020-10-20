@@ -59,6 +59,7 @@ export interface Comment {
 export interface CaseFullFields {
    ProblemDesc: string;
    Comments: Comment[];
+   References: { Value: string; Code: string }[];
 }
 
 export type CaseSummary = CaseBase & Partial<CaseFullFields>;
