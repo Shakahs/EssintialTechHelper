@@ -23,7 +23,11 @@ const CaseStatus: React.FunctionComponent<CaseStatusProps> = (props) => (
          <CaseETAUpdater subcase={props.subcase} refresh={props.refresh} />
          <CaseStatusUpdater subcase={props.subcase} refresh={props.refresh} />
       </Bool>
-      <CaseCheckout subcase={props.subcase} refresh={props.refresh} />
+      <Bool
+         if={caseStatusMapping.Arrive.whenReading === props.subcase.UserStatus}
+      >
+         <CaseCheckout subcase={props.subcase} refresh={props.refresh} />
+      </Bool>
    </div>
 );
 
