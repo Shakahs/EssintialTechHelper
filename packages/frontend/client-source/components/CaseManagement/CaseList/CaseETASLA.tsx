@@ -1,27 +1,18 @@
 import * as React from "react";
-import { useState } from "react";
 import isBefore from "date-fns/isBefore";
 import dateFormat from "date-fns/format";
-import formatDate from "date-fns/format";
-import { zonedTimeToUtc } from "date-fns-tz";
 import isToday from "date-fns/isToday";
-import { CaseBase, NewETABody } from "../../../api";
+import {
+   CaseBase,
+   parseSLA_Date,
+   standardDateTimeFormatting,
+} from "../../../api";
 import parseISO from "date-fns/parseISO";
 import classnames from "classnames";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useFetch } from "react-async";
-import {
-   apiBase,
-   buttonStyle,
-   defaultRequestHeaders,
-} from "../../../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../rootReducer";
 import { getAPISession } from "../../../features/auth/authSelectors";
-import Bool from "../../utility/Bool";
-import { getAPISessionInComponent } from "../../utility";
-import LoadingIcon from "../../LoadingIcon";
 
 interface CaseSummaryETASLAProps {
    subcase: CaseBase;
@@ -50,10 +41,7 @@ const CaseETASLA: React.FunctionComponent<CaseSummaryETASLAProps> = (props) => {
             {props.subcase.Milestones.map((ms) => {
                //Big assumption here: the user is in the same time zone as the store.
                //SLA is in the store's timezone, here we are reading it from the user
-               const parsedSLA_UTC = zonedTimeToUtc(
-                  ms.CalculatedDateTime,
-                  Intl.DateTimeFormat().resolvedOptions().timeZone
-               );
+               const parsedSLA_UTC = parseSLA_Date(ms.CalculatedDateTime);
                return (
                   <span
                      key={ms.Code}
@@ -63,7 +51,7 @@ const CaseETASLA: React.FunctionComponent<CaseSummaryETASLAProps> = (props) => {
                   >
                      {ms.Code === "ARR" && "Arrive"}
                      {ms.Code === "FIX" && "Fix"}
-                     {dateFormat(parsedSLA_UTC, "L/d h:mm b")}
+                     {dateFormat(parsedSLA_UTC, standardDateTimeFormatting)}
                      {/*{ms.CalculatedDateTime}*/}
                   </span>
                );

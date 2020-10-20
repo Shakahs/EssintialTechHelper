@@ -1,6 +1,7 @@
 import { find } from "lodash";
 import { RootState } from "./rootReducer";
 import { caseStatusMapping, defaultRequestHeaders } from "./constants";
+import { zonedTimeToUtc } from "date-fns-tz";
 
 export interface ResultsObject<T> {
    Results: T[];
@@ -43,8 +44,8 @@ export interface CaseBase {
       Zip: string;
    };
    Milestones: {
-      ActualDateTime: Date;
-      CalculatedDateTime: Date;
+      ActualDateTime: string;
+      CalculatedDateTime: string;
       Code: string;
    }[];
 }
@@ -173,3 +174,7 @@ export interface CheckoutBody {
 }
 
 export const timeFormatWhenUpdating = "LLL dd, yyyy hh:mm aa";
+export const standardDateTimeFormatting = "L/d h:mm b";
+
+export const parseSLA_Date = (datestring: string): Date =>
+   zonedTimeToUtc(datestring, Intl.DateTimeFormat().resolvedOptions().timeZone);
