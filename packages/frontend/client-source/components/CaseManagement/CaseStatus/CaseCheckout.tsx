@@ -63,7 +63,7 @@ const CaseCheckout: React.FunctionComponent<CaseCheckoutProps> = (props) => {
    const watchAssignFollowup = watch("assignFollowup", true);
 
    const checkoutFetchState = useFetch(
-      `${apiBase}/subcases/${props.subcase.Id}/reschedule`,
+      `${apiBase}/subcases/${props.subcase.Id}/resolve`,
       {
          method: "POST",
       },
