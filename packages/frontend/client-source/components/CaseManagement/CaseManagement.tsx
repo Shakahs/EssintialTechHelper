@@ -4,7 +4,7 @@ import { CaseBase, CurrentCaseStatus, isProjectWork } from "../../api";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../rootReducer";
 import { map } from "lodash";
-import CaseListItem from "./CaseListItem";
+import CaseListItem from "./CaseList/CaseListItem";
 import classnames from "classnames";
 import { debouncedFetchCases } from "../../features/cases/caseThunks";
 import CaseFilters from "./CaseFilters";
@@ -16,10 +16,10 @@ import {
 } from "../../features/cases/caseSelectors";
 import { getAPISession } from "../../features/auth/authSelectors";
 import { resetAuthentication } from "../../features/auth/authSlice";
-import CaseComments from "./CaseComments";
+import CaseComments from "./CaseList/CaseComments";
 import AjaxButton from "../utility/AjaxButton";
-import CaseMap from "./CaseMap";
-import CaseList from "./CaseList";
+import CaseMap from "./CaseMap/CaseMap";
+import CaseList from "./CaseList/CaseList";
 
 interface Manage2Props {}
 

@@ -1,9 +1,9 @@
 import * as React from "react";
-import { caseInProgress } from "./common";
-import { CaseBase, findCaseStatusName, isProjectWork } from "../../api";
+import { caseInProgress } from "../common";
+import { CaseBase, findCaseStatusName, isProjectWork } from "../../../api";
 import CaseETASLA from "./CaseETASLA";
-import Bool from "../utility/Bool";
-import partsList from "../../assets/riteAidPartList.json";
+import Bool from "../../utility/Bool";
+import partsList from "../../../assets/riteAidPartList.json";
 import classnames from "classnames";
 
 interface CasePrimaryDataProps {

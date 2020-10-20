@@ -1,8 +1,8 @@
 import * as React from "react";
 import { replace, truncate } from "lodash";
-import GeocodingMapMarker from "../Mapping/GeocodingMapMarker";
-import { CaseBase } from "../../api";
-import Pin from "../../assets/map-pin.svg";
+import GeocodingMapMarker from "../../Mapping/GeocodingMapMarker";
+import { CaseBase } from "../../../api";
+import Pin from "../../../assets/map-pin.svg";
 import parseISO from "date-fns/parseISO";
 import dateFormat from "date-fns/format";
 

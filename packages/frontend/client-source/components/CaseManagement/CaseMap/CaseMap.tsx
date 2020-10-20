@@ -1,10 +1,10 @@
 import * as React from "react";
-import { mapboxToken } from "../../../../../constants";
+import { mapboxToken } from "../../../../../../constants";
 import ReactMapGL from "react-map-gl";
 import { useState } from "react";
-import { Ticket } from "../../../../../types";
-import GeocodingMapMarker from "../Mapping/GeocodingMapMarker";
-import { CaseBase } from "../../api";
+import { Ticket } from "../../../../../../types";
+import GeocodingMapMarker from "../../Mapping/GeocodingMapMarker";
+import { CaseBase } from "../../../api";
 import CaseMapMarker from "./CaseMapMarker";
 
 interface CaseMapProps {

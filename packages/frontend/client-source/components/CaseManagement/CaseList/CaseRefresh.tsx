@@ -1,7 +1,7 @@
 import * as React from "react";
-import Bool from "../utility/Bool";
-import Refresh from "../../assets/refresh.svg";
-import { buttonStyle } from "../../constants";
+import Bool from "../../utility/Bool";
+import Refresh from "../../../assets/refresh.svg";
+import { buttonStyle } from "../../../constants";
 
 interface CaseSummaryRefreshProps {
    loading: boolean;

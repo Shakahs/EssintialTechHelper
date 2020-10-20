@@ -1,11 +1,11 @@
 import * as React from "react";
 import { useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import { buttonStyle } from "../../constants";
+import { buttonStyle } from "../../../constants";
 import "react-tabs/style/react-tabs.css";
-import CasePartsList from "./CasePartsList";
-import { CaseBase } from "../../api";
-import EnsureFullCase from "../utility/EnsureFullCase";
+import CasePartsList from "./CaseParts/CasePartsList";
+import { CaseBase } from "../../../api";
+import EnsureFullCase from "../../utility/EnsureFullCase";
 import CaseComments from "./CaseComments";
 import CaseStatus from "./CaseStatus/CaseStatus";
 

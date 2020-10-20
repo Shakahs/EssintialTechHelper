@@ -1,12 +1,12 @@
 import * as React from "react";
 import { useFetch } from "react-async";
-import { PartsShipment, ResultsObject } from "../../api";
-import { apiBase } from "../../constants";
+import { PartsShipment, ResultsObject } from "../../../../api";
+import { apiBase } from "../../../../constants";
 import { useState } from "react";
-import { Tracker, TrackingDetail } from "../../../../../types";
+import { Tracker, TrackingDetail } from "../../../../../../../types";
 import { parseJSON, format } from "date-fns";
-import Bool from "../utility/Bool";
-import LoadingIcon from "../LoadingIcon";
+import Bool from "../../../utility/Bool";
+import LoadingIcon from "../../../LoadingIcon";
 import { last } from "lodash";
 
 interface CaseSummaryPartsListItemProps {

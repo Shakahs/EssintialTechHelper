@@ -5,14 +5,14 @@ import {
    CaseSummary,
    PartsShipment,
    ResultsObject,
-} from "../../api";
+} from "../../../api";
 import { useFetch } from "react-async";
-import { apiBase, buttonStyle } from "../../constants";
+import { apiBase, buttonStyle } from "../../../constants";
 import { useDispatch } from "react-redux";
-import { upsertCaseSummary } from "../../features/cases/caseSlice";
-import { getAPISessionInComponent } from "../utility";
-import LoadingIcon from "../LoadingIcon";
-import Bool from "../utility/Bool";
+import { upsertCaseSummary } from "../../../features/cases/caseSlice";
+import { getAPISessionInComponent } from "../../utility";
+import LoadingIcon from "../../LoadingIcon";
+import Bool from "../../utility/Bool";
 
 interface CaseSummaryCommentsProps {
    sc: CaseSummary;

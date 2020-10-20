@@ -6,8 +6,8 @@ import {
    getCasesArrive,
    getCasesEnroute,
    getFilteredSortedCases,
-} from "../../features/cases/caseSelectors";
-import Bool from "../utility/Bool";
+} from "../../../features/cases/caseSelectors";
+import Bool from "../../utility/Bool";
 
 interface CaseListProps {}
 
