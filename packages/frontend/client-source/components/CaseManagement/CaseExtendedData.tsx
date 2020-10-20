@@ -20,7 +20,7 @@ const CaseExtendedData: React.FunctionComponent<CaseExtendedDataProps> = (
    return (
       <Tabs>
          <TabList>
-            <Tab>ETA / Status</Tab>
+            <Tab>ETA / Status / Checkout</Tab>
             <Tab>Comments / Details</Tab>
             <Tab>Parts</Tab>
          </TabList>

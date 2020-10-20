@@ -162,3 +162,14 @@ export const buildRequestHeaders = (apiSession: APISession) => ({
    ...defaultRequestHeaders,
    Authorization: apiSession.SessionId,
 });
+
+export interface CheckoutBody {
+   Comment: string;
+   ResolvedFlag: boolean;
+   ScheduleDateTime: string | null;
+   SelfAssignFlag: boolean;
+   ServiceRep: string | null;
+   ReasonCode: string;
+}
+
+export const timeFormatWhenUpdating = "LLL dd, yyyy hh:mm aa";

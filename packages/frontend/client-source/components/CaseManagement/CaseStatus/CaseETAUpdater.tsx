@@ -8,7 +8,7 @@ import {
 } from "../../../constants";
 import LoadingIcon from "../../LoadingIcon";
 import { getAPISessionInComponent } from "../../utility";
-import { CaseBase, NewETABody } from "../../../api";
+import { CaseBase, NewETABody, timeFormatWhenUpdating } from "../../../api";
 import formatDate from "date-fns/format";
 import parseISO from "date-fns/parseISO";
 import { useState } from "react";
@@ -62,10 +62,7 @@ const CaseETAUpdater: React.FunctionComponent<CaseETAUpdaterProps> = (
             onClick={(thisAPISession) => {
                const body: NewETABody = {
                   NewSubcaseComment: "Updating ETA",
-                  ScheduledDateTime: formatDate(
-                     newETA,
-                     "LLL dd, yyyy hh:mm aa"
-                  ),
+                  ScheduledDateTime: formatDate(newETA, timeFormatWhenUpdating),
                   ServiceRep: thisAPISession.ServiceRep,
                };
                updateETAFetchState.run({
