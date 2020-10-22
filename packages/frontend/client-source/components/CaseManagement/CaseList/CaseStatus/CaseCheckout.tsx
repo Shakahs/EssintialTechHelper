@@ -68,10 +68,8 @@ const CaseCheckout: React.FunctionComponent<CaseCheckoutProps> = (props) => {
          method: "POST",
       },
       {
-         onResolve: () => {
-            props.refresh();
-         },
-
+         onResolve: props.refresh,
+         onReject: props.refresh,
          json: true,
          defer: true,
       }
@@ -210,11 +208,10 @@ const CaseCheckout: React.FunctionComponent<CaseCheckoutProps> = (props) => {
                                  ? apiSession.ServiceRep.Id
                                  : null,
                         };
-                        console.log(checkoutBody);
-                        // checkoutFetchState.run({
-                        //    headers: buildRequestHeaders(apiSession),
-                        //    body: JSON.stringify(checkoutBody)
-                        // });
+                        checkoutFetchState.run({
+                           headers: buildRequestHeaders(apiSession),
+                           body: JSON.stringify(checkoutBody),
+                        });
                      }
                   }}
                >
