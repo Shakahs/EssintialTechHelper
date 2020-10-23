@@ -20,6 +20,7 @@ import LoadingIcon from "../../../LoadingIcon";
 import Bool from "../../../utility/Bool";
 import AjaxButton from "../../../utility/AjaxButton";
 import RefreshingAjaxButton from "../../../utility/RefreshingAjaxButton";
+import { ErrorBoundary } from "react-error-boundary";
 
 interface CaseSummaryPartsProps {
    subcase: CaseBase;
@@ -72,19 +73,29 @@ const CasePartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
             </RefreshingAjaxButton>
          </div>
          {partsShipments?.length > 0 && (
-            <ul>
-               {partsShipments?.map((eachShipment) => (
-                  <li key={eachShipment.DetailSequence}>
-                     <div>{eachShipment.PartDescription}</div>
-                     {eachShipment.PartShipped?.map((eachItem) => (
-                        <CasePartsListItem
-                           key={eachItem.TrackingNumbers[0]}
-                           trackingNumber={eachItem.TrackingNumbers[0]}
-                        />
-                     ))}
-                  </li>
-               ))}
-            </ul>
+            <ErrorBoundary
+               fallbackRender={({ error }) => (
+                  <span>
+                     Parts list crashed, please refresh parts to try again.
+                     <br />
+                     Error: {error.message}
+                  </span>
+               )}
+            >
+               <ul>
+                  {partsShipments?.map((eachShipment) => (
+                     <li key={eachShipment.DetailSequence}>
+                        <div>{eachShipment.PartDescription}</div>
+                        {eachShipment.PartShipped?.map((eachItem) => (
+                           <CasePartsListItem
+                              key={eachItem.TrackingNumbers[0]}
+                              trackingNumber={eachItem.TrackingNumbers[0]}
+                           />
+                        ))}
+                     </li>
+                  ))}
+               </ul>
+            </ErrorBoundary>
          )}
          {partsShipments?.length === 0 && !partsShippedFetchState.isLoading && (
             <span>There are no parts shipped for this case.</span>
