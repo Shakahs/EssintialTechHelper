@@ -32,6 +32,10 @@ const successCodes = {
 
 const failureCodes = {
    MOREPARTS: "Additional parts required",
+   CUSTDECL: "Site declining service",
+   CUSTHELPDESK: "CUSTOMER HELPDESK NOT AVAILABLE",
+   NOCUSTAVAIL: "NO POINT OF CONTACT AVAILABLE",
+   NOACCESS: "UNABLE TO GAIN ACCESS / SITE CLOSED",
 };
 
 const CaseCheckout: React.FunctionComponent<CaseCheckoutProps> = (props) => {
