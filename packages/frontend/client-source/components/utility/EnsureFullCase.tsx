@@ -8,12 +8,13 @@ import {
 } from "../../api";
 import { useFetch } from "react-async";
 import { apiBase, buttonStyle } from "../../constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { upsertCaseSummary } from "../../features/cases/caseSlice";
 import { getAPISessionInComponent } from "../utility";
 import LoadingIcon from "../LoadingIcon";
 import Bool from "../utility/Bool";
 import { ReactElement, useEffect } from "react";
+import { getLoginFetchState } from "../../features/auth/authSelectors";
 
 interface CaseSummaryCommentsProps {
    sc: CaseSummary;
@@ -24,6 +25,7 @@ const EnsureFullCase: React.FunctionComponent<CaseSummaryCommentsProps> = (
    props
 ) => {
    const dispatch = useDispatch();
+   const loginFetchState = useSelector(getLoginFetchState);
 
    const caseFullFetchState = useFetch<ResultsObject<CaseFull>>(
       `${apiBase}/cases/${props.sc.Id}/subcases/${props.sc.Id}`,
@@ -57,7 +59,7 @@ const EnsureFullCase: React.FunctionComponent<CaseSummaryCommentsProps> = (
 
    return (
       <>
-         <Bool if={caseFullFetchState.isLoading}>
+         <Bool if={caseFullFetchState.isLoading || loginFetchState.loading}>
             <div>
                <LoadingIcon /> Loading data...
             </div>

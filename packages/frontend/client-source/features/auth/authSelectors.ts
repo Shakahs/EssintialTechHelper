@@ -8,3 +8,6 @@ export const getIsLoggedIn = createSelector(
    getAPISession,
    (session) => session !== null
 );
+
+export const getLoginFetchState = (state: RootState) =>
+   state.authSlice.loginFetchState;
