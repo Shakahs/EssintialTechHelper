@@ -10,6 +10,8 @@ import Pin from "../../../assets/map-pin.svg";
 import parseISO from "date-fns/parseISO";
 import dateFormat from "date-fns/format";
 import partsList from "../../../assets/riteAidPartList.json";
+import { useState } from "react";
+import Bool from "../../utility/Bool";
 
 interface CaseMapMarkerProps {
    case: CaseBase;
@@ -23,6 +25,9 @@ const CaseMapMarker: React.FunctionComponent<CaseMapMarkerProps> = (props) => {
       ARR: "Arrive",
       FIX: "Fix",
    };
+
+   const [showPopup, setShowPopup] = useState(true);
+
    return (
       <GeocodingMapMarker query={geoQuery}>
          <div
@@ -30,24 +35,32 @@ const CaseMapMarker: React.FunctionComponent<CaseMapMarkerProps> = (props) => {
                props.setSelectedTicket(props.case.Id);
             }}
          >
-            <div>
-               <img src={Pin} className={"inline"} />
-               <div className={"bg-gray-300 p-1 inline text-sm"}>
-                  {props.case.Id}
-                  <br />
-                  <span>
-                     {partsList?.[props.case.Model]?.description ??
-                        props.case.Model}
-                  </span>
-                  <br />
-                  <span className={"mr-1"}>
-                     SLA: {slaCodes?.[sla.Code] ?? sla.Code}
-                  </span>
-                  {dateFormat(
-                     parseSLA_Date(sla.CalculatedDateTime),
-                     standardDateTimeFormatting
-                  )}
+            <div className={"flex"}>
+               <div>
+                  <img src={Pin} onClick={() => setShowPopup(!showPopup)} />
                </div>
+               <Bool if={showPopup}>
+                  <div
+                     className={
+                        "bg-gray-300 p-1  text-sm bg-opacity-75 border border-black rounded-sm  "
+                     }
+                  >
+                     {props.case.Id}
+                     <br />
+                     <span>
+                        {partsList?.[props.case.Model]?.description ??
+                           props.case.Model}
+                     </span>
+                     <br />
+                     <span className={"mr-1"}>
+                        SLA: {slaCodes?.[sla.Code] ?? sla.Code}
+                     </span>
+                     {dateFormat(
+                        parseSLA_Date(sla.CalculatedDateTime),
+                        standardDateTimeFormatting
+                     )}
+                  </div>
+               </Bool>
             </div>
          </div>
       </GeocodingMapMarker>
