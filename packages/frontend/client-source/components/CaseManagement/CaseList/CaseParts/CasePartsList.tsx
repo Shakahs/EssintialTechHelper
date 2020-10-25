@@ -8,9 +8,12 @@ import {
 import {
    buildRequestHeaders,
    CaseBase,
-   PartsShipment,
+   ShippedParts,
    ResultsObject,
    ResultsObjectDoubleWrapped,
+   RequestedParts,
+   ConsumableParts,
+   decodeCaseNumber,
 } from "../../../../api";
 import { getAPISessionInComponent } from "../../../utility";
 import { useEffect, useState } from "react";
@@ -29,10 +32,11 @@ interface CaseSummaryPartsProps {
 const CasePartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
    props
 ) => {
-   const [partsShipments, setPartsShipments] = useState<PartsShipment[]>([]);
+   const decodedCaseNumber = decodeCaseNumber(props.subcase.Id);
 
-   const partsShippedFetchState = useFetch<ResultsObject<PartsShipment[]>>(
-      `${apiBase}/parts/shipped/${props.subcase.Id}`,
+   const [requestedParts, setRequestedParts] = useState<RequestedParts[]>([]);
+   const requestedPartsFetchState = useFetch<ResultsObject<RequestedParts[]>>(
+      `${apiBase}/parts/request/${decodedCaseNumber.masterCase}`,
       {
          method: "GET",
       },
@@ -41,14 +45,54 @@ const CasePartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
          json: true,
          defer: true,
          onResolve: (res) => {
-            setPartsShipments(res.Results[0]);
+            setRequestedParts(res.Results[0]);
+         },
+      }
+   );
+
+   const [shippedParts, setShippedParts] = useState<ShippedParts[]>([]);
+   const shippedPartsFetchState = useFetch<ResultsObject<ShippedParts[]>>(
+      `${apiBase}/parts/shipped/${decodedCaseNumber.masterCase}`,
+      {
+         method: "GET",
+      },
+
+      {
+         json: true,
+         defer: true,
+         onResolve: (res) => {
+            setShippedParts(res.Results[0]);
+         },
+      }
+   );
+
+   const [consumableParts, setConsumableParts] = useState<ConsumableParts[]>(
+      []
+   );
+   const consumablePartFetchState = useFetch<ResultsObject<ConsumableParts[]>>(
+      `${apiBase}/parts/shipped/${decodedCaseNumber.masterCase}`,
+      {
+         method: "GET",
+      },
+
+      {
+         json: true,
+         defer: true,
+         onResolve: (res) => {
+            setConsumableParts(res.Results[0]);
          },
       }
    );
 
    const runFetchParts = async () => {
       const thisAPISession = await getAPISessionInComponent();
-      partsShippedFetchState.run({
+      requestedPartsFetchState.run({
+         headers: buildRequestHeaders(thisAPISession),
+      });
+      shippedPartsFetchState.run({
+         headers: buildRequestHeaders(thisAPISession),
+      });
+      consumablePartFetchState.run({
          headers: buildRequestHeaders(thisAPISession),
       });
    };
@@ -61,10 +105,17 @@ const CasePartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
       <div className={"inline"}>
          <div>
             <RefreshingAjaxButton
-               async={partsShippedFetchState}
+               async={consumablePartFetchState}
                onClick={(apiSession) => {
-                  setPartsShipments([]);
-                  partsShippedFetchState.run({
+                  setConsumableParts([]);
+
+                  requestedPartsFetchState.run({
+                     headers: buildRequestHeaders(apiSession),
+                  });
+                  shippedPartsFetchState.run({
+                     headers: buildRequestHeaders(apiSession),
+                  });
+                  consumablePartFetchState.run({
                      headers: buildRequestHeaders(apiSession),
                   });
                }}
@@ -72,7 +123,7 @@ const CasePartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
                <span>Refresh Parts</span>
             </RefreshingAjaxButton>
          </div>
-         {partsShipments?.length > 0 && (
+         {consumableParts?.length > 0 && (
             <ErrorBoundary
                fallbackRender={({ error }) => (
                   <span>
@@ -83,7 +134,7 @@ const CasePartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
                )}
             >
                <ul>
-                  {partsShipments?.map((eachShipment) => (
+                  {consumableParts?.map((eachShipment) => (
                      <li key={eachShipment.DetailSequence}>
                         <div>{eachShipment.PartDescription}</div>
                         {eachShipment.PartShipped?.map((eachItem) => (
@@ -97,9 +148,10 @@ const CasePartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
                </ul>
             </ErrorBoundary>
          )}
-         {partsShipments?.length === 0 && !partsShippedFetchState.isLoading && (
-            <span>There are no parts shipped for this case.</span>
-         )}
+         {consumableParts?.length === 0 &&
+            !consumablePartFetchState.isLoading && (
+               <span>There are no parts shipped for this case.</span>
+            )}
       </div>
    );
 };
