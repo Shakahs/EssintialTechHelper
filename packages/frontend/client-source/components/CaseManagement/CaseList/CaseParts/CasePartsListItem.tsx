@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useFetch } from "react-async";
-import { PartsShipment, ResultsObject } from "../../../../api";
 import { apiBase } from "../../../../constants";
 import { useState } from "react";
 import { Tracker, TrackingDetail } from "../../../../../../../types";
