@@ -31,6 +31,7 @@ const CaseMap: React.FunctionComponent<CaseMapProps> = (props) => {
       >
          {props.tickets.map((c) => (
             <CaseMapMarker
+               key={c.Id}
                case={c}
                setSelectedTicket={(id) => console.log(id)}
             />
