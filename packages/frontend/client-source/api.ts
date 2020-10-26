@@ -198,9 +198,12 @@ export interface combinedPartsData {
 
 export interface RequestedParts {
    RequestNo: string;
+   RequestByName: string;
+   Comments: string;
    PartRequested: {
       PartNo: string;
       PartQty: string;
+      PartDescription: string;
    }[];
 }
 
