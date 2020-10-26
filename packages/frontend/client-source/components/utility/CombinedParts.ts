@@ -24,6 +24,7 @@ export class CombinedParts {
    ensurePartRepresented(partNumber: string) {
       if (this.parts[partNumber] === undefined) {
          this.parts[partNumber] = {
+            partNumber,
             requestedQuantity: 0,
             sequences: {},
          };
@@ -37,6 +38,7 @@ export class CombinedParts {
       this.ensurePartRepresented(partNumber);
       if (this.parts[partNumber].sequences[sequence] === undefined) {
          this.parts[partNumber].sequences[sequence] = {
+            sequenceNumber: sequence,
             returnable: false,
             shippedQuantity: 0,
             shippedSerialNumbers: [],

@@ -15,20 +15,22 @@ import {
    ConsumableParts,
    decodeCaseNumber,
    CaseFull,
+   CaseSummary,
 } from "../../../../api";
 import { getAPISessionInComponent } from "../../../utility";
 import { useEffect, useState } from "react";
 import { debouncedFetchCases } from "../../../../features/cases/caseThunks";
-import CasePartsListItem from "./CasePartsListItem";
 import LoadingIcon from "../../../LoadingIcon";
 import Bool from "../../../utility/Bool";
 import AjaxButton from "../../../utility/AjaxButton";
 import RefreshingAjaxButton from "../../../utility/RefreshingAjaxButton";
 import { ErrorBoundary } from "react-error-boundary";
 import { CombinedParts } from "../../../utility/CombinedParts";
+import { map } from "lodash";
+import CasePartsListItem2 from "./CasePartsListItem2";
 
 interface CaseSummaryPartsProps {
-   subcase: CaseFull;
+   subcase: CaseSummary;
 }
 
 const CasePartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
@@ -142,19 +144,9 @@ const CasePartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
                   </span>
                )}
             >
-               <ul>
-                  {shippedParts?.map((eachShipment) => (
-                     <li key={eachShipment.DetailSequence}>
-                        <div>{eachShipment.PartDescription}</div>
-                        {eachShipment.PartShipped?.map((eachItem) => (
-                           <CasePartsListItem
-                              key={eachItem.TrackingNumbers[0]}
-                              trackingNumber={eachItem.TrackingNumbers[0]}
-                           />
-                        ))}
-                     </li>
-                  ))}
-               </ul>
+               {map(partsCombiner.parts, (p) => (
+                  <CasePartsListItem2 parts={p} key={p.partNumber} />
+               ))}
             </ErrorBoundary>
          )}
          {consumableParts?.length === 0 &&

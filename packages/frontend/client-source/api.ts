@@ -170,6 +170,7 @@ export const parseSLA_Date = (datestring: string): Date =>
    zonedTimeToUtc(datestring, Intl.DateTimeFormat().resolvedOptions().timeZone);
 
 export interface combinedPartsSequence {
+   sequenceNumber: string;
    returnable: boolean;
    shippedQuantity: number;
    shippedSerialNumbers: string[];
@@ -182,15 +183,17 @@ export interface combinedPartsSequence {
    consumedReturnTrackingNumbers: string[];
 }
 
+export interface combinedPartsSubData {
+   partNumber: string;
+   requestedQuantity: number;
+   sequences: {
+      //key by logistics F sequence number (F98765*1)
+      [k: string]: combinedPartsSequence;
+   };
+}
 export interface combinedPartsData {
    //key by part number (RA-987654)
-   [k: string]: {
-      requestedQuantity: number;
-      sequences: {
-         //key by logistics F sequence number (F98765*1)
-         [k: string]: combinedPartsSequence;
-      };
-   };
+   [k: string]: combinedPartsSubData;
 }
 
 export interface RequestedParts {
