@@ -10,9 +10,8 @@ import {
 import { useFetch } from "react-async";
 import { apiBase } from "../../../../constants";
 import { getAPISessionInComponent } from "../../../utility";
-import DataGrid from "react-data-grid";
-import "react-data-grid/dist/react-data-grid.css";
-import "./style.css";
+import { Grid } from "gridjs-react";
+import "gridjs/dist/theme/mermaid.css";
 
 interface CasePartsRequestedProps {
    subcase: CaseSummary;
@@ -51,33 +50,36 @@ const CasePartsRequested: React.FunctionComponent<CasePartsRequestedProps> = (
    }, []);
 
    const columns = [
-      { key: "requestNumber", name: "Request #" },
-      { key: "requestedBy", name: "Requested By" },
-      { key: "partNumber", name: "Part #" },
-      { key: "partQuantity", name: "Quantity" },
-      { key: "partDescription", name: "Description" },
+      "Request #",
+      "Requested By",
+      "Part #",
+      "Quantity",
+      "Description",
    ];
 
    const rows = [];
 
    requestedParts.forEach((rp) => {
       rp.PartRequested.forEach((subrp) => {
-         rows.push({
-            requestNumber: rp.RequestNo,
-            requestedBy: rp.RequestByName,
-            partNumber: subrp.PartNo,
-            partQuantity: subrp.PartQty,
-            partDescription: subrp.PartDescription,
-         });
+         rows.push([
+            rp.RequestNo,
+            rp.RequestByName,
+            subrp.PartNo,
+            subrp.PartQty,
+            subrp.PartDescription,
+         ]);
       });
    });
 
    return (
       <div>
-         <DataGrid
+         <Grid
+            data={rows}
             columns={columns}
-            rows={rows}
-            rowClass={() => "bg-yellow-300"}
+            search={true}
+            className={{
+               header: "bg-gray-100",
+            }}
          />
       </div>
    );
