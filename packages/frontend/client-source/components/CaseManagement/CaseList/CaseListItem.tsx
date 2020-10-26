@@ -30,7 +30,6 @@ import { zonedTimeToUtc } from "date-fns-tz";
 import CaseETASLA from "./CaseETASLA";
 import { caseInProgress } from "../common";
 import { useState } from "react";
-import CasePartsList from "./CaseParts/CasePartsList";
 import CaseComments from "./CaseComments";
 import CasePrimaryData from "./CasePrimaryData";
 import CaseExtendedData from "./CaseExtendedData";

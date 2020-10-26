@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { buttonStyle } from "../../../constants";
 import "react-tabs/style/react-tabs.css";
-import CasePartsList from "./CaseParts/CasePartsList";
+import CaseParts from "./CaseParts/CaseParts";
 import { CaseBase, CaseFull, CaseSummary } from "../../../api";
 import EnsureFullCase from "../../utility/EnsureFullCase";
 import CaseComments from "./CaseComments";
@@ -36,7 +36,7 @@ const CaseExtendedData: React.FunctionComponent<CaseExtendedDataProps> = (
          <TabPanel>
             <h2>
                <EnsureFullCase sc={props.subcase}>
-                  <CasePartsList subcase={props.subcase} />
+                  <CaseParts subcase={props.subcase} />
                </EnsureFullCase>
             </h2>
          </TabPanel>
