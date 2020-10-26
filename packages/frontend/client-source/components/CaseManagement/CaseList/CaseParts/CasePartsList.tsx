@@ -14,6 +14,7 @@ import {
    RequestedParts,
    ConsumableParts,
    decodeCaseNumber,
+   CaseFull,
 } from "../../../../api";
 import { getAPISessionInComponent } from "../../../utility";
 import { useEffect, useState } from "react";
@@ -24,9 +25,10 @@ import Bool from "../../../utility/Bool";
 import AjaxButton from "../../../utility/AjaxButton";
 import RefreshingAjaxButton from "../../../utility/RefreshingAjaxButton";
 import { ErrorBoundary } from "react-error-boundary";
+import { CombinedParts } from "../../../utility/CombinedParts";
 
 interface CaseSummaryPartsProps {
-   subcase: CaseBase;
+   subcase: CaseFull;
 }
 
 const CasePartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
@@ -70,7 +72,7 @@ const CasePartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
       []
    );
    const consumablePartFetchState = useFetch<ResultsObject<ConsumableParts[]>>(
-      `${apiBase}/parts/shipped/${decodedCaseNumber.masterCase}`,
+      `${apiBase}/parts/tobeconsumed/${decodedCaseNumber.masterCase}`,
       {
          method: "GET",
       },
@@ -96,6 +98,13 @@ const CasePartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
          headers: buildRequestHeaders(thisAPISession),
       });
    };
+
+   const partsCombiner = new CombinedParts();
+   requestedParts.forEach(partsCombiner.addPartsRequest);
+   shippedParts.forEach(partsCombiner.addShippedParts);
+   consumableParts.forEach(partsCombiner.addConsumableParts);
+   props.subcase.Activities.forEach(partsCombiner.addConsumedParts);
+   console.log(partsCombiner.parts);
 
    useEffect(() => {
       runFetchParts();
@@ -134,7 +143,7 @@ const CasePartsList: React.FunctionComponent<CaseSummaryPartsProps> = (
                )}
             >
                <ul>
-                  {consumableParts?.map((eachShipment) => (
+                  {shippedParts?.map((eachShipment) => (
                      <li key={eachShipment.DetailSequence}>
                         <div>{eachShipment.PartDescription}</div>
                         {eachShipment.PartShipped?.map((eachItem) => (

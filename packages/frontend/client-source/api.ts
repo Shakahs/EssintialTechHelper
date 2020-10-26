@@ -169,23 +169,26 @@ export const standardDateTimeFormatting = "L/d h:mm b";
 export const parseSLA_Date = (datestring: string): Date =>
    zonedTimeToUtc(datestring, Intl.DateTimeFormat().resolvedOptions().timeZone);
 
+export interface combinedPartsSequence {
+   returnable: boolean;
+   shippedQuantity: number;
+   shippedSerialNumbers: string[];
+   shippedTrackingNumbers: string[];
+   consumableQuantity: number;
+   consumableSerialNumbers: string[];
+   consumableReturnTrackingNumbers: string[];
+   consumedQuantity: number;
+   consumedSerialNumbers: string[];
+   consumedReturnTrackingNumbers: string[];
+}
+
 export interface combinedPartsData {
    //key by part number (RA-987654)
    [k: string]: {
       requestedQuantity: number;
       sequences: {
          //key by logistics F sequence number (F98765*1)
-         [k: string]: {
-            shippedQuantity: number;
-            shippedSerialNumbers: string[];
-            shippedTrackingNumbers: string[];
-            consumableQuantity: number;
-            consumableSerialNumbers: string[];
-            consumableReturnTrackingNumbers: string[];
-            consumedQuantity: number;
-            consumedSerialNumbers: string[];
-            consumedReturnTrackingNumbers: string[];
-         };
+         [k: string]: combinedPartsSequence;
       };
    };
 }
@@ -261,5 +264,20 @@ export const decodeCaseNumber = (c: string): DecodedCaseNumber => {
       original: c,
       masterCase: split[0],
       subcaseCounter: split[1],
+   };
+};
+
+export interface DecodePartSequenceNumber {
+   masterSequence: string;
+   counter?: string;
+   partNumber?: string;
+}
+
+export const decodeSequenceNumber = (f: string): DecodePartSequenceNumber => {
+   const split = f.split("*");
+   return {
+      masterSequence: split[0],
+      counter: split[1],
+      partNumber: split[2],
    };
 };
