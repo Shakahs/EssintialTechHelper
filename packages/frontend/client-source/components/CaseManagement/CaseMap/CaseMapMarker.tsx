@@ -45,19 +45,21 @@ const CaseMapMarker: React.FunctionComponent<CaseMapMarkerProps> = (props) => {
                         "bg-gray-300 p-1  text-sm bg-opacity-75 border border-black rounded-sm  "
                      }
                   >
-                     {props.case.Id}
-                     <br />
-                     <span>
+                     <div>{props.case.Id}</div>
+                     <div>
                         {partsList?.[props.case.Model]?.description ??
                            props.case.Model}
-                     </span>
-                     <br />
-                     <span className={"mr-1"}>
-                        SLA: {slaCodes?.[sla.Code] ?? sla.Code}
-                     </span>
-                     {dateFormat(
-                        parseSLA_Date(sla.CalculatedDateTime),
-                        standardDateTimeFormatting
+                     </div>
+                     {sla && (
+                        <div>
+                           <span className={"mr-1"}>
+                              SLA: {slaCodes?.[sla.Code] ?? sla.Code}
+                           </span>
+                           {dateFormat(
+                              parseSLA_Date(sla.CalculatedDateTime),
+                              standardDateTimeFormatting
+                           )}
+                        </div>
                      )}
                   </div>
                </Bool>
