@@ -1,0 +1,59 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/release/1-0/C4_Container.puml
+
+title Application Diagram
+
+Person(fieldTechnician, Essintial Field Technician)
+
+Enterprise_Boundary(essintialSystems, "Essintial"){
+    Container(essintialNewTickets, "Available Tickets","","An API providing a list of unassigned tickets across the USA")
+    Container(essintialSRMBuddyAPI, "SRM API","REST API","A an API to perform all field technician actions such as closing tickets, ordering parts, updating ETA, etc. ")
+    Container(essintialSRMBuddy, "SRMBuddy","AngularJS", "The official frontend application for interacting with the Ticket Management API")
+    Rel(essintialSRMBuddy, essintialSRMBuddyAPI,"REST interactions")
+    Rel(fieldTechnician, essintialSRMBuddy, "Uses")
+}
+
+Enterprise_Boundary(mapBoxSystems, "MapBox"){
+        Container(mapBoxGeocoding, "Geocoding", "REST API", "Converts street addresses into geographic coordinates")
+        Container(mapBoxMap, "Map Service","Provides Map content for frontend map loads")
+}
+
+System_Boundary(twilio,"Twilio"){
+    Container(twilioSMS,"Notifications","SMS","SMS delivery service")
+}
+
+Enterprise_Boundary(easypost,"EasyPost"){
+    Container(easypostAPI,"Package Tracking","REST API","Package tracking service")
+}
+
+System_Boundary(eth, "Essintial Tech Helper"){
+    Container(ethFrontend,"Essintial Tech Helper webapp","Frontend Application")
+    Rel(ethFrontend, essintialSRMBuddyAPI, "Uses")
+    Rel(fieldTechnician, ethFrontend, "Uses")
+
+
+    System_Boundary(ethKubernetes, "Kubernetes"){
+        ContainerDb(ethdb,"Database","Postgres")
+        Container(ethPoll,"Scraper","NodeJS","Polls for new tickets")
+        Container(ethServer,"Web Server","NodeJS","Web Server")
+        Rel(ethServer, ethFrontend, "Serves")
+    }
+
+    Rel(ethFrontend, ethServer,"Package tracking queries (unauthenticated)")
+    Rel(ethServer, easypostAPI, "Package tracking queries (authenticated)")
+
+    Rel(ethPoll,essintialNewTickets,"1. Polls for new tickets")
+    Rel(ethPoll, mapBoxGeocoding, "2. Geocodes new tickets")
+    Rel(ethPoll, ethdb, "3. Persists new tickets ")
+    Rel(ethPoll, twilioSMS, "4. Sends new tickets notifications to nearby technicians")
+    Rel(twilioSMS, fieldTechnician, "5. Delivers new ticket notifications")
+
+}
+
+
+
+
+
+
+@enduml
+
