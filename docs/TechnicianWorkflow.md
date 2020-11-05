@@ -11,4 +11,4 @@ The technician workflow generally conforms to the following steps:
 1. If there are parts, the technician marks the disposition of those parts (used, not used, dead on arrival), and updates the ticket with return tracking and serial numbers.
 1. Technician provides closing notes on departure and marks the ticket as resolved or not resolved. If not resolved a followup ticket will be created. A technician has right of first refusal for followup ticket and can opt to have it assigned automatically when closing the preceding ticket. 
 
-Although step 1 is optional, doing so can be very important for a technician to keep their queue full and  
+Although step 1 is optional, doing so can be very important for a technician to keep their queue full and maximize their hours.   

@@ -8,9 +8,8 @@ Essintial Tech Helper (ETH) is a system designed to support the [`workflow`](doc
 
 1.  [`Features`](#features)
 1.  [`System Components`](#system-components)
-1.  [`Tech Stack`](#essintial-technology)
-1.  [`Developer Environment`](#essintial-technology)
-1.  [`Deployment`](#essintial-technology)
+1.  [`Tech Stack`](#tech-stack)
+1.  [`Developer Environment`](#developer-environment)
 1.  [`Glossary`](#glossary)
 
 ****
