@@ -1,0 +1,53 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/release/1-0/C4_Container.puml
+'!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/release/1-0/C4_Component.puml
+
+title Application Diagram
+
+Person(fieldTechnician, End User, "The end user, a field technician employed by Essintial") #green
+
+Enterprise_Boundary(essintialSystems, "Essintial Enterprise Solutions"){
+    Container(essintialNewTickets, "Available Tickets","","An API providing a list of unassigned tickets across the USA")
+    Container(essintialSRMBuddyAPI, "SRMBuddy API","REST API","A an API to perform all field technician actions such as closing tickets, ordering parts, updating ETA, etc. ")
+    Container(essintialSRMBuddy, "SRMBuddy Frontend Application","AngularJS", "The official frontend application for interacting with the SRMBuddy API") #Goldenrod
+'    Container(essintialSLAMap, "SLA Warning Map", "Google Maps", "A map of tickets from all technicians with SLAs expiring within 6 hours. Raw data can be downloaded in KML form. ")
+    Rel(essintialSRMBuddy, essintialSRMBuddyAPI,"Uses")
+    Rel(fieldTechnician, essintialSRMBuddy, "Uses")
+}
+
+Container(mapBoxMap, "MapBox","REST","External mapping and location geocoding API") #Gray
+Container(twilioSMS,"Twilio","Rest, SMS","External SMS delivery API") #Gray
+Container(easypostAPI,"EasyPost","REST API","External Package tracking API") #Gray
+
+System_Boundary(eth, "Essintial Tech Helper"){
+
+    Container(ethFrontend,"Essintial Tech Helper Frontend Application","React, TypeScript", "Unofficial interface for interacting with SRMBuddy API, adds additional capabilities") #Goldenrod
+        Rel(ethFrontend, essintialSRMBuddyAPI, "Uses")
+        Rel(fieldTechnician, ethFrontend, "Uses")
+        Rel(ethFrontend,mapBoxMap,"Uses")
+
+
+        ContainerDb(ethdb,"Database","Postgres")
+        Container(ethPoll,"Scraper","NodeJS","Polls for new tickets, geocodes them, persists them to database, and sends notifications to nearby field technicians via SMS")
+        Container(ethServer,"API Server","NodeJS","Serves static frontend files and fulfills API requests ")
+        Rel(ethServer, ethFrontend, "Serves")
+        Rel(ethServer, ethdb, "Retrieves available tickets")
+
+    Rel(ethFrontend, easypostAPI,"Package tracking queries")
+'    Rel(ethServer, easypostAPI, "Package tracking queries (authenticated)")
+
+    Rel(ethPoll,essintialNewTickets,"1. Polls for available tickets")
+    Rel(ethPoll, mapBoxMap, "2. Geocodes newly available tickets")
+    Rel(ethPoll, ethdb, "3. Persists newly available tickets ")
+    Rel(ethPoll, twilioSMS, "4. Sends notifications about newly available tickets nearby technicians")
+'    Rel(twilioSMS, fieldTechnician, "5. Delivers newly available ticket notifications")
+
+}
+
+
+
+
+
+
+@enduml
+
