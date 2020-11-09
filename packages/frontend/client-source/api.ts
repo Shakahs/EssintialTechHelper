@@ -60,6 +60,7 @@ export interface CaseFullFields {
    ProblemDesc: string;
    Comments: Comment[];
    References: { Value: string; Code: string }[];
+   Activities: ConsumedParts[];
 }
 
 export type CaseSummary = CaseBase & Partial<CaseFullFields>;
@@ -148,18 +149,6 @@ export interface APISessionState {
    apiSessionCreation: string | null;
 }
 
-export interface PartsShipment {
-   DetailSequence: string; //shipment F number
-   PartDescription: string;
-   PartNo: string;
-   ShipVia: string;
-   PartShipped: {
-      SerialNumbers: string[];
-      ShippedQty: number;
-      TrackingNumbers: string[];
-   }[];
-}
-
 export const buildRequestHeaders = (apiSession: APISession) => ({
    ...defaultRequestHeaders,
    Authorization: apiSession.SessionId,
@@ -179,3 +168,122 @@ export const standardDateTimeFormatting = "L/d h:mm b";
 
 export const parseSLA_Date = (datestring: string): Date =>
    zonedTimeToUtc(datestring, Intl.DateTimeFormat().resolvedOptions().timeZone);
+
+export interface combinedPartsSequence {
+   sequenceNumber: string;
+   returnable: boolean;
+   shippedQuantity: number;
+   shippedSerialNumbers: string[];
+   shippedTrackingNumbers: string[];
+   consumableQuantity: number;
+   consumableSerialNumbers: string[];
+   consumableReturnTrackingNumbers: string[];
+   consumedQuantity: number;
+   consumedSerialNumbers: string[];
+   consumedReturnTrackingNumbers: string[];
+}
+
+export interface combinedPartsSubData {
+   partNumber: string;
+   requestedQuantity: number;
+   sequences: {
+      //key by logistics F sequence number (F98765*1)
+      [k: string]: combinedPartsSequence;
+   };
+}
+export interface combinedPartsData {
+   //key by part number (RA-987654)
+   [k: string]: combinedPartsSubData;
+}
+
+export interface RequestedParts {
+   RequestNo: string;
+   RequestByName: string;
+   Comments: string;
+   PartRequested: {
+      PartNo: string;
+      PartQty: string;
+      PartDescription: string;
+   }[];
+}
+
+export interface ShippedParts {
+   DetailSequence: string; //shipment F number
+   PartDescription: string;
+   PartNo: string;
+   ShipVia: string;
+   PartShippedQty: number;
+   PartShipped: {
+      SerialNumbers: string[];
+      ShippedQty: number;
+      TrackingNumbers: string[];
+   }[];
+}
+
+export interface ConsumePartsBody {
+   ActionCode: "PU";
+   Charges: [];
+   Parts: {
+      SeqNo: string;
+      Number: string;
+      Description: string;
+      Serial: string;
+      Quantity: number;
+   }[];
+}
+
+export interface ConsumedParts {
+   ActionCode: "PU";
+   Parts: {
+      Description: string;
+      Number: string;
+      Quantity: string;
+      Serial: string;
+      SeqNo: string;
+      CorePartNumber: string;
+      CorePartTracking: string;
+      CorePartSerial: string;
+   }[];
+}
+
+export interface ConsumableParts {
+   PartNo: string;
+   PartDescription: string;
+   DetailSequence: string;
+   Returnable: string;
+   PartAvailableQty: number;
+   SerialNumber: string;
+   PartReturnTracking: {
+      ReturnTrackingNumber: string;
+   }[];
+}
+
+export interface DecodedCaseNumber {
+   original: string;
+   masterCase: string;
+   subcaseCounter: string;
+}
+
+export const decodeCaseNumber = (c: string): DecodedCaseNumber => {
+   const split = c.split("-");
+   return {
+      original: c,
+      masterCase: split[0],
+      subcaseCounter: split[1],
+   };
+};
+
+export interface DecodePartSequenceNumber {
+   masterSequence: string;
+   counter?: string;
+   partNumber?: string;
+}
+
+export const decodeSequenceNumber = (f: string): DecodePartSequenceNumber => {
+   const split = f.split("*");
+   return {
+      masterSequence: split[0],
+      counter: split[1],
+      partNumber: split[2],
+   };
+};

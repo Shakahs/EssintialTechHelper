@@ -17,6 +17,8 @@
       "classnames": "^2.2.6",
       "date-fns": "^2.15.0",
       "date-fns-tz": "^1.0.10",
+      "gridjs": "^2.1.0",
+      "gridjs-react": "^1.16.0",
       "lodash": "^4.17.20",
       "mapbox-gl": "^1.11.1",
       "mapbox.js": "^3.3.1",

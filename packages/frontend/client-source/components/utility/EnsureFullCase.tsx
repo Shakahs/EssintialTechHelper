@@ -3,7 +3,6 @@ import {
    buildRequestHeaders,
    CaseFull,
    CaseSummary,
-   PartsShipment,
    ResultsObject,
 } from "../../api";
 import { useFetch } from "react-async";

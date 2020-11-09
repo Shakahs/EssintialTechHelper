@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useFetch } from "react-async";
-import { PartsShipment, ResultsObject } from "../../../../api";
 import { apiBase } from "../../../../constants";
 import { useState } from "react";
 import { Tracker, TrackingDetail } from "../../../../../../../types";
@@ -13,7 +12,7 @@ interface CaseSummaryPartsListItemProps {
    trackingNumber: string;
 }
 
-const CasePartsListItem: React.FunctionComponent<CaseSummaryPartsListItemProps> = (
+const CasePartsListTracking: React.FunctionComponent<CaseSummaryPartsListItemProps> = (
    props
 ) => {
    const [tracking, setTrackingInfo] = useState<null | Tracker>(null);
@@ -102,4 +101,4 @@ const CasePartsListItem: React.FunctionComponent<CaseSummaryPartsListItemProps> 
    );
 };
 
-export default CasePartsListItem;
+export default CasePartsListTracking;

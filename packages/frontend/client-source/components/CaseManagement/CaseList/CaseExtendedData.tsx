@@ -3,8 +3,8 @@ import { useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { buttonStyle } from "../../../constants";
 import "react-tabs/style/react-tabs.css";
-import CasePartsList from "./CaseParts/CasePartsList";
-import { CaseBase } from "../../../api";
+import CaseParts from "./CaseParts/CaseParts";
+import { CaseBase, CaseFull, CaseSummary } from "../../../api";
 import EnsureFullCase from "../../utility/EnsureFullCase";
 import CaseComments from "./CaseComments";
 import CaseStatus from "./CaseStatus/CaseStatus";
@@ -35,7 +35,9 @@ const CaseExtendedData: React.FunctionComponent<CaseExtendedDataProps> = (
          </TabPanel>
          <TabPanel>
             <h2>
-               <CasePartsList subcase={props.subcase} />
+               <EnsureFullCase sc={props.subcase}>
+                  <CaseParts subcase={props.subcase} />
+               </EnsureFullCase>
             </h2>
          </TabPanel>
       </Tabs>
