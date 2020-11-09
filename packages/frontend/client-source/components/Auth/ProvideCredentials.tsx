@@ -75,6 +75,7 @@ const ProvideCredentials: React.FunctionComponent<ManageProps> = (props) => {
                      Password
                   </label>
                   <input
+                     type={"password"}
                      name="password"
                      className={"border rounded w-full shadow appearance-none"}
                      ref={register({ required: "Required field" })}
