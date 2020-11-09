@@ -26,7 +26,7 @@ const CaseMapMarker: React.FunctionComponent<CaseMapMarkerProps> = (props) => {
       FIX: "Fix",
    };
 
-   const [showPopup, setShowPopup] = useState(true);
+   const [showPopup, setShowPopup] = useState(false);
 
    return (
       <GeocodingMapMarker query={geoQuery}>
