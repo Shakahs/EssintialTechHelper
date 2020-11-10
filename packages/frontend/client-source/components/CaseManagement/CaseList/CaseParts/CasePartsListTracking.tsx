@@ -16,6 +16,7 @@ interface CaseSummaryPartsListItemProps {
 const CasePartsListTracking: React.FunctionComponent<CaseSummaryPartsListItemProps> = (
    props
 ) => {
+   const [showFull, setShowFull] = useState(false);
    const [tracking, setTrackingInfo] = useState<null | Tracker>(null);
 
    const trackingFetchState = useFetch<Tracker>(
@@ -44,56 +45,87 @@ const CasePartsListTracking: React.FunctionComponent<CaseSummaryPartsListItemPro
 
    return (
       <>
-         <div className={"flex flex-row space-x-1"}>
-            <div>
-               <a
-                  className={"text-blue-500 underline ml-1"}
-                  href={`https://www.fedex.com/apps/fedextrack/?tracknum=${props.trackingNumber}`}
-               >
-                  {props.trackingNumber}
-               </a>
-            </div>
-            <div>
-               <Bool if={trackingFetchState.isLoading}>
-                  <LoadingIcon /> Fetching tracking status...
-               </Bool>
-               <Bool
-                  if={
-                     trackingFetchState.isRejected ||
-                     tracking?.status === "unknown"
-                  }
-               >
-                  Status unknown, try again later
-               </Bool>
-               <Bool
-                  if={
-                     trackingFetchState.isFulfilled &&
-                     tracking?.status !== "delivered"
-                  }
-               >
-                  {`${tracking?.status} estimated: ${
-                     tracking?.est_delivery_date &&
-                     format(parseJSON(tracking.est_delivery_date), "L/d h:mm b")
-                  }`}
-               </Bool>
-
-               <BoolFunc
-                  if={
-                     trackingFetchState.isFulfilled &&
-                     tracking?.status === "delivered"
-                  }
-               >
-                  {() =>
-                     `delivered ${
-                        tracking?.tracking_details &&
+         <div
+            className={
+               "flex flex-col  bg-green-400 rounded p-1 border-yellow-400 border border-2 border-solid shadow-lg"
+            }
+            onClick={() => setShowFull(!showFull)}
+         >
+            <div className={"flex flex-row space-x-1"}>
+               <div>{props.trackingNumber}</div>
+               <div>
+                  <Bool if={trackingFetchState.isLoading}>
+                     <LoadingIcon /> Fetching tracking status...
+                  </Bool>
+                  <Bool
+                     if={
+                        trackingFetchState.isRejected ||
+                        tracking?.status === "unknown"
+                     }
+                  >
+                     Status unknown, try again later
+                  </Bool>
+                  <Bool
+                     if={
+                        trackingFetchState.isFulfilled &&
+                        tracking?.status !== "delivered"
+                     }
+                  >
+                     {`${tracking?.status} estimated: ${
+                        tracking?.est_delivery_date &&
                         format(
-                           parseJSON(last(tracking.tracking_details).datetime),
+                           parseJSON(tracking.est_delivery_date),
                            "L/d h:mm b"
                         )
-                     }`
-                  }
-               </BoolFunc>
+                     }`}
+                  </Bool>
+
+                  <BoolFunc
+                     if={
+                        trackingFetchState.isFulfilled &&
+                        tracking?.status === "delivered"
+                     }
+                  >
+                     {() =>
+                        `delivered ${
+                           tracking?.tracking_details &&
+                           format(
+                              parseJSON(
+                                 last(tracking.tracking_details).datetime
+                              ),
+                              "L/d h:mm b"
+                           )
+                        }`
+                     }
+                  </BoolFunc>
+               </div>
             </div>
+            <BoolFunc if={showFull}>
+               {() => (
+                  <>
+                     {tracking.tracking_details.map((eachDetail) => (
+                        <div>{`${format(
+                           parseJSON(eachDetail.datetime),
+                           "L/d h:mm b"
+                        )} ${eachDetail.tracking_location.city}, ${
+                           eachDetail.tracking_location.state
+                        }`}</div>
+                     ))}
+                     <div>
+                        <a
+                           target={"_blank"}
+                           className={"text-blue-700 underline "}
+                           href={`https://www.fedex.com/apps/fedextrack/?tracknum=${props.trackingNumber}`}
+                           onClick={(event) => {
+                              event.stopPropagation();
+                           }}
+                        >
+                           Track on FedEx.com
+                        </a>
+                     </div>
+                  </>
+               )}
+            </BoolFunc>
          </div>
          {/*<div>*/}
          {/*   <span>*/}
