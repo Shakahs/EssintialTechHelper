@@ -8,6 +8,7 @@ import Bool from "../../../utility/Bool";
 import LoadingIcon from "../../../LoadingIcon";
 import { last } from "lodash";
 import BoolFunc from "../../../utility/BoolFunc";
+import classnames from "classnames";
 
 interface CaseSummaryPartsListItemProps {
    trackingNumber: string;
@@ -46,9 +47,13 @@ const CasePartsListTracking: React.FunctionComponent<CaseSummaryPartsListItemPro
    return (
       <>
          <div
-            className={
-               "flex flex-col  bg-green-400 rounded p-1 border-yellow-400 border border-2 border-solid shadow-lg"
-            }
+            className={classnames(
+               "flex flex-col   rounded p-1 border-yellow-400 border border-2 border-solid shadow-lg cursor-pointer",
+               {
+                  "bg-green-400": !showFull,
+                  "from-green-400 to-yellow-300 bg-gradient-to-b": showFull,
+               }
+            )}
             onClick={() => setShowFull(!showFull)}
          >
             <div className={"flex flex-row space-x-1"}>
@@ -107,9 +112,10 @@ const CasePartsListTracking: React.FunctionComponent<CaseSummaryPartsListItemPro
                         <div>{`${format(
                            parseJSON(eachDetail.datetime),
                            "L/d h:mm b"
-                        )} ${eachDetail.tracking_location.city}, ${
-                           eachDetail.tracking_location.state
-                        }`}</div>
+                        )} ${
+                           eachDetail.tracking_location.city ??
+                           eachDetail.status
+                        }, ${eachDetail.tracking_location.state ?? ""}`}</div>
                      ))}
                      <div>
                         <a

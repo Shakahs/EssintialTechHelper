@@ -47,9 +47,9 @@ export interface TrackingDetail {
    datetime: string;
    source: string;
    tracking_location: {
-      city: string;
-      state: string;
-      zip: string;
+      city?: string;
+      state?: string;
+      zip?: string;
    };
 }
 
