@@ -10,6 +10,7 @@ import { apiBase } from "../../../../constants";
 import { useFetch } from "react-async";
 import { useEffect, useState } from "react";
 import { getAPISessionInComponent } from "../../../utility";
+import CasePartsListTracking from "./CasePartsListTracking";
 
 interface CasePartsShippedProps {
    subcase: CaseSummary;
@@ -50,7 +51,35 @@ const CasePartsShipped: React.FunctionComponent<CasePartsShippedProps> = (
    return (
       <div>
          {shippedParts.map((sp) => (
-            <div>Shipped part: {sp.PartNo} </div>
+            <div
+               className={
+                  "border border-solid border-1 border-black flex flex-col space-x-1"
+               }
+            >
+               <div className={"flex flex-row space-x-1"}>
+                  <div>{`Logistics Number: ${sp.DetailSequence}`}</div>
+                  <div>{`Shipped Quantity: ${sp.PartShippedQty}`}</div>
+               </div>
+               <div>{`${sp.PartNo}: ${sp.PartDescription}`}</div>
+               {sp.PartShipped.map((speach) => (
+                  <div className={"flex flex-row justify-around"}>
+                     <div className={"flex flex-col"}>
+                        <div>Serial Numbers:</div>
+                        {speach.SerialNumbers.map((eachsn) => (
+                           <div key={eachsn}>{eachsn}</div>
+                        ))}
+                     </div>
+                     <div className={"flex flex-col"}>
+                        <div>Tracking Numbers:</div>
+                        {speach.TrackingNumbers.map((eachtr) => (
+                           <div key={eachtr}>
+                              <CasePartsListTracking trackingNumber={eachtr} />
+                           </div>
+                        ))}
+                     </div>
+                  </div>
+               ))}
+            </div>
          ))}
       </div>
    );

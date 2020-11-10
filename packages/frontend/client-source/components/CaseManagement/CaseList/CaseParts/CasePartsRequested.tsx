@@ -10,7 +10,6 @@ import {
 import { useFetch } from "react-async";
 import { apiBase } from "../../../../constants";
 import { getAPISessionInComponent } from "../../../utility";
-import { Grid } from "gridjs-react";
 import "gridjs/dist/theme/mermaid.css";
 
 interface CasePartsRequestedProps {
@@ -49,38 +48,27 @@ const CasePartsRequested: React.FunctionComponent<CasePartsRequestedProps> = (
       runFetchParts();
    }, []);
 
-   const columns = [
-      "Request #",
-      "Requested By",
-      "Part #",
-      "Quantity",
-      "Description",
-   ];
-
-   const rows = [];
-
-   requestedParts.forEach((rp) => {
-      rp.PartRequested.forEach((subrp) => {
-         rows.push([
-            rp.RequestNo,
-            rp.RequestByName,
-            subrp.PartNo,
-            subrp.PartQty,
-            subrp.PartDescription,
-         ]);
-      });
-   });
-
    return (
       <div>
-         <Grid
-            data={rows}
-            columns={columns}
-            search={true}
-            className={{
-               header: "bg-gray-100",
-            }}
-         />
+         {requestedParts.map((rp) => (
+            <div
+               key={rp.RequestNo}
+               className={
+                  "border border-solid border-1 border-black flex flex-row"
+               }
+            >
+               <div>Request #: {rp.RequestNo}</div>
+               <div>Requested by: {rp.RequestByName}</div>
+               <div className={"flex flex-row"}>
+                  Requested parts:
+                  {rp.PartRequested.map((subrp) => (
+                     <div>
+                        Part: {subrp.PartNo} Quantity: {subrp.PartQty}
+                     </div>
+                  ))}
+               </div>
+            </div>
+         ))}
       </div>
    );
 };
