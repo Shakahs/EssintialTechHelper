@@ -49,13 +49,14 @@ const CasePartsShipped: React.FunctionComponent<CasePartsShippedProps> = (
    }, []);
 
    return (
-      <div>
+      <div
+         className={
+            "border border-solid border-1 border-black divide-y divide-black p-3"
+         }
+      >
+         <div>{`Parts Shipments: ${shippedParts.length}`}</div>
          {shippedParts.map((sp) => (
-            <div
-               className={
-                  "border border-solid border-1 border-black flex flex-col space-x-1"
-               }
-            >
+            <div className={"flex flex-col space-x-1 "}>
                <div className={"flex flex-row space-x-1"}>
                   <div>{`Logistics Number: ${sp.DetailSequence}`}</div>
                   <div>{`Shipped Quantity: ${sp.PartShippedQty}`}</div>

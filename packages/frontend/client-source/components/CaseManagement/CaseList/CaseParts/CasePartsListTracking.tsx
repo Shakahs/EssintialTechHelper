@@ -108,7 +108,7 @@ const CasePartsListTracking: React.FunctionComponent<CaseSummaryPartsListItemPro
             <BoolFunc if={showFull}>
                {() => (
                   <>
-                     {tracking.tracking_details.map((eachDetail) => (
+                     {tracking?.tracking_details?.map((eachDetail) => (
                         <div>{`${format(
                            parseJSON(eachDetail.datetime),
                            "L/d h:mm b"
