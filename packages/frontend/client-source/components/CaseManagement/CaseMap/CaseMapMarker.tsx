@@ -14,13 +14,12 @@ import { useState } from "react";
 import Bool from "../../utility/Bool";
 
 interface CaseMapMarkerProps {
-   case: CaseBase;
+   cases: CaseBase[];
    setSelectedTicket: (ticket: string) => void;
 }
 
 const CaseMapMarker: React.FunctionComponent<CaseMapMarkerProps> = (props) => {
-   const geoQuery = props.case.Location.FullAddress;
-   const sla = props.case.Milestones[0];
+   const geoQuery = props.cases[0].Location.FullAddress;
    const slaCodes = {
       ARR: "Arrive",
       FIX: "Fix",
@@ -31,9 +30,9 @@ const CaseMapMarker: React.FunctionComponent<CaseMapMarkerProps> = (props) => {
    return (
       <GeocodingMapMarker query={geoQuery}>
          <div
-            onClick={() => {
-               props.setSelectedTicket(props.case.Id);
-            }}
+         // onClick={() => {
+         //    props.setSelectedTicket(props.case.Id);
+         // }}
          >
             <div className={"flex"}>
                <div>
@@ -42,25 +41,31 @@ const CaseMapMarker: React.FunctionComponent<CaseMapMarkerProps> = (props) => {
                <Bool if={showPopup}>
                   <div
                      className={
-                        "bg-gray-300 p-1  text-sm bg-opacity-75 border border-black rounded-sm  "
+                        "bg-gray-300 p-1  text-sm bg-opacity-75 border border-black rounded-sm divide-y divide-black"
                      }
                   >
-                     <div>{props.case.Id}</div>
-                     <div>
-                        {partsList?.[props.case.Model]?.description ??
-                           props.case.Model}
-                     </div>
-                     {sla && (
-                        <div>
-                           <span className={"mr-1"}>
-                              SLA: {slaCodes?.[sla.Code] ?? sla.Code}
-                           </span>
-                           {dateFormat(
-                              parseSLA_Date(sla.CalculatedDateTime),
-                              standardDateTimeFormatting
-                           )}
-                        </div>
-                     )}
+                     {props.cases.map((c) => {
+                        const sla = c.Milestones[0];
+                        return (
+                           <div className={""}>
+                              <div>{c.Id}</div>
+                              <div>
+                                 {partsList?.[c.Model]?.description ?? c.Model}
+                              </div>
+                              {sla && (
+                                 <div>
+                                    <span className={"mr-1"}>
+                                       SLA: {slaCodes?.[sla.Code] ?? sla.Code}
+                                    </span>
+                                    {dateFormat(
+                                       parseSLA_Date(sla.CalculatedDateTime),
+                                       standardDateTimeFormatting
+                                    )}
+                                 </div>
+                              )}
+                           </div>
+                        );
+                     })}
                   </div>
                </Bool>
             </div>

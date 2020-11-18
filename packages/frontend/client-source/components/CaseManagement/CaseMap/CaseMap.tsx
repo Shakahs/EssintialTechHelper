@@ -6,6 +6,7 @@ import { Ticket } from "../../../../../../types";
 import GeocodingMapMarker from "../../Mapping/GeocodingMapMarker";
 import { CaseBase } from "../../../api";
 import CaseMapMarker from "./CaseMapMarker";
+import { groupBy, map } from "lodash";
 
 interface CaseMapProps {
    tickets: CaseBase[];
@@ -18,6 +19,8 @@ const CaseMap: React.FunctionComponent<CaseMapProps> = (props) => {
       zoom: 7.5,
    });
 
+   const groupedCases = groupBy(props.tickets, "Location.FullAddress");
+
    return (
       <ReactMapGL
          {...viewport}
@@ -29,10 +32,10 @@ const CaseMap: React.FunctionComponent<CaseMapProps> = (props) => {
             // console.log(nextViewport);
          }}
       >
-         {props.tickets.map((c) => (
+         {map(groupedCases, (c) => (
             <CaseMapMarker
-               key={c.Id}
-               case={c}
+               key={c[0].Id}
+               cases={c}
                setSelectedTicket={(id) => console.log(id)}
             />
          ))}
