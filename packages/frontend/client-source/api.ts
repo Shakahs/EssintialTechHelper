@@ -89,7 +89,7 @@ export enum CurrentCaseStatus {
 }
 
 export function isProjectWork(sb: CaseBase): boolean {
-   return sb.ProblemCode === "PROJECT";
+   return ["IMACD", "project"].includes(sb.ProblemCode);
 }
 
 export type NewStatusCode = "COMMIT";
