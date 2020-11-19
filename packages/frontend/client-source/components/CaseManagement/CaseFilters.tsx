@@ -2,17 +2,21 @@ import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../rootReducer";
 import { map } from "lodash";
-import { CurrentCaseStatus } from "../../api";
+import { CaseBase, CurrentCaseStatus } from "../../api";
 import { updateFilters } from "../../features/cases/caseSlice";
 import { caseStatusMapping } from "../../constants";
 
-interface CaseSummaryFiltersProps {}
+interface CaseSummaryFiltersProps {
+   cases: CaseBase[];
+}
 
 const CaseFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
    props
 ) => {
    const dispatch = useDispatch();
    const { caseFilters } = useSelector((state: RootState) => state.caseSlice);
+
+   const cities = new Set(props.cases.map((c) => c.Location.City));
    return (
       <div className={"border border-solid border-1 p-2"}>
          Filters:
@@ -61,6 +65,23 @@ const CaseFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
                <label htmlFor={`checkbox-projectwork`}>
                   Include Project work
                </label>
+            </div>
+            <div>
+               <select
+                  onChange={(v) => {
+                     dispatch(
+                        updateFilters({
+                           ...caseFilters,
+                           showCity: v.target.value,
+                        })
+                     );
+                  }}
+               >
+                  <option value={""}>Any</option>
+                  {[...cities].map((c, k) => (
+                     <option value={c}>{c}</option>
+                  ))}
+               </select>
             </div>
          </div>
       </div>

@@ -21,6 +21,7 @@ interface CaseFilters {
    showComplete: boolean;
    showHold: boolean;
    showProjectWork: boolean;
+   showCity: string;
 }
 
 type StateShape = CurrentCaseSummaries & { caseFilters: CaseFilters } & {
@@ -41,6 +42,7 @@ let initialState: StateShape = {
       showComplete: false,
       showHold: true,
       showProjectWork: false,
+      showCity: "",
    },
    fetchCaseState: {
       loading: false,

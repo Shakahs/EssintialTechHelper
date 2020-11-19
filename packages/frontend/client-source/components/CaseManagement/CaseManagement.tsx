@@ -55,7 +55,7 @@ const CaseManagement: React.FunctionComponent<Manage2Props> = (props) => {
                   </span>
                )}
             </div>{" "}
-            <CaseFilters />
+            <CaseFilters cases={filteredCaseSummaries} />
             <button
                className={"border p-2 mb-3"}
                onClick={() => {

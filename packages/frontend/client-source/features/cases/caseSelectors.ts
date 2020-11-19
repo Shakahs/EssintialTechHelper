@@ -73,7 +73,7 @@ export const getCaseFilterResult = createSelector(
       casesArrived,
       filters
    ) => {
-      const caseSequenceFilterResult: CaseBase[] = [];
+      let caseSequenceFilterResult: CaseBase[] = [];
       if (filters.showAssigned) {
          caseSequenceFilterResult.push(...casesAssigned);
       }
@@ -83,6 +83,12 @@ export const getCaseFilterResult = createSelector(
 
       if (filters.showComplete) {
          caseSequenceFilterResult.push(...casesComplete);
+      }
+
+      if (filters.showCity !== "") {
+         caseSequenceFilterResult = caseSequenceFilterResult.filter(
+            (c) => c.Location.City === filters.showCity
+         );
       }
 
       caseSequenceFilterResult.push(...casesEnroute, ...casesArrived);
