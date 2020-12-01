@@ -77,9 +77,13 @@ const CaseFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
                      );
                   }}
                >
-                  <option value={""}>Any</option>
-                  {[...cities].map((c, k) => (
-                     <option value={c}>{c}</option>
+                  <option value={""} selected={caseFilters.showCity === ""}>
+                     Any
+                  </option>
+                  {[...cities].map((c) => (
+                     <option value={c} selected={caseFilters.showCity === c}>
+                        {c}
+                     </option>
                   ))}
                </select>
             </div>
