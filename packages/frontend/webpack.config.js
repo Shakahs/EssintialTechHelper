@@ -22,9 +22,9 @@ const purgecss = require("@fullhuman/postcss-purgecss")({
    //       nodir: true,
    //    }
    // ),
-   // safelist: {
-   //    greedy: [/^react-datepicker.*/],
-   // },
+   safelist: {
+      greedy: [/^react-datepicker.*/],
+   },
 
    // Include any special characters you're using in this regular expression
    defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
@@ -77,8 +77,8 @@ module.exports = {
                         require("tailwindcss"),
                         require("autoprefixer"),
                         ...(process.env.NODE_ENV === "production"
-                           ? [cssnano]
-                           : []),
+                           ? [cssnano, purgecss]
+                           : [purgecss]),
                      ],
                   },
                },

@@ -10,7 +10,6 @@ import {
 import { useFetch } from "react-async";
 import { apiBase } from "../../../../constants";
 import { getAPISessionInComponent } from "../../../utility";
-import "gridjs/dist/theme/mermaid.css";
 
 interface CasePartsRequestedProps {
    subcase: CaseSummary;
