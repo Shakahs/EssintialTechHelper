@@ -23,7 +23,7 @@ const purgecss = require("@fullhuman/postcss-purgecss")({
    //    }
    // ),
    safelist: {
-      greedy: [/^react-datepicker.*/],
+      greedy: [/^react-datepicker.*/, /^react-tabs.*/],
    },
 
    // Include any special characters you're using in this regular expression
