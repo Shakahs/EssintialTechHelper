@@ -4,4 +4,5 @@ build/frontend
 node_modules/
 /packages/backend/.env
 /essintialtechhelper/charts/postgresql-9.4.1.tgz
-/pollSecrets.yaml
+/essintialtechhelper/pollSecrets.yaml
+/essintialtechhelper/serverSecrets.yaml
