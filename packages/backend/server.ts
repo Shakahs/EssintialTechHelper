@@ -1,3 +1,5 @@
+import { random } from "lodash";
+
 require("dotenv").config();
 import * as path from "path";
 import * as fs from "fs";
@@ -9,6 +11,7 @@ import ormConfig from "./ormConfig2";
 import { Tracker } from "../../types";
 import fetch from "node-fetch";
 import FormData from "form-data";
+import { FastifyLoggerInstance } from "fastify/types/logger";
 
 const easypostAPIToken = process.env["EASYPOST_TOKEN"];
 
@@ -42,6 +45,42 @@ server.get("/api/available", async (request, reply) => {
    return ticketResults;
 });
 
+const pollTracking = async (
+   trackingNumber: string,
+   log: FastifyLoggerInstance
+): Promise<Tracker> => {
+   let attempts = 0;
+   while (attempts < 5) {
+      attempts++;
+      let trackerResult: Tracker;
+      log.info(
+         `fetching: https://api.easypost.com/v2/trackers/${trackingNumber}, attempt: ${attempts}`
+      );
+      const trackerGetResultRaw = await fetch(
+         `https://api.easypost.com/v2/trackers/${trackingNumber}`,
+         {
+            headers: {
+               Authorization: `Basic RVpBSzI4NDk4M2UyMDRkOTQ5OGM4Nzc2ZGQ5MWEwNzExNTE1em1tZFRsSkt3R0ZKOTNpVm9NcTBNUTo=`,
+            },
+         }
+      );
+      if (trackerGetResultRaw.ok) {
+         trackerResult = await trackerGetResultRaw.json();
+         if (trackerResult.status !== "unknown") {
+            return trackerResult;
+         }
+      } else {
+         throw new Error("Upstream API error");
+      }
+
+      await new Promise((resolve) =>
+         setTimeout(resolve, (2 ^ attempts) * 1000 + random(0, 1000))
+      );
+   }
+
+   throw new Error("Could not poll for tracker result");
+};
+
 server.get("/api/tracking", async (req, reply) => {
    //@ts-ignore
    const { trackingNumber } = req.query;
@@ -51,30 +90,32 @@ server.get("/api/tracking", async (req, reply) => {
       return;
    }
 
-   const data = new FormData();
-   data.append("tracker[carrier]", "FedEx");
-   data.append("tracker[tracking_code]", trackingNumber);
+   try {
+      const result = await pollTracking(trackingNumber, req.log);
+      return result;
+   } catch (e) {
+      req.log.info("creating new tracker");
+      const data = new FormData();
+      data.append("tracker[carrier]", "FedEx");
+      data.append("tracker[tracking_code]", trackingNumber);
 
-   const trackerResultRaw = await fetch(
-      "https://api.easypost.com/v2/trackers",
-      {
-         method: "POST",
-         headers: {
-            // "Content-Type": `multipart/form-data' boundary=${data.getBoundary()}`,
-            // "Content-Length": `${data.getLengthSync()}`,
-            // Authorization: `Basic ${easypostAPIToken}`,
-            Authorization: `Basic RVpBSzI4NDk4M2UyMDRkOTQ5OGM4Nzc2ZGQ5MWEwNzExNTE1em1tZFRsSkt3R0ZKOTNpVm9NcTBNUTo=`,
-         },
-         body: data,
+      const trackerPostResultRaw = await fetch(
+         "https://api.easypost.com/v2/trackers",
+         {
+            method: "POST",
+            headers: {
+               Authorization: `Basic RVpBSzI4NDk4M2UyMDRkOTQ5OGM4Nzc2ZGQ5MWEwNzExNTE1em1tZFRsSkt3R0ZKOTNpVm9NcTBNUTo=`,
+            },
+            body: data,
+         }
+      );
+
+      if (trackerPostResultRaw.ok) {
+         return pollTracking(trackingNumber, req.log);
+      } else {
+         reply.status(500);
+         return "Unable to create tracker, try again later";
       }
-   );
-   const trackerResult: Tracker = await trackerResultRaw.json();
-
-   if (trackerResult?.object === "Tracker") {
-      return trackerResult;
-   } else {
-      reply.status(500);
-      reply.send("");
    }
 });
 
