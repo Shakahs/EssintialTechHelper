@@ -87,7 +87,7 @@ export const getCaseFilterResult = createSelector(
 
       if (filters.showCity !== "") {
          caseSequenceFilterResult = caseSequenceFilterResult.filter(
-            (c) => c.Location.City === filters.showCity
+            (c) => c.Location.City.toLowerCase() === filters.showCity
          );
       }
 

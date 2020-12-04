@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../rootReducer";
-import { map } from "lodash";
+import { map, capitalize } from "lodash";
 import { CaseBase, CurrentCaseStatus } from "../../api";
 import { updateFilters } from "../../features/cases/caseSlice";
 import { caseStatusMapping } from "../../constants";
@@ -16,7 +16,9 @@ const CaseFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
    const dispatch = useDispatch();
    const { caseFilters } = useSelector((state: RootState) => state.caseSlice);
 
-   const cities = new Set(props.cases.map((c) => c.Location.City));
+   const cities = new Set(
+      props.cases.map((c) => c.Location.City.toLowerCase())
+   );
    return (
       <div className={"border border-solid border-1 p-2"}>
          Filters:
@@ -82,7 +84,7 @@ const CaseFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
                   </option>
                   {[...cities].map((c) => (
                      <option value={c} selected={caseFilters.showCity === c}>
-                        {c}
+                        {c.split(" ").map(capitalize).join(" ")}
                      </option>
                   ))}
                </select>
