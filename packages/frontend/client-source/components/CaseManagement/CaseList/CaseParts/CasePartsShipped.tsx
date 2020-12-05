@@ -13,6 +13,7 @@ import { getAPISessionInComponent } from "../../../utility";
 import CasePartsListTracking from "./CasePartsListTracking";
 import Bool from "../../../utility/Bool";
 import LoadingIcon from "../../../LoadingIcon";
+import CasePartsTemplate from "./CasePartsTemplate";
 
 interface CasePartsShippedProps {
    subcase: CaseSummary;
@@ -51,49 +52,43 @@ const CasePartsShipped: React.FunctionComponent<CasePartsShippedProps> = (
    }, []);
 
    return (
-      <div
-         className={
-            "border border-solid border-1 border-black divide-y divide-black p-3"
-         }
+      <CasePartsTemplate
+         title={`Parts Shipments:`}
+         loading={!shippedPartsFetchState.isSettled}
+         length={shippedParts.length}
       >
-         <div style={{ stroke: "black" }}>
-            {`Parts Shipments: `}
-            {!shippedPartsFetchState.isInitial &&
-            shippedPartsFetchState.isSettled ? (
-               shippedParts.length
-            ) : (
-               <LoadingIcon />
-            )}
-         </div>
-
-         {shippedParts.map((sp) => (
-            <div className={"flex flex-col space-x-1 "}>
-               <div className={"flex flex-row space-x-1"}>
-                  <div>{`Logistics Number: ${sp.DetailSequence}`}</div>
-                  <div>{`Shipped Quantity: ${sp.PartShippedQty}`}</div>
-               </div>
-               <div>{`${sp.PartNo}: ${sp.PartDescription}`}</div>
-               {sp.PartShipped.map((speach) => (
-                  <div className={"flex flex-row justify-around"}>
-                     <div className={"flex flex-col"}>
-                        <div>Serial Numbers:</div>
-                        {speach.SerialNumbers.map((eachsn) => (
-                           <div key={eachsn}>{eachsn}</div>
-                        ))}
-                     </div>
-                     <div className={"flex flex-col"}>
-                        <div>Tracking Numbers:</div>
-                        {speach.TrackingNumbers.map((eachtr) => (
-                           <div key={eachtr}>
-                              <CasePartsListTracking trackingNumber={eachtr} />
-                           </div>
-                        ))}
-                     </div>
+         <>
+            {shippedParts.map((sp) => (
+               <div className={"flex flex-col space-x-1 "}>
+                  <div className={"flex flex-row space-x-1"}>
+                     <div>{`Logistics Number: ${sp.DetailSequence}`}</div>
+                     <div>{`Shipped Quantity: ${sp.PartShippedQty}`}</div>
                   </div>
-               ))}
-            </div>
-         ))}
-      </div>
+                  <div>{`${sp.PartNo}: ${sp.PartDescription}`}</div>
+                  {sp.PartShipped.map((speach) => (
+                     <div className={"flex flex-row justify-around"}>
+                        <div className={"flex flex-col"}>
+                           <div>Serial Numbers:</div>
+                           {speach.SerialNumbers.map((eachsn) => (
+                              <div key={eachsn}>{eachsn}</div>
+                           ))}
+                        </div>
+                        <div className={"flex flex-col"}>
+                           <div>Tracking Numbers:</div>
+                           {speach.TrackingNumbers.map((eachtr) => (
+                              <div key={eachtr}>
+                                 <CasePartsListTracking
+                                    trackingNumber={eachtr}
+                                 />
+                              </div>
+                           ))}
+                        </div>
+                     </div>
+                  ))}
+               </div>
+            ))}
+         </>
+      </CasePartsTemplate>
    );
 };
 
