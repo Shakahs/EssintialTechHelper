@@ -5,12 +5,12 @@
    "scripts": {
       "build": "rm -fv ../../build/backend/* && ./node_modules/.bin/webpack-cli",
       "poll-dev": "./node_modules/.bin/ts-node poll.ts",
-      "server-dev": "./node_modules/.bin/ts-node server.ts",
+      "server-dev": "node -r ts-node/register --inspect server.ts",
       "migration-run": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:run"
    },
    "nodemonConfig": {
       "ext": "js,json,ts",
-      "exec": "./node_modules/.bin/ts-node ./server.ts"
+      "exec": "node -r ts-node/register --inspect server.ts"
    },
    "devDependencies": {
       "@types/common-tags": "^1.8.0",
