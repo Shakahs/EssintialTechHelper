@@ -11,6 +11,8 @@ import { useFetch } from "react-async";
 import { useEffect, useState } from "react";
 import { getAPISessionInComponent } from "../../../utility";
 import CasePartsListTracking from "./CasePartsListTracking";
+import Bool from "../../../utility/Bool";
+import LoadingIcon from "../../../LoadingIcon";
 
 interface CasePartsShippedProps {
    subcase: CaseSummary;
@@ -54,7 +56,16 @@ const CasePartsShipped: React.FunctionComponent<CasePartsShippedProps> = (
             "border border-solid border-1 border-black divide-y divide-black p-3"
          }
       >
-         <div>{`Parts Shipments: ${shippedParts.length}`}</div>
+         <div style={{ stroke: "black" }}>
+            {`Parts Shipments: `}
+            {!shippedPartsFetchState.isInitial &&
+            shippedPartsFetchState.isSettled ? (
+               shippedParts.length
+            ) : (
+               <LoadingIcon />
+            )}
+         </div>
+
          {shippedParts.map((sp) => (
             <div className={"flex flex-col space-x-1 "}>
                <div className={"flex flex-row space-x-1"}>

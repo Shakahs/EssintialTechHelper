@@ -60,7 +60,7 @@ const EnsureFullCase: React.FunctionComponent<CaseSummaryCommentsProps> = (
       <>
          <Bool if={caseFullFetchState.isLoading || loginFetchState.loading}>
             <div>
-               <LoadingIcon /> Loading data...
+               <LoadingIcon /> Loading ticket...
             </div>
          </Bool>
          <Bool if={caseFullFetchState.isRejected}>
