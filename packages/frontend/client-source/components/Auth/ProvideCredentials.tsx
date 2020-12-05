@@ -12,7 +12,7 @@ import { SerializedError, unwrapResult } from "@reduxjs/toolkit";
 import { store } from "../../store";
 import Bool from "../utility/Bool";
 import { Credentials } from "../../api";
-import Refresh from "../../assets/refresh.svg";
+import LoadingIcon from "../LoadingIcon";
 interface ManageProps {}
 
 const ProvideCredentials: React.FunctionComponent<ManageProps> = (props) => {
@@ -96,10 +96,7 @@ const ProvideCredentials: React.FunctionComponent<ManageProps> = (props) => {
                      // disabled={isPending}
                   >
                      <Bool if={loginFetchState.loading}>
-                        <img
-                           src={Refresh}
-                           className={"inline animate-spin mr-2 "}
-                        />
+                        <LoadingIcon />
                      </Bool>
                      Log In
                   </button>

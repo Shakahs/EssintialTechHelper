@@ -1,7 +1,7 @@
 import * as React from "react";
 import Bool from "../../utility/Bool";
-import Refresh from "../../../assets/refresh.svg";
 import { buttonStyle } from "../../../constants";
+import LoadingIcon from "../../LoadingIcon";
 
 interface CaseSummaryRefreshProps {
    loading: boolean;
@@ -19,7 +19,7 @@ const CaseRefresh: React.FunctionComponent<CaseSummaryRefreshProps> = (
          disabled={props.loading}
       >
          <Bool if={props.loading}>
-            <img src={Refresh} className={"animate-spin inline"} />
+            <LoadingIcon />
             Case is updating...
          </Bool>
          <Bool if={!props.loading}>Refresh</Bool>
