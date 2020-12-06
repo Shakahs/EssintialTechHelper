@@ -10,6 +10,7 @@ import {
 import { useFetch } from "react-async";
 import { apiBase } from "../../../../constants";
 import { getAPISessionInComponent } from "../../../utility";
+import CasePartsTemplate from "./CasePartsTemplate";
 
 interface CasePartsRequestedProps {
    subcase: CaseSummary;
@@ -48,27 +49,34 @@ const CasePartsRequested: React.FunctionComponent<CasePartsRequestedProps> = (
    }, []);
 
    return (
-      <div>
-         {requestedParts.map((rp) => (
-            <div
-               key={rp.RequestNo}
-               className={
-                  "border border-solid border-1 border-black flex flex-row"
-               }
-            >
-               <div>Request #: {rp.RequestNo}</div>
-               <div>Requested by: {rp.RequestByName}</div>
-               <div className={"flex flex-row"}>
-                  Requested parts:
-                  {rp.PartRequested.map((subrp) => (
-                     <div>
-                        Part: {subrp.PartNo} Quantity: {subrp.PartQty}
+      <CasePartsTemplate
+         title={"Parts Requests"}
+         loading={requestedPartsFetchState.isPending}
+         length={requestedParts.length}
+      >
+         <>
+            {requestedParts.map((rp) => (
+               <div key={rp.RequestNo} className={"flex flex-col"}>
+                  <div className={"flex flex-row space-x-1"}>
+                     <div>Request #: {rp.RequestNo}</div>
+                     <div>Requested by: {rp.RequestByName}</div>
+                     <div>Request Status: {rp.RequestStatus}</div>
+                  </div>
+                  <div className={"flex flex-row"}>
+                     <div className={"flex flex-row"}>
+                        Requested parts:
+                        {rp.PartRequested.map((subrp) => (
+                           <div key={subrp.PartNo}>
+                              Part: {subrp.PartNo} {subrp.PartDescription}{" "}
+                              Quantity: {subrp.PartQty}
+                           </div>
+                        ))}
                      </div>
-                  ))}
+                  </div>
                </div>
-            </div>
-         ))}
-      </div>
+            ))}
+         </>
+      </CasePartsTemplate>
    );
 };
 

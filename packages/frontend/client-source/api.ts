@@ -200,6 +200,7 @@ export interface RequestedParts {
    RequestNo: string;
    RequestByName: string;
    Comments: string;
+   RequestStatus: string;
    PartRequested: {
       PartNo: string;
       PartQty: string;

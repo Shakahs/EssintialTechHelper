@@ -53,13 +53,16 @@ const CasePartsShipped: React.FunctionComponent<CasePartsShippedProps> = (
 
    return (
       <CasePartsTemplate
-         title={`Parts Shipments:`}
-         loading={!shippedPartsFetchState.isSettled}
+         title={`Parts Shipments`}
+         loading={shippedPartsFetchState.isPending}
          length={shippedParts.length}
       >
          <>
             {shippedParts.map((sp) => (
-               <div className={"flex flex-col space-x-1 "}>
+               <div
+                  key={sp.DetailSequence}
+                  className={"flex flex-col space-x-1 "}
+               >
                   <div className={"flex flex-row space-x-1"}>
                      <div>{`Logistics Number: ${sp.DetailSequence}`}</div>
                      <div>{`Shipped Quantity: ${sp.PartShippedQty}`}</div>

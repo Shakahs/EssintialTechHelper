@@ -20,7 +20,7 @@ const CasePartsTemplate: React.FunctionComponent<CasePartsTemplateProps> = (
       }
    >
       <div style={{ stroke: "black" }}>
-         {props.title}
+         {`${props.title}: `}
          {props.loading ? <LoadingIcon /> : props.length}
       </div>
 
