@@ -10,6 +10,7 @@ import { apiBase } from "../../../../constants";
 import { useFetch } from "react-async";
 import { useEffect, useState } from "react";
 import { getAPISessionInComponent } from "../../../utility";
+import CasePartsTemplate from "./CasePartsTemplate";
 
 interface CasePartsConsumableProps {
    subcase: CaseSummary;
@@ -50,11 +51,19 @@ const CasePartsConsumable: React.FunctionComponent<CasePartsConsumableProps> = (
    }, []);
 
    return (
-      <div>
-         {consumableParts.map((cp) => (
-            <div>Consumable Part: {cp.PartNo}</div>
-         ))}
-      </div>
+      <CasePartsTemplate
+         title={"Consumable Parts"}
+         loading={consumablePartFetchState.isLoading}
+         length={consumableParts.length}
+      >
+         <>
+            {consumableParts.map((cp) => (
+               <div
+                  key={cp.DetailSequence}
+               >{`${cp.PartNo} ${cp.PartDescription} Available: ${cp.PartAvailableQty}`}</div>
+            ))}
+         </>
+      </CasePartsTemplate>
    );
 };
 
