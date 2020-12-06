@@ -35,15 +35,22 @@ const isDevelopment = process.env.NODE_ENV !== "production";
 module.exports = {
    mode: "development",
    entry: [__dirname + "/client-source/index.tsx"],
-   devtool: "inline-source-map",
+   // devtool: "inline-source-map",
    module: {
       rules: [
+         {
+            test: /\.m?js/,
+            resolve: {
+               fullySpecified: false,
+            },
+         },
          {
             test: /\.tsx?$/,
             use: [
                {
                   loader: "babel-loader",
                   options: {
+                     cacheDirectory: true,
                      plugins: [
                         isDevelopment && require.resolve("react-refresh/babel"),
                      ].filter(Boolean),
@@ -72,14 +79,15 @@ module.exports = {
                {
                   loader: "postcss-loader",
                   options: {
-                     ident: "postcss",
-                     plugins: [
-                        require("tailwindcss"),
-                        require("autoprefixer"),
-                        ...(process.env.NODE_ENV === "production"
-                           ? [cssnano, purgecss]
-                           : [purgecss]),
-                     ],
+                     postcssOptions: {
+                        plugins: [
+                           require("tailwindcss"),
+                           require("autoprefixer"),
+                           ...(process.env.NODE_ENV === "production"
+                              ? [cssnano, purgecss]
+                              : [purgecss]),
+                        ],
+                     },
                   },
                },
             ],
@@ -96,7 +104,7 @@ module.exports = {
       ],
    },
    output: {
-      filename: "[name].[hash].js",
+      filename: "[name].[contenthash].js",
       path: path.resolve(__dirname, "../../build/frontend/"),
       // publicPath: isProduction ? "/static" : "/",
    },
@@ -113,6 +121,8 @@ module.exports = {
       isDevelopment && new ReactRefreshWebpackPlugin(),
       isDevelopment && new webpack.HotModuleReplacementPlugin(),
       new WebpackBar({ profile: true, fancy: true, basic: false }),
+      // new webpack.ProgressPlugin(),
+      // new webpack.debug.ProfilingPlugin(),
    ].filter(Boolean),
    devServer: {
       port: 3001,
