@@ -6,11 +6,13 @@ import {
    decodeCaseNumber,
    ResultsObject,
 } from "../../../../api";
-import { apiBase } from "../../../../constants";
+import { apiBase, buttonStyle } from "../../../../constants";
 import { useFetch } from "react-async";
 import { useEffect, useState } from "react";
 import { getAPISessionInComponent } from "../../../utility";
 import CasePartsTemplate from "./CasePartsTemplate";
+import Bool from "../../../utility/Bool";
+import ConsumePartForm from "./ConsumePartForm";
 
 interface CasePartsConsumableProps {
    subcase: CaseSummary;
@@ -58,9 +60,14 @@ const CasePartsConsumable: React.FunctionComponent<CasePartsConsumableProps> = (
       >
          <>
             {consumableParts.map((cp) => (
-               <div
-                  key={cp.DetailSequence}
-               >{`${cp.PartNo} ${cp.PartDescription} Available: ${cp.PartAvailableQty}`}</div>
+               <div key={cp.DetailSequence} className={"flex flex-col"}>
+                  <div>
+                     {`${cp.PartNo} ${cp.PartDescription} Serial: ${cp.SerialNumber} Available: ${cp.PartAvailableQty}`}{" "}
+                  </div>
+                  <div>
+                     <ConsumePartForm subcase={props.subcase} cp={cp} />
+                  </div>
+               </div>
             ))}
          </>
       </CasePartsTemplate>
