@@ -41,10 +41,12 @@ const CasePartsShipped: React.FunctionComponent<CasePartsShippedProps> = (
    );
 
    const runFetchParts = async () => {
-      const thisAPISession = await getAPISessionInComponent();
-      shippedPartsFetchState.run({
-         headers: buildRequestHeaders(thisAPISession),
-      });
+      try {
+         const thisAPISession = await getAPISessionInComponent();
+         shippedPartsFetchState.run({
+            headers: buildRequestHeaders(thisAPISession),
+         });
+      } catch {}
    };
 
    useEffect(() => {

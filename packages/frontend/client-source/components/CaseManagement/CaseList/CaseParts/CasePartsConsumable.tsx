@@ -42,10 +42,12 @@ const CasePartsConsumable: React.FunctionComponent<CasePartsConsumableProps> = (
    );
 
    const runFetchParts = async () => {
-      const thisAPISession = await getAPISessionInComponent();
-      consumablePartFetchState.run({
-         headers: buildRequestHeaders(thisAPISession),
-      });
+      try {
+         const thisAPISession = await getAPISessionInComponent();
+         consumablePartFetchState.run({
+            headers: buildRequestHeaders(thisAPISession),
+         });
+      } catch {}
    };
 
    useEffect(() => {
