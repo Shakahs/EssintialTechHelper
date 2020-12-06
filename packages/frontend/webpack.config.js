@@ -35,7 +35,7 @@ const isDevelopment = process.env.NODE_ENV !== "production";
 module.exports = {
    mode: "development",
    entry: [__dirname + "/client-source/index.tsx"],
-   devtool: "cheap-module-eval-source-map",
+   devtool: "inline-source-map",
    module: {
       rules: [
          {
