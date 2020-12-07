@@ -48,15 +48,15 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
    const serialNumbered = props.cp.SerialNumber.length > 0;
 
    const { register, watch, control } = useForm<{
-      disposition: dispositionType;
+      partDisposition: dispositionType;
       returnTracking: string;
    }>({
       defaultValues: {
-         disposition: dispositions.used,
+         partDisposition: dispositions.used,
       },
    });
    const isReturnable = Boolean(Number(props.cp.Returnable));
-   const watchDisposition = watch("disposition.partused");
+   const watchDisposition = watch("partDisposition");
    const watchTracking = watch("returnTracking");
 
    console.log(JSON.stringify(watchDisposition));
@@ -65,9 +65,9 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
       <div className={"flex flex-row space-x-2 justify-around"}>
          <div>Consume Part:</div>
          <div>
-            <label htmlFor={"dispositionLabel"}>Disposition:</label>
+            <label htmlFor={"partDisposition"}>Disposition:</label>
             <select
-               name={"dispositionLabel"}
+               name={"partDisposition"}
                // ref={register}
                ref={register({
                   setValueAs: (value) => dispositions[value],
@@ -101,17 +101,20 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
                ref={register}
                name={"otherTracking"}
                disabled={watchTracking !== "manual"}
+               value={watchTracking === "manual" ? undefined : watchTracking}
             />
          </div>
          <div>
-            <label htmlFor={"serial"}>
-               Return Serial: {props.cp.SerialNumber}
-               {watchDisposition ? "used" : "not used "}
-            </label>
+            <label htmlFor={"serial"}>Serial Number:</label>
             <input
                ref={register({ required: serialNumbered })}
                name={"serial"}
-               disabled={!serialNumbered || watchDisposition === false}
+               disabled={!serialNumbered || !watchDisposition.partUsed}
+               value={
+                  serialNumbered && !watchDisposition.partUsed
+                     ? props.cp.SerialNumber
+                     : undefined
+               }
                // disabled={watchDisposition.partUsed === false}
                // disabled={!watcher.disposition.partUsed}
             />
@@ -119,7 +122,6 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
          <div>
             <button className={buttonStyle}>Consume Part</button>
          </div>
-         <DevTool control={control} /> {/* set up the dev tool */}
       </div>
    );
 };
