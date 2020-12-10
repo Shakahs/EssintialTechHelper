@@ -251,11 +251,12 @@ export interface ConsumableParts {
    PartNo: string;
    PartDescription: string;
    DetailSequence: string;
-   Returnable: string;
+   Returnable: string; // string 0 for false
    PartAvailableQty: number;
    SerialNumber: string;
    PartReturnTracking: {
       ReturnTrackingNumber: string;
+      ReturnTrackingCarrier: string;
    }[];
 }
 
