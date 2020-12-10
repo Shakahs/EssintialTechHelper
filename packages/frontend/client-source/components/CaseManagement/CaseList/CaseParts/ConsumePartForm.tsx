@@ -2,96 +2,24 @@ import { map } from "lodash";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import {
-   buildRequestHeaders,
    CaseSummary,
    ConsumableParts,
-   Credentials,
    decodeCaseNumber,
    RequestedParts,
    ResultsObject,
 } from "../../../../api";
 import { apiBase, buttonStyle } from "../../../../constants";
-import { DevTool } from "@hookform/devtools";
-import { store } from "../../../../store";
-import { loginAPISession } from "../../../../features/auth/authThunks";
-import { SerializedError, unwrapResult } from "@reduxjs/toolkit";
-import {
-   updateAPISession,
-   updateCredentials,
-} from "../../../../features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { useFetch } from "react-async";
-import { getAPISessionInComponent } from "../../../utility";
+import {
+   ConsumePartFormType,
+   dispositions,
+} from "../../../../api/consumePartsTypes";
+import { convertToAction } from "../../../../api/consumeParts";
 
 interface ConsumePartFormProps {
    subcase: CaseSummary;
    cp: ConsumableParts;
-}
-
-interface dispositionType {
-   label: string;
-   partUsed: boolean;
-   subCode?: string;
-}
-
-interface dispositionsType {
-   [k: string]: dispositionType;
-}
-const dispositions: dispositionsType = {
-   used: {
-      label: "Used",
-      partUsed: true,
-   },
-   unused: {
-      label: "Not Used - Good Not Used",
-      partUsed: false,
-      subCode: "RC1",
-   },
-   doa: {
-      label: "Not Used - Dead On Arrival",
-      partUsed: false,
-      subCode: "RC2",
-   },
-
-   wrongPart: {
-      label: "Not Used - Wrong Part",
-      partUsed: false,
-      subCode: "RC3",
-   },
-};
-
-interface PartActionBase {
-   ActionCode: string;
-   Charges: null[];
-}
-
-interface PartUsedAction extends PartActionBase {
-   Parts: {
-      Description: string; //part description
-      Number: string; //part number
-      Quantity: number;
-      SeqNo: string; //logistics identifier
-      Serial: string; // empty string if no serial
-   }[];
-}
-
-interface PartNotUsedAction extends PartActionBase {
-   Parts: {
-      ReturnPartCarrier: string;
-      ReturnPartComments: string;
-      ReturnPartNumber: string;
-      ReturnPartQty: number;
-      ReturnPartReasonCode: string;
-      ReturnPartSeqNo: string;
-      ReturnPartSerial: string;
-      ReturnPartTracking: string;
-   }[];
-}
-
-interface ConsumePartFormType {
-   partDisposition: dispositionType;
-   returnTracking: string;
-   serial: string;
 }
 
 const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
@@ -126,56 +54,23 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
       }
    );
 
-   const convertToAction = (
-      data: ConsumePartFormType
-   ): PartUsedAction | PartNotUsedAction => {
-      if (data.partDisposition.partUsed) {
-         return {
-            ActionCode: "PU",
-            Charges: [],
-            Parts: [
-               {
-                  Description: props.cp.PartDescription,
-                  Number: props.cp.PartNo,
-                  Quantity: 1,
-                  SeqNo: props.cp.DetailSequence,
-                  Serial: data.serial,
-               },
-            ],
-         };
-      } else {
-         return {
-            ActionCode: "RET",
-            Charges: [],
-            Parts: [
-               {
-                  ReturnPartCarrier: "",
-                  ReturnPartComments: "",
-                  ReturnPartNumber: props.cp.PartNo,
-                  ReturnPartQty: 1,
-                  ReturnPartReasonCode: data.partDisposition.subCode,
-                  ReturnPartSeqNo: props.cp.DetailSequence,
-                  ReturnPartSerial: data.serial,
-                  ReturnPartTracking: data.returnTracking,
-               },
-            ],
-         };
-      }
-   };
-
-   const runFetchParts = async (data: ConsumePartFormType) => {
-      // try {
-      //    const thisAPISession = await getAPISessionInComponent();
-      //    consumePartsFetchState.run({
-      //       headers: buildRequestHeaders(thisAPISession),
-      //       body: JSON.stringify(convertToAction(data)),
-      //    });
-      // } catch {}
-      console.log(JSON.stringify(convertToAction(data)));
-   };
+   // const runFetchParts = async (data: ConsumePartFormType) => {
+   //    // try {
+   //    //    const thisAPISession = await getAPISessionInComponent();
+   //    //    consumePartsFetchState.run({
+   //    //       headers: buildRequestHeaders(thisAPISession),
+   //    //       body: JSON.stringify(convertToAction(data)),
+   //    //    });
+   //    // } catch {}
+   //    console.log(JSON.stringify(convertToAction(data)));
+   // };
 
    return (
-      <form onSubmit={handleSubmit(runFetchParts)}>
+      <form
+         onSubmit={handleSubmit((data: ConsumePartFormType) => {
+            console.log(JSON.stringify(convertToAction(data, props.cp)));
+         })}
+      >
          <div className={"flex flex-row space-x-2 justify-around"}>
             <div>Consume Part:</div>
             <div>
