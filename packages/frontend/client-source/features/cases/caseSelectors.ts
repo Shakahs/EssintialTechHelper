@@ -35,6 +35,13 @@ export const getCasesCommitted = createSelector(filterStage1, (cases) => {
    );
 });
 
+export const getCasesComplete = createSelector(filterStage1, (cases) => {
+   return filter(
+      cases,
+      (c) => c.UserStatus === caseStatusMapping.Complete.whenReading
+   );
+});
+
 export const getCasesEnroute = createSelector(allCases, (cases) => {
    return filter(
       cases,
@@ -49,12 +56,10 @@ export const getCasesArrive = createSelector(allCases, (cases) => {
    );
 });
 
-export const getCasesComplete = createSelector(filterStage1, (cases) => {
-   return filter(
-      cases,
-      (c) => c.UserStatus === caseStatusMapping.Complete.whenReading
-   );
-});
+export const getActiveTickets = createSelector(
+   [getCasesEnroute, getCasesArrive],
+   (enroute, arrived) => [...arrived, ...enroute]
+);
 
 export const filterStage2 = createSelector(
    [getCasesAssigned, getCasesCommitted, getCasesComplete, getCaseFilters],
@@ -89,14 +94,21 @@ export const filterStage3 = createSelector(
 );
 
 export const combiner = createSelector(
-   [filterStage3, getCasesEnroute, getCasesArrive],
-   (cases, enroute, arrived) => [
-      ...arrived,
-      ...enroute,
-      ...sortBy(cases, (i) => i.ScheduledDateTime),
+   [filterStage3, getActiveTickets],
+   (filterResult, active) => [
+      ...active,
+      ...sortBy(filterResult, (i) => i.ScheduledDateTime),
    ]
 );
 
-export const getCityFilterOptions = createSelector(filterStage2, (cases) =>
-   Array.from(new Set(cases.map((c) => c.Location.City.toLowerCase())))
+export const getCityFilterOptions = createSelector(
+   [filterStage2, getActiveTickets],
+   (filterResult, active) =>
+      Array.from(
+         new Set(
+            [...filterResult, ...active].map((c) =>
+               c.Location.City.toLowerCase()
+            )
+         )
+      ).sort()
 );
