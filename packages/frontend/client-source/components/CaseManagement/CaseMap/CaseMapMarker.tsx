@@ -12,6 +12,7 @@ import dateFormat from "date-fns/format";
 import partsList from "../../../assets/riteAidPartList.json";
 import { useState } from "react";
 import Bool from "../../utility/Bool";
+import { isMobile } from "react-device-detect";
 
 interface CaseMapMarkerProps {
    cases: CaseBase[];
@@ -26,6 +27,7 @@ const CaseMapMarker: React.FunctionComponent<CaseMapMarkerProps> = (props) => {
    };
 
    const [showPopup, setShowPopup] = useState(false);
+   const [hover, setHover] = useState(false);
 
    return (
       <GeocodingMapMarker query={geoQuery}>
@@ -36,9 +38,18 @@ const CaseMapMarker: React.FunctionComponent<CaseMapMarkerProps> = (props) => {
          >
             <div className={"flex"}>
                <div>
-                  <img src={Pin} onClick={() => setShowPopup(!showPopup)} />
+                  <img
+                     src={Pin}
+                     onClick={() => setShowPopup(!showPopup)}
+                     onMouseOver={() => setHover(true)}
+                     onMouseOut={() => setHover(false)}
+                  />
                </div>
-               <Bool if={showPopup}>
+               <Bool
+                  if={
+                     showPopup || (!isMobile && hover)
+                  } /*disable hover on mobile*/
+               >
                   <div
                      className={
                         "bg-gray-300 p-1  text-sm bg-opacity-75 border border-black rounded-sm divide-y divide-black"
@@ -48,7 +59,7 @@ const CaseMapMarker: React.FunctionComponent<CaseMapMarkerProps> = (props) => {
                         const sla = c.Milestones[0];
                         return (
                            <div className={""}>
-                              <div>{c.Id}</div>
+                              <div>{`${c.Id} ${c.Location.City}`}</div>
                               <div>
                                  {partsList?.[c.Model]?.description ?? c.Model}
                               </div>

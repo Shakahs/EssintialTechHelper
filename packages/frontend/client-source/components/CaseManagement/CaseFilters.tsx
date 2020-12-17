@@ -5,6 +5,7 @@ import { map, capitalize } from "lodash";
 import { CaseBase, CurrentCaseStatus } from "../../api";
 import { updateFilters } from "../../features/cases/caseSlice";
 import { caseStatusMapping } from "../../constants";
+import { getCityOptions } from "../../features/cases/caseSelectors";
 
 interface CaseSummaryFiltersProps {
    cases: CaseBase[];
@@ -16,9 +17,11 @@ const CaseFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
    const dispatch = useDispatch();
    const { caseFilters } = useSelector((state: RootState) => state.caseSlice);
 
-   const cities = new Set(
-      props.cases.map((c) => c.Location.City.toLowerCase())
-   );
+   const casesForCitySelect = useSelector(getCityOptions);
+   const cityOptions = Array.from(
+      new Set(casesForCitySelect.map((c) => c.Location.City.toLowerCase()))
+   ).sort();
+
    return (
       <div className={"border border-solid border-1 p-2"}>
          Filters:
@@ -78,15 +81,30 @@ const CaseFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
                         })
                      );
                   }}
+                  value={caseFilters.showCity}
                >
-                  <option value={""} selected={caseFilters.showCity === ""}>
-                     Any
+                  <option value={""}>
+                     Any {`(${casesForCitySelect.length})`}
                   </option>
-                  {[...cities].map((c) => (
-                     <option value={c} selected={caseFilters.showCity === c}>
-                        {c.split(" ").map(capitalize).join(" ")}
+                  {cityOptions.map((c) => (
+                     <option value={c} key={c}>
+                        {c.split(" ").map(capitalize).join(" ")}{" "}
+                        {`(${
+                           casesForCitySelect.filter(
+                              (all) => all.Location.City.toLowerCase() === c
+                           ).length
+                        })`}
                      </option>
                   ))}
+                  {caseFilters.showCity !== "" &&
+                     !cityOptions.includes(caseFilters.showCity) && (
+                        <option value={caseFilters.showCity}>
+                           {caseFilters.showCity
+                              .split(" ")
+                              .map(capitalize)
+                              .join(" ")}
+                        </option>
+                     )}
                </select>
             </div>
          </div>

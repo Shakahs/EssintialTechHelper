@@ -24,6 +24,7 @@
       "react": "^16.13.1",
       "react-async": "^10.0.1",
       "react-datepicker": "^3.2.2",
+      "react-device-detect": "^1.14.0",
       "react-dom": "^16.13.1",
       "react-error-boundary": "^3.0.2",
       "react-hook-form": "^6.12.2",
