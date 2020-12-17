@@ -59,7 +59,7 @@ const CaseMapMarker: React.FunctionComponent<CaseMapMarkerProps> = (props) => {
                         const sla = c.Milestones[0];
                         return (
                            <div className={""}>
-                              <div>{c.Id}</div>
+                              <div>{`${c.Id} ${c.Location.City}`}</div>
                               <div>
                                  {partsList?.[c.Model]?.description ?? c.Model}
                               </div>
