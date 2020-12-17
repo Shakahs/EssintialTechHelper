@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import {
    getCasesArrive,
    getCasesEnroute,
-   getFilteredSortedCases,
+   combiner,
 } from "../../../features/cases/caseSelectors";
 import Bool from "../../utility/Bool";
 
@@ -14,7 +14,7 @@ interface CaseListProps {}
 const CaseList: React.FunctionComponent<CaseListProps> = (props) => {
    const arrivedCases = useSelector(getCasesArrive);
    const enrouteCases = useSelector(getCasesEnroute);
-   const filteredCaseSummaries = useSelector(getFilteredSortedCases);
+   const filteredCaseSummaries = useSelector(combiner);
 
    return (
       <div>

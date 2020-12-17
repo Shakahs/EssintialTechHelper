@@ -9,10 +9,10 @@ import classnames from "classnames";
 import { debouncedFetchCases } from "../../features/cases/caseThunks";
 import CaseFilters from "./CaseFilters";
 import {
-   getCaseFilterResult,
+   filterStage2,
    getCasesArrive,
    getCasesEnroute,
-   getFilteredSortedCases,
+   combiner,
 } from "../../features/cases/caseSelectors";
 import { getAPISession } from "../../features/auth/authSelectors";
 import { resetAuthentication } from "../../features/auth/authSlice";
@@ -34,7 +34,7 @@ const CaseManagement: React.FunctionComponent<Manage2Props> = (props) => {
       dispatch(debouncedFetchCases());
    }, []);
 
-   const filteredCaseSummaries = useSelector(getFilteredSortedCases);
+   const filteredCaseSummaries = useSelector(combiner);
 
    return (
       <div>

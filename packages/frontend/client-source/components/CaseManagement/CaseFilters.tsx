@@ -5,6 +5,7 @@ import { map, capitalize } from "lodash";
 import { CaseBase, CurrentCaseStatus } from "../../api";
 import { updateFilters } from "../../features/cases/caseSlice";
 import { caseStatusMapping } from "../../constants";
+import { getCityFilterOptions } from "../../features/cases/caseSelectors";
 
 interface CaseSummaryFiltersProps {
    cases: CaseBase[];
@@ -16,9 +17,8 @@ const CaseFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
    const dispatch = useDispatch();
    const { caseFilters } = useSelector((state: RootState) => state.caseSlice);
 
-   const cities = new Set(
-      props.cases.map((c) => c.Location.City.toLowerCase())
-   );
+   const caseCities = useSelector(getCityFilterOptions);
+
    return (
       <div className={"border border-solid border-1 p-2"}>
          Filters:
@@ -81,11 +81,20 @@ const CaseFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
                   value={caseFilters.showCity}
                >
                   <option value={""}>Any</option>
-                  {[...cities].map((c) => (
+                  {caseCities.map((c) => (
                      <option value={c} key={c}>
                         {c.split(" ").map(capitalize).join(" ")}
                      </option>
                   ))}
+                  {caseFilters.showCity !== "" &&
+                     !caseCities.includes(caseFilters.showCity) && (
+                        <option value={caseFilters.showCity}>
+                           {caseFilters.showCity
+                              .split(" ")
+                              .map(capitalize)
+                              .join(" ")}
+                        </option>
+                     )}
                </select>
             </div>
          </div>
