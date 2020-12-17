@@ -12,6 +12,7 @@ import dateFormat from "date-fns/format";
 import partsList from "../../../assets/riteAidPartList.json";
 import { useState } from "react";
 import Bool from "../../utility/Bool";
+import { isMobile } from "react-device-detect";
 
 interface CaseMapMarkerProps {
    cases: CaseBase[];
@@ -44,7 +45,11 @@ const CaseMapMarker: React.FunctionComponent<CaseMapMarkerProps> = (props) => {
                      onMouseOut={() => setHover(false)}
                   />
                </div>
-               <Bool if={showPopup || hover}>
+               <Bool
+                  if={
+                     showPopup || (!isMobile && hover)
+                  } /*disable hover on mobile*/
+               >
                   <div
                      className={
                         "bg-gray-300 p-1  text-sm bg-opacity-75 border border-black rounded-sm divide-y divide-black"
