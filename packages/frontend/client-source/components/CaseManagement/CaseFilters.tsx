@@ -78,12 +78,11 @@ const CaseFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
                         })
                      );
                   }}
+                  value={caseFilters.showCity}
                >
-                  <option value={""} selected={caseFilters.showCity === ""}>
-                     Any
-                  </option>
+                  <option value={""}>Any</option>
                   {[...cities].map((c) => (
-                     <option value={c} selected={caseFilters.showCity === c}>
+                     <option value={c} key={c}>
                         {c.split(" ").map(capitalize).join(" ")}
                      </option>
                   ))}
