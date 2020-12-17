@@ -101,14 +101,7 @@ export const combiner = createSelector(
    ]
 );
 
-export const getCityFilterOptions = createSelector(
+export const getCityOptions = createSelector(
    [filterStage2, getActiveTickets],
-   (filterResult, active) =>
-      Array.from(
-         new Set(
-            [...filterResult, ...active].map((c) =>
-               c.Location.City.toLowerCase()
-            )
-         )
-      ).sort()
+   (filterResult, active) => [...filterResult, ...active]
 );
