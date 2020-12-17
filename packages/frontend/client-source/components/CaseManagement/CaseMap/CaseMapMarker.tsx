@@ -26,6 +26,7 @@ const CaseMapMarker: React.FunctionComponent<CaseMapMarkerProps> = (props) => {
    };
 
    const [showPopup, setShowPopup] = useState(false);
+   const [hover, setHover] = useState(false);
 
    return (
       <GeocodingMapMarker query={geoQuery}>
@@ -36,9 +37,14 @@ const CaseMapMarker: React.FunctionComponent<CaseMapMarkerProps> = (props) => {
          >
             <div className={"flex"}>
                <div>
-                  <img src={Pin} onClick={() => setShowPopup(!showPopup)} />
+                  <img
+                     src={Pin}
+                     onClick={() => setShowPopup(!showPopup)}
+                     onMouseOver={() => setHover(true)}
+                     onMouseOut={() => setHover(false)}
+                  />
                </div>
-               <Bool if={showPopup}>
+               <Bool if={showPopup || hover}>
                   <div
                      className={
                         "bg-gray-300 p-1  text-sm bg-opacity-75 border border-black rounded-sm divide-y divide-black"
