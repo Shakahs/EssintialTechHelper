@@ -39,8 +39,8 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
 
    const isSerialized = props.cp.SerialNumber.length > 0;
    const isReturnable = Boolean(Number(props.cp.Returnable));
-   const shouldBeReturned =
-      isReturnable || !dispositions[watchDisposition].partUsed;
+   const isBeingUsed = dispositions[watchDisposition].partUsed;
+   const shouldBeReturned = isReturnable || !isBeingUsed;
 
    const decodedCaseNumber = decodeCaseNumber(props.subcase.Id);
    const consumePartsFetchState = useFetch<ResultsObject<RequestedParts[]>>(
@@ -143,17 +143,15 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
                      })}
                      ref={register({ required: isSerialized })}
                      name={"serial"}
+                     /* read only if part is being returned,
+                      with content being set by onChange handler on disposition field */
+                     readOnly={isSerialized && !isBeingUsed}
+                     /* disabled with a placeholder if part is not serialized.
+                     Will submit as undefined, and be replaced by an empty string later */
                      disabled={!isSerialized}
                      placeholder={
                         isSerialized ? undefined : "Not a serialized part"
                      }
-                     // value={
-                     //    isSerialized && !watchDisposition.partUsed
-                     //       ? props.cp.SerialNumber
-                     //       : undefined
-                     // }
-                     // disabled={watchDisposition.partUsed === false}
-                     // disabled={!watcher.disposition.partUsed}
                   />
                   {errors.serial && (
                      <p className={"text-red-600 font-semibold"}>
