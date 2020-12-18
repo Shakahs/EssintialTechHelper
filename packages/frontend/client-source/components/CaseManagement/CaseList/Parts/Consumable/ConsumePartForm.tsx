@@ -7,15 +7,15 @@ import {
    decodeCaseNumber,
    RequestedParts,
    ResultsObject,
-} from "../../../../api";
-import { apiBase, buttonStyle } from "../../../../constants";
+} from "../../../../../api";
+import { apiBase, buttonStyle } from "../../../../../constants";
 import { useDispatch } from "react-redux";
 import { useFetch } from "react-async";
 import {
    ConsumePartFormType,
    dispositions,
-} from "../../../../api/consumePartsTypes";
-import { convertToAction } from "../../../../api/consumeParts";
+} from "../../../../../api/consumePartsTypes";
+import { convertToAction } from "../../../../../api/consumeParts";
 import classnames from "classnames";
 
 interface ConsumePartFormProps {

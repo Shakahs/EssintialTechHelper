@@ -10,13 +10,13 @@ import {
 import { useFetch } from "react-async";
 import { apiBase } from "../../../../constants";
 import { getAPISessionInComponent } from "../../../utility";
-import CasePartsTemplate from "./CasePartsTemplate";
+import PartsListTemplate from "./PartsListTemplate";
 
 interface CasePartsRequestedProps {
    subcase: CaseSummary;
 }
 
-const CasePartsRequested: React.FunctionComponent<CasePartsRequestedProps> = (
+const RequestedParts: React.FunctionComponent<CasePartsRequestedProps> = (
    props
 ) => {
    const decodedCaseNumber = decodeCaseNumber(props.subcase.Id);
@@ -51,7 +51,7 @@ const CasePartsRequested: React.FunctionComponent<CasePartsRequestedProps> = (
    }, []);
 
    return (
-      <CasePartsTemplate
+      <PartsListTemplate
          title={"Parts Requests"}
          loading={requestedPartsFetchState.isPending}
          length={requestedParts.length}
@@ -78,8 +78,8 @@ const CasePartsRequested: React.FunctionComponent<CasePartsRequestedProps> = (
                </div>
             ))}
          </>
-      </CasePartsTemplate>
+      </PartsListTemplate>
    );
 };
 
-export default CasePartsRequested;
+export default RequestedParts;

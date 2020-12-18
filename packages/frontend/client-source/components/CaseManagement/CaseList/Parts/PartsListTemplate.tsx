@@ -1,6 +1,6 @@
 import * as React from "react";
 import LoadingIcon from "../../../LoadingIcon";
-import CasePartsListTracking from "./CasePartsListTracking";
+import PartTracking from "./PartTracking";
 import { ReactElement } from "react";
 import Bool from "../../../utility/Bool";
 
@@ -11,7 +11,7 @@ interface CasePartsTemplateProps {
    length: number;
 }
 
-const CasePartsTemplate: React.FunctionComponent<CasePartsTemplateProps> = (
+const PartsListTemplate: React.FunctionComponent<CasePartsTemplateProps> = (
    props
 ) => (
    <div
@@ -28,4 +28,4 @@ const CasePartsTemplate: React.FunctionComponent<CasePartsTemplateProps> = (
    </div>
 );
 
-export default CasePartsTemplate;
+export default PartsListTemplate;

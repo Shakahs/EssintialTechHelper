@@ -10,16 +10,16 @@ import { apiBase } from "../../../../constants";
 import { useFetch } from "react-async";
 import { useEffect, useState } from "react";
 import { getAPISessionInComponent } from "../../../utility";
-import CasePartsListTracking from "./CasePartsListTracking";
+import PartTracking from "./PartTracking";
 import Bool from "../../../utility/Bool";
 import LoadingIcon from "../../../LoadingIcon";
-import CasePartsTemplate from "./CasePartsTemplate";
+import PartsListTemplate from "./PartsListTemplate";
 
 interface CasePartsShippedProps {
    subcase: CaseSummary;
 }
 
-const CasePartsShipped: React.FunctionComponent<CasePartsShippedProps> = (
+const ShippedParts: React.FunctionComponent<CasePartsShippedProps> = (
    props
 ) => {
    const decodedCaseNumber = decodeCaseNumber(props.subcase.Id);
@@ -54,7 +54,7 @@ const CasePartsShipped: React.FunctionComponent<CasePartsShippedProps> = (
    }, []);
 
    return (
-      <CasePartsTemplate
+      <PartsListTemplate
          title={`Parts Shipments`}
          loading={shippedPartsFetchState.isPending}
          length={shippedParts.length}
@@ -82,9 +82,7 @@ const CasePartsShipped: React.FunctionComponent<CasePartsShippedProps> = (
                            <div>Tracking Numbers:</div>
                            {speach.TrackingNumbers.map((eachtr) => (
                               <div key={eachtr}>
-                                 <CasePartsListTracking
-                                    trackingNumber={eachtr}
-                                 />
+                                 <PartTracking trackingNumber={eachtr} />
                               </div>
                            ))}
                         </div>
@@ -93,8 +91,8 @@ const CasePartsShipped: React.FunctionComponent<CasePartsShippedProps> = (
                </div>
             ))}
          </>
-      </CasePartsTemplate>
+      </PartsListTemplate>
    );
 };
 
-export default CasePartsShipped;
+export default ShippedParts;

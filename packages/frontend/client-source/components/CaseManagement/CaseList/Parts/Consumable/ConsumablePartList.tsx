@@ -5,20 +5,20 @@ import {
    ConsumableParts,
    decodeCaseNumber,
    ResultsObject,
-} from "../../../../api";
-import { apiBase, buttonStyle } from "../../../../constants";
+} from "../../../../../api";
+import { apiBase, buttonStyle } from "../../../../../constants";
 import { useFetch } from "react-async";
 import { useEffect, useState } from "react";
-import { getAPISessionInComponent } from "../../../utility";
-import CasePartsTemplate from "./CasePartsTemplate";
-import Bool from "../../../utility/Bool";
+import { getAPISessionInComponent } from "../../../../utility";
+import PartsListTemplate from "../PartsListTemplate";
+import Bool from "../../../../utility/Bool";
 import ConsumePartForm from "./ConsumePartForm";
 
-interface CasePartsConsumableProps {
+interface ConsumablePartListProps {
    subcase: CaseSummary;
 }
 
-const CasePartsConsumable: React.FunctionComponent<CasePartsConsumableProps> = (
+const ConsumablePartList: React.FunctionComponent<ConsumablePartListProps> = (
    props
 ) => {
    const decodedCaseNumber = decodeCaseNumber(props.subcase.Id);
@@ -55,7 +55,7 @@ const CasePartsConsumable: React.FunctionComponent<CasePartsConsumableProps> = (
    }, []);
 
    return (
-      <CasePartsTemplate
+      <PartsListTemplate
          title={"Consumable Parts"}
          loading={consumablePartFetchState.isLoading}
          length={consumableParts.length}
@@ -72,8 +72,8 @@ const CasePartsConsumable: React.FunctionComponent<CasePartsConsumableProps> = (
                </div>
             ))}
          </>
-      </CasePartsTemplate>
+      </PartsListTemplate>
    );
 };
 
-export default CasePartsConsumable;
+export default ConsumablePartList;

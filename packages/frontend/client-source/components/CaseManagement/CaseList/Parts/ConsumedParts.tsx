@@ -1,15 +1,15 @@
 import * as React from "react";
 import { CaseSummary } from "../../../../api";
-import CasePartsTemplate from "./CasePartsTemplate";
+import PartsListTemplate from "./PartsListTemplate";
 
 interface CasePartsConsumedProps {
    subcase: CaseSummary;
 }
 
-const CasePartsConsumed: React.FunctionComponent<CasePartsConsumedProps> = (
+const ConsumedParts: React.FunctionComponent<CasePartsConsumedProps> = (
    props
 ) => (
-   <CasePartsTemplate
+   <PartsListTemplate
       title={"Consumed Parts"}
       loading={false}
       length={props.subcase.Activities.length}
@@ -23,7 +23,7 @@ const CasePartsConsumed: React.FunctionComponent<CasePartsConsumedProps> = (
             }
          })}
       </>
-   </CasePartsTemplate>
+   </PartsListTemplate>
 );
 
-export default CasePartsConsumed;
+export default ConsumedParts;
