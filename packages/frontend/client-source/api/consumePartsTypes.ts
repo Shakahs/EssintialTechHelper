@@ -72,8 +72,9 @@ export type PartNotUsedAction = PartActionBase<PartNotUsedActionCore>;
 
 export interface ConsumePartFormType {
    partDisposition: dispositionType;
-   returnTracking: string;
+   returnTracking: string; //tracking number or "manual"
    serial: string;
+   manualTracking: string;
    comments: string;
 }
 

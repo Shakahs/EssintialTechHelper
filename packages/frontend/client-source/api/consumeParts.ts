@@ -26,7 +26,10 @@ export const convertToAction = (
                CorePartCarrier: "FDX",
                CorePartNumber: part.PartNo,
                CorePartQty: "1",
-               CorePartTracking: data.returnTracking,
+               CorePartTracking:
+                  data.returnTracking === "manual"
+                     ? data.manualTracking
+                     : data.returnTracking,
                CorePartSerial: data.serial,
                Description: part.PartDescription,
                Number: part.PartNo,
@@ -65,7 +68,10 @@ export const convertToAction = (
                ReturnPartReasonCode: data.partDisposition.subCode,
                ReturnPartSeqNo: part.DetailSequence,
                ReturnPartSerial: data.serial,
-               ReturnPartTracking: data.returnTracking,
+               ReturnPartTracking:
+                  data.returnTracking === "manual"
+                     ? data.manualTracking
+                     : data.returnTracking,
             },
          ],
       };
