@@ -13,6 +13,7 @@ import { getAPISessionInComponent } from "../../../../utility";
 import PartsListTemplate from "../PartsListTemplate";
 import Bool from "../../../../utility/Bool";
 import ConsumePartForm from "./ConsumePartForm";
+import ConsumablePartListItem from "./ConsumablePartListItem";
 
 interface ConsumablePartListProps {
    subcase: CaseSummary;
@@ -62,14 +63,11 @@ const ConsumablePartList: React.FunctionComponent<ConsumablePartListProps> = (
       >
          <>
             {consumableParts.map((cp) => (
-               <div key={cp.DetailSequence} className={"flex flex-col"}>
-                  <div>
-                     {`${cp.PartNo} ${cp.PartDescription} Serial: ${cp.SerialNumber} Available: ${cp.PartAvailableQty}`}{" "}
-                  </div>
-                  <div>
-                     <ConsumePartForm subcase={props.subcase} cp={cp} />
-                  </div>
-               </div>
+               <ConsumablePartListItem
+                  key={cp.DetailSequence}
+                  cp={cp}
+                  subcase={props.subcase}
+               />
             ))}
          </>
       </PartsListTemplate>
