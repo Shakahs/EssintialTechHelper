@@ -1,5 +1,6 @@
 import {
    ConsumePartFormType,
+   dispositions,
    PartDataForActionCreation,
    PartNotUsedAction,
    PartUsedAction,
@@ -17,7 +18,7 @@ export const convertToAction = (
    data: ConsumePartFormType,
    part: ConsumableParts
 ): PartUsedAction | PartNotUsedAction | ReturnablePartUsedAction => {
-   if (data.partDisposition.partUsed && isPartReturnable(part)) {
+   if (dispositions[data.partDisposition].partUsed && isPartReturnable(part)) {
       const action: ReturnablePartUsedAction = {
          ActionCode: "PU",
          Charges: [],
@@ -40,7 +41,10 @@ export const convertToAction = (
          ],
       };
       return action;
-   } else if (data.partDisposition.partUsed && !isPartReturnable(part)) {
+   } else if (
+      dispositions[data.partDisposition].partUsed &&
+      !isPartReturnable(part)
+   ) {
       const action: PartUsedAction = {
          ActionCode: "PU",
          Charges: [],
@@ -55,7 +59,7 @@ export const convertToAction = (
          ],
       };
       return action;
-   } else if (!data.partDisposition.partUsed) {
+   } else if (!dispositions[data.partDisposition].partUsed) {
       const action: PartNotUsedAction = {
          ActionCode: "RET",
          Charges: [],
@@ -65,7 +69,7 @@ export const convertToAction = (
                ReturnPartComments: data.comments,
                ReturnPartNumber: part.PartNo,
                ReturnPartQty: 1,
-               ReturnPartReasonCode: data.partDisposition.subCode,
+               ReturnPartReasonCode: dispositions[data.partDisposition].subCode,
                ReturnPartSeqNo: part.DetailSequence,
                ReturnPartSerial: data.serial,
                ReturnPartTracking:

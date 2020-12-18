@@ -1,4 +1,5 @@
 interface dispositionType {
+   key: string;
    label: string;
    partUsed: boolean;
    subCode?: string;
@@ -10,21 +11,25 @@ interface dispositionsType {
 
 export const dispositions: dispositionsType = {
    used: {
+      key: "used",
       label: "Used",
       partUsed: true,
    },
    unused: {
+      key: "unused",
       label: "Not Used - Good Not Used",
       partUsed: false,
       subCode: "RC1",
    },
    doa: {
+      key: "doa",
       label: "Not Used - Dead On Arrival",
       partUsed: false,
       subCode: "RC2",
    },
 
    wrongPart: {
+      key: "wrongPart",
       label: "Not Used - Wrong Part",
       partUsed: false,
       subCode: "RC3",
@@ -71,7 +76,7 @@ export type ReturnablePartUsedAction = PartActionBase<
 export type PartNotUsedAction = PartActionBase<PartNotUsedActionCore>;
 
 export interface ConsumePartFormType {
-   partDisposition: dispositionType;
+   partDisposition: string;
    returnTracking: string; //tracking number or "manual"
    serial: string;
    manualTracking: string;

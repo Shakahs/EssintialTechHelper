@@ -33,7 +33,7 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
       ConsumePartFormType
    >({
       defaultValues: {
-         partDisposition: dispositions.used,
+         partDisposition: dispositions.used.key,
       },
    });
 
@@ -79,10 +79,10 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
                   <label htmlFor={"partDisposition"}>Disposition:</label>
                   <select
                      name={"partDisposition"}
-                     // ref={register}
-                     ref={register({
-                        setValueAs: (value) => dispositions[value],
-                     })}
+                     ref={register}
+                     // ref={register({
+                     //    setValueAs: (value) => dispositions[value],
+                     // })}
                      onChange={(e) => {
                         if (
                            !dispositions[e.target.value].partUsed &&
@@ -133,7 +133,9 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
                      ref={register({ required: isSerialized })}
                      name={"serial"}
                      disabled={!isSerialized}
-                     placeholder={!isSerialized && "Not a serialized part"}
+                     placeholder={
+                        isSerialized ? undefined : "Not a serialized part"
+                     }
                      // value={
                      //    isSerialized && !watchDisposition.partUsed
                      //       ? props.cp.SerialNumber
@@ -178,7 +180,7 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
                      </div>
                   </>
                )}
-               {!watchDisposition.partUsed && (
+               {!dispositions[watchDisposition].partUsed && (
                   <div className={"md:col-span-3"}>
                      <label htmlFor={"comments"}>Part return comments:</label>
                      <textarea
@@ -198,83 +200,6 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
                   <button className={buttonStyle}>Consume Part</button>
                </div>
             </div>
-            {/*<div className={"flex flex-col space-x-2 justify-around "}>*/}
-            {/*   <div className={"flex flex-row justify-around"}>*/}
-            {/*      <div>*/}
-            {/*         <label htmlFor={"partDisposition"}>Disposition:</label>*/}
-            {/*         <select*/}
-            {/*            name={"partDisposition"}*/}
-            {/*            // ref={register}*/}
-            {/*            ref={register({*/}
-            {/*               setValueAs: (value) => dispositions[value],*/}
-            {/*            })}*/}
-            {/*         >*/}
-            {/*            {map(dispositions, (value, key) => (*/}
-            {/*               <option key={value.label} value={key}>*/}
-            {/*                  {value.label}*/}
-            {/*               </option>*/}
-            {/*            ))}*/}
-            {/*         </select>*/}
-            {/*      </div>*/}
-            {/*      <div>*/}
-            {/*         <label htmlFor={"returnTracking"}>Return Tracking:</label>*/}
-            {/*         <select*/}
-            {/*            name={"returnTracking"}*/}
-            {/*            disabled={!isReturnable}*/}
-            {/*            ref={register}*/}
-            {/*         >*/}
-            {/*            {props.cp.PartReturnTracking.map((rpt) => (*/}
-            {/*               <option key={rpt.ReturnTrackingNumber}>*/}
-            {/*                  {`${rpt.ReturnTrackingNumber} ${rpt.ReturnTrackingCarrier}`}*/}
-            {/*               </option>*/}
-            {/*            ))}*/}
-            {/*            <option value={"manual"}>Manually Enter</option>*/}
-            {/*         </select>*/}
-            {/*      </div>*/}
-            {/*      <div>*/}
-            {/*         <label htmlFor={"serial"}>Serial Number:</label>*/}
-            {/*         <input*/}
-            {/*            ref={register({ required: serialNumbered })}*/}
-            {/*            name={"serial"}*/}
-            {/*            disabled={!serialNumbered || !watchDisposition.partUsed}*/}
-            {/*            value={*/}
-            {/*               serialNumbered && !watchDisposition.partUsed*/}
-            {/*                  ? props.cp.SerialNumber*/}
-            {/*                  : undefined*/}
-            {/*            }*/}
-            {/*            // disabled={watchDisposition.partUsed === false}*/}
-            {/*            // disabled={!watcher.disposition.partUsed}*/}
-            {/*         />*/}
-            {/*      </div>*/}
-            {/*   </div>*/}
-            {/*   {watchTracking === "manual" && (*/}
-            {/*      <div className={"flex flex-row justify-around"}>*/}
-            {/*         <div>*/}
-            {/*            <label htmlFor={"otherTracking"}>Enter Tracking:</label>*/}
-            {/*            <input*/}
-            {/*               ref={register}*/}
-            {/*               name={"otherTracking"}*/}
-            {/*               disabled={watchTracking !== "manual"}*/}
-            {/*               value={*/}
-            {/*                  watchTracking === "manual"*/}
-            {/*                     ? undefined*/}
-            {/*                     : watchTracking*/}
-            {/*               }*/}
-            {/*            />*/}
-            {/*         </div>*/}
-            {/*         <div>*/}
-            {/*            <label htmlFor={"specifyCarrier"}>Carrier:</label>*/}
-            {/*            <select name={"specifyCarrier"}>*/}
-            {/*               <option value={"FDX"}>FedEx</option>*/}
-            {/*            </select>*/}
-            {/*         </div>*/}
-            {/*      </div>*/}
-            {/*   )}*/}
-
-            {/*   <div>*/}
-            {/*      <button className={buttonStyle}>Consume Part</button>*/}
-            {/*   </div>*/}
-            {/*</div>*/}
          </>
       </form>
    );
