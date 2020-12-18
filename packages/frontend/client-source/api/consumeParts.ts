@@ -59,7 +59,7 @@ export const convertToAction = (
          Parts: [
             {
                ReturnPartCarrier: "FDX",
-               ReturnPartComments: "",
+               ReturnPartComments: data.comments,
                ReturnPartNumber: part.PartNo,
                ReturnPartQty: 1,
                ReturnPartReasonCode: data.partDisposition.subCode,

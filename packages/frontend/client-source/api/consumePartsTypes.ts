@@ -74,6 +74,7 @@ export interface ConsumePartFormType {
    partDisposition: dispositionType;
    returnTracking: string;
    serial: string;
+   comments: string;
 }
 
 export interface PartDataForActionCreation {
