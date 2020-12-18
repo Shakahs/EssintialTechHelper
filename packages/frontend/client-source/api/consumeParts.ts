@@ -15,67 +15,71 @@ export const isPartReturnable = (part: ConsumableParts): boolean =>
    Boolean(Number(part.Returnable));
 
 export const convertToAction = (
-   data: ConsumePartFormType,
-   part: ConsumableParts
+   formData: ConsumePartFormType,
+   partData: ConsumableParts
 ): PartUsedAction | PartNotUsedAction | ReturnablePartUsedAction => {
-   if (dispositions[data.partDisposition].partUsed && isPartReturnable(part)) {
+   if (
+      dispositions[formData.partDisposition].partUsed &&
+      isPartReturnable(partData)
+   ) {
       const action: ReturnablePartUsedAction = {
          ActionCode: "PU",
          Charges: [],
          Parts: [
             {
                CorePartCarrier: "FDX",
-               CorePartNumber: part.PartNo,
+               CorePartNumber: partData.PartNo,
                CorePartQty: "1",
                CorePartTracking:
-                  data.returnTracking === "manual"
-                     ? data.manualTracking
-                     : data.returnTracking,
-               CorePartSerial: data.serial,
-               Description: part.PartDescription,
-               Number: part.PartNo,
+                  formData.returnTracking === "manual"
+                     ? formData.manualTracking
+                     : formData.returnTracking,
+               CorePartSerial: formData.serial,
+               Description: partData.PartDescription,
+               Number: partData.PartNo,
                Quantity: 1,
-               SeqNo: part.DetailSequence,
-               Serial: data.serial,
+               SeqNo: partData.DetailSequence,
+               Serial: formData.serial ?? "",
             },
          ],
       };
       return action;
    } else if (
-      dispositions[data.partDisposition].partUsed &&
-      !isPartReturnable(part)
+      dispositions[formData.partDisposition].partUsed &&
+      !isPartReturnable(partData)
    ) {
       const action: PartUsedAction = {
          ActionCode: "PU",
          Charges: [],
          Parts: [
             {
-               Description: part.PartDescription,
-               Number: part.PartNo,
+               Description: partData.PartDescription,
+               Number: partData.PartNo,
                Quantity: 1,
-               SeqNo: part.DetailSequence,
-               Serial: data.serial,
+               SeqNo: partData.DetailSequence,
+               Serial: formData.serial ?? "",
             },
          ],
       };
       return action;
-   } else if (!dispositions[data.partDisposition].partUsed) {
+   } else if (!dispositions[formData.partDisposition].partUsed) {
       const action: PartNotUsedAction = {
          ActionCode: "RET",
          Charges: [],
          Parts: [
             {
                ReturnPartCarrier: "FDX",
-               ReturnPartComments: data.comments,
-               ReturnPartNumber: part.PartNo,
+               ReturnPartComments: formData.comments,
+               ReturnPartNumber: partData.PartNo,
                ReturnPartQty: 1,
-               ReturnPartReasonCode: dispositions[data.partDisposition].subCode,
-               ReturnPartSeqNo: part.DetailSequence,
-               ReturnPartSerial: data.serial,
+               ReturnPartReasonCode:
+                  dispositions[formData.partDisposition].subCode,
+               ReturnPartSeqNo: partData.DetailSequence,
+               ReturnPartSerial: formData.serial ?? "",
                ReturnPartTracking:
-                  data.returnTracking === "manual"
-                     ? data.manualTracking
-                     : data.returnTracking,
+                  formData.returnTracking === "manual"
+                     ? formData.manualTracking
+                     : formData.returnTracking,
             },
          ],
       };

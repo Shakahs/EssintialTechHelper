@@ -26,9 +26,6 @@ interface ConsumePartFormProps {
 const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
    props
 ) => {
-   const isSerialized = props.cp.SerialNumber.length > 0;
-   const isReturnable = Boolean(Number(props.cp.Returnable));
-
    const { register, watch, handleSubmit, setValue, errors } = useForm<
       ConsumePartFormType
    >({
@@ -39,6 +36,11 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
 
    const watchDisposition = watch("partDisposition");
    const watchTracking = watch("returnTracking");
+
+   const isSerialized = props.cp.SerialNumber.length > 0;
+   const isReturnable = Boolean(Number(props.cp.Returnable));
+   const shouldBeReturned =
+      isReturnable || !dispositions[watchDisposition].partUsed;
 
    const decodedCaseNumber = decodeCaseNumber(props.subcase.Id);
    const consumePartsFetchState = useFetch<ResultsObject<RequestedParts[]>>(
@@ -71,6 +73,7 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
       <form
          onSubmit={handleSubmit((data: ConsumePartFormType) => {
             console.log(JSON.stringify(convertToAction(data, props.cp)));
+            console.dir(convertToAction(data, props.cp));
          })}
       >
          <>
@@ -96,6 +99,12 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
                         ) {
                            setValue("serial", "");
                         }
+                        if (
+                           dispositions[e.target.value].partUsed &&
+                           !isReturnable
+                        ) {
+                           setValue("returnTracking", "");
+                        }
                      }}
                   >
                      {map(dispositions, (value, key) => (
@@ -109,9 +118,11 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
                   <label htmlFor={"returnTracking"}>Return Tracking:</label>
                   <select
                      name={"returnTracking"}
-                     disabled={!isReturnable}
-                     ref={register}
+                     ref={register({ required: true })}
                   >
+                     {!shouldBeReturned && (
+                        <option value={""}>No return needed</option>
+                     )}
                      {props.cp.PartReturnTracking.map((rpt) => (
                         <option
                            key={rpt.ReturnTrackingNumber}
@@ -197,7 +208,11 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
                   </div>
                )}
                <div className={"md:col-span-3"}>
-                  <button className={buttonStyle}>Consume Part</button>
+                  <input
+                     type={"submit"}
+                     className={buttonStyle}
+                     value={"Consume Part"}
+                  />
                </div>
             </div>
          </>
