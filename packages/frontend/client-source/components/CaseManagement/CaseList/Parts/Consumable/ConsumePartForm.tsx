@@ -2,8 +2,10 @@ import { map } from "lodash";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import {
+   buildRequestHeaders,
    CaseSummary,
    ConsumableParts,
+   ConsumePartResponse,
    decodeCaseNumber,
    RequestedParts,
    ResultsObject,
@@ -21,16 +23,23 @@ import {
    isPartSerialized,
 } from "../../../../../api/consumeParts";
 import classnames from "classnames";
+import { updateCaseActivities } from "../../../../../features/cases/caseSlice";
+import { getAPISessionInComponent } from "../../../../utility";
+import Bool from "../../../../utility/Bool";
+import LoadingIcon from "../../../../LoadingIcon";
 
 interface ConsumePartFormProps {
    subcase: CaseSummary;
    cp: ConsumableParts;
    closeForm: () => void;
+   refreshConsumables: () => void;
 }
 
 const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
    props
 ) => {
+   const dispatch = useDispatch();
+
    const { register, watch, handleSubmit, setValue, errors } = useForm<
       ConsumePartFormType
    >({
@@ -48,7 +57,7 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
    const shouldBeReturned = isReturnable || !isBeingUsed;
 
    const decodedCaseNumber = decodeCaseNumber(props.subcase.Id);
-   const consumePartsFetchState = useFetch<ResultsObject<RequestedParts[]>>(
+   const consumePartsFetchState = useFetch<ResultsObject<ConsumePartResponse>>(
       `${apiBase}/subcases/${decodedCaseNumber.masterCase}/action`,
       {
          method: "POST",
@@ -59,27 +68,45 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
          defer: true,
          onResolve: (res) => {
             console.log(res);
+            console.dir({
+               Id: res.Results[0].Id,
+               Activities: res.Results[0].Activities,
+            });
+
+            //refresh consumed parts (activities)
+            //do it first to ensure there's no race with refreshing consumables
+            dispatch(
+               updateCaseActivities({
+                  Id: res.Results[0].Id,
+                  Activities: res.Results[0].Activities,
+               })
+            );
+
+            //then refresh consumables
+            props.refreshConsumables();
          },
       }
    );
 
-   // const runFetchParts = async (data: ConsumePartFormType) => {
-   //    // try {
-   //    //    const thisAPISession = await getAPISessionInComponent();
-   //    //    consumePartsFetchState.run({
-   //    //       headers: buildRequestHeaders(thisAPISession),
-   //    //       body: JSON.stringify(convertToAction(data)),
-   //    //    });
-   //    // } catch {}
-   //    console.log(JSON.stringify(convertToAction(data)));
-   // };
+   const runFetchParts = async (data: ConsumePartFormType) => {
+      // try {
+      //    const thisAPISession = await getAPISessionInComponent();
+      //    consumePartsFetchState.run({
+      //       headers: buildRequestHeaders(thisAPISession),
+      //       body: JSON.stringify(convertToAction(data, props.cp)),
+      //    });
+      // } catch {}
+      console.dir(convertToAction(data, props.cp));
+   };
 
    return (
       <form
-         onSubmit={handleSubmit((data: ConsumePartFormType) => {
-            console.log(JSON.stringify(convertToAction(data, props.cp)));
-            console.dir(convertToAction(data, props.cp));
-         })}
+         // onSubmit={handleSubmit((data: ConsumePartFormType) => {
+         //    console.log(JSON.stringify(convertToAction(data, props.cp)));
+         //    console.dir(convertToAction(data, props.cp));
+         //    props.refreshConsumables();
+         // })}
+         onSubmit={handleSubmit(runFetchParts)}
       >
          <>
             <div className={"grid grid-cols-1 md:grid-cols-3 gap-2"}>
@@ -216,6 +243,9 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
                      className={buttonStyle}
                      value={"Consume Part"}
                   />
+                  <Bool if={consumePartsFetchState.isPending}>
+                     <LoadingIcon />
+                  </Bool>
                   <button
                      onClick={props.closeForm}
                      className={"p-1 bg-red-600 border border-black"}
