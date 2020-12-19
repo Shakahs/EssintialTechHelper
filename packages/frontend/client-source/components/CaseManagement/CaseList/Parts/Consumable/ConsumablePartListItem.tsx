@@ -12,6 +12,7 @@ import {
 interface ConsumablePartListItemProps {
    cp: ConsumableParts;
    subcase: CaseSummary;
+   refreshConsumables: () => void;
 }
 
 const ConsumablePartListItem: React.FunctionComponent<ConsumablePartListItemProps> = (
@@ -47,6 +48,7 @@ const ConsumablePartListItem: React.FunctionComponent<ConsumablePartListItemProp
                      subcase={props.subcase}
                      cp={props.cp}
                      closeForm={() => setShowForm(false)}
+                     refreshConsumables={props.refreshConsumables}
                   />
                </div>
             </div>

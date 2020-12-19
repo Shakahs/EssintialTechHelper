@@ -27,6 +27,7 @@ const ConsumablePartList: React.FunctionComponent<ConsumablePartListProps> = (
    const [consumableParts, setConsumableParts] = useState<ConsumableParts[]>(
       []
    );
+   const [triggerRefresh, setTriggerRefresh] = useState(0);
    const consumablePartFetchState = useFetch<ResultsObject<ConsumableParts[]>>(
       `${apiBase}/parts/tobeconsumed/${decodedCaseNumber.masterCase}`,
       {
@@ -53,7 +54,7 @@ const ConsumablePartList: React.FunctionComponent<ConsumablePartListProps> = (
 
    useEffect(() => {
       runFetchParts();
-   }, []);
+   }, [triggerRefresh]);
 
    return (
       <PartsListTemplate
@@ -64,6 +65,9 @@ const ConsumablePartList: React.FunctionComponent<ConsumablePartListProps> = (
          <>
             {consumableParts.map((cp) => (
                <ConsumablePartListItem
+                  refreshConsumables={() =>
+                     setTriggerRefresh(triggerRefresh + 1)
+                  }
                   key={cp.DetailSequence}
                   cp={cp}
                   subcase={props.subcase}
