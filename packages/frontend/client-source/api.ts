@@ -65,6 +65,7 @@ export interface CaseFullFields {
 
 export type CaseSummary = CaseBase & Partial<CaseFullFields>;
 export type CaseFull = CaseBase & CaseFullFields;
+export type ConsumePartResponse = Pick<CaseFull, "Id" | "Activities">;
 
 export interface GlossaryWord {
    code: string;

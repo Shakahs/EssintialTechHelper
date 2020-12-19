@@ -1,5 +1,5 @@
 import { createSlice, EntityState, PayloadAction } from "@reduxjs/toolkit";
-import { CaseBase, CaseSummary } from "../../api";
+import { CaseBase, CaseSummary, ConsumePartResponse } from "../../api";
 import { fetchCases } from "./caseThunks";
 import { caseAdapter, sliceName } from "./caseConstants";
 import { fetchState } from "../common";
@@ -57,6 +57,10 @@ export const caseSlice = createSlice({
       updateFilters(state, action: PayloadAction<CaseFilters>) {
          state.caseFilters = action.payload;
       },
+      updateCaseActivities(state, action: PayloadAction<ConsumePartResponse>) {
+         state.caseSummaries.entities[action.payload.Id].Activities =
+            action.payload.Activities;
+      },
    },
    extraReducers: (builder) => {
       builder
@@ -79,6 +83,7 @@ export const {
    updateFilters,
    upsertCaseSummary,
    deleteCaseSummary,
+   updateCaseActivities,
 } = caseSlice.actions;
 
 export default caseSlice.reducer;
