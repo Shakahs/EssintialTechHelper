@@ -15,12 +15,17 @@ import {
    ConsumePartFormType,
    dispositions,
 } from "../../../../../api/consumePartsTypes";
-import { convertToAction } from "../../../../../api/consumeParts";
+import {
+   convertToAction,
+   isPartReturnable,
+   isPartSerialized,
+} from "../../../../../api/consumeParts";
 import classnames from "classnames";
 
 interface ConsumePartFormProps {
    subcase: CaseSummary;
    cp: ConsumableParts;
+   closeForm: () => void;
 }
 
 const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
@@ -37,8 +42,8 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
    const watchDisposition = watch("partDisposition");
    const watchTracking = watch("returnTracking");
 
-   const isSerialized = props.cp.SerialNumber.length > 0;
-   const isReturnable = Boolean(Number(props.cp.Returnable));
+   const isSerialized = isPartSerialized(props.cp);
+   const isReturnable = isPartReturnable(props.cp);
    const isBeingUsed = dispositions[watchDisposition].partUsed;
    const shouldBeReturned = isReturnable || !isBeingUsed;
 
@@ -211,6 +216,12 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
                      className={buttonStyle}
                      value={"Consume Part"}
                   />
+                  <button
+                     onClick={props.closeForm}
+                     className={"p-1 bg-red-600 border border-black"}
+                  >
+                     Cancel
+                  </button>
                </div>
             </div>
          </>
