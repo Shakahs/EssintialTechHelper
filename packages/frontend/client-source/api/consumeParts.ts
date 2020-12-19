@@ -39,7 +39,7 @@ export const convertToAction = (
                Number: partData.PartNo,
                Quantity: 1,
                SeqNo: partData.DetailSequence,
-               Serial: formData.serial ?? "",
+               Serial: partData.SerialNumber,
             },
          ],
       };
