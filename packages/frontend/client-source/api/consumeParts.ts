@@ -1,6 +1,7 @@
 import {
    ConsumePartFormType,
    dispositions,
+   PartActivity,
    PartDataForActionCreation,
    PartNotUsedAction,
    PartUsedAction,
@@ -17,7 +18,7 @@ export const isPartReturnable = (part: ConsumableParts): boolean =>
 export const convertToAction = (
    formData: ConsumePartFormType,
    partData: ConsumableParts
-): PartUsedAction | PartNotUsedAction | ReturnablePartUsedAction => {
+): PartActivity => {
    if (
       dispositions[formData.partDisposition].partUsed &&
       isPartReturnable(partData)
@@ -43,7 +44,7 @@ export const convertToAction = (
             },
          ],
       };
-      return action;
+      return { Activities: [action] };
    } else if (
       dispositions[formData.partDisposition].partUsed &&
       !isPartReturnable(partData)
@@ -61,7 +62,7 @@ export const convertToAction = (
             },
          ],
       };
-      return action;
+      return { Activities: [action] };
    } else if (!dispositions[formData.partDisposition].partUsed) {
       const action: PartNotUsedAction = {
          ActionCode: "RET",
@@ -83,6 +84,6 @@ export const convertToAction = (
             },
          ],
       };
-      return action;
+      return { Activities: [action] };
    }
 };

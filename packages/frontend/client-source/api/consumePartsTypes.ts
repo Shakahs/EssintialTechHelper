@@ -75,6 +75,15 @@ export type ReturnablePartUsedAction = PartActionBase<
 >;
 export type PartNotUsedAction = PartActionBase<PartNotUsedActionCore>;
 
+export type PartActions =
+   | PartUsedAction
+   | ReturnablePartUsedAction
+   | PartNotUsedAction;
+
+export interface PartActivity {
+   Activities: PartActions[];
+}
+
 export interface ConsumePartFormType {
    partDisposition: string;
    returnTracking: string; //tracking number or "manual"

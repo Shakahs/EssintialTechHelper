@@ -50,6 +50,7 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
 
    const watchDisposition = watch("partDisposition");
    const watchTracking = watch("returnTracking");
+   const watchAll = watch();
 
    const isSerialized = isPartSerialized(props.cp);
    const isReturnable = isPartReturnable(props.cp);
@@ -58,7 +59,7 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
 
    const decodedCaseNumber = decodeCaseNumber(props.subcase.Id);
    const consumePartsFetchState = useFetch<ResultsObject<ConsumePartResponse>>(
-      `${apiBase}/subcases/${decodedCaseNumber.masterCase}/action`,
+      `${apiBase}/subcases/${props.subcase.Id}/action`,
       {
          method: "POST",
       },
@@ -89,13 +90,13 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
    );
 
    const runFetchParts = async (data: ConsumePartFormType) => {
-      // try {
-      //    const thisAPISession = await getAPISessionInComponent();
-      //    consumePartsFetchState.run({
-      //       headers: buildRequestHeaders(thisAPISession),
-      //       body: JSON.stringify(convertToAction(data, props.cp)),
-      //    });
-      // } catch {}
+      try {
+         const thisAPISession = await getAPISessionInComponent();
+         consumePartsFetchState.run({
+            headers: buildRequestHeaders(thisAPISession),
+            body: JSON.stringify(convertToAction(data, props.cp)),
+         });
+      } catch {}
       console.dir(convertToAction(data, props.cp));
    };
 
@@ -252,6 +253,15 @@ const ConsumePartForm: React.FunctionComponent<ConsumePartFormProps> = (
                   >
                      Cancel
                   </button>
+               </div>
+               <div>
+                  <pre>
+                     {JSON.stringify(
+                        convertToAction(watchAll, props.cp),
+                        null,
+                        2
+                     )}
+                  </pre>
                </div>
             </div>
          </>
