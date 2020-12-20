@@ -4,9 +4,9 @@ import ReactMapGL from "react-map-gl";
 import { useState } from "react";
 import { Ticket } from "../../../../../../types";
 import GeocodingMapMarker from "../../Mapping/GeocodingMapMarker";
-import { CaseBase } from "../../../api";
 import CaseMapMarker from "./CaseMapMarker";
 import { groupBy, map } from "lodash";
+import { CaseBase } from "../../../features/cases/types";
 
 interface CaseMapProps {
    tickets: CaseBase[];

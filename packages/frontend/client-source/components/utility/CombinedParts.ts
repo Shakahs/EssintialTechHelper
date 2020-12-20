@@ -3,10 +3,10 @@ import {
    combinedPartsSequence,
    ConsumableParts,
    ConsumedParts,
-   decodeSequenceNumber,
    RequestedParts,
    ShippedParts,
-} from "../../api";
+} from "../../features/parts/types";
+import { decodeLogisticsSequenceNumber } from "../../features/parts/utility";
 
 export class CombinedParts {
    parts: combinedPartsData = {};
@@ -64,7 +64,7 @@ export class CombinedParts {
    }
 
    addShippedParts(sp: ShippedParts) {
-      const decodedSequence = decodeSequenceNumber(sp.DetailSequence);
+      const decodedSequence = decodeLogisticsSequenceNumber(sp.DetailSequence);
 
       const sequence = this.ensureSequenceRepresented(
          sp.PartNo,
@@ -84,7 +84,7 @@ export class CombinedParts {
    }
 
    addConsumableParts(cp: ConsumableParts) {
-      const decodedSequence = decodeSequenceNumber(cp.DetailSequence);
+      const decodedSequence = decodeLogisticsSequenceNumber(cp.DetailSequence);
       const sequence = this.ensureSequenceRepresented(
          cp.PartNo,
          decodedSequence.masterSequence
@@ -106,7 +106,7 @@ export class CombinedParts {
       //filter for "parts used" action code
       if (cp.ActionCode === "PU") {
          cp.Parts.forEach((c) => {
-            const decodedSequence = decodeSequenceNumber(c.SeqNo);
+            const decodedSequence = decodeLogisticsSequenceNumber(c.SeqNo);
             const sequence = this.ensureSequenceRepresented(
                c.Number,
                decodedSequence.masterSequence

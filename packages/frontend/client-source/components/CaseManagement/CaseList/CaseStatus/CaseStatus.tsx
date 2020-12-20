@@ -1,10 +1,10 @@
 import * as React from "react";
 import CaseETAUpdater from "./CaseETAUpdater";
-import { CaseBase } from "../../../../api";
 import CaseStatusUpdater from "./CaseStatusUpdater";
 import Bool from "../../../utility/Bool";
-import { caseStatusMapping } from "../../../../constants";
 import CaseCheckout from "./CaseCheckout";
+import { CaseBase } from "../../../../features/cases/types";
+import { caseStatusMapping } from "../../../../features/cases/constants";
 
 interface CaseStatusProps {
    subcase: CaseBase;

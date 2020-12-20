@@ -7,7 +7,7 @@ import {
    PartUsedAction,
    ReturnablePartUsedAction,
 } from "./consumePartsTypes";
-import { ConsumableParts } from "../api";
+import { ConsumableParts } from "./types";
 
 export const isPartSerialized = (part: ConsumableParts) =>
    part.SerialNumber.length > 0;

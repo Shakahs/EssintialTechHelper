@@ -8,7 +8,7 @@ import {
    combiner,
 } from "../../../features/cases/caseSelectors";
 import Bool from "../../utility/Bool";
-import { caseStatusMapping } from "../../../constants";
+import { caseStatusMapping } from "../../../features/cases/constants";
 
 interface CaseListProps {}
 

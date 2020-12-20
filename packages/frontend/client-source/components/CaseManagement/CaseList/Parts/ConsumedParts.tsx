@@ -1,6 +1,6 @@
 import * as React from "react";
-import { CaseSummary } from "../../../../api";
 import PartsListTemplate from "./PartsListTemplate";
+import { CaseSummary } from "../../../../features/cases/types";
 
 interface CasePartsConsumedProps {
    subcase: CaseSummary;

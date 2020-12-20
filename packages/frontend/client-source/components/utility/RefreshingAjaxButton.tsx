@@ -3,7 +3,7 @@ import { AsyncState } from "react-async";
 import { ReactElement, useState } from "react";
 import { getAPISessionInComponent } from "./index";
 import AjaxButton from "./AjaxButton";
-import { APISession } from "../../api";
+import { APISession } from "../../features/auth/types";
 
 interface RefreshingAjaxButtonProps {
    async: AsyncState<any>;

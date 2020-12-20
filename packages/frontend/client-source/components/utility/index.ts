@@ -1,9 +1,9 @@
-import { store } from "../../store";
+import { store } from "../../features/store";
 import { checkAPISession } from "../../features/auth/authThunks";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { updateAPISession } from "../../features/auth/authSlice";
-import { APISession } from "../../api";
 import { getAPISession } from "../../features/auth/authSelectors";
+import { APISession } from "../../features/auth/types";
 
 export const getAPISessionInComponent = async (): Promise<APISession> => {
    const oldApiSession = getAPISession(store.getState());

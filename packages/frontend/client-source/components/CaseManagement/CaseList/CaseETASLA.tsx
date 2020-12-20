@@ -2,17 +2,15 @@ import * as React from "react";
 import isBefore from "date-fns/isBefore";
 import dateFormat from "date-fns/format";
 import isToday from "date-fns/isToday";
-import {
-   CaseBase,
-   parseSLA_Date,
-   standardDateTimeFormatting,
-} from "../../../api";
 import parseISO from "date-fns/parseISO";
 import classnames from "classnames";
 import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../rootReducer";
+import { RootState } from "../../../features/rootReducer";
 import { getAPISession } from "../../../features/auth/authSelectors";
+import { CaseBase } from "../../../features/cases/types";
+import { parseCaseSLA } from "../../../features/cases/utility";
+import { standardDateTimeFormatting } from "../../../constants";
 
 interface CaseSummaryETASLAProps {
    subcase: CaseBase;
@@ -41,7 +39,7 @@ const CaseETASLA: React.FunctionComponent<CaseSummaryETASLAProps> = (props) => {
             {props.subcase.Milestones.map((ms) => {
                //Big assumption here: the user is in the same time zone as the store.
                //SLA is in the store's timezone, here we are reading it from the user
-               const parsedSLA_UTC = parseSLA_Date(ms.CalculatedDateTime);
+               const parsedSLA_UTC = parseCaseSLA(ms.CalculatedDateTime);
                return (
                   <span
                      key={ms.Code}

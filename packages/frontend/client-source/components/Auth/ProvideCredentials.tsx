@@ -1,5 +1,5 @@
 import * as React from "react";
-import { RootState } from "../../rootReducer";
+import { RootState } from "../../features/rootReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import classNames from "classnames";
@@ -9,10 +9,10 @@ import {
 } from "../../features/auth/authSlice";
 import { loginAPISession } from "../../features/auth/authThunks";
 import { SerializedError, unwrapResult } from "@reduxjs/toolkit";
-import { store } from "../../store";
+import { store } from "../../features/store";
 import Bool from "../utility/Bool";
-import { Credentials } from "../../api";
 import LoadingIcon from "../LoadingIcon";
+import { Credentials } from "../../features/auth/types";
 interface ManageProps {}
 
 const ProvideCredentials: React.FunctionComponent<ManageProps> = (props) => {

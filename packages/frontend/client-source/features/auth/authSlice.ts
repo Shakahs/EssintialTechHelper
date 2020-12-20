@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { APISessionState, Credentials } from "../../api";
 import { sliceName } from "./authConstants";
-import { fetchState } from "../common";
+import { fetchState } from "../types";
 import { loginAPISession } from "./authThunks";
 import { init } from "react-async";
 import { merge } from "lodash";
+import { APISessionState, Credentials } from "./types";
 
 type StateShape = { credentials: Credentials } & {
    apiSession: APISessionState;

@@ -1,15 +1,12 @@
 import * as React from "react";
-import { apiBase, caseStatusMapping } from "../../../../constants";
-import {
-   buildRequestHeaders,
-   CaseBase,
-   findCaseStatusName,
-   NewStatusBody,
-} from "../../../../api";
+import { apiBase, buildRequestHeaders } from "../../../../features/api";
 import { useFetch } from "react-async";
 import { useDispatch } from "react-redux";
 import { deleteCaseSummary } from "../../../../features/cases/caseSlice";
 import RefreshingAjaxButton from "../../../utility/RefreshingAjaxButton";
+import { CaseBase, NewStatusBody } from "../../../../features/cases/types";
+import { findCaseStatusName } from "../../../../features/cases/utility";
+import { caseStatusMapping } from "../../../../features/cases/constants";
 
 interface CaseSummaryStatusProps {
    subcase: CaseBase;

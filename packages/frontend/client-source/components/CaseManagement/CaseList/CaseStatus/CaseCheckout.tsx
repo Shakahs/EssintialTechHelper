@@ -1,20 +1,19 @@
 import * as React from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
+   apiBase,
    buildRequestHeaders,
-   CaseBase,
-   CheckoutBody,
    timeFormatWhenUpdating,
-} from "../../../../api";
+} from "../../../../features/api";
 import Bool from "../../../utility/Bool";
 import { map } from "lodash";
 import ReactDatePicker from "react-datepicker";
 import RefreshingAjaxButton from "../../../utility/RefreshingAjaxButton";
 import { useFetch } from "react-async";
-import { apiBase } from "../../../../constants";
 import DatePicker from "react-datepicker";
 import addDays from "date-fns/addDays";
 import formatDate from "date-fns/format";
+import { CaseBase, CheckoutBody } from "../../../../features/cases/types";
 
 interface CaseCheckoutProps {
    subcase: CaseBase;

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useFetch } from "react-async";
-import { apiBase, buttonStyle } from "../../../../constants";
+import { buttonStyle } from "../../../../constants";
 import { useEffect, useState } from "react";
 import { Tracker, TrackingDetail } from "../../../../../../../types";
 import { parseJSON, format } from "date-fns";
@@ -9,6 +9,7 @@ import LoadingIcon from "../../../LoadingIcon";
 import { last } from "lodash";
 import BoolFunc from "../../../utility/BoolFunc";
 import classnames from "classnames";
+import { apiBase } from "../../../../features/api";
 
 interface CaseSummaryPartsListItemProps {
    trackingNumber: string;

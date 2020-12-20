@@ -1,5 +1,4 @@
 import * as React from "react";
-import { CaseSummary, ConsumableParts } from "../../../../../api";
 import ConsumePartForm from "./ConsumePartForm";
 import { useState } from "react";
 import { buttonStyle } from "../../../../../constants";
@@ -7,7 +6,9 @@ import Bool from "../../../../utility/Bool";
 import {
    isPartReturnable,
    isPartSerialized,
-} from "../../../../../api/consumeParts";
+} from "../../../../../features/parts/consumeParts";
+import { CaseSummary } from "../../../../../features/cases/types";
+import { ConsumableParts } from "../../../../../features/parts/types";
 
 interface ConsumablePartListItemProps {
    cp: ConsumableParts;

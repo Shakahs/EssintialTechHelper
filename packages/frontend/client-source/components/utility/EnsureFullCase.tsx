@@ -1,12 +1,11 @@
 import * as React from "react";
 import {
+   apiBase,
    buildRequestHeaders,
-   CaseFull,
-   CaseSummary,
    ResultsObject,
-} from "../../api";
+} from "../../features/api";
 import { useFetch } from "react-async";
-import { apiBase, buttonStyle } from "../../constants";
+import { buttonStyle } from "../../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { upsertCaseSummary } from "../../features/cases/caseSlice";
 import { getAPISessionInComponent } from "../utility";
@@ -14,6 +13,7 @@ import LoadingIcon from "../LoadingIcon";
 import Bool from "../utility/Bool";
 import { ReactElement, useEffect } from "react";
 import { getLoginFetchState } from "../../features/auth/authSelectors";
+import { CaseFull, CaseSummary } from "../../features/cases/types";
 
 interface CaseSummaryCommentsProps {
    sc: CaseSummary;

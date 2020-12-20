@@ -4,7 +4,7 @@ import AvailableCases from "./AvailableCases/AvailableCases";
 import ProvideCredentials from "./Auth/ProvideCredentials";
 import Navbar from "./Navbar";
 import { useSelector } from "react-redux";
-import { RootState } from "../rootReducer";
+import { RootState } from "../features/rootReducer";
 import Bool from "./utility/Bool";
 import CaseManagement from "./CaseManagement/CaseManagement";
 import { getIsLoggedIn } from "../features/auth/authSelectors";

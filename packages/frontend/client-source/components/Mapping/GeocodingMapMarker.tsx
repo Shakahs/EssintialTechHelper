@@ -7,7 +7,7 @@ import { parseJSON } from "date-fns";
 import { GeoJSON, Point, Position } from "geojson";
 import { mapboxToken } from "../../../../../constants";
 import { useState } from "react";
-import { CaseBase } from "../../api";
+import { CaseBase } from "../../features/cases/types";
 
 interface GeocodingMapMarkerProps {
    query: string;

@@ -1,9 +1,10 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { RootState } from "../../rootReducer";
+import { RootState } from "../rootReducer";
 import { filter, sortBy, remove } from "lodash";
-import { CaseBase, isProjectWork } from "../../api";
-import { caseStatusMapping } from "../../constants";
 import { caseAdapter } from "./caseConstants";
+import { CaseBase } from "./types";
+import { isCaseProjectWork } from "./utility";
+import { caseStatusMapping } from "./constants";
 
 const getCaseFilters = (state: RootState) => state.caseSlice.caseFilters;
 const builtinSelectors = caseAdapter.getSelectors<RootState>(
@@ -13,7 +14,7 @@ const allCases = (state: RootState) => builtinSelectors.selectAll(state);
 
 const filterStage1 = createSelector([allCases, getCaseFilters], (cases, f) => {
    const result = filter(cases, (c) => {
-      if (isProjectWork(c)) {
+      if (isCaseProjectWork(c)) {
          return f.showProjectWork;
       }
       return true;

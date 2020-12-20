@@ -1,12 +1,9 @@
 import * as React from "react";
 import {
+   apiBase,
    buildRequestHeaders,
-   CaseSummary,
-   decodeCaseNumber,
    ResultsObject,
-   ShippedParts,
-} from "../../../../api";
-import { apiBase } from "../../../../constants";
+} from "../../../../features/api";
 import { useFetch } from "react-async";
 import { useEffect, useState } from "react";
 import { getAPISessionInComponent } from "../../../utility";
@@ -14,6 +11,9 @@ import PartTracking from "./PartTracking";
 import Bool from "../../../utility/Bool";
 import LoadingIcon from "../../../LoadingIcon";
 import PartsListTemplate from "./PartsListTemplate";
+import { CaseSummary } from "../../../../features/cases/types";
+import { ShippedParts } from "../../../../features/parts/types";
+import { decodeCaseNumber } from "../../../../features/cases/utility";
 
 interface CasePartsShippedProps {
    subcase: CaseSummary;

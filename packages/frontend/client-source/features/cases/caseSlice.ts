@@ -1,8 +1,9 @@
 import { createSlice, EntityState, PayloadAction } from "@reduxjs/toolkit";
-import { CaseBase, CaseSummary, ConsumePartResponse } from "../../api";
 import { fetchCases } from "./caseThunks";
 import { caseAdapter, sliceName } from "./caseConstants";
-import { fetchState } from "../common";
+import { fetchState } from "../types";
+import { CaseBase, CaseSummary } from "./types";
+import { ConsumePartResponse } from "../parts/types";
 
 interface CurrentCaseSummaries {
    caseSummaries: EntityState<CaseSummary>;

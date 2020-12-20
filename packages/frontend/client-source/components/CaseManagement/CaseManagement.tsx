@@ -1,8 +1,7 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { CaseBase, CurrentCaseStatus, isProjectWork } from "../../api";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../rootReducer";
+import { RootState } from "../../features/rootReducer";
 import { map } from "lodash";
 import CaseListItem from "./CaseList/CaseListItem";
 import classnames from "classnames";
@@ -20,6 +19,8 @@ import CaseComments from "./CaseList/CaseComments";
 import AjaxButton from "../utility/AjaxButton";
 import CaseMap from "./CaseMap/CaseMap";
 import CaseList from "./CaseList/CaseList";
+import { CaseBase, CurrentCaseStatus } from "../../features/cases/types";
+import { isCaseProjectWork } from "../../features/cases/utility";
 
 interface Manage2Props {}
 

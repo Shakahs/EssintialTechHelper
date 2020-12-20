@@ -2,31 +2,34 @@ import { map } from "lodash";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import {
+   apiBase,
    buildRequestHeaders,
-   CaseSummary,
-   ConsumableParts,
-   ConsumePartResponse,
-   decodeCaseNumber,
-   RequestedParts,
    ResultsObject,
-} from "../../../../../api";
-import { apiBase, buttonStyle } from "../../../../../constants";
+} from "../../../../../features/api";
+import { buttonStyle } from "../../../../../constants";
 import { useDispatch } from "react-redux";
 import { useFetch } from "react-async";
 import {
    ConsumePartFormType,
    dispositions,
-} from "../../../../../api/consumePartsTypes";
+} from "../../../../../features/parts/consumePartsTypes";
 import {
    convertToAction,
    isPartReturnable,
    isPartSerialized,
-} from "../../../../../api/consumeParts";
+} from "../../../../../features/parts/consumeParts";
 import classnames from "classnames";
 import { updateCaseActivities } from "../../../../../features/cases/caseSlice";
 import { getAPISessionInComponent } from "../../../../utility";
 import Bool from "../../../../utility/Bool";
 import LoadingIcon from "../../../../LoadingIcon";
+import { CaseSummary } from "../../../../../features/cases/types";
+import {
+   ConsumableParts,
+   ConsumePartResponse,
+   RequestedParts,
+} from "../../../../../features/parts/types";
+import { decodeCaseNumber } from "../../../../../features/cases/utility";
 
 interface ConsumePartFormProps {
    subcase: CaseSummary;

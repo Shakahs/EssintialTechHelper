@@ -1,38 +1,20 @@
 import * as React from "react";
 import {
-   CaseBase,
-   CurrentCaseStatus,
-   isProjectWork,
-   NewStatusBody,
-   NewStatusCode,
-   findCaseStatusName,
-   ResultsObject,
-} from "../../../api";
-import Bool from "../../utility/Bool";
-import { useFetch } from "react-async";
-import {
    apiBase,
-   caseStatusMapping,
    defaultRequestHeaders,
-} from "../../../constants";
+   ResultsObject,
+} from "../../../features/api";
+import { useFetch } from "react-async";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../rootReducer";
-import parseJSON from "date-fns/parseJSON";
-import dateFormat from "date-fns/format";
-import isBefore from "date-fns/isBefore";
-import isToday from "date-fns/isToday";
+import { RootState } from "../../../features/rootReducer";
 import classnames from "classnames";
-import partsList from "../../../assets/riteAidPartList.json";
 import { getAPISession } from "../../../features/auth/authSelectors";
 import { upsertCaseSummary } from "../../../features/cases/caseSlice";
 import CaseRefresh from "./CaseRefresh";
-import { zonedTimeToUtc } from "date-fns-tz";
-import CaseETASLA from "./CaseETASLA";
 import { caseInProgress } from "../common";
-import { useState } from "react";
-import CaseComments from "./CaseComments";
 import CasePrimaryData from "./CasePrimaryData";
 import CaseExtendedData from "./CaseExtendedData";
+import { CaseBase } from "../../../features/cases/types";
 
 interface CaseSummaryItemProps {
    subcase: CaseBase;

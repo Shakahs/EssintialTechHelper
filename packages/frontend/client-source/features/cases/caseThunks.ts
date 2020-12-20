@@ -1,12 +1,12 @@
 import { createAsyncThunk, unwrapResult } from "@reduxjs/toolkit";
-import { CaseBase } from "../../api";
-import { RootState } from "../../rootReducer";
-import { AppDispatch } from "../../store";
-import { apiBase, defaultRequestHeaders } from "../../constants";
+import { RootState } from "../rootReducer";
+import { AppDispatch } from "../store";
 import { replaceCaseSummaries } from "./caseSlice";
 import { debounce } from "lodash";
 import { sliceName } from "./caseConstants";
 import { checkAPISession } from "../auth/authThunks";
+import { CaseBase } from "./types";
+import { apiBase, defaultRequestHeaders } from "../api";
 
 export const fetchCases = createAsyncThunk<
    CaseBase[],

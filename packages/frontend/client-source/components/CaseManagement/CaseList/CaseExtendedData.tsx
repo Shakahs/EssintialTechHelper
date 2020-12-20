@@ -4,10 +4,10 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { buttonStyle } from "../../../constants";
 import "react-tabs/style/react-tabs.css";
 import Parts from "./Parts/Parts";
-import { CaseBase, CaseFull, CaseSummary } from "../../../api";
 import EnsureFullCase from "../../utility/EnsureFullCase";
 import CaseComments from "./CaseComments";
 import CaseStatus from "./CaseStatus/CaseStatus";
+import { CaseBase, CaseFull, CaseSummary } from "../../../features/cases/types";
 
 interface CaseExtendedDataProps {
    subcase: CaseBase;

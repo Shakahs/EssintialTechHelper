@@ -1,11 +1,6 @@
 import * as React from "react";
 import { replace, truncate } from "lodash";
 import GeocodingMapMarker from "../../Mapping/GeocodingMapMarker";
-import {
-   CaseBase,
-   parseSLA_Date,
-   standardDateTimeFormatting,
-} from "../../../api";
 import Pin from "../../../assets/map-pin.svg";
 import parseISO from "date-fns/parseISO";
 import dateFormat from "date-fns/format";
@@ -13,6 +8,9 @@ import partsList from "../../../assets/riteAidPartList.json";
 import { useState } from "react";
 import Bool from "../../utility/Bool";
 import { isMobile } from "react-device-detect";
+import { CaseBase } from "../../../features/cases/types";
+import { parseCaseSLA } from "../../../features/cases/utility";
+import { standardDateTimeFormatting } from "../../../constants";
 
 interface CaseMapMarkerProps {
    cases: CaseBase[];
@@ -69,7 +67,7 @@ const CaseMapMarker: React.FunctionComponent<CaseMapMarkerProps> = (props) => {
                                        SLA: {slaCodes?.[sla.Code] ?? sla.Code}
                                     </span>
                                     {dateFormat(
-                                       parseSLA_Date(sla.CalculatedDateTime),
+                                       parseCaseSLA(sla.CalculatedDateTime),
                                        standardDateTimeFormatting
                                     )}
                                  </div>

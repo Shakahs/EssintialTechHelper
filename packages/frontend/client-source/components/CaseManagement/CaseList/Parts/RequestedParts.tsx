@@ -1,16 +1,16 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import {
+   apiBase,
    buildRequestHeaders,
-   CaseSummary,
-   decodeCaseNumber,
-   RequestedParts,
    ResultsObject,
-} from "../../../../api";
+} from "../../../../features/api";
 import { useFetch } from "react-async";
-import { apiBase } from "../../../../constants";
 import { getAPISessionInComponent } from "../../../utility";
 import PartsListTemplate from "./PartsListTemplate";
+import { CaseSummary } from "../../../../features/cases/types";
+import { RequestedParts } from "../../../../features/parts/types";
+import { decodeCaseNumber } from "../../../../features/cases/utility";
 
 interface CasePartsRequestedProps {
    subcase: CaseSummary;

@@ -10,7 +10,7 @@ import {
    REGISTER,
    REHYDRATE,
 } from "redux-persist/es/constants";
-import { authSlice } from "./features/auth/authSlice";
+import { authSlice } from "./auth/authSlice";
 
 const persistConfig = {
    key: "root",

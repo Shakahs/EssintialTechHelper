@@ -1,14 +1,14 @@
 import * as React from "react";
 import DatePicker from "react-datepicker";
 import Bool from "../../../utility/Bool";
-import {
-   apiBase,
-   buttonStyle,
-   defaultRequestHeaders,
-} from "../../../../constants";
+import { buttonStyle } from "../../../../constants";
 import LoadingIcon from "../../../LoadingIcon";
 import { getAPISessionInComponent } from "../../../utility";
-import { CaseBase, NewETABody, timeFormatWhenUpdating } from "../../../../api";
+import {
+   apiBase,
+   defaultRequestHeaders,
+   timeFormatWhenUpdating,
+} from "../../../../features/api";
 import formatDate from "date-fns/format";
 import parseISO from "date-fns/parseISO";
 import { useState } from "react";
@@ -16,6 +16,7 @@ import { useFetch } from "react-async";
 import AjaxButton from "../../../utility/AjaxButton";
 import RefreshingAjaxButton from "../../../utility/RefreshingAjaxButton";
 import classnames from "classnames";
+import { CaseBase, NewETABody } from "../../../../features/cases/types";
 
 interface CaseETAUpdaterProps {
    subcase: CaseBase;

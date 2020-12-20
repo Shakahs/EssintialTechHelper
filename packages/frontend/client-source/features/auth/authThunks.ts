@@ -1,13 +1,13 @@
 import { createAsyncThunk, SerializedError } from "@reduxjs/toolkit";
 import { sliceName } from "./authConstants";
-import { APISession, Credentials, ResultsObject } from "../../api";
-import { RootState } from "../../rootReducer";
-import { AppDispatch } from "../../store";
-import { apiBase, defaultRequestHeaders } from "../../constants";
+import { apiBase, defaultRequestHeaders, ResultsObject } from "../api";
+import { RootState } from "../rootReducer";
+import { AppDispatch } from "../store";
 import differenceInMinutes from "date-fns/differenceInMinutes";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { parseISO } from "date-fns";
 import { FetchError } from "react-async";
+import { APISession, Credentials } from "./types";
 
 //login to the API, store the received session data
 export const loginAPISession = createAsyncThunk<

@@ -1,12 +1,10 @@
 import * as React from "react";
 import {
+   apiBase,
    buildRequestHeaders,
-   CaseSummary,
-   ConsumableParts,
-   decodeCaseNumber,
    ResultsObject,
-} from "../../../../../api";
-import { apiBase, buttonStyle } from "../../../../../constants";
+} from "../../../../../features/api";
+import { buttonStyle } from "../../../../../constants";
 import { useFetch } from "react-async";
 import { useEffect, useState } from "react";
 import { getAPISessionInComponent } from "../../../../utility";
@@ -14,6 +12,9 @@ import PartsListTemplate from "../PartsListTemplate";
 import Bool from "../../../../utility/Bool";
 import ConsumePartForm from "./ConsumePartForm";
 import ConsumablePartListItem from "./ConsumablePartListItem";
+import { CaseSummary } from "../../../../../features/cases/types";
+import { ConsumableParts } from "../../../../../features/parts/types";
+import { decodeCaseNumber } from "../../../../../features/cases/utility";
 
 interface ConsumablePartListProps {
    subcase: CaseSummary;

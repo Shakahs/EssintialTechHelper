@@ -1,10 +1,14 @@
 import * as React from "react";
 import { caseInProgress } from "../common";
-import { CaseBase, findCaseStatusName, isProjectWork } from "../../../api";
 import CaseETASLA from "./CaseETASLA";
 import Bool from "../../utility/Bool";
 import partsList from "../../../assets/riteAidPartList.json";
 import classnames from "classnames";
+import { CaseBase } from "../../../features/cases/types";
+import {
+   findCaseStatusName,
+   isCaseProjectWork,
+} from "../../../features/cases/utility";
 
 interface CasePrimaryDataProps {
    subcase: CaseBase;
@@ -34,7 +38,7 @@ const CasePrimaryData: React.FunctionComponent<CasePrimaryDataProps> = (
       <div className={"block"}>
          <CaseETASLA subcase={props.subcase} refresh={props.runUpdateCase} />
       </div>
-      <Bool if={isProjectWork(props.subcase)}>Project Work</Bool>
+      <Bool if={isCaseProjectWork(props.subcase)}>Project Work</Bool>
       <div>
          <b>Part:</b>
          {partsList?.[props.subcase.Model]?.description ?? props.subcase.Model}

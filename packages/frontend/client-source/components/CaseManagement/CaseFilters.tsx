@@ -1,11 +1,11 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../rootReducer";
+import { RootState } from "../../features/rootReducer";
 import { map, capitalize } from "lodash";
-import { CaseBase, CurrentCaseStatus } from "../../api";
 import { updateFilters } from "../../features/cases/caseSlice";
-import { caseStatusMapping } from "../../constants";
 import { getCityOptions } from "../../features/cases/caseSelectors";
+import { CaseBase, CurrentCaseStatus } from "../../features/cases/types";
+import { caseStatusMapping } from "../../features/cases/constants";
 
 interface CaseSummaryFiltersProps {
    cases: CaseBase[];

@@ -7,7 +7,7 @@ import AvailableCases from "./components/AvailableCases/AvailableCases";
 import "./style.css";
 import Navbar from "./components/Navbar";
 // import Main from "./components/Main";
-import { store, persistor } from "./store";
+import { store, persistor } from "./features/store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 

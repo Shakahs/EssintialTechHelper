@@ -1,10 +1,10 @@
 import * as React from "react";
-import { CaseSummary } from "../../../../api";
 import RequestedParts from "./RequestedParts";
 import ShippedParts from "./ShippedParts";
 import ConsumablePartList from "./Consumable/ConsumablePartList";
 import ConsumedParts from "./ConsumedParts";
 import { ErrorBoundary } from "react-error-boundary";
+import { CaseSummary } from "../../../../features/cases/types";
 
 interface CaseSummaryPartsProps {
    subcase: CaseSummary;

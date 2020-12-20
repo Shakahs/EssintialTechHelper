@@ -1,7 +1,7 @@
 import * as React from "react";
-import { CaseSummary } from "../../../api";
 import { keyBy } from "lodash";
 import Bool from "../../utility/Bool";
+import { CaseSummary } from "../../../features/cases/types";
 
 interface CaseSummaryCommentsProps {
    sc: CaseSummary;
