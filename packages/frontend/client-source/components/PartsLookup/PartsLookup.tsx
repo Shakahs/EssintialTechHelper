@@ -2,6 +2,8 @@ import * as React from "react";
 import { partsList } from "../../features/parts/partsList";
 import { useState } from "react";
 import Bool from "../utility/Bool";
+import Copy from "../../assets/copy.svg";
+import Copier from "../utility/Copier";
 
 interface PartsLookupProps {}
 
@@ -32,7 +34,10 @@ const PartsLookup: React.FunctionComponent<PartsLookupProps> = (props) => {
          <div>
             {results.map(([k, v]) => (
                <div className={"grid grid-cols-2 bg-gray-300"} key={k}>
-                  <div>{k}</div>
+                  <div>
+                     <span className={"mr-2"}>{k}</span>
+                     <Copier text={k} />
+                  </div>
                   <div>{v.partDescription}</div>
                </div>
             ))}

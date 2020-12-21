@@ -24,8 +24,8 @@ class PartsList {
 
       this.parts.forEach((v, k) => {
          if (
-            k.toLowerCase().includes(query) ||
-            v.partDescription.toLowerCase().includes(query)
+            k.toLowerCase().includes(query.toLowerCase()) ||
+            v.partDescription.toLowerCase().includes(query.toLowerCase())
          ) {
             res.set(k, v);
          }
