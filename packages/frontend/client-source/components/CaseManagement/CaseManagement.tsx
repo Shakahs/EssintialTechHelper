@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../features/rootReducer";
 import { map } from "lodash";
-import CaseListItem from "./CaseList/CaseListItem";
 import classnames from "classnames";
 import { debouncedFetchCases } from "../../features/cases/caseThunks";
 import CaseFilters from "./CaseFilters";
@@ -15,10 +14,10 @@ import {
 } from "../../features/cases/caseSelectors";
 import { getAPISession } from "../../features/auth/authSelectors";
 import { resetAuthentication } from "../../features/auth/authSlice";
-import CaseComments from "./CaseList/CaseComments";
+import CaseComments from "./CaseDisplay/CaseComments";
 import AjaxButton from "../utility/AjaxButton";
 import CaseMap from "./CaseMap/CaseMap";
-import CaseList from "./CaseList/CaseList";
+import CaseList from "./CaseList";
 import { CaseBase, CurrentCaseStatus } from "../../features/cases/types";
 import { isCaseProjectWork } from "../../features/cases/utility";
 

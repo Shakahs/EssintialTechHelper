@@ -1,14 +1,14 @@
 import * as React from "react";
 import { map } from "lodash";
-import CaseListItem from "./CaseListItem";
+import CaseListItem from "./CaseDisplay/CaseListItem";
 import { useSelector } from "react-redux";
 import {
    getCasesArrive,
    getCasesEnroute,
    combiner,
-} from "../../../features/cases/caseSelectors";
-import Bool from "../../utility/Bool";
-import { caseStatusMapping } from "../../../features/cases/constants";
+} from "../../features/cases/caseSelectors";
+import Bool from "../utility/Bool";
+import { caseStatusMapping } from "../../features/cases/constants";
 
 interface CaseListProps {}
 
