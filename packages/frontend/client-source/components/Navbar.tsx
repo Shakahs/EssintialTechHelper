@@ -30,6 +30,14 @@ const Navbar: React.FunctionComponent<mainProps> = (props) => (
                My Tickets
             </NavLink>
 
+            <NavLink
+               to={"/parts"}
+               activeClassName={"underline"}
+               className="block mt-2 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+            >
+               Parts Lookup
+            </NavLink>
+
             <a
                href={
                   "https://www.google.com/maps/d/u/2/viewer?ll=37.99581677180192%2C-122.04098581931868&z=9&mid=1d13LtxTrKnGI-RSrjDFo11SdXoB3YOMS"

@@ -8,6 +8,7 @@ import { RootState } from "../features/rootReducer";
 import Bool from "./utility/Bool";
 import CaseManagement from "./CaseManagement/CaseManagement";
 import { getIsLoggedIn } from "../features/auth/authSelectors";
+import PartsLookup from "./PartsLookup/PartsLookup";
 
 interface MainProps {}
 
@@ -29,6 +30,9 @@ const Main: React.FunctionComponent<MainProps> = (props) => {
                   <Bool if={!loggedIn}>
                      <ProvideCredentials />
                   </Bool>
+               </Route>
+               <Route path={"/parts"} exact>
+                  <PartsLookup />
                </Route>
             </div>
          </Router>
