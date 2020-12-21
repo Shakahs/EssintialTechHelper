@@ -33,8 +33,8 @@ const CaseComments: React.FunctionComponent<CaseSummaryCommentsProps> = (
             <br />
          </Bool>
          {props.sc?.ProblemDesc}
-         {props.sc?.Comments?.map((comment) => (
-            <div>
+         {props.sc?.Comments?.map((comment, k) => (
+            <div key={k}>
                {comment.CommentDateTime} {comment.CommentText}
             </div>
          ))}
