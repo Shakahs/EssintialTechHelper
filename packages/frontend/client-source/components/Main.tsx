@@ -20,10 +20,10 @@ const Main: React.FunctionComponent<MainProps> = (props) => {
          <Router>
             <Navbar />
             <div className={"m-2"}>
-               <Route path={"/"} exact>
+               <Route path={"/available"} exact>
                   <AvailableCases />
                </Route>
-               <Route path={"/manage"}>
+               <Route path={"/"} exact>
                   <Bool if={loggedIn}>
                      <CaseManagement />
                   </Bool>
