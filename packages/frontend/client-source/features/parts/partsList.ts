@@ -1,7 +1,11 @@
-import * as partsListJSON from "../../assets/riteAidPartList.json";
+import partsListJSON from "../../assets/riteAidPartList.json";
+
+export interface IndividualPart {
+   partDescription: string;
+}
 
 class PartsList {
-   parts: Map<string, { partDescription: string }> = new Map();
+   public parts: Map<string, IndividualPart> = new Map();
 
    constructor() {
       for (const partsListKey in partsListJSON) {
@@ -13,6 +17,21 @@ class PartsList {
 
    lookupPart(pn: string): string {
       return this.parts.get(pn)?.partDescription ?? pn;
+   }
+
+   searchPart(query: string): Map<string, IndividualPart> {
+      const res = new Map<string, IndividualPart>();
+
+      this.parts.forEach((v, k) => {
+         if (
+            k.toLowerCase().includes(query) ||
+            v.partDescription.toLowerCase().includes(query)
+         ) {
+            res.set(k, v);
+         }
+      });
+
+      return res;
    }
 }
 

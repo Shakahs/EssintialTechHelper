@@ -6,7 +6,7 @@ declare module "*.svg" {
 }
 
 declare module "riteAidPartList.json" {
-   export default interface parts {
+   export interface parts {
       [k: string]: {
          description: string;
       };
