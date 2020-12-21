@@ -4,13 +4,13 @@ import GeocodingMapMarker from "../../Mapping/GeocodingMapMarker";
 import Pin from "../../../assets/map-pin.svg";
 import parseISO from "date-fns/parseISO";
 import dateFormat from "date-fns/format";
-import partsList from "../../../assets/riteAidPartList.json";
 import { useState } from "react";
 import Bool from "../../utility/Bool";
 import { isMobile } from "react-device-detect";
 import { CaseBase } from "../../../features/cases/types";
 import { parseCaseSLA } from "../../../features/cases/utility";
 import { standardDateTimeFormatting } from "../../../constants";
+import { PartsList } from "../../../features/parts/partsList";
 
 interface CaseMapMarkerProps {
    cases: CaseBase[];
@@ -26,6 +26,8 @@ const CaseMapMarker: React.FunctionComponent<CaseMapMarkerProps> = (props) => {
 
    const [showPopup, setShowPopup] = useState(false);
    const [hover, setHover] = useState(false);
+
+   const partsDB = new PartsList();
 
    return (
       <GeocodingMapMarker query={geoQuery}>
@@ -58,9 +60,7 @@ const CaseMapMarker: React.FunctionComponent<CaseMapMarkerProps> = (props) => {
                         return (
                            <div className={""}>
                               <div>{`${c.Id} ${c.Location.City}`}</div>
-                              <div>
-                                 {partsList?.[c.Model]?.description ?? c.Model}
-                              </div>
+                              <div>{partsDB.lookupPart(c.Model)}</div>
                               {sla && (
                                  <div>
                                     <span className={"mr-1"}>

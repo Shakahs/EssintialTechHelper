@@ -4,3 +4,11 @@ declare module "*.svg" {
    const src: string;
    export default src;
 }
+
+declare module "riteAidPartList.json" {
+   export default interface parts {
+      [k: string]: {
+         description: string;
+      };
+   }
+}
