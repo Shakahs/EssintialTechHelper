@@ -8,7 +8,7 @@ import {
    findCaseStatusName,
    isCaseProjectWork,
 } from "../../../features/cases/utility";
-import { PartsList } from "../../../features/parts/partsList";
+import { partsList } from "../../../features/parts/partsList";
 
 interface CasePrimaryDataProps {
    subcase: CaseBase;
@@ -18,8 +18,6 @@ interface CasePrimaryDataProps {
 const CasePrimaryData: React.FunctionComponent<CasePrimaryDataProps> = (
    props
 ) => {
-   const partsDB = new PartsList();
-
    return (
       <div>
          <div className={"block"}>
@@ -44,7 +42,7 @@ const CasePrimaryData: React.FunctionComponent<CasePrimaryDataProps> = (
          <Bool if={isCaseProjectWork(props.subcase)}>Project Work</Bool>
          <div>
             <b>Part:</b>
-            {partsDB.lookupPart(props.subcase.Model)}
+            {partsList.lookupPart(props.subcase.Model)}
          </div>
          <div>
             <span className={"mr-2"}>

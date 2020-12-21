@@ -1,7 +1,19 @@
-import * as partsList from "../../assets/riteAidPartList.json";
+import * as partsListJSON from "../../assets/riteAidPartList.json";
 
-export class PartsList {
+class PartsList {
+   parts: Map<string, { partDescription: string }> = new Map();
+
+   constructor() {
+      for (const partsListKey in partsListJSON) {
+         this.parts.set(partsListKey, {
+            partDescription: partsListJSON[partsListKey].description,
+         });
+      }
+   }
+
    lookupPart(pn: string): string {
-      return partsList?.[pn]?.description ?? pn;
+      return this.parts.get(pn)?.partDescription ?? pn;
    }
 }
+
+export const partsList = new PartsList();
