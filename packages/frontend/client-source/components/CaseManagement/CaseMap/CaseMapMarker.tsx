@@ -56,7 +56,7 @@ const CaseMapMarker: React.FunctionComponent<CaseMapMarkerProps> = (props) => {
                      {props.cases.map((c) => {
                         const sla = c.Milestones[0];
                         return (
-                           <div className={""}>
+                           <div className={""} key={c.Id}>
                               <div>{`${c.Id} ${c.Location.City}`}</div>
                               <div>{partsList.lookupPart(c.Model)}</div>
                               {sla && (
