@@ -20,7 +20,6 @@ const PartsLookup: React.FunctionComponent<PartsLookupProps> = (props) => {
                   className={"border border-black"}
                   type={"text"}
                   value={query}
-                  placeholder={"anything"}
                   onChange={(e) => {
                      setQuery(e.target.value);
                      setResults(
