@@ -20,7 +20,9 @@ interface CaseSummaryItemProps {
    subcase: CaseBase;
 }
 
-const CaseListItem: React.FunctionComponent<CaseSummaryItemProps> = (props) => {
+const CaseDisplayFull: React.FunctionComponent<CaseSummaryItemProps> = (
+   props
+) => {
    const dispatch = useDispatch();
    const { SessionId } = useSelector((state: RootState) =>
       useSelector(getAPISession)
@@ -84,4 +86,4 @@ const CaseListItem: React.FunctionComponent<CaseSummaryItemProps> = (props) => {
    );
 };
 
-export default CaseListItem;
+export default CaseDisplayFull;
