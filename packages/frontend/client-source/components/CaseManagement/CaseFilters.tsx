@@ -23,7 +23,7 @@ const CaseFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
    ).sort();
 
    return (
-      <div className={"border border-solid border-1 p-2"}>
+      <div className={"border border-solid border-1 p-2 flex flex-col"}>
          Filters:
          <div className={"flex flex-row justify-between"}>
             {map(caseStatusMapping, (csm) => {
@@ -71,42 +71,44 @@ const CaseFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
                   Include Project work
                </label>
             </div>
-            <div>
-               <select
-                  onChange={(v) => {
-                     dispatch(
-                        updateFilters({
-                           ...caseFilters,
-                           showCity: v.target.value,
-                        })
-                     );
-                  }}
-                  value={caseFilters.showCity}
-               >
-                  <option value={""}>
-                     Any {`(${casesForCitySelect.length})`}
+         </div>
+         <div>
+            <label htmlFor={"selectCity"}>City:</label>
+            <select
+               onChange={(v) => {
+                  dispatch(
+                     updateFilters({
+                        ...caseFilters,
+                        showCity: v.target.value,
+                     })
+                  );
+               }}
+               value={caseFilters.showCity}
+               name={"selectCity"}
+            >
+               <option value={""}>
+                  Any {`(${casesForCitySelect.length})`}
+               </option>
+               {cityOptions.map((c) => (
+                  <option value={c} key={c}>
+                     {c.split(" ").map(capitalize).join(" ")}{" "}
+                     {`(${
+                        casesForCitySelect.filter(
+                           (all) => all.Location.City.toLowerCase() === c
+                        ).length
+                     })`}
                   </option>
-                  {cityOptions.map((c) => (
-                     <option value={c} key={c}>
-                        {c.split(" ").map(capitalize).join(" ")}{" "}
-                        {`(${
-                           casesForCitySelect.filter(
-                              (all) => all.Location.City.toLowerCase() === c
-                           ).length
-                        })`}
+               ))}
+               {caseFilters.showCity !== "" &&
+                  !cityOptions.includes(caseFilters.showCity) && (
+                     <option value={caseFilters.showCity}>
+                        {caseFilters.showCity
+                           .split(" ")
+                           .map(capitalize)
+                           .join(" ")}
                      </option>
-                  ))}
-                  {caseFilters.showCity !== "" &&
-                     !cityOptions.includes(caseFilters.showCity) && (
-                        <option value={caseFilters.showCity}>
-                           {caseFilters.showCity
-                              .split(" ")
-                              .map(capitalize)
-                              .join(" ")}
-                        </option>
-                     )}
-               </select>
-            </div>
+                  )}
+            </select>
          </div>
       </div>
    );

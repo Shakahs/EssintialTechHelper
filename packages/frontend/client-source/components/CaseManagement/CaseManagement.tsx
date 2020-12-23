@@ -38,7 +38,9 @@ const CaseManagement: React.FunctionComponent<Manage2Props> = (props) => {
 
    return (
       <div>
-         <div className={"flex flex-row justify-between items-center"}>
+         <div
+            className={"flex flex-col md:flex-row justify-between items-center"}
+         >
             <div>
                <AjaxButton
                   loading={fetchCaseState.loading}
