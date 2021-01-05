@@ -47,7 +47,8 @@ const CaseStatusUpdater: React.FunctionComponent<CaseSummaryStatusProps> = (
                   async={updateStatusFetchState}
                   onClick={(apiSession) => {
                      const statusBody: NewStatusBody = {
-                        Comment: "",
+                        Comment:
+                           nextStatus === "Reject" ? "Cannot make SLA" : "", // hardcode rejection message for now
                         HoldReasonCode: "",
                         Code: caseStatusMapping[nextStatus].whenUpdating,
                      };
