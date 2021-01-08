@@ -13,7 +13,10 @@ const CaseDisplay: React.FunctionComponent<CaseDisplayProps> = (props) => {
    return (
       <>
          {showFull ? (
-            <CaseDisplayFull subcase={props.subcase} />
+            <CaseDisplayFull
+               subcase={props.subcase}
+               toggleDisplay={() => setShowFull(false)}
+            />
          ) : (
             <CaseDisplayMini
                subcase={props.subcase}

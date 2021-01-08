@@ -18,6 +18,7 @@ import { CaseBase } from "../../../features/cases/types";
 
 interface CaseSummaryItemProps {
    subcase: CaseBase;
+   toggleDisplay: () => void;
 }
 
 const CaseDisplayFull: React.FunctionComponent<CaseSummaryItemProps> = (
@@ -53,7 +54,7 @@ const CaseDisplayFull: React.FunctionComponent<CaseSummaryItemProps> = (
    return (
       <div
          className={classnames(
-            "w-full border-solid border-black mb-3 bg-gray-300 p-1 text-sm",
+            "w-full border-solid border-black my-3 bg-gray-300 p-1 text-sm",
             {
                "bg-yellow-500": props.subcase.Priority === "02",
                "bg-red-500": props.subcase.Priority === "01",
@@ -68,6 +69,12 @@ const CaseDisplayFull: React.FunctionComponent<CaseSummaryItemProps> = (
             }
          )}
       >
+         <div
+            onClick={props.toggleDisplay}
+            className={"cursor-pointer underline "}
+         >
+            Close
+         </div>
          <CasePrimaryData
             subcase={props.subcase}
             runUpdateCase={runUpdateCase}
