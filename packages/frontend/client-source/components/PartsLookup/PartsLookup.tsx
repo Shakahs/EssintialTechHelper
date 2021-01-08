@@ -34,7 +34,6 @@ const PartsLookup: React.FunctionComponent<PartsLookupProps> = (props) => {
             {results.map(([k, v]) => (
                <div className={"grid grid-cols-2 bg-gray-300"} key={k}>
                   <div>
-                     <span className={"mr-2"}>{k}</span>
                      <Copier text={k} />
                   </div>
                   <div>{v.partDescription}</div>

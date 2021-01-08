@@ -19,12 +19,12 @@ const Copier: React.FunctionComponent<CopierProps> = (props) => {
          }}
       >
          <span
-            className={classNames("text-sm ", {
+            className={classNames({
                "cursor-default": copied,
                "cursor-pointer": !copied,
             })}
          >
-            {copied ? "(Copied...)" : "(Copy to Clipboard)"}
+            {copied ? "Copied!" : props.text}
          </span>
       </CopyToClipboard>
    );

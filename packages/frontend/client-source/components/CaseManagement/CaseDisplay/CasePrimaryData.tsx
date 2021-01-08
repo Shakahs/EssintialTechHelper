@@ -9,6 +9,7 @@ import {
    isCaseProjectWork,
 } from "../../../features/cases/utility";
 import { partsList } from "../../../features/parts/partsList";
+import Copier from "../../utility/Copier";
 
 interface CasePrimaryDataProps {
    subcase: CaseBase;
@@ -22,7 +23,9 @@ const CasePrimaryData: React.FunctionComponent<CasePrimaryDataProps> = (
       <div>
          <div className={"block"}>
             <span className={"underline mr-1"}>
-               <b>{props.subcase.Id}</b>
+               <b>
+                  <Copier text={props.subcase.Id} />
+               </b>
             </span>
             <span className={"mr-1"}>{props.subcase.CustomerCompany}</span>
             <span className={"mr-1"}>
@@ -46,7 +49,8 @@ const CasePrimaryData: React.FunctionComponent<CasePrimaryDataProps> = (
          </div>
          <div>
             <span className={"mr-2"}>
-               <b>Address:</b> {props.subcase.Location.FullAddress}
+               <b>Address:</b>{" "}
+               <Copier text={props.subcase.Location.FullAddress} />
             </span>
             <a
                target={"_blank"}
