@@ -90,6 +90,24 @@ const CaseFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
                   )}
             </select>
          </div>
+         <div>
+            <label htmlFor={"search"}>Search:</label>
+            <input
+               name={"search"}
+               type={"text"}
+               className={"border border-solid p-1 border-black"}
+               placeholder={"Case number or address"}
+               value={caseFilters.search}
+               onChange={(v) => {
+                  dispatch(
+                     updateFilters({
+                        ...caseFilters,
+                        search: v.target.value,
+                     })
+                  );
+               }}
+            />
+         </div>
       </div>
    );
 };

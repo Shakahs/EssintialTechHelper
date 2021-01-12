@@ -17,6 +17,7 @@ interface CaseFilters {
    showComplete: boolean;
    showHold: boolean;
    showCity: string;
+   search: string;
 }
 
 type StateShape = CurrentCaseSummaries & { caseFilters: CaseFilters } & {
@@ -33,6 +34,7 @@ let initialState: StateShape = {
       showComplete: false,
       showHold: true,
       showCity: "",
+      search: "",
    },
    fetchCaseState: {
       loading: false,

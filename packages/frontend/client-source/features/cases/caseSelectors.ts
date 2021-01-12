@@ -52,6 +52,7 @@ export const getActiveTickets = createSelector(
    (enroute, arrived) => [...arrived, ...enroute]
 );
 
+//stage 2 = assigned/committed/complete
 export const filterStage2 = createSelector(
    [getCasesAssigned, getCasesCommitted, getCasesComplete, getCaseFilters],
    (casesAssigned, casesCommitted, casesComplete, filters) => {
@@ -71,6 +72,7 @@ export const filterStage2 = createSelector(
    }
 );
 
+//stage 3 = city filter
 export const filterStage3 = createSelector(
    [filterStage2, getCaseFilters],
    (cases, filters) => {
@@ -84,8 +86,24 @@ export const filterStage3 = createSelector(
    }
 );
 
+//stage 4 = text search
+export const filterStage4 = createSelector(
+   [filterStage3, getCaseFilters],
+   (cases, filters) => {
+      let stageResult: CaseBase[] = cases;
+      if (filters.search !== "") {
+         stageResult = stageResult.filter(
+            (c) =>
+               c.Id.includes(filters.search) ||
+               c.Location.FullAddress.toLowerCase().includes(filters.search)
+         );
+      }
+      return stageResult;
+   }
+);
+
 export const combiner = createSelector(
-   [filterStage3, getActiveTickets],
+   [filterStage4, getActiveTickets],
    (filterResult, active) => [
       ...active,
       ...sortBy(filterResult, (i) => i.ScheduledDateTime),
