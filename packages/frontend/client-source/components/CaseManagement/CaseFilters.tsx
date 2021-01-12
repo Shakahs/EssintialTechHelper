@@ -51,26 +51,6 @@ const CaseFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
                   );
                }
             })}
-            <div
-               onClick={() => {
-                  dispatch(
-                     updateFilters({
-                        ...caseFilters,
-                        showProjectWork: !caseFilters.showProjectWork,
-                     })
-                  );
-               }}
-            >
-               <input
-                  type={"checkbox"}
-                  name={`checkbox-projectwork`}
-                  checked={caseFilters.showProjectWork}
-                  readOnly
-               />
-               <label htmlFor={`checkbox-projectwork`}>
-                  Include Project work
-               </label>
-            </div>
          </div>
          <div>
             <label htmlFor={"selectCity"}>City:</label>

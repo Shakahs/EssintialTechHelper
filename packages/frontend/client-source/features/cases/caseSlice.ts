@@ -16,7 +16,6 @@ interface CaseFilters {
    showArrived: boolean;
    showComplete: boolean;
    showHold: boolean;
-   showProjectWork: boolean;
    showCity: string;
 }
 
@@ -33,7 +32,6 @@ let initialState: StateShape = {
       showArrived: true,
       showComplete: false,
       showHold: true,
-      showProjectWork: true,
       showCity: "",
    },
    fetchCaseState: {

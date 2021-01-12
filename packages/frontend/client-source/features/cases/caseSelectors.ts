@@ -12,31 +12,21 @@ const builtinSelectors = caseAdapter.getSelectors<RootState>(
 );
 const allCases = (state: RootState) => builtinSelectors.selectAll(state);
 
-const filterStage1 = createSelector([allCases, getCaseFilters], (cases, f) => {
-   const result = filter(cases, (c) => {
-      if (isCaseProjectWork(c)) {
-         return f.showProjectWork;
-      }
-      return true;
-   });
-   return result;
-});
-
-export const getCasesAssigned = createSelector(filterStage1, (cases) => {
+export const getCasesAssigned = createSelector(allCases, (cases) => {
    return filter(
       cases,
       (c) => c.UserStatus === caseStatusMapping.Assign.whenReading
    );
 });
 
-export const getCasesCommitted = createSelector(filterStage1, (cases) => {
+export const getCasesCommitted = createSelector(allCases, (cases) => {
    return filter(
       cases,
       (c) => c.UserStatus === caseStatusMapping.Commit.whenReading
    );
 });
 
-export const getCasesComplete = createSelector(filterStage1, (cases) => {
+export const getCasesComplete = createSelector(allCases, (cases) => {
    return filter(
       cases,
       (c) => c.UserStatus === caseStatusMapping.Complete.whenReading
