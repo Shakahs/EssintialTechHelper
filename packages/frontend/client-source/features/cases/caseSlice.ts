@@ -24,18 +24,20 @@ type StateShape = CurrentCaseSummaries & { caseFilters: CaseFilters } & {
    fetchCaseState: fetchState;
 };
 
+export const initialFilterState: CaseFilters = {
+   showAssigned: true,
+   showCommitted: true,
+   showEnroute: true,
+   showArrived: true,
+   showComplete: false,
+   showHold: true,
+   showCity: "",
+   search: "",
+};
+
 let initialState: StateShape = {
    caseSummaries: caseAdapter.getInitialState(),
-   caseFilters: {
-      showAssigned: true,
-      showCommitted: true,
-      showEnroute: true,
-      showArrived: true,
-      showComplete: false,
-      showHold: true,
-      showCity: "",
-      search: "",
-   },
+   caseFilters: initialFilterState,
    fetchCaseState: {
       loading: false,
       error: "",

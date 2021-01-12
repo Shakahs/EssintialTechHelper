@@ -2,10 +2,14 @@ import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../features/rootReducer";
 import { map, capitalize } from "lodash";
-import { updateFilters } from "../../features/cases/caseSlice";
+import {
+   initialFilterState,
+   updateFilters,
+} from "../../features/cases/caseSlice";
 import { getCityOptions } from "../../features/cases/caseSelectors";
 import { CaseBase, CurrentCaseStatus } from "../../features/cases/types";
 import { caseStatusMapping } from "../../features/cases/constants";
+import { buttonStyle } from "../../constants";
 
 interface CaseSummaryFiltersProps {
    cases: CaseBase[];
@@ -107,6 +111,16 @@ const CaseFilters: React.FunctionComponent<CaseSummaryFiltersProps> = (
                   );
                }}
             />
+         </div>
+         <div>
+            <button
+               className={buttonStyle}
+               onClick={() => {
+                  dispatch(updateFilters(initialFilterState));
+               }}
+            >
+               Reset filters
+            </button>
          </div>
       </div>
    );
