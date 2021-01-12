@@ -28,6 +28,7 @@ const CaseManagement: React.FunctionComponent<Manage2Props> = (props) => {
    const { fetchCaseState } = useSelector(
       (state: RootState) => state.caseSlice
    );
+   const { caseFilters } = useSelector((state: RootState) => state.caseSlice);
 
    //run once on component mount
    useEffect(() => {
@@ -68,7 +69,14 @@ const CaseManagement: React.FunctionComponent<Manage2Props> = (props) => {
             </button>
          </div>
          <div className={"mt-2"}>
-            <CaseMap tickets={filteredCaseSummaries} />
+            {!caseFilters.showComplete && (
+               <CaseMap tickets={filteredCaseSummaries} />
+            )}
+            {caseFilters.showComplete && (
+               <div className={"border border-solid border-black"}>
+                  The map is disabled when displaying completed cases.
+               </div>
+            )}
          </div>
          <div>
             <CaseList />
