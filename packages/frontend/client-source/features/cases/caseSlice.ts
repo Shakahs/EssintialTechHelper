@@ -4,6 +4,7 @@ import { caseAdapter, sliceName } from "./caseConstants";
 import { fetchState } from "../types";
 import { CaseBase, CaseSummary } from "./types";
 import { ConsumePartResponse } from "../parts/types";
+import { resetAuthentication } from "../auth/authSlice";
 
 interface CurrentCaseSummaries {
    caseSummaries: EntityState<CaseSummary>;
@@ -77,6 +78,10 @@ export const caseSlice = createSlice({
          .addCase(fetchCases.rejected, (state, action) => {
             state.fetchCaseState.loading = false;
             state.fetchCaseState.error = action.error.message;
+         })
+         .addCase(resetAuthentication, (state, action) => {
+            state.caseFilters = initialFilterState;
+            caseAdapter.removeAll(state.caseSummaries);
          });
    },
 });
