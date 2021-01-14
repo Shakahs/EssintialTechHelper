@@ -12,6 +12,8 @@ import { CaseBase } from "../../features/cases/types";
 interface GeocodingMapMarkerProps {
    query: string;
    children: React.ReactElement;
+   knownPosition?: Position;
+   onResolve: (p: Position) => void;
 }
 
 const GeocodingMapMarker: React.FunctionComponent<GeocodingMapMarkerProps> = (
@@ -25,25 +27,26 @@ const GeocodingMapMarker: React.FunctionComponent<GeocodingMapMarkerProps> = (
       {},
       {
          json: true,
-         defer: false,
+         defer: props.knownPosition !== undefined,
          onResolve: (result) => {
-            setPosition(result.features[0].geometry.coordinates);
+            // setPosition(result.features[0].geometry.coordinates);
+            props.onResolve(result.features[0].geometry.coordinates);
          },
       }
    );
 
    return (
-      <IfFulfilled state={geocodingFetchState}>
-         {position && (
+      <>
+         {props.knownPosition && (
             <Marker
                captureClick={true}
-               latitude={position[1]}
-               longitude={position[0]}
+               latitude={props.knownPosition[1]}
+               longitude={props.knownPosition[0]}
             >
                {props.children}
             </Marker>
          )}
-      </IfFulfilled>
+      </>
    );
 };
 

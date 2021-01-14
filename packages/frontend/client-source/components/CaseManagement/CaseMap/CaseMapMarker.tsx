@@ -11,6 +11,8 @@ import { CaseBase } from "../../../features/cases/types";
 import { parseCaseSLA } from "../../../features/cases/utility";
 import { standardDateTimeFormatting } from "../../../constants";
 import { partsList } from "../../../features/parts/partsList";
+import { useDispatch } from "react-redux";
+import { upsertCaseSummary } from "../../../features/cases/caseSlice";
 
 interface CaseMapMarkerProps {
    cases: CaseBase[];
@@ -18,7 +20,11 @@ interface CaseMapMarkerProps {
 }
 
 const CaseMapMarker: React.FunctionComponent<CaseMapMarkerProps> = (props) => {
-   const geoQuery = props.cases[0].Location.FullAddress;
+   const dispatch = useDispatch();
+
+   const firstCaseInGroupedCases = props.cases[0];
+
+   const geoQuery = firstCaseInGroupedCases.Location.FullAddress;
    const slaCodes = {
       ARR: "Arrive",
       FIX: "Fix",
@@ -28,7 +34,15 @@ const CaseMapMarker: React.FunctionComponent<CaseMapMarkerProps> = (props) => {
    const [hover, setHover] = useState(false);
 
    return (
-      <GeocodingMapMarker query={geoQuery}>
+      <GeocodingMapMarker
+         query={geoQuery}
+         knownPosition={firstCaseInGroupedCases.geoCoding}
+         onResolve={(p) => {
+            dispatch(
+               upsertCaseSummary({ ...firstCaseInGroupedCases, geoCoding: p })
+            );
+         }}
+      >
          <div
          // onClick={() => {
          //    props.setSelectedTicket(props.case.Id);

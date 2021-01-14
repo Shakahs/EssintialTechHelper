@@ -1,5 +1,6 @@
 import { ConsumedParts } from "../parts/types";
 import { RootState } from "../rootReducer";
+import { Point, Position } from "geojson";
 
 export interface CaseBase {
    ArriveDateTime: Date;
@@ -27,6 +28,7 @@ export interface CaseBase {
       CalculatedDateTime: string;
       Code: string;
    }[];
+   geoCoding?: Position;
 }
 
 export interface Comment {
