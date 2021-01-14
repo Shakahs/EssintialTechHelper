@@ -25,7 +25,7 @@ const CaseExtendedData: React.FunctionComponent<CaseExtendedDataProps> = (
             <Tab>Parts</Tab>
          </TabList>
 
-         <TabPanel>
+         <TabPanel forceRender>
             <CaseStatus subcase={props.subcase} refresh={props.refresh} />
          </TabPanel>
          <TabPanel>
@@ -33,7 +33,7 @@ const CaseExtendedData: React.FunctionComponent<CaseExtendedDataProps> = (
                <CaseComments sc={props.subcase} />
             </EnsureFullCase>
          </TabPanel>
-         <TabPanel>
+         <TabPanel forceRender>
             <h2>
                <EnsureFullCase sc={props.subcase}>
                   <Parts subcase={props.subcase} />
