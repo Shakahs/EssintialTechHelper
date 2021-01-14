@@ -1336,6 +1336,14 @@
     "@turf/helpers" "^5.1.5"
     "@turf/meta" "^5.1.5"
 
+"@turf/bbox@^6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@turf/bbox/-/bbox-6.2.0.tgz#ae75ab6b111478863dd34c4e63dbb36e613e6854"
+  integrity sha512-8KR//ruA/hhCvDiBzxBTUJ/G3hm9+tuCyeZA81hvdsooDpeq0PK/jSJjlwYjS//UK5c2deBeNNJx7NvL/PLEwg==
+  dependencies:
+    "@turf/helpers" "^6.2.0"
+    "@turf/meta" "^6.2.0"
+
 "@turf/bearing@5.1.x", "@turf/bearing@^5.1.5":
   version "5.1.5"
   resolved "https://registry.yarnpkg.com/@turf/bearing/-/bearing-5.1.5.tgz#7a0b790136c4ef4797f0246305d45cbe2d27b3f7"
@@ -1511,6 +1519,14 @@
   dependencies:
     "@turf/bbox" "^5.1.5"
     "@turf/helpers" "^5.1.5"
+
+"@turf/center@^6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@turf/center/-/center-6.2.0.tgz#ace81665eeb019b676b0fdf5e7d95a734b946e11"
+  integrity sha512-FfXopeqhHKr0FUYZaYQY8BXu8QMImKFWtFqjirdTRVQ/MiziBzKOrHs6XV95wrO+0Jf55EvsRb+jyZ0BV/c+JQ==
+  dependencies:
+    "@turf/bbox" "^6.2.0"
+    "@turf/helpers" "^6.2.0"
 
 "@turf/centroid@5.1.x", "@turf/centroid@^5.1.5":
   version "5.1.5"
@@ -1733,6 +1749,11 @@
   version "5.1.5"
   resolved "https://registry.yarnpkg.com/@turf/helpers/-/helpers-5.1.5.tgz#153405227ab933d004a5bb9641a9ed999fcbe0cf"
   integrity sha1-FTQFInq5M9AEpbuWQantmZ/L4M8=
+
+"@turf/helpers@^6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@turf/helpers/-/helpers-6.2.0.tgz#dc770ce3b35b230f6a661824f3f87591378e379b"
+  integrity sha512-ANcZ0LFpnrza52y3um8KXgbpF1l7qmJXEqY1Bv5RovdQH+kUvMrZsb4SO3q4VH4eQqlsxDLxxXl7hkjjFbDtHg==
 
 "@turf/hex-grid@5.1.x", "@turf/hex-grid@^5.1.5":
   version "5.1.5"
@@ -1968,6 +1989,13 @@
   integrity sha1-OxrUhe4MOwsXdRMqMsOE1T5LpT0=
   dependencies:
     "@turf/helpers" "^5.1.5"
+
+"@turf/meta@^6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@turf/meta/-/meta-6.2.0.tgz#a225477fd8b5a4166d98e2e70cc4ed843db0f48d"
+  integrity sha512-8bM69hzRYKNfpZ+cyLxXZLw1IqCxm3cBcyEkVBHROFsQJb1o1Ghv2cd4iCSIuvkc1xSWD+qQvUjYr40XSNsyOQ==
+  dependencies:
+    "@turf/helpers" "^6.2.0"
 
 "@turf/midpoint@5.1.x":
   version "5.1.5"
