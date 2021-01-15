@@ -11,11 +11,12 @@ import {
    REHYDRATE,
 } from "redux-persist/es/constants";
 import { authSlice } from "./auth/authSlice";
+import { caseSlice } from "./cases/caseSlice";
 
 const persistConfig = {
    key: "root",
    storage,
-   // whitelist: [authSlice.name],
+   whitelist: [authSlice.name, caseSlice.name],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
