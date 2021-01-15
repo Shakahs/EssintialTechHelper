@@ -11,8 +11,10 @@ import { CaseBase } from "../../../features/cases/types";
 import { parseCaseSLA } from "../../../features/cases/utility";
 import { standardDateTimeFormatting } from "../../../constants";
 import { partsList } from "../../../features/parts/partsList";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { upsertCaseSummary } from "../../../features/cases/caseSlice";
+import { upsertGeocoding } from "../../../features/geocoding/slice";
+import { allGeocoding } from "../../../features/geocoding/selectors";
 
 interface CaseMapMarkerProps {
    cases: CaseBase[];
@@ -21,6 +23,7 @@ interface CaseMapMarkerProps {
 
 const CaseMapMarker: React.FunctionComponent<CaseMapMarkerProps> = (props) => {
    const dispatch = useDispatch();
+   const geocoding = useSelector(allGeocoding);
 
    const firstCaseInGroupedCases = props.cases[0];
 
@@ -36,10 +39,13 @@ const CaseMapMarker: React.FunctionComponent<CaseMapMarkerProps> = (props) => {
    return (
       <GeocodingMapMarker
          query={geoQuery}
-         knownPosition={firstCaseInGroupedCases.geoCoding}
+         knownPosition={geocoding[firstCaseInGroupedCases.Id]?.feature}
          onResolve={(p) => {
+            // dispatch(
+            //    upsertCaseSummary({ ...firstCaseInGroupedCases, geoCoding: p })
+            // );
             dispatch(
-               upsertCaseSummary({ ...firstCaseInGroupedCases, geoCoding: p })
+               upsertGeocoding({ id: firstCaseInGroupedCases.Id, feature: p })
             );
          }}
       >

@@ -9,6 +9,8 @@ import { CaseBase } from "../../../features/cases/types";
 import center from "@turf/center";
 import { featureCollection } from "@turf/helpers";
 import { Feature, Point } from "geojson";
+import { allGeocoding } from "../../../features/geocoding/selectors";
+import { useSelector } from "react-redux";
 
 interface CaseMapProps {
    tickets: CaseBase[];
@@ -28,16 +30,21 @@ const CaseMap: React.FunctionComponent<CaseMapProps> = (props) => {
       trailing: true,
    });
 
+   //get the Features that correspond to our tickets
    let calculatedCenter: Feature<Point>;
-   //pull out the Features, filtering because grouped cases at the same address don't all get geocoded
-   const features = map(props.tickets, (t) => t.geoCoding).filter(
-      (f) => f !== undefined
-   );
-   const featureColl = featureCollection(features);
+   let features: Feature<Point>[] = [];
+   const geocoding = useSelector(allGeocoding);
+   props.tickets.forEach((t) => {
+      if (geocoding[t.Id]) {
+         features.push(geocoding[t.Id].feature);
+      }
+   });
 
    //have to use this conditional because the featurecollection can be empty while Redux re-hydrates, cases refresh, and Turf will raise an exception
+   const featureColl = featureCollection(features);
    if (featureColl.features.length > 0) {
       calculatedCenter = center(featureColl);
+      // console.log(featureColl, calculatedCenter, viewPortChanged);
 
       //if the user changes the viewport we don't want to change it back
       if (!viewPortChanged) {
@@ -57,10 +64,17 @@ const CaseMap: React.FunctionComponent<CaseMapProps> = (props) => {
          width={"100%"}
          height={"400px"}
          mapboxApiAccessToken={mapboxToken}
-         onViewportChange={(nextViewport) => {
-            setViewportChanged(true);
-            setViewport(nextViewport);
-            // console.log(nextViewport);
+         onViewportChange={(nextViewport, transition) => {
+            // console.log(transition);
+            if (
+               transition.isDragging ||
+               transition.isPanning ||
+               transition.isZooming ||
+               transition.isRotating
+            ) {
+               setViewportChanged(true);
+               setViewport(nextViewport);
+            }
          }}
       >
          {map(groupedCases, (c) => (

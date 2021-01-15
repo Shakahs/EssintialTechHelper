@@ -28,7 +28,6 @@ export interface CaseBase {
       CalculatedDateTime: string;
       Code: string;
    }[];
-   geoCoding?: Feature<Point>;
 }
 
 export interface Comment {
